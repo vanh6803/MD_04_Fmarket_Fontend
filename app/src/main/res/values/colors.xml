@@ -5,7 +5,9 @@
     <color name="primary">#0CC0DF</color>
     <color name="gray69">#B0B0B0</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="red">#00FF0000</color>
+    <color name="red">#FF0000</color>
     <color name="yellow">#FFCA00</color>
     <color name="color_4285F4">#4285F4</color>
+    <color name="color_chudao">#0CC0DF</color>
+    <color name="color_edittext">#F6F6F6</color>
 </resources>
