@@ -16,7 +16,7 @@
     <TextView
 
         android:text="Đăng ký"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="@color/color_chudao"
         android:textStyle="bold"
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Email hoặc số điện thoại"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -77,7 +77,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Mật khẩu"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -126,7 +126,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Nhập lại mật khẩu"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -194,7 +194,7 @@
             android:textStyle="bold"
             android:textColor="@color/color_chudao"
             android:text="Tôi đã có tài khoản? Đăng nhập"
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -211,7 +211,7 @@
         android:text="Khi nhấn vào đăng ký là bạn đã chấp thuận"
         android:textColor="@color/black"
         android:textStyle="normal"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <LinearLayout
@@ -221,14 +221,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:text="Chính sách bảo mật"
             android:textColor="@color/red"
             android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <TextView
-            android:textSize="14dp"
+            android:textSize="14sp"
             android:text=" của chúng tôi"
             android:textColor="@color/black"
             android:textStyle="normal"

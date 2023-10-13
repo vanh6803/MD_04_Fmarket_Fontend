@@ -20,14 +20,14 @@
         android:gravity="center"
         android:layout_marginTop="50dp"
         android:text="Mã Xác Minh"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="@color/color_chudao"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         android:layout_marginTop="10dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:gravity="center"
         android:text="Mã xác minh đã được gửi vào Email của bạn"
         android:layout_width="match_parent"
@@ -59,7 +59,7 @@
 
     <TextView
         android:layout_marginTop="10dp"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textColor="@color/color_chudao"
         android:textStyle="bold"
         android:gravity="center"
