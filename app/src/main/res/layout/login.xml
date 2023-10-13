@@ -21,7 +21,7 @@
         android:layout_marginTop="40dp"
         android:text="Email hoặc số điện thoại"
         android:textColor="@color/black"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -70,7 +70,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Mật khẩu"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -139,7 +139,7 @@
              android:textStyle="bold"
              android:textColor="@color/color_chudao"
              android:text="Bạn chưa có tài khoản?"
-             android:textSize="14dp"
+             android:textSize="14sp"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"/>
          <TextView
@@ -155,7 +155,7 @@
              android:textStyle="bold"
              android:textColor="@color/color_chudao"
              android:text="Quên mật khẩu?"
-             android:textSize="14dp"
+             android:textSize="14sp"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"/>
      </LinearLayout>
