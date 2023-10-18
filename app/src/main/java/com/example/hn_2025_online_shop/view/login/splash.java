@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.login;
+package com.example.hn_2025_online_shop.view.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.hn_2025_online_shop.MainActivity;
 import com.example.hn_2025_online_shop.R;
 
 public class splash extends AppCompatActivity {

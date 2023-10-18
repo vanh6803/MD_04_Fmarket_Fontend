@@ -3,4 +3,6 @@
     <string name="parameter_text">%s</string>
     <string name="font_size_text">14dp</string>
     <string name="font_size_text_title">30dp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

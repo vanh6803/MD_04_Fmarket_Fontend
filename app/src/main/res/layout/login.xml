@@ -116,6 +116,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnLogin"
         android:elevation="10dp"
         android:layout_marginTop="40dp"
         android:text="Đăng Nhập"
@@ -125,6 +126,25 @@
         android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:layout_marginTop="20dp"
+        android:id="@+id/iconLoadMain"
+        android:layout_gravity="center"
+        android:outlineAmbientShadowColor="#0CC0DF"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
+    <TextView
+        android:id="@+id/loadMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:text=""
+        android:textColor="#0CC0DF"
+        android:textSize="14dp"
+        android:textStyle="italic" />
 
      <LinearLayout
          android:layout_marginVertical="10dp"
