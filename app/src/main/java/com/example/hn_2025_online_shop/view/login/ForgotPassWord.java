@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.login;
+package com.example.hn_2025_online_shop.view.login;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

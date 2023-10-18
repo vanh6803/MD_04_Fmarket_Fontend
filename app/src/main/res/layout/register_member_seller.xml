@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backRegi"
+        android:layout_width="25dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/backss" />
+
+    <TextView
+        android:text="Đăng ký trở thành Người bán FMarket"
+        android:textSize="29sp"
+        android:gravity="center"
+        android:textColor="@color/color_chudao"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_marginTop="40dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Tên Shop"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edittext"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:maxWidth="20dp"
+                    android:maxHeight="20dp"
+                    android:src="@drawable/person" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        app:passwordToggleEnabled="false"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtName"
+                            android:background="@color/transparent"
+                            android:padding="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="Email hoặc số điện thoại" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:height="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Email"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edittext"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:maxWidth="20dp"
+                    android:maxHeight="20dp"
+                    android:src="@drawable/pass" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        app:passwordToggleEnabled="true"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtpass"
+                            android:background="@color/transparent"
+                            android:padding="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="Email" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:height="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Địa chỉ"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edittext"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:maxWidth="20dp"
+                    android:maxHeight="20dp"
+                    android:src="@drawable/pass" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        app:passwordToggleEnabled="true"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtDiachi"
+                            android:background="@color/transparent"
+                            android:padding="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="Địa chỉ" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:height="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_marginTop="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:text="Số điện thoại"
+                android:textSize="14sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:background="@drawable/custom_edittext"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:maxWidth="20dp"
+                    android:maxHeight="20dp"
+                    android:src="@drawable/pass" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:gravity="center"
+                        app:passwordToggleEnabled="true"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:inputType="number"
+                            android:id="@+id/edtRepass"
+                            android:background="@color/transparent"
+                            android:padding="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:hint="Số điện thoại" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:height="6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:elevation="10dp"
+                android:layout_marginTop="40dp"
+                android:text="Tiếp tục"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:height="40dp"
+                android:background="@drawable/custom_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+</LinearLayout>
