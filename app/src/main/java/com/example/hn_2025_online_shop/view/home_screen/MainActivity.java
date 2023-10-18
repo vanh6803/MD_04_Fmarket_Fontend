@@ -6,10 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Favorite;
@@ -17,85 +16,48 @@ import com.example.hn_2025_online_shop.view.Fragment.Fragment_Home;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Notification;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Product;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Profile;
-import com.example.hn_2025_online_shop.view.login.ForgotPassWord;
-import com.example.hn_2025_online_shop.view.login.Login;
-import com.example.hn_2025_online_shop.view.login.Register;
-import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    private FrameLayout frameLayout;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        Fragment_Home fragment = new Fragment_Home();
-        transaction.add(R.id.framelayout, fragment);
-        transaction.commit();
         bottomNavigationView = findViewById(R.id.bottomnavigator);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        frameLayout = findViewById(R.id.framelayout);
+        loadFragment(Fragment_Home.newInstance());
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment;
-                int index;
-
-//                switch (item.getItemId()){
-//                    case (R.id.homePage):
-//                        fragment = new Fragment_Home();
-//                        loadFragment(fragment);
-//                        return true;
-//                    case (R.id.product):
-//                        fragment = new Fragment_Home();
-//                        loadFragment(fragment);
-//                        return true;
-//                    case (R.id.favorites):
-//                        fragment = new Fragment_Home();
-//                        loadFragment(fragment);
-//                        return true;
-//                    default:
-//                        fragment = new Fragment_Home();
-//                        loadFragment(fragment);
-//                        return true;
-//                }
-
-
-                if(item.getItemId() == R.id.homePage){
-                    fragment = new Fragment_Home();
-                    loadFragment(fragment);
-                    return true;
-                } else if (item.getItemId() == R.id.product) {
-                    fragment = new Fragment_Product();
-                    loadFragment(fragment);
-                    return true;
-                } else if (item.getItemId() == R.id.favorites) {
-                    fragment = new Fragment_Favorite();
-                    loadFragment(fragment);
-                    return true;
-                } else if (item.getItemId() == R.id.notification) {
-                    fragment = new Fragment_Notification();
-                    loadFragment(fragment);
-                    return true;
-                } else if (item.getItemId() == R.id.profile) {
-                    fragment = new Fragment_Profile();
-                    loadFragment(fragment);
-                    return true;
-                }else {
-                    fragment = new Fragment_Home();
-                    loadFragment(fragment);
-                    return true;
+                int id = item.getItemId();
+                if (id == R.id.homePage) {
+                    loadFragment(Fragment_Home.newInstance());
+                } else if (id == R.id.product) {
+                    loadFragment(Fragment_Product.newInstance());
+                } else if (id == R.id.favorites) {
+                    loadFragment(Fragment_Favorite.newInstance());
+                } else if (id == R.id.notification) {
+                    loadFragment(Fragment_Notification.newInstance());
+                } else if (id == R.id.product) {
+                    loadFragment(Fragment_Profile.newInstance());
                 }
+
+                return true;
             }
         });
 
 
     }
+
     private void loadFragment(Fragment fragment) {
         // load fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.framelayout, fragment);
-        transaction.addToBackStack(null);
         transaction.commit();
     }
 }

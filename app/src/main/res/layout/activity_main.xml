@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_weight="1"
         android:id="@+id/framelayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomnavigator"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,9 +30,7 @@
         app:menu="@menu/menu"
         app:labelVisibilityMode="labeled"
         app:itemTextColor="@drawable/select_color"
-        tools:ignore="MissingConstraints">
-
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+        tools:ignore="MissingConstraints"/>
 
 
 </LinearLayout>

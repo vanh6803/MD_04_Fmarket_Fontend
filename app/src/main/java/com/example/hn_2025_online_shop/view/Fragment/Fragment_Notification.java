@@ -12,7 +12,12 @@ import com.example.hn_2025_online_shop.R;
 
 public class Fragment_Notification extends Fragment {
 
+    public static Fragment_Notification newInstance() {
 
+
+        Fragment_Notification fragment = new Fragment_Notification();
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

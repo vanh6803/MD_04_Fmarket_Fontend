@@ -13,6 +13,12 @@ import com.example.hn_2025_online_shop.R;
 public class Fragment_Product extends Fragment {
 
 
+    public static Fragment_Product newInstance() {
+
+
+        Fragment_Product fragment = new Fragment_Product();
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
