@@ -10,19 +10,18 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.ResetPasswordBinding;
 
 public class ResetPassWord extends AppCompatActivity {
-
-    Button btnRepassSuccess;
-    ImageView backResetpass;
+    private ResetPasswordBinding binding;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.reset_password);
-        btnRepassSuccess = findViewById(R.id.btnRepassSuccess);
-        backResetpass = findViewById(R.id.backResetpass);
-        btnRepassSuccess.setOnClickListener(new View.OnClickListener() {
+        binding = ResetPasswordBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.btnRepassSuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ResetPassWord.this, ResetPassWordSuccess.class);
@@ -30,7 +29,7 @@ public class ResetPassWord extends AppCompatActivity {
             }
         });
 
-        backResetpass.setOnClickListener(new View.OnClickListener() {
+        binding.backResetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.ActivityMainBinding;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Favorite;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Home;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Notification;
@@ -20,18 +21,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
-    private FrameLayout frameLayout;
+    private ActivityMainBinding binding;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        bottomNavigationView = findViewById(R.id.bottomnavigator);
-        frameLayout = findViewById(R.id.framelayout);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
         loadFragment(Fragment_Home.newInstance());
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        binding.bottomnavigator.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();

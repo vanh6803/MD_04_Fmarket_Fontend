@@ -8,16 +8,18 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.RegisterBinding;
 
 public class Register extends AppCompatActivity {
-    ImageView backRegi;
+    private RegisterBinding binding;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register);
-        backRegi= findViewById(R.id.backRegi);
-        backRegi.setOnClickListener(new View.OnClickListener() {
+        binding = RegisterBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.backRegi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();

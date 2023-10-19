@@ -10,24 +10,23 @@ import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.VerifiPassBinding;
 
 public class VerifiPassWord extends AppCompatActivity {
-    Button btnsuccess;
-    ImageView backVerify;
+    private VerifiPassBinding binding;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.verifi_pass);
-        btnsuccess = findViewById(R.id.btnsuccess);
-        backVerify= findViewById(R.id.backVerify);
-        backVerify.setOnClickListener(new View.OnClickListener() {
+        binding = VerifiPassBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.backVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        btnsuccess.setOnClickListener(new View.OnClickListener() {
+        binding.btnsuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(VerifiPassWord.this, ResetPassWord.class);

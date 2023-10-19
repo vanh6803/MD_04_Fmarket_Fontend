@@ -12,34 +12,33 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.LoginBinding;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
 public class Login extends AppCompatActivity{
-    TextView txtRegister,txtfogotpass;
-    Button btnLogin;
+    private LoginBinding binding;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login);
-        txtRegister= findViewById(R.id.txtRegister);
-        txtfogotpass= findViewById(R.id.txtfogotpass);
-        btnLogin= findViewById(R.id.btnLogin);
-        txtRegister.setOnClickListener(new View.OnClickListener() {
+        binding = LoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        binding.txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
             }
         });
-        txtfogotpass.setOnClickListener(new View.OnClickListener() {
+        binding.txtfogotpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent2 = new Intent(Login.this, ForgotPassWord.class);
                 startActivity(intent2);
             }
         });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, MainActivity.class);

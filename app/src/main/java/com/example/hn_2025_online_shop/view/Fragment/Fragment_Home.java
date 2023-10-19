@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.FragmentHomeBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +19,8 @@ import com.example.hn_2025_online_shop.R;
  * create an instance of this fragment.
  */
 public class Fragment_Home extends Fragment {
+
+    private FragmentHomeBinding binding;
 
     public Fragment_Home() {
     }
@@ -36,8 +39,9 @@ public class Fragment_Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment__home, container, false);
+        return binding.getRoot();
     }
 
     @Override
