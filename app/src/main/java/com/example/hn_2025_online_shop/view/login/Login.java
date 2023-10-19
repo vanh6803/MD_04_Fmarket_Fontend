@@ -26,8 +26,6 @@ public class Login extends AppCompatActivity{
         txtRegister= findViewById(R.id.txtRegister);
         txtfogotpass= findViewById(R.id.txtfogotpass);
         btnLogin= findViewById(R.id.btnLogin);
-        load= findViewById(R.id.loadMain);
-        icon= findViewById(R.id.iconLoadMain);
         icon.setVisibility(View.GONE);
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
