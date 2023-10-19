@@ -15,9 +15,8 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
 public class Login extends AppCompatActivity{
-    TextView txtRegister,txtfogotpass, load;
+    TextView txtRegister,txtfogotpass;
     Button btnLogin;
-    ProgressBar icon;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,6 @@ public class Login extends AppCompatActivity{
         txtRegister= findViewById(R.id.txtRegister);
         txtfogotpass= findViewById(R.id.txtfogotpass);
         btnLogin= findViewById(R.id.btnLogin);
-        icon.setVisibility(View.GONE);
         txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,13 +42,8 @@ public class Login extends AppCompatActivity{
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent intent = new Intent(Login.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                }, 3000);
+                Intent intent = new Intent(Login.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -15,13 +15,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ProductAdapter extends BaseAdapter {
+public class ProductMainAdapter extends BaseAdapter {
     Context context;
     List<Product_main> list;
     TextView name;
     ImageView imageView;
 
-    public ProductAdapter(Context context, List<Product_main> list) {
+    public ProductMainAdapter(Context context, List<Product_main> list) {
         this.context = context;
         this.list = list;
     }

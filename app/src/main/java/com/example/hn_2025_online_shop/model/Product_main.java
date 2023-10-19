@@ -1,8 +1,8 @@
 package com.example.hn_2025_online_shop.model;
-
 public class Product_main {
     String url;
     String name;
+
 
     public Product_main(String url, String name) {
         this.url = url;
@@ -24,4 +24,5 @@ public class Product_main {
     public void setName(String name) {
         this.name = name;
     }
+
 }
