@@ -15,7 +15,7 @@
 
     <TextView
         android:text="Đăng ký trở thành Người bán FMarket"
-        android:textSize="29sp"
+        android:textSize="@dimen/font_size_text_title"
         android:gravity="center"
         android:textColor="@color/color_chudao"
         android:textStyle="bold"
@@ -36,7 +36,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:text="Tên Shop"
-                android:textSize="14sp"
+                android:textSize="@dimen/font_size_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -86,7 +86,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:text="Email"
-                android:textSize="14sp"
+                android:textSize="@dimen/font_size_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -135,7 +135,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:text="Địa chỉ"
-                android:textSize="14sp"
+                android:textSize="@dimen/font_size_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -185,7 +185,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:text="Số điện thoại"
-                android:textSize="14sp"
+                android:textSize="@dimen/font_size_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

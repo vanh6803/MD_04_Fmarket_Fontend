@@ -19,7 +19,7 @@
     android:textColor="@color/color_chudao"
     android:textStyle="bold"
     android:text="Đổi mật khẩu thành công"
-    android:textSize="30sp"
+    android:textSize="@dimen/font_size_text_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 
