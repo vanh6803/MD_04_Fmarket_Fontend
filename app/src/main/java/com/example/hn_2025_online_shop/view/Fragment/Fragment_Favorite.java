@@ -13,6 +13,11 @@ import com.example.hn_2025_online_shop.R;
 
 public class Fragment_Favorite extends Fragment {
 
+    public static Fragment_Favorite newInstance() {
+        Fragment_Favorite fragment = new Fragment_Favorite();
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(  @Nullable LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
