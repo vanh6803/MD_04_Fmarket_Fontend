@@ -44,7 +44,7 @@ public class ProductAdapter extends BaseAdapter {
     @SuppressLint("MissingInflatedId")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-     View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid, parent, false);
+     @SuppressLint("ViewHolder") View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_grid, parent, false);
         name = view.findViewById(R.id.txtname);
         imageView = view.findViewById(R.id.img);
         name.setText( list.get(position).getName());
