@@ -9,7 +9,7 @@
     <TextView
         android:layout_marginTop="50dp"
         android:text="Đăng nhập"
-        android:textSize="30dp"
+        android:textSize="@dimen/font_size_text_title"
         android:textColor="@color/color_chudao"
         android:textStyle="bold"
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
         android:layout_marginTop="40dp"
         android:text="Email hoặc số điện thoại"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_size_text"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -70,7 +70,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:text="Mật khẩu"
-        android:textSize="14sp"
+        android:textSize="@dimen/font_size_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -126,25 +126,6 @@
         android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ProgressBar
-        android:layout_marginTop="20dp"
-        android:id="@+id/iconLoadMain"
-        android:layout_gravity="center"
-        android:outlineAmbientShadowColor="#0CC0DF"
-        android:layout_width="40dp"
-        android:layout_height="40dp"/>
-
-    <TextView
-        android:id="@+id/loadMain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:gravity="center"
-        android:text=""
-        android:textColor="#0CC0DF"
-        android:textSize="14dp"
-        android:textStyle="italic" />
 
      <LinearLayout
          android:layout_marginVertical="10dp"
@@ -159,7 +140,7 @@
              android:textStyle="bold"
              android:textColor="@color/color_chudao"
              android:text="Bạn chưa có tài khoản?"
-             android:textSize="14sp"
+             android:textSize="@dimen/font_size_text"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"/>
          <TextView
@@ -175,7 +156,7 @@
              android:textStyle="bold"
              android:textColor="@color/color_chudao"
              android:text="Quên mật khẩu?"
-             android:textSize="14sp"
+             android:textSize="@dimen/font_size_text"
              android:layout_width="wrap_content"
              android:layout_height="match_parent"/>
      </LinearLayout>
