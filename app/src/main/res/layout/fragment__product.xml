@@ -21,16 +21,34 @@
                 android:src="@drawable/backs"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
-            <TextView
-                android:layout_gravity="center"
-                android:gravity="center"
+            <androidx.cardview.widget.CardView
+                android:layout_marginHorizontal="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
                 android:layout_weight="1"
-                android:text="FMarket"
-                android:textSize="30dp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:paddingVertical="6dp"
+                    android:paddingHorizontal="12dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/find_product"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <EditText
+                        android:layout_gravity="center"
+                        android:hint="Tìm kiếm..."
+                        android:background="@color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
             <ImageView
                 android:layout_gravity="center"
                 android:src="@drawable/buy"
@@ -78,39 +96,6 @@
             android:layout_height="match_parent">
         </androidx.recyclerview.widget.RecyclerView>
 
-        <LinearLayout
-            android:layout_marginHorizontal="4dp"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:textStyle="bold"
-                android:text="Sản phẩm bán chạy"
-                android:textColor="@color/color_chudao"
-                android:textSize="@dimen/font_size_text_title_medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="Xem tất cả"
-                android:textColor="@color/color_chudao"
-                android:textSize="@dimen/font_size_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </LinearLayout>
-        <GridView
-            android:scrollbarAlwaysDrawVerticalTrack="false"
-            android:layout_marginTop="10dp"
-            android:id="@+id/grid_product"
-            android:horizontalSpacing="10dp"
-            android:numColumns="3"
-            android:verticalSpacing="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
 
     </LinearLayout>

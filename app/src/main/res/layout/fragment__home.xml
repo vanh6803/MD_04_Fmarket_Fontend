@@ -50,93 +50,70 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_marginHorizontal="12dp"
+    <LinearLayout
+        android:paddingHorizontal="12dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
 
-        <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
             android:layout_marginTop="20dp"
+            app:cardElevation="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/color_chudao"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="200dp">
 
-            <ImageView
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/sliderHome"
                 android:layout_width="match_parent"
+                app:iss_period="1000"
+                app:iss_auto_cycle="true"
+                app:iss_delay="1000"
+                app:iss_corner_radius="20"
+                android:layout_height="200dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabIndicatorColor="@color/color_chudao"
+            app:tabSelectedTextAppearance="@color/color_chudao"
+            app:tabSelectedTextColor="@color/color_chudao">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/banner2" />
+                android:contextClickable="true"
+                android:text="Bán chạy"
+                android:textAlignment="center" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:layout_width="match_parent"
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/color_chudao"
-                app:tabSelectedTextAppearance="@color/color_chudao"
-                app:tabSelectedTextColor="@color/color_chudao">
+                android:contextClickable="true"
+                android:text="Đang giảm giá"
+                android:textAlignment="center" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contextClickable="true"
-                    android:text="Bán chạy"
-                    android:textAlignment="center" />
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contextClickable="true"
+                android:text="Nổi bật"
+                android:textAlignment="center" />
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contextClickable="true"
-                    android:text="Đang giảm giá"
-                    android:textAlignment="center" />
+        </com.google.android.material.tabs.TabLayout>
 
-                <com.google.android.material.tabs.TabItem
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:contextClickable="true"
-                    android:text="Nổi bật"
-                    android:textAlignment="center" />
-
-            </com.google.android.material.tabs.TabLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingHorizontal="20dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/banner2" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleProductMain"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
 
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Danh sách sản phẩm"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/color_chudao"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
-
-                <GridView
-                    android:paddingVertical="20dp"
-                    android:layout_marginTop="10dp"
-                    android:id="@+id/grid_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:horizontalSpacing="10dp"
-                    android:numColumns="3"
-                    android:verticalSpacing="10dp">
-
-                </GridView>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
 </LinearLayout>
