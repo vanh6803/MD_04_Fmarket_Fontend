@@ -1,0 +1,6 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="#FFFFFF" /> <!-- Màu sắc của elip -->
+    <size android:width="100dp" android:height="100dp" /> <!-- Kích thước của elip -->
+    <corners android:radius="50dp" /> <!-- Bán kính góc bo tròn của elip -->
+</shape>

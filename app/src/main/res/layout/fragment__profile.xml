@@ -17,11 +17,11 @@
             android:id="@+id/arrowBackSignIn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
             android:src="@drawable/backkk"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="-3dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -44,7 +44,8 @@
             android:textStyle="bold"
 
             tools:layout_editor_absoluteX="72dp"
-            tools:layout_editor_absoluteY="30dp" />
+            tools:layout_editor_absoluteY="30dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:layout_width="wrap_content"
