@@ -8,16 +8,14 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ActivityMainBinding;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Favorite;
-import com.example.hn_2025_online_shop.view.Fragment.Fragment_Home;
+import com.example.hn_2025_online_shop.view.Fragment.Fragment_home.Fragment_Home;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Notification;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Product;
 import com.example.hn_2025_online_shop.view.Fragment.Fragment_Profile;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
