@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.view.Fragment;
+package com.example.hn_2025_online_shop.view.Fragment.Fragment_home;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -14,11 +14,12 @@ import android.view.ViewGroup;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.adapter.ProductMainAdapter;
 import com.example.hn_2025_online_shop.adapter.ProductTypeAdapter;
+import com.example.hn_2025_online_shop.adapter.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentHomeBinding;
 import com.example.hn_2025_online_shop.model.Producct_type;
 import com.example.hn_2025_online_shop.model.Product_main;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,9 +27,8 @@ import java.util.List;
 public class Fragment_Home extends Fragment {
 
     private FragmentHomeBinding binding;
-    List<Producct_type> producct_types;
-    ProductTypeAdapter homeAdapter;
-    List<Product_main> product_mains;
+    ViewPageHomeAdapter adapter;
+
     public Fragment_Home() {
     }
 
@@ -47,7 +47,6 @@ public class Fragment_Home extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        // Inflate the layout for this fragment
         return binding.getRoot();
     }
 
@@ -65,17 +64,21 @@ public class Fragment_Home extends Fragment {
         list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
         list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
         binding.sliderHome.setImageList(list, ScaleTypes.FIT);
-
-
-        producct_types= new ArrayList<>();
-        product_mains= new ArrayList<>();
-
-            producct_types.add(new Producct_type("Điện thoại / Lap top ",product_mains));
-            producct_types.add(new Producct_type("Tivi / Tủ lạnh ",product_mains));
-            producct_types.add(new Producct_type("Nồi cơm",product_mains));
-            producct_types.add(new Producct_type("Quạt",product_mains));
-        homeAdapter= new ProductTypeAdapter(producct_types, getContext());
-        binding.recycleProductMain.setAdapter(homeAdapter);
-        binding.recycleProductMain.setAdapter(homeAdapter);
+        List<String> tabTitles = new ArrayList<>();
+        tabTitles.add("Bán chạy");
+        tabTitles.add("Đang giảm giá");
+        tabTitles.add("Nổi bật");
+        adapter = new ViewPageHomeAdapter(getActivity().getSupportFragmentManager(),tabTitles);
+        binding.viewPagerHome.setAdapter(adapter);
+        binding.tabHome.setupWithViewPager(binding.viewPagerHome);
+        setTabTitles(tabTitles);
+    }
+    private void setTabTitles(List<String> tabTitles) {
+        for (int i = 0; i < tabTitles.size(); i++) {
+            TabLayout.Tab tab = binding.tabHome.getTabAt(i);
+            if (tab != null) {
+                tab.setText(tabTitles.get(i));
+            }
+        }
     }
 }
