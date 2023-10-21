@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.adapter;
+package com.example.hn_2025_online_shop.adapter.page_view;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
