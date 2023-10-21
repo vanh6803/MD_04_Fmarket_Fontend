@@ -57,7 +57,7 @@
             <ImageView
                 android:layout_marginLeft="10dp"
                 android:layout_gravity="center"
-                android:src="@drawable/mes"
+                android:src="@drawable/messg"
                 android:layout_width="30dp"
                 android:layout_height="35dp"/>
 

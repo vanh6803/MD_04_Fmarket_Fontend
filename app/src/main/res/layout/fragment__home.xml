@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp">
             <ImageView
-                android:src="@drawable/profile_2"
+                android:src="@drawable/baseline_people_alt_24"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
@@ -32,18 +32,18 @@
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/find"
+                android:src="@drawable/timkiem"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <ImageView
                 android:id="@+id/buy"
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/buy"
+                android:src="@drawable/giohang"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <ImageView
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/mes"
+                android:src="@drawable/messg"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
 
