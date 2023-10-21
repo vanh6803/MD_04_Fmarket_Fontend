@@ -6,7 +6,7 @@
         android:title="Trang chủ"  />
     <item
         android:id="@+id/product"
-        android:icon="@drawable/sanpham"
+        android:icon="@drawable/product_24"
         android:title="Sản phầm" />
     <item
         android:id="@+id/favorites"

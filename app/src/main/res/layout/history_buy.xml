@@ -39,7 +39,7 @@
 
             <ImageView
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/mes"
+                android:src="@drawable/messg"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
 
