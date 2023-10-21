@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.ItemProductSaleBinding;
 import com.example.hn_2025_online_shop.model.Product_sale;
 import com.squareup.picasso.Picasso;
 
@@ -29,17 +30,17 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_sale,parent,false);
-        return new ViewHolder(view);
+        ItemProductSaleBinding binding = ItemProductSaleBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product_sale productSale = list.get(position);
-        holder.name.setText(productSale.getName());
-        holder.priceSale.setText(productSale.getPrice_sale().toString());
-        holder.price.setText(productSale.getPrice().toString());
-        Picasso.get().load(list.get(position).getImg()).into(holder.img);
+        holder.binding.nameSale.setText(productSale.getName());
+        holder.binding.price.setText(productSale.getPrice_sale().toString());
+        holder.binding.textsale.setText(productSale.getPrice().toString());
+        Picasso.get().load(list.get(position).getImg()).into(holder.binding.imgSale);
     }
 
     @Override
@@ -48,16 +49,12 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
     }
 
     public  class ViewHolder extends  RecyclerView.ViewHolder{
-        TextView price, priceSale, name;
-        ImageView img;
 
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            price = itemView.findViewById(R.id.price);
-            img = itemView.findViewById(R.id.imgSale);
-            priceSale = itemView.findViewById(R.id.textsale);
-            name = itemView.findViewById(R.id.nameSale);
-            priceSale.setPaintFlags(priceSale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        private ItemProductSaleBinding binding;
+        public ViewHolder(ItemProductSaleBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+            binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         }
     }
 }

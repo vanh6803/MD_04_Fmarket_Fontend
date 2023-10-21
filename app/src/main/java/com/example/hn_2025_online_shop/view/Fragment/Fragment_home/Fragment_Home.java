@@ -1,6 +1,7 @@
 package com.example.hn_2025_online_shop.view.Fragment.Fragment_home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,11 +15,9 @@ import android.view.ViewGroup;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.adapter.ProductTypeAdapter;
-import com.example.hn_2025_online_shop.adapter.ViewPageHomeAdapter;
+import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentHomeBinding;
-import com.example.hn_2025_online_shop.model.Producct_type;
-import com.example.hn_2025_online_shop.model.Product_main;
+import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -72,6 +71,14 @@ public class Fragment_Home extends Fragment {
         binding.viewPagerHome.setAdapter(adapter);
         binding.tabHome.setupWithViewPager(binding.viewPagerHome);
         setTabTitles(tabTitles);
+        binding.buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), HistoryBuyScreen.class);
+                startActivity(intent);
+            }
+        });
+
     }
     private void setTabTitles(List<String> tabTitles) {
         for (int i = 0; i < tabTitles.size(); i++) {

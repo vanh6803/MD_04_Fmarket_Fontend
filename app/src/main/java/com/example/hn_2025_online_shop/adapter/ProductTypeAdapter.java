@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.ItemHistoryBuyBinding;
+import com.example.hn_2025_online_shop.databinding.ItemProductTypeBinding;
 import com.example.hn_2025_online_shop.model.Producct_type;
 import com.example.hn_2025_online_shop.model.Product_main;
 
@@ -22,6 +24,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     List<Producct_type> list;
     Context context;
 
+
     public ProductTypeAdapter(List<Producct_type> list, Context context) {
         this.list = list;
         this.context = context;
@@ -30,14 +33,14 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_type,parent,false);
-        return new ViewHolder(view);
+        ItemProductTypeBinding binding = ItemProductTypeBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        return new ViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Producct_type producctType = list.get(position);
-        holder.txttitle.setText(producctType.getTitle());
+        holder.binding.titleType.setText(producctType.getTitle());
 
     }
 
@@ -47,22 +50,20 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txttitle;
-        GridView gridView;
+        private ItemProductTypeBinding binding;
         List<Product_main> productMainList;
         ProductMainAdapter productAdapter;
-        LinearLayout sale;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            txttitle = itemView.findViewById(R.id.titleType);
-            gridView = itemView.findViewById(R.id.grid_product);
-            sale= itemView.findViewById(R.id.sale);
+
+        public ViewHolder(ItemProductTypeBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
+
             productMainList= new ArrayList<>();
             for (int i = 0; i<6; i++){
                 productMainList.add(new Product_main("https://www.digitaltrends.com/wp-content/uploads/2021/11/macbook-pro-2021-01.jpg?resize=625%2C417&p=1", "ốp"+ i));
             }
             productAdapter = new ProductMainAdapter(itemView.getContext(), productMainList);
-            gridView.setAdapter(productAdapter);
+            binding.gridProduct.setAdapter(productAdapter);
 
 
 
