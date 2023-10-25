@@ -32,19 +32,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.733" />
+            app:layout_constraintVertical_bias="0.666" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ngocntph26008"
+            android:layout_marginTop="28dp"
+            android:text="Fmarket User"
             android:textColor="@color/black"
             android:textSize="22dp"
             android:textStyle="bold"
-
-            tools:layout_editor_absoluteX="72dp"
-            tools:layout_editor_absoluteY="30dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.258"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -52,11 +54,14 @@
             android:text="Khách hàng tiềm năng"
             android:textColor="@color/white"
             android:textSize="16dp"
-            tools:layout_editor_absoluteX="72dp"
-            tools:layout_editor_absoluteY="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.673"
             tools:ignore="MissingConstraints" />
 
-             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -411,7 +416,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="18dp"
                 android:padding="2dp"
-                android:id="@+id/layoutLinkedBank">
+                android:id="@+id/layoutLogout">
 
                 <ImageView
                     android:id="@+id/imageView5"
