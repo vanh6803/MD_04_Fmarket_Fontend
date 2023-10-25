@@ -17,11 +17,11 @@
             android:id="@+id/arrowBackSignIn"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
             android:src="@drawable/backkk"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="-3dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -38,15 +38,16 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="196dp"
             android:text="Fmarket User"
             android:textColor="@color/black"
             android:textSize="22dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.258"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.329"
             app:layout_constraintTop_toTopOf="parent" />
+
 
         <TextView
             android:layout_width="wrap_content"
