@@ -25,6 +25,7 @@ import com.example.hn_2025_online_shop.model.Product_main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Fragment_Product extends Fragment {
 
@@ -63,7 +64,7 @@ public class Fragment_Product extends Fragment {
 
         for (int i = 0 ; i< producct_types.size(); i++){
             for (int j = 0; j< producct_types.get(i).getList().size(); j ++){
-                if (producct_types.get(i).getTitle() == "Sản phẩm bán chạy2"){
+                if (Objects.equals(producct_types.get(i).getTitle(), "Sản phẩm bán chạy2")){
                     Log.d("vv", "onCreateView: aaaaaaaaaaaaaaaaa");
                 }
             }
