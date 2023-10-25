@@ -191,6 +191,7 @@
     </LinearLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/btn_login_google"
         android:elevation="20dp"
         android:layout_marginTop="20dp"
         app:cardCornerRadius="10dp"
