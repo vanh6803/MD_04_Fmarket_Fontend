@@ -2,79 +2,126 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:layout_height="80dp"
+    android:background="@drawable/custom_btn_boder"
     android:orientation="horizontal"
-    android:layout_marginTop="10dp"
-    >
+    android:paddingRight="10dp"
+    android:paddingVertical="2dp"
+    android:layout_marginTop="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="110dp">
+        android:layout_width="wrap_content"
+        android:layout_height="80dp">
 
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imageView11"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:background="@drawable/iteamvoucher"
+            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="5dp"
-            tools:ignore="MissingConstraints" />
+            tools:layout_editor_absoluteY="5dp" />
 
         <ImageView
-            android:layout_width="90dp"
-            android:layout_height="30dp"
+            android:id="@+id/imageView3"
+            android:layout_width="60dp"
+            android:layout_height="20dp"
             android:background="@drawable/iteamgiamgia"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="-10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:layout_width="100dp"
+            android:id="@+id/sale"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center"
             android:text="Giảm 10%"
             android:textColor="@color/white"
             android:textStyle="bold"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/imageView11"
+            app:layout_constraintHorizontal_bias="0.58"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView3"
             tools:ignore="MissingConstraints" />
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:textStyle="bold"
+            android:textSize="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tất cả các hình thức thành toán"/>
         <LinearLayout
-
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_width="200dp"
-            android:layout_height="110dp"
-            tools:layout_editor_absoluteX="100dp"
-            tools:layout_editor_absoluteY="5dp"
-            tools:ignore="MissingConstraints">
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <TextView
                 android:textStyle="bold"
-                android:layout_margin="10dp"
-              android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tất cả các hình thức thành toán"/>
-            <TextView
-                android:textStyle="bold"
-                android:layout_margin="10dp"
                 android:textSize="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Đơn hàng từ 100k"/>
+                android:text="Đơn hàng từ:"/>
             <TextView
+                android:id="@+id/price"
+                android:textColor="@color/red"
+                android:layout_weight="1"
                 android:textStyle="bold"
-                android:layout_margin="10dp"
                 android:textSize="12dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Thời hạn: Còn 5 ngày"/>
-            
+                android:text="100k"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thời hạn:"/>
+            <TextView
+                android:id="@+id/date"
+                android:textColor="@color/red"
+                android:textStyle="bold"
+                android:textSize="12dp"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Còn 5 ngày"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
             android:textColor="@color/white"
@@ -84,23 +131,26 @@
             android:textSize="17dp"
             android:gravity="center"
             android:layout_width="80dp"
-            android:layout_height="35dp"
+            android:layout_height="30dp"
             tools:layout_editor_absoluteX="321dp"
             tools:layout_editor_absoluteY="16dp"
             tools:ignore="MissingConstraints" />
 
         <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
             android:textStyle="bold"
             android:textSize="13dp"
             android:text="Điều kiện"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            tools:layout_editor_absoluteX="345dp"
-            tools:layout_editor_absoluteY="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             tools:ignore="MissingConstraints" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

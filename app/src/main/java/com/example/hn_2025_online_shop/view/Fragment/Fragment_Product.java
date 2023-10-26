@@ -61,15 +61,6 @@ public class Fragment_Product extends Fragment {
         for (int i = 1; i< 4; i++){
             producct_types.add(new Producct_type("Sản phẩm bán chạy"+ i ,product_mains));
         }
-
-        for (int i = 0 ; i< producct_types.size(); i++){
-            for (int j = 0; j< producct_types.get(i).getList().size(); j ++){
-                if (Objects.equals(producct_types.get(i).getTitle(), "Sản phẩm bán chạy2")){
-                    Log.d("vv", "onCreateView: aaaaaaaaaaaaaaaaa");
-                }
-            }
-        }
-
         productAdapter2= new ProductTypeAdapter(producct_types, getContext());
         binding.recycleProduct.setAdapter(productAdapter2);
         ArrayList<SlideModel> list  = new ArrayList<>();

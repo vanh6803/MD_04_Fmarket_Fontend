@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.product_screen;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import com.example.hn_2025_online_shop.adapter.VoucherAdapter;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
 import com.example.hn_2025_online_shop.model.Product_sale;
 import com.example.hn_2025_online_shop.model.Voucher;
+import com.example.hn_2025_online_shop.view.product_screen.infor_shop.InforShop;
+import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +47,13 @@ public class DetailProduct extends AppCompatActivity {
         voucherAdapter = new VoucherAdapter(this, voucherList);
         binding.recyProductSame.setAdapter(productSaleAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
+
+        binding.showshop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailProduct.this, InforShop.class));
+            }
+        });
 
     }
 }

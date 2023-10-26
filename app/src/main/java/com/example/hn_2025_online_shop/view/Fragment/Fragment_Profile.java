@@ -47,12 +47,18 @@ public class Fragment_Profile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        followDon();//theo dõi đơn hàng
+        binding.arrowBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
+        HistoryDon();//theo dõi đơn hàng
         chat(); // chat với khách hàng
         logOut();//đăng xuất
     }
-    private void followDon() {
-        binding.layoutFollowDon.setOnClickListener(new View.OnClickListener() {
+    private void HistoryDon() {
+        binding.layoutHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), HistoryBuyScreen.class));
@@ -66,6 +72,7 @@ public class Fragment_Profile extends Fragment {
                 startActivity(new Intent(getActivity(), ChatScreen.class));
             }
         });
+
     }
     private void logOut() {
         binding.layoutLogout.setOnClickListener(new View.OnClickListener() {
