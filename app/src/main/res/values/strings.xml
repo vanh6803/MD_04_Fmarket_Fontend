@@ -6,4 +6,5 @@
     <string name="web_client_id">52248343175-t9jiacpb07fov31faob0en15k944300q.apps.googleusercontent.com</string>
     <string name="android_client_id">52248343175-el4h3n5n8mc7nbl7oll24ngifvh9ka4a.apps.googleusercontent.com</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_logout">Bạn có muốn đăng xuất không?</string>
 </resources>

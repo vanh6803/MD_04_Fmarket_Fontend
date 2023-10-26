@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -25,6 +27,21 @@
         <activity
             android:name=".view.home_screen.MainActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".view.profile_screen.ChatScreen"
+            android:exported="false" />
+        <activity
+            android:name=".view.cart_screen.CartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".view.home_screen.MainActivity"
+            android:exported="true" />
         <activity
             android:name=".view.login.Login"
             android:exported="true"></activity>
@@ -49,6 +66,28 @@
         <activity
             android:name=".view.profile_screen.HistoryBuyScreen"
             android:exported="true"></activity>
+            android:exported="true" />
+        <activity
+            android:name=".view.login.Register"
+            android:exported="true" />
+        <activity
+            android:name=".view.login.ResetPassWord"
+            android:exported="true" />
+        <activity
+            android:name=".view.login.ResetPassWordSuccess"
+            android:exported="true" />
+        <activity
+            android:name=".view.login.VerifiPassWord"
+            android:exported="true" />
+        <activity
+            android:name=".view.login.ForgotPassWord"
+            android:exported="true" />
+        <activity
+            android:name=".view.product_screen.DetailProduct"
+            android:exported="true" />
+        <activity
+            android:name=".view.profile_screen.HistoryBuyScreen"
+            android:exported="true" />
         <activity
             android:name=".view.login.splash"
             android:exported="true">

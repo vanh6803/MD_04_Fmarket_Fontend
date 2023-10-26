@@ -61,7 +61,10 @@
                 android:layout_width="17dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center"
-                android:background="@color/black" />
+                android:background="@color/black"
+
+                android:src="@drawable/ngoisao" />
+
             <TextView
                 android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"

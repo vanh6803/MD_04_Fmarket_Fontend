@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(Fragment_Favorite.newInstance());
                 } else if (id == R.id.notification) {
                     loadFragment(Fragment_Notification.newInstance());
-                } else if (id == R.id.product) {
+                } else if (id == R.id.profile) {
                     loadFragment(Fragment_Profile.newInstance());
                 }
 
