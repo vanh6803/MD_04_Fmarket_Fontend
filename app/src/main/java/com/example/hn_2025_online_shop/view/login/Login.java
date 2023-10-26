@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,14 +39,15 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
-public class Login extends AppCompatActivity{
+public class Login extends AppCompatActivity {
 
     private LoginBinding binding;
 
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
+    private SharedPreferences sharedPreferences;
 
-    final int RC_SIGN_IN= 2;
+    final int RC_SIGN_IN = 2;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -56,6 +58,7 @@ public class Login extends AppCompatActivity{
 
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.web_client_id))
                 .requestEmail()
                 .build();
 
@@ -85,7 +88,6 @@ public class Login extends AppCompatActivity{
         });
 
 
-
         //login with google
 
         binding.btnLoginGoogle.setOnClickListener(v -> {
@@ -97,7 +99,12 @@ public class Login extends AppCompatActivity{
     protected void onStart() {
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        Log.d("account", "onStart: "+account);
+        Log.d("account-onStart", "onStart: " + account);
+        if (account != null) {
+            Intent intent = new Intent(Login.this, MainActivity.class);
+
+            startActivity(intent);
+        }
     }
 
     private void signIn() {
@@ -115,18 +122,39 @@ public class Login extends AppCompatActivity{
             handleSignInResult(task);
         }
     }
+
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Log.d("account", "handleSignInResult: "+account);
-            startActivity(new Intent(Login.this, MainActivity.class));
-            // Signed in successfully, show authenticated UI.
-//            updateUI(account);
+            Log.d("account", "handleSignInResult: " + account);
+
+            // Lấy token của người dùng
+            String idToken = account.getIdToken();
+            String email = account.getEmail();
+
+            Log.d("email", "email: " + email);
+
+            // Kiểm tra xem token có null không
+            if (idToken != null) {
+                // Điều hướng người dùng đến màn hình chính (MainActivity) và chuyển token qua
+                Log.d("idToken", "idToken: " + idToken);
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("TOKEN", idToken);
+                editor.commit();
+
+                Intent intent = new Intent(Login.this, MainActivity.class);
+
+                startActivity(intent);
+            } else {
+                // Xử lý token null
+                Log.e("Token", "Token is null");
+            }
+
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("ApiException", "signInResult:failed code=" + e.getStatusCode());
-//            updateUI(null);
         }
     }
 }
