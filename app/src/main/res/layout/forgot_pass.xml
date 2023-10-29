@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtName"
+                    android:id="@+id/edtEmail"
                     android:background="@color/transparent"
                     android:padding="8dp"
                     android:layout_width="match_parent"
