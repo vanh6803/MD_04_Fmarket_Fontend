@@ -19,7 +19,11 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.ultil.Validator;
-import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class Login extends AppCompatActivity{
     private LoginBinding binding;
@@ -63,11 +67,19 @@ public class Login extends AppCompatActivity{
                                                 Toast.makeText(Login.this
                                                         ,"Bạn đã đăng nhập thành công!"
                                                         ,Toast.LENGTH_SHORT).show();
-                                                screenSwitch(Login.this, MainActivity.class);
-                                            }else {
-                                                Toast.makeText(Login.this
-                                                        ,loginResponse.getMessage()
-                                                        ,Toast.LENGTH_SHORT).show();
+//                                                screenSwitch(Login.this, MainActivity.class);
+                                            }
+                                        }else {
+                                            try {
+                                                String errorBody = response.errorBody().string();
+                                                // Parse and display the error message
+                                                JSONObject errorJson = new JSONObject(errorBody);
+                                                String errorMessage = errorJson.getString("message");
+                                                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                                            }catch (IOException e){
+                                                e.printStackTrace();
+                                            } catch (JSONException e) {
+                                                throw new RuntimeException(e);
                                             }
                                         }
                                     }
