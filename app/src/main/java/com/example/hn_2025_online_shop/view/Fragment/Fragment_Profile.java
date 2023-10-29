@@ -18,6 +18,7 @@ import android.view.WindowManager;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.FragmentProfileBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
+import com.example.hn_2025_online_shop.databinding.LayoutDialogPhanhoiBinding;
 import com.example.hn_2025_online_shop.model.HistoryBuy;
 import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
@@ -49,6 +50,7 @@ public class Fragment_Profile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         followDon();//theo dõi đơn hàng
         chat(); // chat với khách hàng
+        phanHoiKhieuNai();//phan hoi khieu nai
         logOut();//đăng xuất
     }
     private void followDon() {
@@ -64,6 +66,27 @@ public class Fragment_Profile extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ChatScreen.class));
+            }
+        });
+    }
+    private void phanHoiKhieuNai() {
+        binding.layoutPhanhoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LayoutDialogPhanhoiBinding bindingLogout = LayoutDialogPhanhoiBinding.inflate(getLayoutInflater());
+                Dialog dialog = new Dialog(getContext());
+                dialog.setContentView(bindingLogout.getRoot());
+                Window window = dialog.getWindow();
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
+                bindingLogout.btnPhanHoi.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(getActivity(), HistoryBuyScreen.class));
+                        getActivity().finish();
+                    }
+                });
+                dialog.show();
             }
         });
     }
