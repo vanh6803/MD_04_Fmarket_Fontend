@@ -18,6 +18,7 @@ import android.view.WindowManager;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.FragmentProfileBinding;
+import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 
 import com.example.hn_2025_online_shop.model.HistoryBuy;
@@ -29,10 +30,6 @@ public class Fragment_Profile extends Fragment {
     private GoogleSignInClient mGoogleSignInClient;
     private SharedPreferences sharedPreferences;
 
-
-public class Fragment_Profile extends Fragment {
-    private FragmentProfileBinding binding;
-
     public static Fragment_Profile newInstance() {
         Fragment_Profile fragment = new Fragment_Profile();
         return fragment;
@@ -42,6 +39,7 @@ public class Fragment_Profile extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +55,7 @@ public class Fragment_Profile extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        String token = sharedPreferences.getString("TOKEN", null);
+//        String token = sharedPreferences.getString("TOKEN", null);
 
 //        todo: cho vào trong btn logout
 //        if (token != null){
@@ -68,6 +66,7 @@ public class Fragment_Profile extends Fragment {
         chat(); // chat với khách hàng
         logOut();//đăng xuất
     }
+
     private void followDon() {
         binding.layoutFollowDon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +75,7 @@ public class Fragment_Profile extends Fragment {
             }
         });
     }
+
     private void chat() {
         binding.layoutQA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +84,7 @@ public class Fragment_Profile extends Fragment {
             }
         });
     }
+
     private void logOut() {
         binding.layoutLogout.setOnClickListener(new View.OnClickListener() {
             @Override

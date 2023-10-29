@@ -56,6 +56,7 @@ public class Login extends AppCompatActivity {
         binding = LoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        sharedPreferences = getSharedPreferences("USER_FILE", MODE_PRIVATE);
 
         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.web_client_id))
