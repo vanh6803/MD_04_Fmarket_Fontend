@@ -17,10 +17,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="60dp">
-            <ImageView
-                android:src="@drawable/backs"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+
             <androidx.cardview.widget.CardView
                 android:layout_marginHorizontal="10dp"
                 app:cardElevation="10dp"
@@ -37,7 +34,7 @@
                     android:layout_height="wrap_content">
                     <ImageView
                         android:layout_gravity="center"
-                        android:src="@drawable/find_product"
+                        android:src="@drawable/tiemkiem"
                         android:layout_width="24dp"
                         android:layout_height="24dp"/>
 
@@ -46,20 +43,28 @@
                         android:hint="Tìm kiếm..."
                         android:background="@color/transparent"
                         android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16sp"
                         android:layout_height="30dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <ImageView
-                android:layout_gravity="center"
-                android:src="@drawable/buy"
-                android:layout_width="40dp"
-                android:layout_height="35dp"/>
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
-                android:src="@drawable/messg"
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/giohang"
+                android:background="@drawable/custom_bg_icon"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
                 android:layout_width="30dp"
-                android:layout_height="35dp"/>
+                android:layout_height="30dp"/>
+
+            <ImageView
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/messg"
+                android:background="@drawable/custom_bg_icon"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
 
         </LinearLayout>
 
