@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.model.Product_main;
-import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

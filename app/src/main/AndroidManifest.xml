@@ -50,17 +50,17 @@
             android:name=".view.login.ForgotPassWord"
             android:exported="true" />
         <activity
-            android:name=".view.product_screen.DetailProduct"
+            android:name=".view.profile_screen.history_buy_screen.product_screen.DetailProduct"
             android:exported="true" />
         <activity
             android:name=".view.profile_screen.HistoryBuyScreen"
             android:exported="true" />
 
         <activity
-            android:name=".view.product_screen.infor_shop.InforShop"
+            android:name=".view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop"
             android:exported="true" />
         <activity
-            android:name=".view.login.splash"
+            android:name=".view.login.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
