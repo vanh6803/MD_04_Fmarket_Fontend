@@ -29,6 +29,7 @@ public class Login extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
         binding.txtfogotpass.setOnClickListener(new View.OnClickListener() {
@@ -36,6 +37,7 @@ public class Login extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent2 = new Intent(Login.this, ForgotPassWord.class);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {

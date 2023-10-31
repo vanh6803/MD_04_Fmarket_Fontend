@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ForgotPassBinding;
 
 public class ForgotPassWord extends AppCompatActivity {
@@ -20,6 +22,7 @@ public class ForgotPassWord extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ForgotPassWord.this, VerifiPassWord.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
 
@@ -27,7 +30,14 @@ public class ForgotPassWord extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

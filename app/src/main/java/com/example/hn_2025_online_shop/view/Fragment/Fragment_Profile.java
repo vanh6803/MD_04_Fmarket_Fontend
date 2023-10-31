@@ -59,6 +59,7 @@ public class Fragment_Profile extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), HistoryBuyScreen.class));
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
@@ -67,6 +68,7 @@ public class Fragment_Profile extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), ChatScreen.class));
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
 
