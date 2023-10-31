@@ -116,11 +116,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/tvProfileUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="Cài đặt"
+                    android:text="Thông tin cá nhân"
                     android:textColor="@color/black"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"

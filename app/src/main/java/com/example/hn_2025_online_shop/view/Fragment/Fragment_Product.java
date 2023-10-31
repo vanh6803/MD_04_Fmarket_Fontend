@@ -59,7 +59,7 @@ public class Fragment_Product extends Fragment {
         product_mains= new ArrayList<>();
         producct_types= new ArrayList<>();
         for (int i = 1; i< 4; i++){
-            producct_types.add(new Producct_type("Sản phẩm bán chạy"+ i ,product_mains));
+            producct_types.add(new Producct_type(1,"Sản phẩm bán chạy"+ i ,product_mains));
         }
         productAdapter2= new ProductTypeAdapter(producct_types, getContext());
         binding.recycleProduct.setAdapter(productAdapter2);

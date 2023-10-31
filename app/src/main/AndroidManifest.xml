@@ -19,12 +19,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.profile_screen.ProfileUserScreen"
+            android:exported="false" />
+        <activity
+            android:name=".voucher.VoucherScreen"
+            android:exported="false" />
+        <activity
             android:name=".view.profile_screen.ChatScreen"
             android:exported="false" />
         <activity
             android:name=".view.cart_screen.CartActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".view.home_screen.MainActivity"
             android:exported="true" />
@@ -52,7 +57,6 @@
         <activity
             android:name=".view.profile_screen.HistoryBuyScreen"
             android:exported="true" />
-
         <activity
             android:name=".view.product_screen.infor_shop.InforShop"
             android:exported="true" />

@@ -3,17 +3,14 @@ package com.example.hn_2025_online_shop.adapter;
 import android.content.Context;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ItemProductSaleBinding;
 import com.example.hn_2025_online_shop.model.Product_sale;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -22,7 +19,7 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
     List<Product_sale> list;
     Context context;
 
-    public ProductSaleAdapter(List<Product_sale> list, Context context) {
+    public ProductSaleAdapter(List<Product_sale> list, DetailProduct context) {
         this.list = list;
         this.context = context;
     }

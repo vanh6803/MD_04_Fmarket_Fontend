@@ -1,22 +1,38 @@
 package com.example.hn_2025_online_shop.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Producct_type {
-    String title;
+    @SerializedName("_id")
+    private int id;
+    String name;
     List<Product_main> list;
 
-    public Producct_type(String title, List<Product_main> list) {
-        this.title = title;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Producct_type(int id, String name, List<Product_main> list) {
+        this.id = id;
+        this.name = name;
         this.list = list;
     }
 
-    public String getTitle() {
-        return title;
+    public Producct_type() {
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<Product_main> getList() {

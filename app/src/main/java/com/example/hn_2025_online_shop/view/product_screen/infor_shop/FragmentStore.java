@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.product_screen.infor_shop;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,18 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.ProductSaleAdapter;
 import com.example.hn_2025_online_shop.adapter.StoreAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentStoreBinding;
+import com.example.hn_2025_online_shop.model.Product_sale;
 import com.example.hn_2025_online_shop.model.Store;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentStore extends Fragment {
     private FragmentStoreBinding binding;
-
+    public Context context;
     StoreAdapter adapter;
+
     List<Store> list;
+
+
     public FragmentStore() {
     }
 
@@ -54,5 +61,13 @@ public class FragmentStore extends Fragment {
         list.add(new Store("40%", "220k", "còn 4 ngày"));
         adapter = new StoreAdapter(list,getContext());
         binding.gridStore.setAdapter(adapter);
+
+
+
+
+
+
+
+
     }
 }
