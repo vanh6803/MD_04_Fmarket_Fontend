@@ -48,12 +48,7 @@ public class Fragment_Profile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.arrowBackSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().finish();
-            }
-        });
+
         HistoryDon();//theo dõi đơn hàng
         chat(); // chat với khách hàng
         phanHoiKhieuNai();//phan hoi khieu nai
