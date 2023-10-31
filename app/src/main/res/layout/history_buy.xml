@@ -18,9 +18,14 @@
             android:layout_height="60dp">
             <ImageView
                 android:id="@+id/back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/custom_bg_shopping_cart"
+                android:padding="5dp"
                 android:src="@drawable/backs"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                app:tint="@color/primary"
+                />
+
             <TextView
                 android:layout_gravity="center"
                 android:gravity="center"
