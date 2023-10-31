@@ -48,7 +48,7 @@ public class Fragment_Profile extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        binding.arrowBack.setOnClickListener(new View.OnClickListener() {
+        binding.arrowBackSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getActivity().finish();
