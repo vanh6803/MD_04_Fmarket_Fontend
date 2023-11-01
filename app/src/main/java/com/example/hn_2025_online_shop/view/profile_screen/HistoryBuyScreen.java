@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHistoryAdapter;
 import com.example.hn_2025_online_shop.databinding.HistoryBuyBinding;
 import com.google.android.material.tabs.TabLayout;
@@ -30,6 +31,7 @@ public class HistoryBuyScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
             }
         });
         adapter = new ViewPageHistoryAdapter(getSupportFragmentManager(), tabTitles);
@@ -46,5 +48,11 @@ public class HistoryBuyScreen extends AppCompatActivity {
                 tab.setText(tabTitles.get(i));
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

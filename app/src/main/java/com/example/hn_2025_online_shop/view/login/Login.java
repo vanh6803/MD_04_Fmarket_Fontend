@@ -15,10 +15,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.ultil.Validator;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ public class Login extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(Login.this, Register.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
         binding.txtfogotpass.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +49,7 @@ public class Login extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent2 = new Intent(Login.this, ForgotPassWord.class);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +65,11 @@ public class Login extends AppCompatActivity{
                                     public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                         if(response.isSuccessful()){
                                             LoginResponse loginResponse = response.body();
-                                            int code = loginResponse.getCode();
-                                            Toast.makeText(Login.this, ""+code, Toast.LENGTH_SHORT).show();
                                             if (loginResponse.getCode() == 201){
                                                 Toast.makeText(Login.this
                                                         ,"Bạn đã đăng nhập thành công!"
                                                         ,Toast.LENGTH_SHORT).show();
-//                                                screenSwitch(Login.this, MainActivity.class);
+                                                screenSwitch(Login.this, MainActivity.class);
                                             }
                                         }else {
                                             try {

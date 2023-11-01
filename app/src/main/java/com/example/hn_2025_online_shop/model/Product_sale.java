@@ -4,7 +4,6 @@ public class Product_sale{
     String name;
     Number price;
     Number price_sale;
-
     String img;
 
     public Product_sale(String name, Number price, Number price_sale, String img) {

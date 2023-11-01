@@ -19,12 +19,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.profile_screen.ProfileUserScreen"
+            android:exported="false" />
+        <activity
+            android:name=".voucher.VoucherScreen"/>
+        <activity
             android:name=".view.profile_screen.ChatScreen"
             android:exported="false" />
         <activity
             android:name=".view.cart_screen.CartActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".view.home_screen.MainActivity"
             android:exported="true" />
@@ -47,17 +51,16 @@
             android:name=".view.login.ForgotPassWord"
             android:exported="true" />
         <activity
-            android:name=".view.product_screen.DetailProduct"
+            android:name=".view.profile_screen.history_buy_screen.product_screen.DetailProduct"
             android:exported="true" />
         <activity
             android:name=".view.profile_screen.HistoryBuyScreen"
             android:exported="true" />
-
         <activity
-            android:name=".view.product_screen.infor_shop.InforShop"
+            android:name=".view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop"
             android:exported="true" />
         <activity
-            android:name=".view.login.splash"
+            android:name=".view.login.Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
