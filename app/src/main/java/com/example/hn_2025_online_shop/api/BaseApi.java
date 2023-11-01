@@ -16,7 +16,7 @@ import retrofit2.http.GET;
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://172.24.0.1:3030/api/")
+            .baseUrl("http://192.168.100.4:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
