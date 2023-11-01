@@ -29,7 +29,7 @@ import retrofit2.Response;
 
 public class Fragement_Page_Banchay extends Fragment {
     List<Producct_type> producct_types;
-    List<Product_main> product_mains;
+
     ProductTypeAdapter homeAdapter;
     ProgressDialog dialog;
 
@@ -72,7 +72,7 @@ public class Fragement_Page_Banchay extends Fragment {
         dialog = new ProgressDialog(getContext());
 
         producct_types= new ArrayList<>();
-        product_mains= new ArrayList<>();
+
 
 //        producct_types.add(new Producct_type("1","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
 //        producct_types.add(new Producct_type("2","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
