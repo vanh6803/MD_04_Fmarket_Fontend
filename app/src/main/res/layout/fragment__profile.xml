@@ -23,8 +23,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5" />
-
-
         <TextView
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
@@ -38,7 +36,6 @@
             app:layout_constraintHorizontal_bias="0.038"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

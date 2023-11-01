@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentProductStore">
 
