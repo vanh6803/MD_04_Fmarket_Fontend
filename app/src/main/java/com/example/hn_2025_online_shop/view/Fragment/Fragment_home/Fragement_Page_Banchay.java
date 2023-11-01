@@ -58,20 +58,31 @@ public class Fragement_Page_Banchay extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        homeAdapter= new ProductTypeAdapter(producct_types, getContext());
+        binding.recycleProductMain.setAdapter(homeAdapter);
+        binding.recycleProductMain.setAdapter(homeAdapter);
+        callApiProductType();
+    }
+
+    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        dialog = new ProgressDialog(getContext());
 
         producct_types= new ArrayList<>();
         product_mains= new ArrayList<>();
 
-        producct_types.add(new Producct_type(1,"Điện thoại / Lap top ",product_mains));
-        producct_types.add(new Producct_type(2,"Tivi / Tủ lạnh ",product_mains));
-        producct_types.add(new Producct_type(3,"Nồi cơm",product_mains));
-        producct_types.add(new Producct_type(4,"Quạt",product_mains));
-        homeAdapter= new ProductTypeAdapter(producct_types, getContext());
+//        producct_types.add(new Producct_type("1","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
+//        producct_types.add(new Producct_type("2","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
+//        producct_types.add(new Producct_type("3","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
+//        producct_types.add(new Producct_type("4","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
+
+       homeAdapter= new ProductTypeAdapter(producct_types, getContext());
         binding.recycleProductMain.setAdapter(homeAdapter);
         binding.recycleProductMain.setAdapter(homeAdapter);
-//        callApiProductType();
+       callApiProductType();
     }
     private void callApiProductType(){
         dialog.show();
@@ -81,9 +92,11 @@ public class Fragement_Page_Banchay extends Fragment {
                 if(response.isSuccessful()){
                     ProductTypeResponse productTypeResponse =response.body();
                     homeAdapter.setListProductType(productTypeResponse.getData());
+                    binding.recycleProductMain.setAdapter(homeAdapter);
                     dialog.cancel();
                 }else{
                     Toast.makeText(getActivity(), "Get Product Type Error", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
                 }
             }
             @Override

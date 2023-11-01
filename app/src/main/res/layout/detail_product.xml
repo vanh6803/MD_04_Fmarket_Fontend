@@ -36,16 +36,21 @@
                 tools:ignore="MissingConstraints" />
 
             <ImageView
-                android:id="@+id/back_detail_product"
-                android:layout_width="25dp"
-                android:layout_height="29dp"
+                android:id="@+id/backDetailProduct"
+                app:tint="@color/primary"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/custom_bg_shopping_cart"
+                android:padding="5dp"
                 android:layout_marginTop="20dp"
                 android:src="@drawable/backs"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.041"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
+                tools:ignore="MissingConstraints"
+                />
+
 
             <LinearLayout
                 android:layout_width="match_parent"

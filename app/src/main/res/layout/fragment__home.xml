@@ -32,19 +32,28 @@
                 android:layout_height="wrap_content"/>
             <ImageView
                 android:layout_marginHorizontal="5dp"
-                android:src="@drawable/timkiem"
+                android:src="@drawable/tiemkiem"
+                android:background="@drawable/custom_bg_icon"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <ImageView
                 android:id="@+id/buy"
                 android:layout_marginHorizontal="5dp"
                 android:src="@drawable/giohang"
+                android:background="@drawable/custom_bg_icon"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <ImageView
-                android:layout_marginHorizontal="5dp"
                 android:src="@drawable/messg"
+                android:layout_marginHorizontal="5dp"
                 android:layout_width="30dp"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/custom_bg_icon"
                 android:layout_height="30dp"/>
 
         </LinearLayout>
@@ -55,7 +64,6 @@
         android:paddingHorizontal="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:gravity="center"
         android:orientation="vertical">
 
@@ -105,14 +113,12 @@
                 android:contextClickable="true"
                 android:text="Nổi bật"
                 android:textAlignment="center" />
-
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPagerHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
 
     </LinearLayout>
 

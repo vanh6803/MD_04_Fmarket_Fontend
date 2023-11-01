@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.view.product_screen;
+package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen;
 
 import android.content.Intent;
 import android.graphics.Paint;
@@ -13,8 +13,7 @@ import com.example.hn_2025_online_shop.adapter.VoucherAdapter;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
 import com.example.hn_2025_online_shop.model.Product_sale;
 import com.example.hn_2025_online_shop.model.Voucher;
-import com.example.hn_2025_online_shop.view.product_screen.infor_shop.InforShop;
-import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
 
 import java.util.ArrayList;
 import java.util.List;

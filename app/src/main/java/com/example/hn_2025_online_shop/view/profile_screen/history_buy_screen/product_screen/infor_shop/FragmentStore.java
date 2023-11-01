@@ -1,23 +1,20 @@
-package com.example.hn_2025_online_shop.view.product_screen.infor_shop;
+package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.adapter.ProductSaleAdapter;
+import com.example.hn_2025_online_shop.adapter.ProductStoreAdapter;
 import com.example.hn_2025_online_shop.adapter.StoreAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentStoreBinding;
-import com.example.hn_2025_online_shop.model.Product_sale;
+import com.example.hn_2025_online_shop.model.ProductStore;
 import com.example.hn_2025_online_shop.model.Store;
-import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +22,9 @@ import java.util.List;
 public class FragmentStore extends Fragment {
     private FragmentStoreBinding binding;
     public Context context;
+    List<ProductStore> productStoreList;
+    ProductStoreAdapter productStoreAdapter;
     StoreAdapter adapter;
-
     List<Store> list;
 
 
@@ -61,13 +59,13 @@ public class FragmentStore extends Fragment {
         list.add(new Store("40%", "220k", "còn 4 ngày"));
         adapter = new StoreAdapter(list,getContext());
         binding.gridStore.setAdapter(adapter);
+        productStoreList = new ArrayList<>();
+        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
+        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
+        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
+        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
 
-
-
-
-
-
-
-
+        productStoreAdapter = new ProductStoreAdapter(productStoreList, getContext());
+        binding.recyStore.setAdapter(productStoreAdapter);
     }
 }

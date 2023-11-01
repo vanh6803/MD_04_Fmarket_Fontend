@@ -13,12 +13,12 @@ import retrofit2.http.GET;
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.100.4:3000/")
+            .baseUrl("http://192.168.100.4:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
     @GET("/products/")
     Call<ProductResponse> getListProduct();
-    @GET("/category/get-list")
+    @GET("category/get-list")
     Call<ProductTypeResponse> getListTypeProduct();
 }

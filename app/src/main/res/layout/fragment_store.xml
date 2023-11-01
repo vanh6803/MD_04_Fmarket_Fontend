@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".view.product_screen.infor_shop.FragmentStore">
+    tools:context=".view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentStore">
 
     <!-- TODO: Update blank fragment layout -->
   <androidx.core.widget.NestedScrollView
@@ -84,7 +84,8 @@
 
           <androidx.recyclerview.widget.RecyclerView
               android:id="@+id/recyStore"
-              tools:listitem="@layout/item_product_sale"
+              android:orientation="horizontal"
+              tools:listitem="@layout/layout_iteam_product_store"
               app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
               android:layout_width="match_parent"
               android:layout_height="match_parent"/>

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Product_main {
    @SerializedName("_id")
-   private int id;
+   private String id;
    Number store_id;
    Number category_id;
    String name;
@@ -18,18 +18,18 @@ public class Product_main {
    String manufacturer;
    Object attribute;
 
-   public int getId() {
+   public String getId() {
       return id;
    }
 
-   public void setId(int id) {
+   public void setId(String id) {
       this.id = id;
    }
 
    public Product_main() {
     }
 
-   public Product_main(int id, Number store_id, Number category_id, String name, String image, float price, Number quantity, Number units_sold, String discription, boolean is_active, Number status, String manufacturer, Object attribute) {
+   public Product_main(String id, Number store_id, Number category_id, String name, String image, float price, Number quantity, Number units_sold, String discription, boolean is_active, Number status, String manufacturer, Object attribute) {
       this.id = id;
       this.store_id = store_id;
       this.category_id = category_id;
