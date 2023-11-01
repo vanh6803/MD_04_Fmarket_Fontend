@@ -22,6 +22,8 @@ import com.example.hn_2025_online_shop.databinding.LayoutDialogPhanhoiBinding;
 import com.example.hn_2025_online_shop.model.HistoryBuy;
 import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
+import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
+import com.example.hn_2025_online_shop.voucher.VoucherScreen;
 
 public class Fragment_Profile extends Fragment {
     private FragmentProfileBinding binding;
@@ -53,6 +55,20 @@ public class Fragment_Profile extends Fragment {
         chat(); // chat với khách hàng
         phanHoiKhieuNai();//phan hoi khieu nai
         logOut();//đăng xuất
+        binding.imageView10.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), VoucherScreen.class);
+                startActivity(intent);
+            }
+        });
+        binding.tvProfileUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), ProfileUserScreen.class);
+                startActivity(intent);
+            }
+        });
     }
     private void HistoryDon() {
         binding.layoutHistory.setOnClickListener(new View.OnClickListener() {

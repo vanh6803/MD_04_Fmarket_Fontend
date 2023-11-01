@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,7 +41,7 @@ public class StoreAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        IteamVoucherBinding binding = IteamVoucherBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        @SuppressLint("ViewHolder") IteamVoucherBinding binding = IteamVoucherBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         binding.date.setText(list.get(position).getDate());
         binding.sale.setText(list.get(position).getTextSale());
         binding.price.setText(list.get(position).getPrice());

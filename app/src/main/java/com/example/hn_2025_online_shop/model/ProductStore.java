@@ -1,16 +1,21 @@
 package com.example.hn_2025_online_shop.model;
 
-public class Product_sale{
+public class ProductStore {
     String name;
     Number price;
     Number price_sale;
     String img;
+    int quanity_sold;
 
-    public Product_sale(String name, Number price, Number price_sale, String img) {
+    public ProductStore() {
+    }
+
+    public ProductStore(String name, Number price, Number price_sale, String img, int quanity_sold) {
         this.name = name;
         this.price = price;
         this.price_sale = price_sale;
         this.img = img;
+        this.quanity_sold = quanity_sold;
     }
 
     public String getName() {
@@ -43,5 +48,13 @@ public class Product_sale{
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public int getQuanity_sold() {
+        return quanity_sold;
+    }
+
+    public void setQuanity_sold(int quanity_sold) {
+        this.quanity_sold = quanity_sold;
     }
 }
