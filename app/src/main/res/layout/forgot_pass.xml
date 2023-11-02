@@ -3,14 +3,17 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="12dp"
+    android:paddingHorizontal="22dp"
     android:layout_height="match_parent">
     <ImageView
         android:id="@+id/backfogot"
-        android:layout_marginTop="30dp"
-        android:layout_width="25dp"
-        android:layout_height="29dp"
-        android:src="@drawable/backss" />
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_bg_shopping_cart_primary"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/backs"
+        app:tint="@color/white" />
     <TextView
         android:layout_gravity="center"
         android:gravity="center"
@@ -29,17 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:layout_marginTop="40dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="Email hoặc số điện thoại"
-        android:textSize="@dimen/font_size_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/custom_edittext"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -69,12 +64,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:hint="Email hoặc số điện thoại" />
+                    android:hint="Email" />
             </com.google.android.material.textfield.TextInputLayout>
-            <TextView
-                android:height="6dp"
+            <View
+                android:id="@+id/lineEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="6dp"
+                android:visibility="invisible"
+                />
+            <TextView
+                android:id="@+id/tvErrorEmail"
+                android:textColor="@color/red"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="8dp"
+                />
         </LinearLayout>
 
     </LinearLayout>

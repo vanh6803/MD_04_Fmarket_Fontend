@@ -74,7 +74,7 @@ public class Fragment_Profile extends Fragment {
         binding.layoutSignUpBuier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), CreateVoucherActivity.class));
+                startActivity(new Intent(getActivity(), HistoryBuyScreen.class));
                 getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
