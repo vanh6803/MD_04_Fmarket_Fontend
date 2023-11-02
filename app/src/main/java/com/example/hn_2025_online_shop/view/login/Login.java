@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,6 +18,7 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
+import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.Validator;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
@@ -29,13 +29,18 @@ import java.io.IOException;
 
 public class Login extends AppCompatActivity{
     private LoginBinding binding;
+    private ProgressLoadingDialog loadingDialog;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = LoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initView();
+        initController();
+    }
 
+    private void initController() {
         binding.txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,55 +62,62 @@ public class Login extends AppCompatActivity{
             public void onClick(View v) {
                 String email = binding.edtEmail.getText().toString().trim();
                 String pass = binding.edtPass.getText().toString().trim();
-                if (!areEditTextsEmpty(binding.edtEmail, binding.edtPass)){
-                    if (Validator.isValidEmail(email)){
-                        BaseApi.API.login(email,pass).enqueue(
-                                new Callback<LoginResponse>() {
-                                    @Override
-                                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                                        if(response.isSuccessful()){
-                                            LoginResponse loginResponse = response.body();
-                                            if (loginResponse.getCode() == 201){
-                                                Toast.makeText(Login.this
-                                                        ,"Bạn đã đăng nhập thành công!"
-                                                        ,Toast.LENGTH_SHORT).show();
-                                                screenSwitch(Login.this, MainActivity.class);
-                                            }
-                                        }else {
-                                            try {
-                                                String errorBody = response.errorBody().string();
-                                                // Parse and display the error message
-                                                JSONObject errorJson = new JSONObject(errorBody);
-                                                String errorMessage = errorJson.getString("message");
-                                                Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                                            }catch (IOException e){
-                                                e.printStackTrace();
-                                            } catch (JSONException e) {
-                                                throw new RuntimeException(e);
-                                            }
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-                                        Toast.makeText(Login.this
-                                                ,t.getMessage()
-                                                ,Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                        );
-                    }else {
-                        Toast.makeText(Login.this
-                                ,"Bạn hãy nhập đúng định dạnh email!"
-                                , Toast.LENGTH_SHORT).show();
-                    }
-                }else {
-                    Toast.makeText(Login.this
-                            ,"Bạn đừng để trống chỗ nhập nhé!"
-                            , Toast.LENGTH_SHORT).show();
-                }
+                loginAccount(email, pass);
             }
         });
+    }
+
+    private void loginAccount(String email, String pass) {
+        if(validateLogin(email, pass)) {
+            loadingDialog.show();
+            BaseApi.API.login(email,pass).enqueue(new Callback<LoginResponse>() {
+                @Override
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    if(response.isSuccessful()){
+                        LoginResponse loginResponse = response.body();
+                        if (loginResponse.getCode() == 201){
+                            Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                            screenSwitch(Login.this, MainActivity.class);
+                        }
+                    }else {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            // Parse and display the error message
+                            JSONObject errorJson = new JSONObject(errorBody);
+                            String errorMessage = errorJson.getString("message");
+                            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    loadingDialog.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    Toast.makeText(Login.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                    loadingDialog.dismiss();
+                }
+            });
+        }
+
+    }
+
+    private boolean validateLogin(String email, String pass) {
+        if (areEditTextsEmpty(binding.edtEmail, binding.edtPass)){
+            Toast.makeText(Login.this,"Bạn đừng để trống chỗ nhập nhé!", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(!Validator.isValidEmail(email)) {
+            Toast.makeText(Login.this,"Bạn hãy nhập đúng định dạnh email!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private void initView() {
+        loadingDialog = new ProgressLoadingDialog(this);
     }
 
     private void screenSwitch(Context packageContext, Class<?> cls) {

@@ -40,8 +40,6 @@ public class Register extends AppCompatActivity {
         initView();
     }
 
-
-
     private void initController() {
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,8 +102,6 @@ public class Register extends AppCompatActivity {
         }
 
     }
-
-
 
     private boolean checkRegister(String email, String pass, String repass) {
         setTextUI();
