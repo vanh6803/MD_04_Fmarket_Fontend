@@ -1,6 +1,5 @@
 package com.example.hn_2025_online_shop.view.login;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -11,12 +10,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
@@ -25,13 +22,10 @@ import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.ultil.Validator;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import java.io.IOException;
-
 
 public class Login extends AppCompatActivity{
     private LoginBinding binding;
@@ -41,7 +35,6 @@ public class Login extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding = LoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         binding.txtRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +86,6 @@ public class Login extends AppCompatActivity{
                                         }
                                     }
 
-
                                     @Override
                                     public void onFailure(Call<LoginResponse> call, Throwable t) {
                                         Toast.makeText(Login.this
@@ -116,12 +108,10 @@ public class Login extends AppCompatActivity{
         });
     }
 
-
     private void screenSwitch(Context packageContext, Class<?> cls) {
         Intent intent = new Intent(packageContext, cls);
         startActivity(intent);
     }
-
 
     private boolean areEditTextsEmpty(EditText editText1, EditText editText2) {
         String text1 = editText1.getText().toString().trim();
@@ -129,4 +119,3 @@ public class Login extends AppCompatActivity{
         return TextUtils.isEmpty(text1) || TextUtils.isEmpty(text2);
     }
 }
-

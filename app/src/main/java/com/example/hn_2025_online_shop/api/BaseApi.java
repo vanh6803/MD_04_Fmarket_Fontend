@@ -19,7 +19,7 @@ import retrofit2.http.Path;
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.110:3000/")
+            .baseUrl("http://192.168.0.110:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -29,18 +29,18 @@ public interface BaseApi {
     Call<LoginResponse> login(@Field("email") String email, @Field("password") String password);
 
     @FormUrlEncoded
-    @POST("api/register")
+    @POST("register")
     Call<ServerResponse> register(@Field("email") String email,
                                   @Field("password") String password);
-    @GET("api/verify/{idCode}")
+    @GET("verify/{idCode}")
     Call<ServerResponse> verify(@Path("idCode") String idCode);
 
     @FormUrlEncoded
-    @POST("api/resend-code")
+    @POST("resend-code")
     Call<ServerResponse> resendCode(@Field("email") String email);
 
     @FormUrlEncoded
-    @POST("api/forgot-password")
+    @POST("forgot-password")
     Call<ServerResponse> forgotPassword(@Field("email") String email);
 
     @GET("products/")
