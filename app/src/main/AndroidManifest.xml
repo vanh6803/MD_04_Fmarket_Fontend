@@ -19,6 +19,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.login.RegisterSuccess"
+            android:exported="true" >
+        </activity>
+        <activity
             android:name=".view.my_store.MyStoreScreen"
             android:exported="false" />
         <activity
@@ -27,10 +31,10 @@
         <activity android:name=".voucher.VoucherScreen" />
         <activity
             android:name=".view.profile_screen.ChatScreen"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".view.cart_screen.CartActivity"
-            android:exported="true" />
+            android:exported="true"></activity>
         <activity
             android:name=".view.home_screen.MainActivity"
             android:exported="true" />
@@ -48,7 +52,7 @@
             android:exported="true" />
         <activity
             android:name=".view.login.VerifiPassWord"
-            android:exported="true" />
+            android:exported="true"></activity>
         <activity
             android:name=".view.login.ForgotPassWord"
             android:exported="true" />

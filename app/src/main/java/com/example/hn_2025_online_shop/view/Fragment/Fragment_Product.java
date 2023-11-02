@@ -29,7 +29,6 @@ import java.util.Objects;
 
 public class Fragment_Product extends Fragment {
 
-
     List<Producct_type> producct_types;
     List<Product_main> product_mains;
 
