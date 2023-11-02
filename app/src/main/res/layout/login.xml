@@ -15,17 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="Email hoặc số điện thoại"
-        android:textColor="@color/black"
-        android:textSize="@dimen/font_size_text"
-        android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/custom_edittext"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -51,13 +43,14 @@
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtEmail"
+                    android:text="thuanncph26023@fpt.edu.vn"
                     android:background="@color/transparent"
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="16sp"
-                    android:hint="Email hoặc số điện thoại" />
+                    android:hint="Email" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:height="6dp"
@@ -67,17 +60,9 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_marginTop="30dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="Mật khẩu"
-        android:textSize="@dimen/font_size_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/custom_edittext"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -104,6 +89,7 @@
                     android:id="@+id/edtPass"
                     android:background="@color/transparent"
                     android:padding="6dp"
+                    android:text="123456"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"

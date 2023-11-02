@@ -20,7 +20,7 @@
                 android:id="@+id/back"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/custom_bg_shopping_cart"
+                android:background="@drawable/custom_bg_shopping_cart_white"
                 android:padding="5dp"
                 android:src="@drawable/backs"
                 app:tint="@color/primary"
