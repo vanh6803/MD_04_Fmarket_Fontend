@@ -4,16 +4,19 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="12dp"
+    android:paddingHorizontal="22dp"
     android:layout_height="match_parent"
     tools:ignore="MissingClass">
 
     <ImageView
         android:id="@+id/backVerify"
-        android:layout_marginTop="30dp"
-        android:layout_width="25dp"
-        android:layout_height="29dp"
-        android:src="@drawable/backss" />
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_bg_shopping_cart_primary"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/backs"
+        app:tint="@color/white" />
 
     <TextView
         android:layout_gravity="center"
@@ -34,11 +37,11 @@
         android:layout_height="wrap_content"/>
 
     <com.chaos.view.PinView
-        app:itemSpacing="30dp"
+        app:itemSpacing="15dp"
         android:itemBackground="#D9D9D9"
         app:lineColor="@color/transparent"
         android:id="@+id/pinview"
-        app:itemCount="4"
+        app:itemCount="5"
         app:itemWidth="60dp"
         app:itemHeight="60dp"
         android:gravity="center"
@@ -58,18 +61,19 @@
 
 
     <TextView
+        android:id="@+id/tvResendCode"
         android:layout_marginTop="10dp"
         android:textSize="16sp"
-        android:textColor="@color/color_chudao"
+        android:textColor="@drawable/custom_text_primary_press"
         android:textStyle="bold"
         android:gravity="center"
         android:text="Gửi lại mã xác minh"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"/>
 
     <Button
-
-        android:id="@+id/btnsuccess"
+        android:id="@+id/btnSuccess"
         android:elevation="10dp"
         android:layout_marginTop="40dp"
         android:text="Tiếp tục"
@@ -79,15 +83,5 @@
         android:background="@drawable/custom_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:layout_weight="1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
 
 </LinearLayout>
