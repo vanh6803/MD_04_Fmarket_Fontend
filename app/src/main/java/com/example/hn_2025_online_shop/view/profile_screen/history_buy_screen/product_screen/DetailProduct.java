@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailProduct extends AppCompatActivity {
-    private DetailProductBinding binding;
+    public DetailProductBinding binding;
     List<Product_sale> productSaleList;
     List<Voucher> voucherList;
     ProductSaleAdapter productSaleAdapter;

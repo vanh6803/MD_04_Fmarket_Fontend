@@ -42,14 +42,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtName"
+                    android:id="@+id/edtEmail"
+                    android:text="thuanncph26023@fpt.edu.vn"
                     android:background="@color/transparent"
                     android:padding="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:textSize="16sp"
-                    android:hint="Email hoặc số điện thoại" />
+                    android:hint="Email" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:height="6dp"
@@ -85,9 +86,10 @@
                 app:passwordToggleEnabled="true"
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtRepass"
+                    android:id="@+id/edtPass"
                     android:background="@color/transparent"
                     android:padding="6dp"
+                    android:text="123456"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"

@@ -61,7 +61,7 @@ public class ProductMainAdapter extends BaseAdapter {
             }
         });
         name.setText( list.get(position).getName());
-        Picasso.get().load(list.get(position).getUrl()).into(imageView);
+        Picasso.get().load(list.get(position).getImage()).into(imageView);
         return view;
     }
 }

@@ -103,6 +103,7 @@
                 app:passwordToggleEnabled="true"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edtPass"
                     android:background="@color/transparent"

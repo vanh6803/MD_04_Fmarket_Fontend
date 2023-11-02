@@ -29,7 +29,6 @@ import java.util.Objects;
 
 public class Fragment_Product extends Fragment {
 
-
     List<Producct_type> producct_types;
     List<Product_main> product_mains;
 
@@ -59,7 +58,7 @@ public class Fragment_Product extends Fragment {
         product_mains= new ArrayList<>();
         producct_types= new ArrayList<>();
         for (int i = 1; i< 4; i++){
-            producct_types.add(new Producct_type("Sản phẩm bán chạy"+ i ,product_mains));
+            producct_types.add(new Producct_type("1","Sản phẩm bán chạy" + i , "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg"));
         }
         productAdapter2= new ProductTypeAdapter(producct_types, getContext());
         binding.recycleProduct.setAdapter(productAdapter2);

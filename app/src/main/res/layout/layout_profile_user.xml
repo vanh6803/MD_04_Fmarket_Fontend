@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_chudao">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/backkk"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="20dp"/>
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_marginLeft="30dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/avatar1"
+                android:background="@drawable/custom_bg_avartar_user"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Ngocntph26008"
+                android:layout_marginLeft="30dp"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:gravity="center_vertical"/>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_detail_product"
+        android:orientation="vertical"
+        android:padding="12dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Avatar"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            android:background="@drawable/custom_bg_avartar_user"
+            android:layout_gravity="center">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/imgAvartar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/custom_bg_avartar_user"
+                    android:src="@drawable/avatar1"
+                    app:layout_constraintBaseline_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageView
+                    android:id="@+id/imgMayAnh"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="24dp"
+                    android:src="@drawable/mayanh"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:ignore="MissingConstraints" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="UserName"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:hint="  Ngocntph26008"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/custom_bg_edt_user"/>
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/imgupdate"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:hint="  Ngocntph26008@gmail.com"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/custom_bg_edt_user"/>
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/imgupdate"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phone Number"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:hint="  09848247248"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/custom_bg_edt_user"/>
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/imgupdate"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ngày sinh"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:hint="  19/08/1984"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/custom_bg_edt_user"/>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="11dp"
+
+                android:src="@drawable/imgngaysinh" />
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa chỉ"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginLeft="30dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="5dp"
+                android:layout_width="280dp"
+                android:layout_height="40dp"
+                android:hint="  Quốc Oai - Hà Nội"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/custom_bg_edt_user"/>
+            <ImageView
+                android:layout_marginLeft="15dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/imgupdate"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+        
+
+
+</LinearLayout>

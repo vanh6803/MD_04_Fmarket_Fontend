@@ -23,6 +23,13 @@
             android:exported="true" >
         </activity>
         <activity
+            android:name=".view.my_store.MyStoreScreen"
+            android:exported="false" />
+        <activity
+            android:name=".view.profile_screen.ProfileUserScreen"
+            android:exported="false" />
+        <activity android:name=".voucher.VoucherScreen" />
+        <activity
             android:name=".view.profile_screen.ChatScreen"
             android:exported="true" />
         <activity
