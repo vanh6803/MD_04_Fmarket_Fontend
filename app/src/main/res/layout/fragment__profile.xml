@@ -120,7 +120,7 @@
                 android:layout_marginHorizontal="18dp"
                 android:paddingVertical="12dp"
                 android:background="@drawable/custom_bg_white_gray"
-                android:id="@+id/layoutOrder">
+                android:id="@+id/layoutSignUpBuier">
 
                 <ImageView
                     android:id="@+id/imageView7"
