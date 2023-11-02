@@ -19,7 +19,6 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.FragmentProfileBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogPhanhoiBinding;
-import com.example.hn_2025_online_shop.model.HistoryBuy;
 import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
@@ -54,6 +53,7 @@ public class Fragment_Profile extends Fragment {
         HistoryDon();//theo dõi đơn hàng
         chat(); // chat với khách hàng
         phanHoiKhieuNai();//phan hoi khieu nai
+        SignUpBuier();//đăng kí thành người bạn
         logOut();//đăng xuất
         binding.imageView10.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +67,15 @@ public class Fragment_Profile extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ProfileUserScreen.class);
                 startActivity(intent);
+            }
+        });
+    }
+    private void SignUpBuier(){
+        binding.layoutSignUpBuier.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), CreateVoucherActivity.class));
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
