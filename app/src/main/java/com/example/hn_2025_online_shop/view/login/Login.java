@@ -18,6 +18,7 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.Validator;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
@@ -76,6 +77,7 @@ public class Login extends AppCompatActivity{
                     if(response.isSuccessful()){
                         LoginResponse loginResponse = response.body();
                         if (loginResponse.getCode() == 201){
+                            AccountUltil.TOKEN = loginResponse.getToken();
                             Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             screenSwitch(Login.this, MainActivity.class);
                         }

@@ -76,6 +76,7 @@ public class VerifiPassWord extends AppCompatActivity {
                     if(serverResponse.getCode() == 200) {
                         Intent intent = new Intent(VerifiPassWord.this, RegisterSuccess.class);
                         startActivity(intent);
+                        finishAffinity();
                     }
                 } else {
                     try {

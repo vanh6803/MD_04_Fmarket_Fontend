@@ -69,7 +69,6 @@ public class Register extends AppCompatActivity {
                     if(response.isSuccessful()){ // chỉ nhận đầu status 200
                         ServerResponse serverResponse = response.body();
                         Log.d(TAG.toString, "onResponse-register: " + serverResponse.toString());
-                        serverResponse.getCode();
                         if(serverResponse.getCode() == 200) {
                             Intent intent = new Intent(Register.this, VerifiPassWord.class);
                             intent.putExtra("email", email);
