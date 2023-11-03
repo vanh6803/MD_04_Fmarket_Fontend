@@ -13,12 +13,12 @@
         android:background="@color/color_chudao"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/imageView4"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAvartar"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="4dp"
-            android:src="@drawable/aaaa"
+            android:src="@drawable/avatar1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.038"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imgAvartar"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -51,6 +51,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
