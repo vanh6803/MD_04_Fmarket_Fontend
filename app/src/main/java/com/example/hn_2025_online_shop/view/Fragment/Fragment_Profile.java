@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProfileBinding;
@@ -41,6 +43,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -75,6 +78,22 @@ public class Fragment_Profile extends Fragment {
 
         initView();
         initController();
+        setData();
+
+    }
+
+    private void setData() {
+        binding.tvUserName.setText(AccountUltil.USER.getUsername());
+        Glide.with(getActivity())
+                .load(AccountUltil.USER.getAvatar())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.avatar1)
+                .into(binding.imgAvartar);
+        if(TextUtils.isEmpty(AccountUltil.USER.getPhone())) {
+            binding.tvPhone.setText("099.999.999");
+        } else {
+            binding.tvPhone.setText(AccountUltil.USER.getPhone());
+        }
 
     }
 
@@ -94,6 +113,7 @@ public class Fragment_Profile extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ProfileUserScreen.class);
                 startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.api;
 
+import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.response.ProductResponse;
@@ -46,6 +47,10 @@ public interface BaseApi {
                                         @Path("idUser") String idUser,
                                         @Field("oldPassword") String oldPassword,
                                         @Field("newPassword") String newPassword);
+
+    @GET("user/detail-profile/{idUser}")
+    Call<DetailUserReponse> detailProfile(@Header("Authorization") String authorization,
+                                          @Path("idUser") String idUser);
 
     @FormUrlEncoded
     @POST("resend-code")
