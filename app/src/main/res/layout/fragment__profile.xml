@@ -13,12 +13,12 @@
         android:background="@color/color_chudao"
         android:padding="8dp">
 
-        <ImageView
-            android:id="@+id/imageView4"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAvartar"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="4dp"
-            android:src="@drawable/aaaa"
+            android:src="@drawable/avatar1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +34,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.038"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toEndOf="@+id/imgAvartar"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -51,6 +51,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tvPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -73,7 +74,7 @@
                 android:layout_marginHorizontal="18dp"
                 android:background="@drawable/custom_bg_white_gray"
                 android:paddingVertical="12dp"
-                android:id="@+id/layoutSettings">
+                android:id="@+id/layoutProfile">
 
                 <ImageView
                     android:id="@+id/imageView6"
@@ -120,7 +121,7 @@
                 android:layout_marginHorizontal="18dp"
                 android:paddingVertical="12dp"
                 android:background="@drawable/custom_bg_white_gray"
-                android:id="@+id/layoutOrder">
+                android:id="@+id/layoutSignUpBuier">
 
                 <ImageView
                     android:id="@+id/imageView7"
@@ -212,7 +213,7 @@
                 android:layout_marginHorizontal="18dp"
                 android:background="@drawable/custom_bg_white_gray"
                 android:paddingVertical="12dp"
-                android:id="@+id/layoutQA">
+                android:id="@+id/layoutHoiDap">
 
                 <ImageView
                     android:id="@+id/imageView9"
@@ -294,6 +295,7 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="15dp"
                 android:background="@color/gray" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -384,6 +386,7 @@
                 android:layout_height="1dp"
                 android:layout_marginHorizontal="15dp"
                 android:background="@color/gray" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -412,6 +415,53 @@
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView10"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.523" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="@color/gray" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutResetPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
+                android:background="@drawable/custom_bg_white_gray"
+                android:paddingVertical="12dp"
+                >
+
+                <ImageView
+                    android:id="@+id/imageView20"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_clock"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="Đổi mật khẩu"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView20"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.523" />
 

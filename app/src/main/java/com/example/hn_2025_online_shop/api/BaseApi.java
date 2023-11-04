@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.api;
 
+import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.response.ProductResponse;
@@ -12,14 +13,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.100.4:3000/api/")
+            .baseUrl("http://172.20.10.2:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -32,8 +35,22 @@ public interface BaseApi {
     @POST("register")
     Call<ServerResponse> register(@Field("email") String email,
                                   @Field("password") String password);
+    @GET("logout")
+    Call<ServerResponse> logout(@Header("Authorization") String authorization);
+
     @GET("verify/{idCode}")
     Call<ServerResponse> verify(@Path("idCode") String idCode);
+
+    @FormUrlEncoded
+    @PUT("user/change-password/{idUser}")
+    Call<ServerResponse> changePassword(@Header("Authorization") String authorization,
+                                        @Path("idUser") String idUser,
+                                        @Field("oldPassword") String oldPassword,
+                                        @Field("newPassword") String newPassword);
+
+    @GET("user/detail-profile/{idUser}")
+    Call<DetailUserReponse> detailProfile(@Header("Authorization") String authorization,
+                                          @Path("idUser") String idUser);
 
     @FormUrlEncoded
     @POST("resend-code")
