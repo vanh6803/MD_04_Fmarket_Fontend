@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.view.store;
+package com.example.hn_2025_online_shop.view.my_store;
 
 import android.os.Bundle;
 
