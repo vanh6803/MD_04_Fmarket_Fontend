@@ -3,68 +3,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="22dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/color_chudao">
-    <LinearLayout
+    android:orientation="vertical">
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        >
+
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/backkk"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"/>
-        <LinearLayout
-            android:layout_marginTop="5dp"
+            android:id="@+id/imgBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_bg_shopping_cart_primary"
+            android:padding="5dp"
+            android:layout_gravity="center"
+            android:src="@drawable/backs"
+            app:tint="@color/white" />
+
+        <TextView
+            android:text="Thông tin người dùng"
+            android:textSize="@dimen/font_size_text_title"
+            android:textColor="@color/color_chudao"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_marginLeft="30dp"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:src="@drawable/avatar1"
-                android:background="@drawable/custom_bg_avartar_user"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Ngocntph26008"
-                android:layout_marginLeft="30dp"
-                android:textSize="20dp"
-                android:textColor="@color/white"
-                android:gravity="center_vertical"/>
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:layout_marginTop="10dp"
-        android:background="@drawable/custom_detail_product"
-        android:orientation="vertical"
-        android:padding="12dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Avatar"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:gravity="center"
-            />
-        <LinearLayout
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:orientation="horizontal"
             android:background="@drawable/custom_bg_avartar_user"
             android:layout_gravity="center">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imgAvartar"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -83,34 +68,37 @@
                     android:id="@+id/imgMayAnh"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_marginLeft="24dp"
                     android:src="@drawable/mayanh"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintVertical_bias="1.0"
                     tools:ignore="MissingConstraints" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="UserName"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
+            android:textColor="@color/primary"
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:id="@+id/edtUserName"
                 android:layout_marginTop="5dp"
-                android:layout_width="280dp"
-                android:layout_height="40dp"
-                android:hint="  Ngocntph26008"
-                android:layout_marginLeft="30dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Nhập username"
+                android:padding="10dp"
                 android:background="@drawable/custom_bg_edt_user"/>
             <ImageView
                 android:layout_marginLeft="15dp"
@@ -119,25 +107,28 @@
                 android:src="@drawable/imgupdate"
                 android:layout_gravity="center"/>
         </LinearLayout>
+
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Email"
+            android:textColor="@color/primary"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:id="@+id/edtEmail"
                 android:layout_marginTop="5dp"
-                android:layout_width="280dp"
-                android:layout_height="40dp"
-                android:hint="  Ngocntph26008@gmail.com"
-                android:layout_marginLeft="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dp"
+                android:hint="Nhập email"
                 android:background="@drawable/custom_bg_edt_user"/>
             <ImageView
                 android:layout_marginLeft="15dp"
@@ -147,24 +138,26 @@
                 android:layout_gravity="center"/>
         </LinearLayout>
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Phone Number"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
+            android:textColor="@color/primary"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:id="@+id/edtPhone"
                 android:layout_marginTop="5dp"
-                android:layout_width="280dp"
-                android:layout_height="40dp"
-                android:hint="  09848247248"
-                android:layout_marginLeft="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Nhập số điện thoại"
+                android:padding="10dp"
+                android:layout_weight="1"
                 android:background="@drawable/custom_bg_edt_user"/>
             <ImageView
                 android:layout_marginLeft="15dp"
@@ -174,25 +167,28 @@
                 android:layout_gravity="center"/>
         </LinearLayout>
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Ngày sinh"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
+            android:textColor="@color/primary"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
             <EditText
+                android:id="@+id/edtBirday"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_width="280dp"
-                android:layout_height="40dp"
-                android:hint="  19/08/1984"
-                android:layout_marginLeft="30dp"
-                android:background="@drawable/custom_bg_edt_user"/>
+                android:layout_weight="1"
+                android:background="@drawable/custom_bg_edt_user"
+                android:hint="Chọn ngày sinh"
+                android:padding="10dp" />
 
             <ImageView
                 android:layout_width="35dp"
@@ -203,24 +199,26 @@
                 android:src="@drawable/imgngaysinh" />
         </LinearLayout>
         <TextView
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Địa chỉ"
             android:textSize="17dp"
             android:textStyle="bold"
-            android:layout_marginLeft="30dp"
+            android:textColor="@color/primary"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <EditText
+                android:id="@+id/edtAddress"
                 android:layout_marginTop="5dp"
-                android:layout_width="280dp"
-                android:layout_height="40dp"
-                android:hint="  Quốc Oai - Hà Nội"
-                android:layout_marginLeft="30dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Nhập địa chỉ"
+                android:padding="10dp"
                 android:background="@drawable/custom_bg_edt_user"/>
             <ImageView
                 android:layout_marginLeft="15dp"
@@ -234,7 +232,7 @@
 
 
     </LinearLayout>
-        
+
 
 
 </LinearLayout>

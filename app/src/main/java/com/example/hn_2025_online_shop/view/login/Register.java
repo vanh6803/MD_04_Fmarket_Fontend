@@ -15,7 +15,7 @@ import com.example.hn_2025_online_shop.databinding.RegisterBinding;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.ultil.Ultil;
+import com.example.hn_2025_online_shop.ultil.Validator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,7 +69,6 @@ public class Register extends AppCompatActivity {
                     if(response.isSuccessful()){ // chỉ nhận đầu status 200
                         ServerResponse serverResponse = response.body();
                         Log.d(TAG.toString, "onResponse-register: " + serverResponse.toString());
-                        serverResponse.getCode();
                         if(serverResponse.getCode() == 200) {
                             Intent intent = new Intent(Register.this, VerifiPassWord.class);
                             intent.putExtra("email", email);
@@ -105,7 +104,7 @@ public class Register extends AppCompatActivity {
 
     private boolean checkRegister(String email, String pass, String repass) {
         setTextUI();
-        if(!Ultil.isEmailValid(email)) {
+        if(!Validator.isValidEmail(email)) {
             binding.tvErrorEmail.setText("Không đúng định dạng email!");
             binding.lineEmail.setVisibility(View.GONE);
             binding.tvErrorEmail.setVisibility(View.VISIBLE);

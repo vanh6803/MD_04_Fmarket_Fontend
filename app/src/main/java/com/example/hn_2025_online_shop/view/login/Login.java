@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,8 +18,12 @@ import retrofit2.Response;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
+import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.JWTUtils;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.ultil.Validator;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
@@ -76,6 +81,8 @@ public class Login extends AppCompatActivity{
                     if(response.isSuccessful()){
                         LoginResponse loginResponse = response.body();
                         if (loginResponse.getCode() == 201){
+                            AccountUltil.TOKEN = loginResponse.getToken();
+                            getDetailUser(); // Đăng nhập thành công thì lấy ra detail user rồi cho vào 1 biến để có thể tái sử dụng
                             Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             screenSwitch(Login.this, MainActivity.class);
                         }
@@ -105,6 +112,8 @@ public class Login extends AppCompatActivity{
 
     }
 
+
+
     private boolean validateLogin(String email, String pass) {
         if (areEditTextsEmpty(binding.edtEmail, binding.edtPass)){
             Toast.makeText(Login.this,"Bạn đừng để trống chỗ nhập nhé!", Toast.LENGTH_SHORT).show();
@@ -129,5 +138,43 @@ public class Login extends AppCompatActivity{
         String text1 = editText1.getText().toString().trim();
         String text2 = editText2.getText().toString().trim();
         return TextUtils.isEmpty(text1) || TextUtils.isEmpty(text2);
+    }
+
+    private void getDetailUser() {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String idUser = JWTUtils.decoded(AccountUltil.TOKEN).getUserId();
+        loadingDialog.show();
+        BaseApi.API.detailProfile(token, idUser).enqueue(new Callback<DetailUserReponse>() {
+            @Override
+            public void onResponse(Call<DetailUserReponse> call, Response<DetailUserReponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    DetailUserReponse detailUserReponse = response.body();
+                    Log.d(TAG.toString, "onResponse-detailProfile: " + detailUserReponse.toString());
+                    if(detailUserReponse.getCode() == 200) {
+                        AccountUltil.USER = detailUserReponse.getData(); // lấy user
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-detailProfile: " + errorMessage);
+                        Toast.makeText(Login.this, errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<DetailUserReponse> call, Throwable t) {
+                Toast.makeText(Login.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-detailProfile: " + t.toString());
+                loadingDialog.dismiss();
+            }
+        });
     }
 }
