@@ -19,7 +19,7 @@ public class User {
     private String confirmationCode;
     private String confirmationExpiration;
     private Boolean is_active;
-    private int role_id;
+    private String role_id;
     private String createdAt;
     private String updatedAt;
 
@@ -161,11 +161,11 @@ public class User {
         this.is_active = is_active;
     }
 
-    public int getRole_id() {
+    public String getRole_id() {
         return role_id;
     }
 
-    public void setRole_id(int role_id) {
+    public void setRole_id(String role_id) {
         this.role_id = role_id;
     }
 

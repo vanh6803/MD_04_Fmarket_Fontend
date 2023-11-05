@@ -3,6 +3,7 @@ package com.example.hn_2025_online_shop.adapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,21 +51,9 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ItemProductTypeBinding binding;
-        List<Product_main> productMainList;
-        ProductMainAdapter productAdapter;
-
         public ViewHolder(ItemProductTypeBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
-            productMainList= new ArrayList<>();
-            for (int i = 0; i<6; i++){
-                productMainList.add(new Product_main());
-            }
-            productAdapter = new ProductMainAdapter(itemView.getContext(), productMainList);
-            binding.gridProduct.setAdapter(productAdapter);
-
-
         }
     }
 }

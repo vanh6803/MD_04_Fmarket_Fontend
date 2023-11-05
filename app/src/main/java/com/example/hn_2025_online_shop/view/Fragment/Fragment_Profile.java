@@ -34,6 +34,7 @@ import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.login.Register;
 import com.example.hn_2025_online_shop.view.login.ResetPassWord;
 import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
+import com.example.hn_2025_online_shop.view.my_store.MyStoreScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
@@ -80,6 +81,7 @@ public class Fragment_Profile extends Fragment {
         initController();
         setData();
 
+
     }
 
     private void setData() {
@@ -104,7 +106,21 @@ public class Fragment_Profile extends Fragment {
         SignUpBuier();//đăng kí thành người bạn
         resetPass();
         profile();
+        myStore();
+
         logOut();//đăng xuất
+
+    }
+
+    private void myStore() {
+        binding.imgMyStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), MyStoreScreen.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+            }
+        });
     }
 
     private void profile() {
