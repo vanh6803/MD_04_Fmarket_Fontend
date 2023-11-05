@@ -42,10 +42,17 @@ public class ProductMainAdapter extends RecyclerView.Adapter<ProductMainAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ProductMainViewHolder holder, int position) {
-        Product_main product_main = new Product_main();
+        Product_main product_main = list.get(position);
         Glide.with(context).load(product_main.getImage()).into(holder.img);
         holder.tvName.setText(product_main.getName());
         Log.d("TAG", "onBindViewHolder: "+ product_main.toString());
+        holder.item_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailProduct.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -65,12 +72,7 @@ public class ProductMainAdapter extends RecyclerView.Adapter<ProductMainAdapter.
             tvName = itemView.findViewById(R.id.txtname);
             img = itemView.findViewById(R.id.img);
             item_product = itemView.findViewById(R.id.item_product);
-            item_product.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(itemView.getContext(), DetailProduct.class);
-                }
-            });
+
         }
     }
 }

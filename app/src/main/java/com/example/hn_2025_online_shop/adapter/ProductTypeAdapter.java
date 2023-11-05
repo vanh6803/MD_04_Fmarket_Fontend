@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.databinding.ItemProductTypeBinding;
@@ -18,8 +19,6 @@ import java.util.List;
 public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.ViewHolder> {
     List<Producct_type> list;
     Context context;
-
-
     public void setListProductType(List<Producct_type> list) {
         this.list = list;
         notifyDataSetChanged();
@@ -42,6 +41,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
         Producct_type producctType = list.get(position);
         holder.binding.titleType.setText(producctType.getName());
 
+
     }
 
     @Override
@@ -54,6 +54,12 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
         public ViewHolder(ItemProductTypeBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+
+
+
+
+
         }
     }
 }

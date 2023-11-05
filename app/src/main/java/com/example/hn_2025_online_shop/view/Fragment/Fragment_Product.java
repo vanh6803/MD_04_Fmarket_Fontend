@@ -62,11 +62,12 @@ public class Fragment_Product extends Fragment {
         binding.recycleProduct.setLayoutManager(layoutManager);
 
         listProdcut = new ArrayList<>();
-        listProdcut.add(new Product_main("1", "Laptop Az", "https://news.khangz.com/wp-content/uploads/2022/09/khung-vien-cua-nhung-phien-ban-iphone-14-duoc-lam-tu-titan-1-750x536.jpg", "aaa"));
-        listProdcut.add(new Product_main("1", "Laptop Az", "https://news.khangz.com/wp-content/uploads/2022/09/khung-vien-cua-nhung-phien-ban-iphone-14-duoc-lam-tu-titan-1-750x536.jpg", "aaa"));
-        listProdcut.add(new Product_main("1", "Laptop Az", "https://news.khangz.com/wp-content/uploads/2022/09/khung-vien-cua-nhung-phien-ban-iphone-14-duoc-lam-tu-titan-1-750x536.jpg", "aaa"));
-        listProdcut.add(new Product_main("1", "Laptop Az", "https://news.khangz.com/wp-content/uploads/2022/09/khung-vien-cua-nhung-phien-ban-iphone-14-duoc-lam-tu-titan-1-750x536.jpg", "aaa"));
-        listProdcut.add(new Product_main("1", "Laptop Az", "https://news.khangz.com/wp-content/uploads/2022/09/khung-vien-cua-nhung-phien-ban-iphone-14-duoc-lam-tu-titan-1-750x536.jpg", "aaa"));
+        listProdcut.add(new Product_main("1", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
+        listProdcut.add(new Product_main("2", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
+        listProdcut.add(new Product_main("3", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
+        listProdcut.add(new Product_main("4", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
+        listProdcut.add(new Product_main("5", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
+
 
         adapter = new ProductMainAdapter(getContext());
         adapter.setData(listProdcut);
