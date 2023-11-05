@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.my_store.Fragment_BaoCaoDoanhThu">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/id_toolbarBaoCaoDoanhThu"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title=" ">
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                app:tint="@color/color_chudao"
+                android:id="@+id/arrowBackDetailProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/custom_btn_boder"
+                android:padding="2dp"
+                android:src="@drawable/baseline_arrow_back_24_black"
+                />
+            <TextView
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="20dp"
+                android:text="Báo Cáo Doanh Thu"
+                android:textColor="@color/color_chudao"
+                android:textSize="@dimen/font_size_text_title" />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/thetext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/id_toolbarBaoCaoDoanhThu">
+
+        <TextView
+            android:id="@+id/tvLoaiThoiGian"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_weight="0.1"
+            android:textSize="@dimen/font_size_text_title_medium"
+            android:text="Loại Thời Gian"
+            app:backgroundTint="@null" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="0.9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtLoaiThoiGian"
+                    android:background="@color/transparent"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Loại Thời Gian" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:height="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/thetext2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thetext">
+
+        <TextView
+            android:id="@+id/ngaybatdau"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_weight="0.1"
+            android:textSize="@dimen/font_size_text_title_medium"
+            android:text="Ngày Bắt Đầu"
+            app:backgroundTint="@null" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="0.9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtngaybatdau"
+                    android:background="@color/transparent"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Ngày Bắt Đầu" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:height="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/thetext3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thetext2">
+
+        <TextView
+            android:id="@+id/tvngayketthuc"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_weight="0.1"
+            android:textSize="@dimen/font_size_text_title_medium"
+            android:text="Ngày Kết Thúc"
+            app:backgroundTint="@null" />
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="0.9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtngayketthuc"
+                    android:background="@color/transparent"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Ngày Kết Thúc" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:height="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/thetext4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thetext3">
+
+        <TextView
+            android:id="@+id/textvieww4"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_weight="0.1"
+            android:textSize="@dimen/font_size_text_title_medium"
+            android:text="Loại Sản Phẩm"
+            app:backgroundTint="@null" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="0.9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtMucHoaDon"
+                    android:background="@color/transparent"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Loại Sản Phẩm" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:height="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+    <!--    // buton -->
+    <LinearLayout
+        android:id="@+id/timkKiemDoanhThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thetext4">
+
+        <Button
+            android:id="@+id/btnCreateVoucher"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/custom_btn_yes"
+            android:text="Tìm Kiếm"
+            android:textColor="@color/white"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+<!--    Tổng doanh thu-->
+    <LinearLayout
+        android:id="@+id/linearTongDoanhThu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timkKiemDoanhThu">
+
+        <TextView
+            android:id="@+id/tvTongDoanhThu"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_weight="0.1"
+            android:textSize="@dimen/font_size_text_title_medium"
+            android:text="Tổng Doanh Thu"
+            app:backgroundTint="@null" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="0.9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edtTongDoanhThu"
+                    android:background="@color/transparent"
+                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="Tổng Doanh Thu" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:height="6dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

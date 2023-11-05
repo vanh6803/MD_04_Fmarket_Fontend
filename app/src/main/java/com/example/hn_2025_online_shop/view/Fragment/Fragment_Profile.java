@@ -26,15 +26,17 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProfileBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogPhanhoiBinding;
+
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.login.Register;
-import com.example.hn_2025_online_shop.view.login.ResetPassWord;
 import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
+
 import com.example.hn_2025_online_shop.view.my_store.MyStoreScreen;
+import com.example.hn_2025_online_shop.view.login.ResetPassWord;
 import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;

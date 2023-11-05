@@ -21,6 +21,8 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
     private static final int Fragment_khosanpham = 1;
     private static final int Fragment_dondathang = 2;
     private static final int Fragment_xuatkho = 3;
+    private static final int Fragment_taoVoucher = 4;
+    private static final int Fragment_baoCaoDoanhThu = 5;
     private int mcurrentFrg = Fragment_home;
     private DrawerLayout drawerLayout;
 
@@ -71,7 +73,10 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         }
         else if(id == R.id.taovoucher){
-
+            if(mcurrentFrg != Fragment_taoVoucher){
+                replaceFragment(new CreateVoucherFragment());
+                mcurrentFrg = Fragment_taoVoucher;
+            }
         }
         else if(id == R.id.taobanner){
 
@@ -90,7 +95,10 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         }
         else if(id == R.id.doanhthu){
-
+            if(mcurrentFrg != Fragment_baoCaoDoanhThu){
+                replaceFragment(new Fragment_BaoCaoDoanhThu());
+                mcurrentFrg = Fragment_baoCaoDoanhThu;
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
