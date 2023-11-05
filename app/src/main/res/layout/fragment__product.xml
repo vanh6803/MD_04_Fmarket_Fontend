@@ -94,6 +94,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/item_grid"
+
             android:id="@+id/recycleProduct"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"

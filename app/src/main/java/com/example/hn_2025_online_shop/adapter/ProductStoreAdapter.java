@@ -1,6 +1,7 @@
 package com.example.hn_2025_online_shop.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.example.hn_2025_online_shop.databinding.ItemProductSaleBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamProductStoreBinding;
 import com.example.hn_2025_online_shop.model.ProductStore;
 import com.example.hn_2025_online_shop.model.Product_sale;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentStore;
 import com.squareup.picasso.Picasso;
 
@@ -50,6 +52,14 @@ public class ProductStoreAdapter extends RecyclerView.Adapter<ProductStoreAdapte
         holder.binding.textsale.setText(productStore.getPrice().toString());
         Glide.with(context).load(productStore.getImg()).into(holder.binding.imgSale);
         holder.binding.tvDaBan.setText(productStore.getQuanity_sold() + "");
+
+        holder.binding.lnProductStore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, DetailProduct.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

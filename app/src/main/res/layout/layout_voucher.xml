@@ -88,7 +88,6 @@
             android:id="@+id/rcvVoucherStore"
             android:layout_marginLeft="8dp"
 
-
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_width="match_parent"
             tools:listitem="@layout/iteam_voucher"

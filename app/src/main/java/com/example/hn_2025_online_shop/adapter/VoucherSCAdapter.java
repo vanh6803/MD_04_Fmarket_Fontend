@@ -18,16 +18,12 @@ import java.util.List;
 public class VoucherSCAdapter extends RecyclerView.Adapter<VoucherSCAdapter.VoucherViewHolder>{
     private Context context;
 
-
     public VoucherSCAdapter(Context context, List<Store> list) {
         this.context = context;
         this.list = list;
     }
 
     private List<Store> list;
-
-
-
 
     @NonNull
     @Override
@@ -55,8 +51,6 @@ public class VoucherSCAdapter extends RecyclerView.Adapter<VoucherSCAdapter.Vouc
 
     public class VoucherViewHolder extends RecyclerView.ViewHolder {
         TextView tvSale, tvprice, tvDate;
-
-
         public VoucherViewHolder(@NonNull View itemView) {
             super(itemView);
             tvprice = itemView.findViewById(R.id.price);

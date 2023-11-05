@@ -31,8 +31,6 @@
                   android:layout_height="200dp"/>
           </androidx.cardview.widget.CardView>
           <GridView
-
-
               android:id="@+id/gridStore"
               android:layout_width="match_parent"
               android:layout_height="270dp"
