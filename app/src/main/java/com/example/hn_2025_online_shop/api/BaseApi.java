@@ -60,9 +60,10 @@ public interface BaseApi {
     @POST("forgot-password")
     Call<ServerResponse> forgotPassword(@Field("email") String email);
 
-    @GET("products/")
-    Call<ProductResponse> getListProduct();
+    @GET("products/all-product")
+    Call<ProductResponse> getListAllProduct();
 
     @GET("category/get-list")
     Call<ProductTypeResponse> getListTypeProduct();
+
 }

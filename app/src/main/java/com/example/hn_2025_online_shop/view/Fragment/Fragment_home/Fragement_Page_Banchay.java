@@ -63,7 +63,6 @@ public class Fragement_Page_Banchay extends Fragment {
         super.onResume();
         homeAdapter= new ProductTypeAdapter(producct_types, getContext());
         binding.recycleProductMain.setAdapter(homeAdapter);
-        binding.recycleProductMain.setAdapter(homeAdapter);
         callApiProductType();
     }
 
@@ -71,18 +70,14 @@ public class Fragement_Page_Banchay extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         loadingDialog = new ProgressLoadingDialog(getContext());
-
         producct_types= new ArrayList<>();
-
-
 //        producct_types.add(new Producct_type("1","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
 //        producct_types.add(new Producct_type("2","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
 //        producct_types.add(new Producct_type("3","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
 //        producct_types.add(new Producct_type("4","Điện thoại / Lap top ", "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg" ));
 
        homeAdapter= new ProductTypeAdapter(producct_types, getContext());
-        binding.recycleProductMain.setAdapter(homeAdapter);
-        binding.recycleProductMain.setAdapter(homeAdapter);
+       binding.recycleProductMain.setAdapter(homeAdapter);
        callApiProductType();
     }
     private void callApiProductType(){

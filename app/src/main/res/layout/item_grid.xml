@@ -45,6 +45,7 @@
                 android:background="@drawable/custom_button"
                 tools:ignore="MissingConstraints">
                 <TextView
+                    android:id="@+id/tvGiamGia"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:textStyle="bold"

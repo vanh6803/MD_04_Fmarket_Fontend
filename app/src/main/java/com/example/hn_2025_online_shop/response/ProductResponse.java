@@ -7,15 +7,15 @@ import java.util.List;
 public class ProductResponse {
     String message;
     int code;
-    List<Product_main> data;
+    List<Product_main> result;
 
     public ProductResponse() {
     }
 
-    public ProductResponse(String message, int code, List<Product_main> data) {
+    public ProductResponse(String message, int code, List<Product_main> result) {
         this.message = message;
         this.code = code;
-        this.data = data;
+        this.result = result;
     }
 
     public String getMessage() {
@@ -34,11 +34,11 @@ public class ProductResponse {
         this.code = code;
     }
 
-    public List<Product_main> getData() {
-        return data;
+    public List<Product_main> getResult() {
+        return result;
     }
 
-    public void setData(List<Product_main> data) {
-        this.data = data;
+    public void setResult(List<Product_main> result) {
+        this.result = result;
     }
 }
