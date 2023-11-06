@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.FragmentPageDanggiao;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.FragmentPageDelivering;
 
 import java.util.List;
 
@@ -23,13 +23,13 @@ public class ViewPageHistoryAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new FragmentPageDanggiao();
+                return new FragmentPageDelivering();
             case 1:
-                return new FragmentPageDanggiao();
+                return new FragmentPageDelivering();
             case 2:
-                return new FragmentPageDanggiao();
+                return new FragmentPageDelivering();
             case 3:
-                return new FragmentPageDanggiao();
+                return new FragmentPageDelivering();
             default:
                 return null;
         }

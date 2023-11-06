@@ -8,10 +8,10 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.hn_2025_online_shop.adapter.ProductSaleAdapter;
+import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.adapter.VoucherAdapter;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
-import com.example.hn_2025_online_shop.model.Product_sale;
+import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.Voucher;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
 
@@ -20,9 +20,9 @@ import java.util.List;
 
 public class DetailProduct extends AppCompatActivity {
     public DetailProductBinding binding;
-    List<Product_sale> productSaleList;
+    List<Product> productList;
     List<Voucher> voucherList;
-    ProductSaleAdapter productSaleAdapter;
+    ProductAdapter productAdapter;
     VoucherAdapter voucherAdapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,15 +36,15 @@ public class DetailProduct extends AppCompatActivity {
                 finish();
             }
         });
-        productSaleList = new ArrayList<>();
+        productList = new ArrayList<>();
         voucherList = new ArrayList<>();
         for (int i = 1 ; i< 4; i++){
-            productSaleList.add(new Product_sale("sản phẩm "+ i,12341,1233,"https://cdn11.dienmaycholon.vn/filewebdmclnew/public/userupload/files/news/di-dong/co-the-apple-se-trang-bi-man-hinh-phu-cho-iphone-15-pro.jpg"));
-            voucherList.add(new Voucher("Giảm"+i+"%"));
+            productList.add(new Product("1", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+            voucherList.add(new Voucher("Giảm"+i+"%", "1234", ""));
         }
-        productSaleAdapter = new ProductSaleAdapter(productSaleList, this);
+        productAdapter = new ProductAdapter(this, productList);
         voucherAdapter = new VoucherAdapter(this, voucherList);
-        binding.recyProductSame.setAdapter(productSaleAdapter);
+        binding.recyProductSame.setAdapter(productAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
 
         binding.showshop.setOnClickListener(new View.OnClickListener() {

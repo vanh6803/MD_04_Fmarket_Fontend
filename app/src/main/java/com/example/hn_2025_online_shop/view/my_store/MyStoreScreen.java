@@ -41,7 +41,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.navigation_View);
         navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new Fragment_Home());
+        replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
 
@@ -53,13 +53,13 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         int id = item.getItemId();
         if(id == R.id.nav_home){
             if(mcurrentFrg != Fragment_home){
-                replaceFragment(new Fragment_Home());
+                replaceFragment(new FragmentHomeStore());
                 mcurrentFrg = Fragment_home;
             }
 
         }else if(id == R.id.khosanpham){
             if(mcurrentFrg != Fragment_khosanpham){
-                replaceFragment(new Fragment_KhoSanPham());
+                replaceFragment(new FragmentProductWarehouse());
                 mcurrentFrg = Fragment_khosanpham;
             }
 
@@ -67,7 +67,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         else if(id == R.id.dondathang){
             if(mcurrentFrg != Fragment_dondathang){
-                replaceFragment(new Fragment_DonDatHang());
+                replaceFragment(new FragmentOrder());
                 mcurrentFrg = Fragment_dondathang;
             }
 
@@ -86,7 +86,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         }
         else if(id == R.id.xuatkho){
             if(mcurrentFrg != Fragment_xuatkho){
-                replaceFragment(new FragmentXuatKho());
+                replaceFragment(new FragmentWarehouse());
                 mcurrentFrg = Fragment_xuatkho;
             }
 
@@ -96,7 +96,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         }
         else if(id == R.id.doanhthu){
             if(mcurrentFrg != Fragment_baoCaoDoanhThu){
-                replaceFragment(new Fragment_BaoCaoDoanhThu());
+                replaceFragment(new FragmentRevenue());
                 mcurrentFrg = Fragment_baoCaoDoanhThu;
             }
         }
