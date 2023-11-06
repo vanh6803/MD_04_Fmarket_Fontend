@@ -30,15 +30,17 @@
                   android:layout_width="match_parent"
                   android:layout_height="200dp"/>
           </androidx.cardview.widget.CardView>
+
           <GridView
               android:id="@+id/gridStore"
               android:layout_width="match_parent"
               android:layout_height="270dp"
+              android:paddingHorizontal="10dp"
               android:numColumns="1"
               android:overScrollMode="always"
               android:verticalSpacing="10dp">
-
           </GridView>
+
           <View
               android:background="@color/color_edittext"
               android:layout_width="match_parent"
@@ -106,8 +108,5 @@
 
       </LinearLayout>
   </androidx.core.widget.NestedScrollView>
-
-
-
 
 </LinearLayout>

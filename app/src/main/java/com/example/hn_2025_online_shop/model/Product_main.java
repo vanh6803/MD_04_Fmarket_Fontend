@@ -8,12 +8,14 @@ public class Product_main {
    private String name;
    private boolean discounted;
    private String image;
+   private String price;
    private double minPrice;
    private double maxPrice;
    private int averageRate;
 
    public Product_main() {
    }
+
 
    @Override
    public String toString() {
@@ -22,20 +24,30 @@ public class Product_main {
               ", name='" + name + '\'' +
               ", discounted=" + discounted +
               ", image='" + image + '\'' +
+              ", price='" + price + '\'' +
               ", minPrice=" + minPrice +
               ", maxPrice=" + maxPrice +
               ", averageRate=" + averageRate +
               '}';
    }
 
-   public Product_main(String id, String name, boolean discounted, String image, double minPrice, double maxPrice, int averageRate) {
+   public Product_main(String id, String name, boolean discounted, String image, String price, double minPrice, double maxPrice, int averageRate) {
       this.id = id;
       this.name = name;
       this.discounted = discounted;
       this.image = image;
+      this.price = price;
       this.minPrice = minPrice;
       this.maxPrice = maxPrice;
       this.averageRate = averageRate;
+   }
+
+   public String getPrice() {
+      return price;
+   }
+
+   public void setPrice(String price) {
+      this.price = price;
    }
 
    public String getId() {
