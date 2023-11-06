@@ -5,18 +5,37 @@ import com.google.gson.annotations.SerializedName;
 public class Product_main {
    @SerializedName("_id")
    private String id;
-    private String name;
+   private String name;
+   private boolean discounted;
    private String image;
-   private String description;
+   private double minPrice;
+   private double maxPrice;
+   private int averageRate;
 
    public Product_main() {
    }
 
-   public Product_main(String id, String name, String image, String description) {
+   @Override
+   public String toString() {
+      return "Product_main{" +
+              "id='" + id + '\'' +
+              ", name='" + name + '\'' +
+              ", discounted=" + discounted +
+              ", image='" + image + '\'' +
+              ", minPrice=" + minPrice +
+              ", maxPrice=" + maxPrice +
+              ", averageRate=" + averageRate +
+              '}';
+   }
+
+   public Product_main(String id, String name, boolean discounted, String image, double minPrice, double maxPrice, int averageRate) {
       this.id = id;
       this.name = name;
+      this.discounted = discounted;
       this.image = image;
-      this.description = description;
+      this.minPrice = minPrice;
+      this.maxPrice = maxPrice;
+      this.averageRate = averageRate;
    }
 
    public String getId() {
@@ -35,29 +54,43 @@ public class Product_main {
       this.name = name;
    }
 
-   public String getImage() {
-      return image;
+   public boolean isDiscounted() {
+      return discounted;
    }
 
-   @Override
-   public String toString() {
-      return "Product_main{" +
-              "id='" + id + '\'' +
-              ", name='" + name + '\'' +
-              ", image='" + image + '\'' +
-              ", description='" + description + '\'' +
-              '}';
+   public void setDiscounted(boolean discounted) {
+      this.discounted = discounted;
+   }
+
+   public String getImage() {
+      return image;
    }
 
    public void setImage(String image) {
       this.image = image;
    }
 
-   public String getDescription() {
-      return description;
+   public double getMinPrice() {
+      return minPrice;
    }
 
-   public void setDescription(String description) {
-      this.description = description;
+   public void setMinPrice(double minPrice) {
+      this.minPrice = minPrice;
+   }
+
+   public double getMaxPrice() {
+      return maxPrice;
+   }
+
+   public void setMaxPrice(double maxPrice) {
+      this.maxPrice = maxPrice;
+   }
+
+   public int getAverageRate() {
+      return averageRate;
+   }
+
+   public void setAverageRate(int averageRate) {
+      this.averageRate = averageRate;
    }
 }
