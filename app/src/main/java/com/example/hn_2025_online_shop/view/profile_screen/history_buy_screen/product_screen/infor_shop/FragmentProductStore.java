@@ -15,17 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.example.hn_2025_online_shop.adapter.ProductStoreAdapter;
+import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentProductStoreBinding;
-import com.example.hn_2025_online_shop.model.ProductStore;
+import com.example.hn_2025_online_shop.model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FragmentProductStore extends Fragment {
     private FragmentProductStoreBinding binding;
-    private List<ProductStore> list;
-    ProductStoreAdapter adapter;
+    private List<Product> productList;
+    ProductAdapter productAdapter;
 
 
 
@@ -54,12 +54,12 @@ public class FragmentProductStore extends Fragment {
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.rcvProductStore.setLayoutManager(layoutManager);
-        list = new ArrayList<>();
-        list.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        list.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        list.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        list.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        adapter = new ProductStoreAdapter(list, getContext());
-        binding.rcvProductStore.setAdapter(adapter);
+        productList = new ArrayList<>();
+        productList.add(new Product("1", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productList.add(new Product("2", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productList.add(new Product("3", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productList.add(new Product("4", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productAdapter = new ProductAdapter(getActivity(), productList);
+        binding.rcvProductStore.setAdapter(productAdapter);
     }
 }

@@ -10,20 +10,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.model.Store;
-import com.example.hn_2025_online_shop.voucher.VoucherScreen;
+import com.example.hn_2025_online_shop.model.Voucher;
 
 import java.util.List;
 
 public class VoucherSCAdapter extends RecyclerView.Adapter<VoucherSCAdapter.VoucherViewHolder>{
     private Context context;
 
-    public VoucherSCAdapter(Context context, List<Store> list) {
+    public VoucherSCAdapter(Context context, List<Voucher> list) {
         this.context = context;
         this.list = list;
     }
 
-    private List<Store> list;
+    private List<Voucher> list;
 
     @NonNull
     @Override
@@ -34,8 +33,8 @@ public class VoucherSCAdapter extends RecyclerView.Adapter<VoucherSCAdapter.Vouc
 
     @Override
     public void onBindViewHolder(@NonNull VoucherViewHolder holder, int position) {
-        Store store = list.get(position);
-        holder.tvSale.setText(store.getTextSale());
+        Voucher store = list.get(position);
+        holder.tvSale.setText(store.getNameVoucher());
         holder.tvprice.setText(store.getPrice());
         holder.tvDate.setText(store.getDate());
 

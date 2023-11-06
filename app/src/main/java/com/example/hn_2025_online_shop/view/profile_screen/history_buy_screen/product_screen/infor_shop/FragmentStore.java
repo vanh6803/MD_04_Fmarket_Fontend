@@ -11,17 +11,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
-import com.example.hn_2025_online_shop.adapter.ProductStoreAdapter;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 
 
 import com.example.hn_2025_online_shop.adapter.StoreAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentStoreBinding;
-import com.example.hn_2025_online_shop.model.ProductStore;
-import com.example.hn_2025_online_shop.model.Store;
+import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.model.Voucher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,10 +25,10 @@ import java.util.List;
 public class FragmentStore extends Fragment {
     private FragmentStoreBinding binding;
     public Context context;
-    List<ProductStore> productStoreList;
-    ProductStoreAdapter productStoreAdapter;
+    List<Product> productList;
+    ProductAdapter productAdapter;
     StoreAdapter adapter;
-    List<Store> list;
+    List<Voucher> list;
 
 
     public FragmentStore() {
@@ -60,19 +56,20 @@ public class FragmentStore extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         list = new ArrayList<>();
-        list.add(new Store("20%", "200k", "còn 4 ngày"));
-        list.add(new Store("10%", "400k", "còn 4 ngày"));
-        list.add(new Store("40%", "100k", "còn 4 ngày"));
-        list.add(new Store("40%", "220k", "còn 4 ngày"));
+        list.add(new Voucher("20%", "200k", "còn 4 ngày"));
+        list.add(new Voucher("10%", "400k", "còn 4 ngày"));
+        list.add(new Voucher("40%", "100k", "còn 4 ngày"));
+        list.add(new Voucher("40%", "220k", "còn 4 ngày"));
         adapter = new StoreAdapter(list,getContext());
         binding.gridStore.setAdapter(adapter);
-        productStoreList = new ArrayList<>();
-        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
-        productStoreList.add(new ProductStore("sản phẩm",111, 111, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11 ));
+        productList = new ArrayList<>();
+        productList.add(new Product("1", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productList.add(new Product("2", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productList.add(new Product("3", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
+        productList.add(new Product("4", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
 
-        productStoreAdapter = new ProductStoreAdapter(productStoreList, getContext());
-        binding.recyStore.setAdapter(productStoreAdapter);
+
+        productAdapter = new ProductAdapter(getActivity(), productList);
+        binding.recyStore.setAdapter(productAdapter);
     }
 }

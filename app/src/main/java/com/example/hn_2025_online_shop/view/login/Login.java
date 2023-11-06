@@ -86,7 +86,7 @@ public class Login extends AppCompatActivity{
                             Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             screenSwitch(Login.this, MainActivity.class);
                         }
-                    }else {
+                    } else {
                         try {
                             String errorBody = response.errorBody().string();
                             // Parse and display the error message

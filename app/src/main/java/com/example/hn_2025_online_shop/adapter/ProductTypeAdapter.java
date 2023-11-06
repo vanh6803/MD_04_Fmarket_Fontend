@@ -8,19 +8,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.databinding.ItemProductTypeBinding;
-import com.example.hn_2025_online_shop.model.Product_type;
+import com.example.hn_2025_online_shop.model.ProductType;
 
 import java.util.List;
 
 public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.ViewHolder> {
-    List<Product_type> list;
+    List<ProductType> list;
     Context context;
-    public void setListProductType(List<Product_type> list) {
+    public void setListProductType(List<ProductType> list) {
         this.list = list;
         notifyDataSetChanged();
     }
 
-    public ProductTypeAdapter(List<Product_type> list, Context context) {
+    public ProductTypeAdapter(List<ProductType> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -34,7 +34,7 @@ public class ProductTypeAdapter extends RecyclerView.Adapter<ProductTypeAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product_type producctType = list.get(position);
+        ProductType producctType = list.get(position);
         holder.binding.titleType.setText(producctType.getName());
     }
 

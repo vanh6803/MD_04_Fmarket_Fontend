@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.hn_2025_online_shop.view.Fragment.Fragment_home.Fragement_Page_Banchay;
-import com.example.hn_2025_online_shop.view.Fragment.Fragment_home.Fragment_Page_Danggiamgia;
-import com.example.hn_2025_online_shop.view.Fragment.Fragment_home.Fragment_Page_Noibat;
+import com.example.hn_2025_online_shop.view.fragment.fragment_home.FragementPageSelling;
+import com.example.hn_2025_online_shop.view.fragment.fragment_home.FragmentPageDiscount;
+import com.example.hn_2025_online_shop.view.fragment.fragment_home.FragmentPageOutstanding;
 
 import java.util.List;
 
@@ -24,11 +24,11 @@ public class ViewPageHomeAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new Fragement_Page_Banchay();
+                return new FragementPageSelling();
             case 1:
-                return new Fragment_Page_Danggiamgia();
+                return new FragmentPageDiscount();
             case 2:
-                return new Fragment_Page_Noibat();
+                return new FragmentPageOutstanding();
             default:
                 return null;
         }
