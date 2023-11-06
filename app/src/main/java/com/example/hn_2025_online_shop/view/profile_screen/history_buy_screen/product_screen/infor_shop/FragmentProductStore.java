@@ -29,8 +29,6 @@ public class FragmentProductStore extends Fragment {
 
 
 
-
-
     public FragmentProductStore() {
     }
     public static FragmentProductStore newInstance(String param1, String param2) {

@@ -22,7 +22,7 @@ import retrofit2.http.Path;
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://172.20.10.2:3000/api/")
+            .baseUrl("http://192.168.0.106:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -60,9 +60,10 @@ public interface BaseApi {
     @POST("forgot-password")
     Call<ServerResponse> forgotPassword(@Field("email") String email);
 
-    @GET("products/")
-    Call<ProductResponse> getListProduct();
+    @GET("products/all-product")
+    Call<ProductResponse> getListAllProduct();
 
     @GET("category/get-list")
     Call<ProductTypeResponse> getListTypeProduct();
+
 }

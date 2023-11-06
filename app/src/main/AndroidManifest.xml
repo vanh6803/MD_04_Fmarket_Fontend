@@ -25,6 +25,7 @@
             android:name=".view.profile_screen.ProfileUserScreen"
             android:exported="false" />
         <activity android:name=".voucher.VoucherScreen" />
+        <activity android:name=".view.my_store.MyStoreScreen"/>
         <activity
             android:name=".view.profile_screen.ChatScreen"
             android:exported="false" />

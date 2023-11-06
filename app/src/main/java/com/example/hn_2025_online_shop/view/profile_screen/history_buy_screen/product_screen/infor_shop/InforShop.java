@@ -40,7 +40,5 @@ public class InforShop  extends AppCompatActivity {
                 binding.viewPagerHome.setCurrentItem(curentIndex);
             }
         });
-
-
     }
 }
