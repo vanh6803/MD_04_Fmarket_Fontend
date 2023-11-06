@@ -1,6 +1,5 @@
 package com.example.hn_2025_online_shop.view.login;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +13,7 @@ import com.example.hn_2025_online_shop.databinding.ForgotPassBinding;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.ultil.Ultil;
+import com.example.hn_2025_online_shop.ultil.Validator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -101,7 +100,7 @@ public class ForgotPassWord extends AppCompatActivity {
 
     private boolean checkEmail(String email) {
         setTextUI();
-        if(!Ultil.isEmailValid(email)) {
+        if(!Validator.isValidEmail(email)) {
             binding.tvErrorEmail.setText("Không đúng định dạng email!");
             binding.lineEmail.setVisibility(View.GONE);
             binding.tvErrorEmail.setVisibility(View.VISIBLE);

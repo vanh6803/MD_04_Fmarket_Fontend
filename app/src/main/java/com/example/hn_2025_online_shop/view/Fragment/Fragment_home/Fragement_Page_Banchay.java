@@ -19,6 +19,7 @@ import com.example.hn_2025_online_shop.databinding.FragmentFragementPageBanchayB
 import com.example.hn_2025_online_shop.model.Producct_type;
 import com.example.hn_2025_online_shop.model.Product_main;
 import com.example.hn_2025_online_shop.response.ProductTypeResponse;
+import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Fragement_Page_Banchay extends Fragment {
     List<Producct_type> producct_types;
 
     ProductTypeAdapter homeAdapter;
-    ProgressDialog dialog;
+    ProgressLoadingDialog loadingDialog;
 
     private FragmentFragementPageBanchayBinding binding;
 
@@ -69,7 +70,7 @@ public class Fragement_Page_Banchay extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dialog = new ProgressDialog(getContext());
+        loadingDialog = new ProgressLoadingDialog(getContext());
 
         producct_types= new ArrayList<>();
 
@@ -85,7 +86,7 @@ public class Fragement_Page_Banchay extends Fragment {
        callApiProductType();
     }
     private void callApiProductType(){
-        dialog.show();
+        loadingDialog.show();
         BaseApi.API.getListTypeProduct().enqueue(new Callback<ProductTypeResponse>() {
             @Override
             public void onResponse(Call<ProductTypeResponse> call, Response<ProductTypeResponse> response) {
@@ -93,14 +94,14 @@ public class Fragement_Page_Banchay extends Fragment {
                     ProductTypeResponse productTypeResponse =response.body();
                     homeAdapter.setListProductType(productTypeResponse.getData());
                     binding.recycleProductMain.setAdapter(homeAdapter);
-                    dialog.cancel();
                 }else{
                     Toast.makeText(getActivity(), "Get Product Type Error", Toast.LENGTH_SHORT).show();
-                    dialog.cancel();
                 }
+                loadingDialog.dismiss();
             }
             @Override
             public void onFailure(Call<ProductTypeResponse> call, Throwable t) {
+                loadingDialog.dismiss();
             }
         });
     }

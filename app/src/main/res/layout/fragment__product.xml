@@ -78,7 +78,6 @@
 
         <androidx.cardview.widget.CardView
             android:layout_marginTop="20dp"
-            app:cardElevation="20dp"
             app:cardCornerRadius="20dp"
             app:cardBackgroundColor="@color/color_chudao"
             android:layout_width="match_parent"

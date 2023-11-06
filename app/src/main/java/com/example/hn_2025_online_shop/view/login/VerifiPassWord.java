@@ -70,29 +70,34 @@ public class VerifiPassWord extends AppCompatActivity {
         BaseApi.API.verify(strCode).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-                if(response.isSuccessful()) {
-                    ServerResponse serverResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-verify: " + serverResponse.toString());
-                    if(serverResponse.getCode() == 200) {
-                        Intent intent = new Intent(VerifiPassWord.this, RegisterSuccess.class);
-                        startActivity(intent);
+                try {
+                    if(response.isSuccessful()) {
+                        ServerResponse serverResponse = response.body();
+                        Log.d(TAG.toString, "onResponse-verify: " + serverResponse.toString());
+                        if(serverResponse.getCode() == 200) {
+                            Intent intent = new Intent(VerifiPassWord.this, RegisterSuccess.class);
+                            startActivity(intent);
+                            finishAffinity();
+                        }
+                    } else {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            JSONObject errorJson = new JSONObject(errorBody);
+                            String errorMessage = errorJson.getString("message");
+                            Log.d(TAG.toString, "onResponse-verify: " + errorMessage);
+                            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-                } else {
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-verify: " + errorMessage);
-                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+
+
+                    loadingDialog.dismiss();
+                } catch (Exception e) {
+                    Log.d(TAG.toString, "onResponse: " + e);
                 }
-
-
-                loadingDialog.dismiss();
             }
 
             @Override
