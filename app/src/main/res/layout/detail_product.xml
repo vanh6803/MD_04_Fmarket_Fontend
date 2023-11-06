@@ -10,13 +10,13 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_marginBottom="5dp"
+        >
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,12 +55,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="6dp"
                 android:layout_marginTop="260dp"
                 android:background="@drawable/custom_detail_product"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:padding="12dp"
+                android:paddingVertical="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:layout_marginHorizontal="8dp"
                     android:text="Ốp lưng iPhone 14 Pro Spigen Liquid Air màu Deep Purple"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_text_title_medium"
@@ -81,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -122,6 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -132,7 +134,7 @@
                         android:gravity="start"
                         android:text="420.000 đ"
                         android:textColor="@color/red"
-                        android:textSize="@dimen/font_size_text_title"
+                        android:textSize="@dimen/font_size_text_title_medium"
                         android:textStyle="bold" />
 
                     <ImageView
@@ -150,6 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
                     android:gravity="start"
                     android:text="450.000 đ"
                     android:textColor="@color/gray69"
@@ -162,6 +165,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:gravity="start"
+                    android:layout_marginHorizontal="8dp"
                     android:text="Miễn phí vận chuyển"
                     android:textColor="@color/gray69"
                     android:textSize="@dimen/font_size_text"
@@ -169,7 +173,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="5dp"
                     android:layout_marginVertical="10dp"
                     android:background="@color/color_edittext" />
 
@@ -178,6 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:layout_marginHorizontal="8dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -187,14 +192,14 @@
                         android:gravity="start"
                         android:text="3 mã giảm giá"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/font_size_text_title_medium"
+                        android:textSize="16sp"
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recy_voucher"
                         android:layout_width="wrap_content"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="2"
                         android:orientation="horizontal" />
 
@@ -203,7 +208,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="5dp"
                     android:layout_marginVertical="10dp"
                     android:background="@color/color_edittext" />
 
@@ -212,20 +217,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
-                        app:cardElevation="10dp"
-                        app:cardCornerRadius="40dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:src="@drawable/test" />
-                    </androidx.cardview.widget.CardView>
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/test" />
+
                     <LinearLayout
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
@@ -278,16 +279,11 @@
                         android:text="Xem Shop"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"/>
-
-
-
-
-
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="10dp"
+                    android:layout_height="5dp"
                     android:layout_marginVertical="10dp"
                     android:background="@color/color_edittext" />
 
@@ -296,6 +292,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -329,59 +326,40 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"/>
-
-
-
-
             </LinearLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
     </ScrollView>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="12dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="7dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/scrollView"
-        app:layout_constraintVertical_bias="0.96"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:layout_weight="1"
+            android:id="@+id/btnCart"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="0.5"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_button"
-            android:gravity="center"
-            android:padding="12dp"
+            android:layout_height="wrap_content"
             android:text="Thêm vào giỏ hàng"
-            android:textColor="@color/white"
-            android:textSize="12dp" />
+            android:background="@drawable/custom_btn_no"
+            app:backgroundTint="@null"
+            android:textColor="@color/primary"/>
 
         <Button
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:layout_width="140dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:background="@drawable/custom_button"
-            android:gravity="center"
-            android:padding="12dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_weight="0.5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Mua ngay"
-            android:textColor="@color/white"
-            android:textSize="12dp" />
+            android:background="@drawable/custom_btn_yes"
+            app:backgroundTint="@null"
+            android:textColor="@color/white"/>
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

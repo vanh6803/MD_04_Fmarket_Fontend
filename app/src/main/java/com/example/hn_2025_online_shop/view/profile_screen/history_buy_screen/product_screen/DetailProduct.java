@@ -53,6 +53,5 @@ public class DetailProduct extends AppCompatActivity {
                 startActivity(new Intent(DetailProduct.this, InforShop.class));
             }
         });
-
     }
 }

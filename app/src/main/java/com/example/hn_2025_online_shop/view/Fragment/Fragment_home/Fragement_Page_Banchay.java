@@ -1,6 +1,5 @@
 package com.example.hn_2025_online_shop.view.Fragment.Fragment_home;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,12 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductTypeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentFragementPageBanchayBinding;
-import com.example.hn_2025_online_shop.model.Producct_type;
-import com.example.hn_2025_online_shop.model.Product_main;
+import com.example.hn_2025_online_shop.model.Product_type;
 import com.example.hn_2025_online_shop.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 
@@ -29,7 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Fragement_Page_Banchay extends Fragment {
-    List<Producct_type> producct_types;
+    List<Product_type> producct_types;
 
     ProductTypeAdapter homeAdapter;
     ProgressLoadingDialog loadingDialog;

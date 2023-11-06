@@ -1,18 +1,18 @@
 package com.example.hn_2025_online_shop.response;
 
-import com.example.hn_2025_online_shop.model.Producct_type;
+import com.example.hn_2025_online_shop.model.Product_type;
 
 import java.util.List;
 
 public class ProductTypeResponse {
     String message;
     int code;
-    List<Producct_type> data;
+    List<Product_type> data;
 
     public ProductTypeResponse() {
     }
 
-    public ProductTypeResponse(String message, int code, List<Producct_type> data) {
+    public ProductTypeResponse(String message, int code, List<Product_type> data) {
         this.message = message;
         this.code = code;
         this.data = data;
@@ -34,11 +34,11 @@ public class ProductTypeResponse {
         this.code = code;
     }
 
-    public List<Producct_type> getData() {
+    public List<Product_type> getData() {
         return data;
     }
 
-    public void setData(List<Producct_type> data) {
+    public void setData(List<Product_type> data) {
         this.data = data;
     }
 }

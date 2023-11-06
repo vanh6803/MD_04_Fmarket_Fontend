@@ -54,10 +54,7 @@
                     android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"/>
-
             </LinearLayout>
-
-
         </androidx.cardview.widget.CardView>
 
         <TextView
@@ -66,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:maxLines="1"
             android:text="Sạc dự phòng"
             android:textColor="@color/color_chudao"
             android:textSize="14dp"
@@ -75,6 +73,5 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="MissingConstraints" />
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
