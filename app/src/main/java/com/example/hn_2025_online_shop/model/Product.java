@@ -8,19 +8,19 @@ public class Product {
    private String name;
    private boolean discounted;
    private String image;
-   private int price;
+   private int minPrice;
    private double averageRate;
    private int review;
 
    public Product() {
    }
 
-   public Product(String id, String name, boolean discounted, String image, int price, double averageRate, int review) {
+   public Product(String id, String name, boolean discounted, String image, int minPrice, double averageRate, int review) {
       this.id = id;
       this.name = name;
       this.discounted = discounted;
       this.image = image;
-      this.price = price;
+      this.minPrice = minPrice;
       this.averageRate = averageRate;
       this.review = review;
    }
@@ -32,7 +32,7 @@ public class Product {
               ", name='" + name + '\'' +
               ", discounted=" + discounted +
               ", image='" + image + '\'' +
-              ", price=" + price +
+              ", minPrice=" + minPrice +
               ", averageRate=" + averageRate +
               ", review=" + review +
               '}';
@@ -70,12 +70,12 @@ public class Product {
       this.image = image;
    }
 
-   public int getPrice() {
-      return price;
+   public int getMinPrice() {
+      return minPrice;
    }
 
-   public void setPrice(int price) {
-      this.price = price;
+   public void setMinPrice(int minPrice) {
+      this.minPrice = minPrice;
    }
 
    public double getAverageRate() {

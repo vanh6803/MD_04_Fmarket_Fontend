@@ -50,20 +50,17 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.binding.tvName.setText(product.getName());
-        holder.binding.tvPrice.setText(product.getPrice() + "đ");
-        Glide.with(context)
-                .load(product.getImage())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .into(holder.binding.imgProduct);
-
+        holder.binding.tvPrice.setText(product.getMinPrice() + "");
+        Glide.with(context).load(product.getImage()).into(holder.binding.imgProduct);
         holder.binding.ratingBar.setRating((float) product.getAverageRate());
         holder.binding.tvReview.setText("Đã bán " + product.getReview());
 
         holder.binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String id = product.getId();
                 Intent intent = new Intent(context, DetailProduct.class);
+                intent.putExtra("id_product", id);
                 context.startActivity(intent);
             }
         });
@@ -71,7 +68,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
         private LayoutItemProductBinding binding;
-
         public ProductViewHolder(LayoutItemProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

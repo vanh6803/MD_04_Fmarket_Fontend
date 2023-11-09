@@ -1,6 +1,10 @@
 package com.example.hn_2025_online_shop.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class OptionProduct {
+    @SerializedName("_id")
+    private String id;
     Number product_id;
     String name_color;
     String color_code;
@@ -14,7 +18,8 @@ public class OptionProduct {
     public OptionProduct() {
     }
 
-    public OptionProduct(Number product_id, String name_color, String color_code, Number ram, Number rom, Number price, Number discount_value, Number quantity, Number soldQuantity) {
+    public OptionProduct(String id, Number product_id, String name_color, String color_code, Number ram, Number rom, Number price, Number discount_value, Number quantity, Number soldQuantity) {
+        this.id = id;
         this.product_id = product_id;
         this.name_color = name_color;
         this.color_code = color_code;
@@ -24,6 +29,14 @@ public class OptionProduct {
         this.discount_value = discount_value;
         this.quantity = quantity;
         this.soldQuantity = soldQuantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Number getProduct_id() {
