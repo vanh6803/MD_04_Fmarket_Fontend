@@ -1,22 +1,142 @@
 package com.example.hn_2025_online_shop.view.login;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.api.BaseApi;
+import com.example.hn_2025_online_shop.databinding.RegisterBinding;
 import com.example.hn_2025_online_shop.databinding.RegisterMemberSellerBinding;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.ultil.Validator;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterMemberSeller extends AppCompatActivity {
     private RegisterMemberSellerBinding binding;
+    private ProgressLoadingDialog loadingDialog;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = RegisterMemberSellerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        initController();
+        initView();
+    }
+    private void initController() {
+        binding.btnRegisMember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = binding.edtNameShop.getText().toString().trim();
+                String email = binding.edtNameShop.getText().toString().trim();
+                String address = binding.edtAddressShop.getText().toString().trim();
+//                registerMemberSeller(name,email, address);
+            }
+        });
+
+        binding.backRegi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+            }
+        });
+    }
+
+    //Hàm này đang lỗi rồi  huhu
+
+//    private void registerMemberSeller(String name,  String address) {
+//        if(checkRegister(name,address)) {
+//            loadingDialog.show();
+//
+//            BaseApi.API.registerMemberSeller(name, address).enqueue(new Callback<ServerResponse>() {
+//                @Override
+//                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+//                    if(response.isSuccessful()){ // chỉ nhận đầu status 200
+//                        ServerResponse serverResponse = response.body();
+//                        Log.d(TAG.toString, "onResponse-register: " + serverResponse.toString());
+//                        if(serverResponse.getCode() == 200) {
+//                            Intent intent = new Intent(RegisterMemberSeller.this, CreateStoreSuccessActivity.class);
+//                            intent.putExtra("name",email);
+//                            startActivity(intent);
+//                            overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+//                        }
+//                    } else { // nhận các đầu status #200
+//                        try {
+//                            String errorBody = response.errorBody().string();
+//                            JSONObject errorJson = new JSONObject(errorBody);
+//                            String errorMessage = errorJson.getString("message");
+//                            Log.d(TAG.toString, "onResponse-register: " + errorMessage);
+//                            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+//                        }catch (IOException e){
+//                            e.printStackTrace();
+//                        } catch (JSONException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                    }
+//                    loadingDialog.dismiss();
+//                }
+//
+//                @Override
+//                public void onFailure(Call<ServerResponse> call, Throwable t) {
+//                    Toast.makeText(RegisterMemberSeller.this, t.toString(), Toast.LENGTH_SHORT).show();
+//                    Log.d(TAG.toString, "onFailure-register: " + t.toString());
+//                    loadingDialog.dismiss();
+//                }
+//            });
+//        }
+//
+//    }
+
+    private boolean checkRegister(String name, String address) {
+        setTextUI();
+//       if(!pass.equals(repass)) {
+//            binding.tvErrorPass.setText("Pass và repass không khớp nhau!");
+//            binding.linePass.setVisibility(View.GONE);
+//            binding.tvErrorPass.setVisibility(View.VISIBLE);
+//            return false;
+//        } else if(pass.length() < 6) {
+//            binding.tvErrorPass.setText("Vui lòng đặt mật khẩu từ 6 kí tự!");
+//            binding.linePass.setVisibility(View.GONE);
+//            binding.tvErrorPass.setVisibility(View.VISIBLE);
+//            return false;
+//        }
+        return true;
+    }
+
+    private void setTextUI() {
+//        binding.tvErrorEmail.setText("");
+//        binding.tvErrorPass.setText("");
+//        binding.lineEmail.setVisibility(View.VISIBLE);
+//        binding.tvErrorEmail.setVisibility(View.GONE);
+//        binding.linePass.setVisibility(View.VISIBLE);
+//        binding.tvErrorPass.setVisibility(View.GONE);
+    }
+
+    private void initView() {
+        loadingDialog = new ProgressLoadingDialog(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

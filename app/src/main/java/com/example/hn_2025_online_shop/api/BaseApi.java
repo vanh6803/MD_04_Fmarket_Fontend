@@ -1,11 +1,7 @@
 package com.example.hn_2025_online_shop.api;
 
-
-import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
-import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
-import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
-import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
+import com.example.hn_2025_online_shop.model.response.MemberSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -26,7 +22,7 @@ import retrofit2.http.Path;
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.100.4:3000/api/")
+            .baseUrl("http://192.168.42.103:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -67,17 +63,11 @@ public interface BaseApi {
     @GET("products/all-product")
     Call<ProductResponse> getListAllProduct();
 
-    @GET("products/all-product-by-category")
-    Call<ProductByCategoryReponse> getListProductByCategory();
-
     @GET("category/get-list")
     Call<ProductTypeResponse> getListTypeProduct();
 
-    @GET("products/detail-product/{productId}")
-    Call<DetailProductResponse> getDetailProduct(@Path("productId") String productId);
-
-    @GET("banner/get-list")
-    Call<BannerReponse> getListBanner();
-
-
+    @FormUrlEncoded
+    @POST("store/create/:uid")
+    Call<MemberSellerResponse> registerMemberSeller(@Field("name") String name,
+                                                    @Field("address") String address);
 }

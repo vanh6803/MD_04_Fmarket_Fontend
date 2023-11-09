@@ -19,13 +19,16 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.login.CreateStoreSuccessActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.login.RegisterSuccess"
             android:exported="true" />
         <activity
             android:name=".view.profile_screen.ProfileUserScreen"
             android:exported="false" />
         <activity android:name=".voucher.VoucherScreen" />
-        <activity android:name=".view.my_store.MyStoreScreen"/>
+        <activity android:name=".view.my_store.MyStoreScreen" />
         <activity
             android:name=".view.profile_screen.ChatScreen"
             android:exported="false" />
