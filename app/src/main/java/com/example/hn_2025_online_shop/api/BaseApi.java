@@ -1,6 +1,9 @@
 package com.example.hn_2025_online_shop.api;
 
+import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
+import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
+import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -62,7 +65,13 @@ public interface BaseApi {
     @GET("products/all-product")
     Call<ProductResponse> getListAllProduct();
 
+    @GET("products/all-product-by-category")
+    Call<ProductByCategoryReponse> getListProductByCategory();
+
     @GET("category/get-list")
     Call<ProductTypeResponse> getListTypeProduct();
+
+    @GET("banner/get-list")
+    Call<BannerReponse> getListBanner();
 
 }
