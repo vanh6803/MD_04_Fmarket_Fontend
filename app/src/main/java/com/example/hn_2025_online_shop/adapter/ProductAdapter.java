@@ -49,13 +49,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.binding.nameProduct.setText(product.getName());
-        holder.binding.price.setText(product.getPrice() + "");
+        holder.binding.price.setText(product.getMinPrice() + "");
         Glide.with(context).load(product.getImage()).into(holder.binding.imgProduct);
 
         holder.binding.lnProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String id = product.getId();
+
                 Intent intent = new Intent(context, DetailProduct.class);
+                intent.putExtra("id_product", id);
                 context.startActivity(intent);
             }
         });
