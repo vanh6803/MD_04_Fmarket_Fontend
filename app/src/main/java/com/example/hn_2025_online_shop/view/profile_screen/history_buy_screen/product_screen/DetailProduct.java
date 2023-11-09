@@ -87,8 +87,6 @@ public class DetailProduct extends AppCompatActivity {
         });
         callApiDetailProduct();
 
-
-
     }
     public void callApiDetailProduct(){
         dialog.show();
@@ -125,9 +123,7 @@ public class DetailProduct extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
     }
-
     private void setDataUi(DetailProductResponse response1) {
 
         if(response1 != null){
@@ -156,37 +152,29 @@ public class DetailProduct extends AppCompatActivity {
         }
     }
     public void showDetailProductDialog(DetailProductResponse response1){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LayoutDialogDetailProductBinding binding = LayoutDialogDetailProductBinding.inflate(getLayoutInflater());
-                LayoutInflater inflater = getLayoutInflater();
-                View dialogview = inflater.inflate(R.layout.layout_dialog_detail_product, null);
-                builder.setView(dialogview);
-                binding.description.setText(response1.getResult().getDescription() + "");
-                binding.screen.setText(response1.getResult().getScreen()+ "");
-                binding.camera.setText(response1.getResult().getCamera()+ "");
-                binding.chipset.setText(response1.getResult().getDescription()+ "");
-                binding.cpu.setText(response1.getResult().getCpu()+ "");
-                binding.gpu.setText(response1.getResult().getGpu()+ "");
-                binding.operatingSystem.setText(response1.getResult().getOperatingSystem()+ "");
-                binding.battery.setText(response1.getResult().getBattery()+ "");
-                binding.weight.setText(response1.getResult().getWeight()+ "");
-                binding.connection.setText(response1.getResult().getConnection()+ "");
-                binding.specialFeature.setText(response1.getResult().getSpecialFeature()+ "");
-                binding.manufacturer.setText(response1.getResult().getManufacturer()+ "");
-                binding.other.setText(response1.getResult().getOther()+ "");
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailProduct.this);
+                LayoutDialogDetailProductBinding binding = LayoutDialogDetailProductBinding.inflate(getLayoutInflater());;
+                builder.setView(binding.getRoot());
+                binding.description.setText(response1.getResult().getDescription());
+                binding.screen.setText("Screen: "+response1.getResult().getScreen());
+                binding.camera.setText(response1.getResult().getCamera());
+                binding.chipset.setText("Chipset: " + response1.getResult().getChipset());
+                binding.cpu.setText("Cpu: "+response1.getResult().getCpu());
+                binding.gpu.setText("Gpu: "+response1.getResult().getGpu());
+                binding.operatingSystem.setText("OperatingSystem: "+response1.getResult().getOperatingSystem());
+                binding.battery.setText("Battery: " + response1.getResult().getBattery());
+                binding.weight.setText("Weight: " + response1.getResult().getWeight());
+                binding.connection.setText("Connection: "+response1.getResult().getConnection());
+                binding.specialFeature.setText("SpecialFeature: "+ response1.getResult().getSpecialFeature());
+                binding.manufacturer.setText("Manufacturer: "+response1.getResult().getManufacturer());
+                binding.other.setText("Other: "+response1.getResult().getOther());
                 builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                    }
-                });
-                binding.btnDong.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
                     }
                 });
                 AlertDialog dialog = builder.create();

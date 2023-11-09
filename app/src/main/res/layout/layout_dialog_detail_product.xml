@@ -24,10 +24,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -35,10 +31,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -46,10 +38,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -57,10 +45,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -68,10 +52,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -79,10 +59,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -90,10 +66,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -101,10 +73,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -112,10 +80,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -123,10 +87,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -134,10 +94,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -145,10 +101,6 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
@@ -156,24 +108,9 @@
                 android:layout_marginTop="10dp"
                 android:gravity="start"
                 android:textSize="15dp"
-                android:maxLines="1"
-                android:ellipsize="end"
-                android:clickable="true"
-                android:focusable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <Button
-                android:id="@+id/btnDong"
-                android:shadowColor="@color/color_chudao"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center"
-                android:layout_width="200dp"
-                android:layout_height="40dp"
-                android:text="Đóng"
-                android:textColor="@color/red"
-                android:gravity="center"
-                android:background="@drawable/custom_btn_detail_prodcut"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
