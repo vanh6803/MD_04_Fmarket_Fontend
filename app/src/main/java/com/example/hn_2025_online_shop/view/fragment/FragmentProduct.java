@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,20 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
+import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductBinding;
+import com.example.hn_2025_online_shop.model.Banner;
 import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.TAG;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +43,8 @@ public class FragmentProduct extends Fragment {
 
     private List<Product> listProdcut;
     private ProductAdapter productAdapter;
-    ProgressLoadingDialog dialog;
+
+    private ProgressLoadingDialog dialog;
     private FragmentProductBinding binding;
     public static FragmentProduct newInstance() {
         FragmentProduct fragment = new FragmentProduct();
@@ -55,29 +65,66 @@ public class FragmentProduct extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView();
+        initController();
+        callApiBanner();
+        callApiGetListAllProducts();
+    }
+
+    private void callApiBanner() {
+        BaseApi.API.getListBanner().enqueue(new Callback<BannerReponse>() {
+            @Override
+            public void onResponse(Call<BannerReponse> call, Response<BannerReponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    BannerReponse reponse = response.body();
+                    Log.d(TAG.toString, "onResponse-getListBanner: " + reponse.toString());
+                    if(reponse.getCode() == 200) {
+                        setDataBanner(reponse.getData());
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-getListBanner: " + errorMessage);
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+            @Override
+            public void onFailure(Call<BannerReponse> call, Throwable t) {
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setDataBanner(List<Banner> data) {
+        ArrayList<SlideModel> list  = new ArrayList<>();
+        List<String> tabTitles = new ArrayList<>();
+        for (Banner banner: data) {
+            list.add(new SlideModel(banner.getImage() , ScaleTypes.FIT));
+            tabTitles.add(banner.getNote());
+        }
+        binding.sliderProduct.setImageList(list, ScaleTypes.FIT);
+    }
+
+    private void initController() {
+    }
+
+    private void initView() {
         dialog = new ProgressLoadingDialog(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recycleProduct.setLayoutManager(layoutManager);
         listProdcut = new ArrayList<>();
-//        listProdcut.add(new Product_main("1", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
-//        listProdcut.add(new Product_main("2", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
-//        listProdcut.add(new Product_main("3", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
-//        listProdcut.add(new Product_main("4", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
-//        listProdcut.add(new Product_main("5", "Laptop Az", "https://www.techone.vn/wp-content/uploads/2023/09/iphone-15-pro-max_2__5.webp", "aaa"));
         productAdapter = new ProductAdapter(getContext(), listProdcut);
         productAdapter.setProductList(listProdcut);
         binding.recycleProduct.setAdapter(productAdapter);
-        ArrayList<SlideModel> list  = new ArrayList<>();
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        list.add(new SlideModel(R.drawable.banner2 , ScaleTypes.FIT));
-        binding.sliderProduct.setImageList(list, ScaleTypes.FIT);
-        callApiGetListAllProducts();
     }
+
     public void callApiGetListAllProducts(){
         dialog.show();
         BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {

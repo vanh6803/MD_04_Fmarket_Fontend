@@ -89,6 +89,7 @@
                 app:iss_period="1000"
                 app:iss_auto_cycle="true"
                 app:iss_delay="1000"
+                android:background="@color/white"
                 app:iss_corner_radius="20"
                 android:layout_height="200dp"/>
         </androidx.cardview.widget.CardView>

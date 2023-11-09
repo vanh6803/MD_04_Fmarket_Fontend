@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/layout_iteam_product"
+        tools:listitem="@layout/layout_item_product"
         android:id="@+id/rcvProductStore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
