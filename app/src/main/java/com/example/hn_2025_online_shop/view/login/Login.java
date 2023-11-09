@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity{
                 public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                     if(response.isSuccessful()){
                         LoginResponse loginResponse = response.body();
-                        if (loginResponse.getCode() == 201){
+                        if (loginResponse.getCode() == 200){
                             AccountUltil.TOKEN = loginResponse.getToken();
                             getDetailUser(); // Đăng nhập thành công thì lấy ra detail user rồi cho vào 1 biến để có thể tái sử dụng
                             Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
