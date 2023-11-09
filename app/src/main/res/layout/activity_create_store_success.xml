@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingHorizontal="12dp"
+    android:layout_marginVertical="16dp"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/backResetsuccess"
+        android:layout_marginTop="50dp"
+        android:layout_width="25dp"
+        android:layout_height="29dp"
+        android:src="@drawable/backss" />
+    <TextView
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/color_chudao"
+        android:textStyle="bold"
+        android:text="Đăng ký cửa hàng thành công"
+        android:textSize="@dimen/font_size_text_title_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/success" />
+    <Button
+        android:elevation="10dp"
+        android:layout_marginTop="40dp"
+        android:text="Tiếp tục"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:height="40dp"
+        android:background="@drawable/custom_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

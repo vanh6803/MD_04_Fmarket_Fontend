@@ -44,7 +44,6 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
-
     }
 
 
