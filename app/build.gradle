@@ -61,4 +61,7 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    // imagepicker
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 }

@@ -8,10 +8,13 @@
 
     <ImageView
         android:id="@+id/backRegi"
-        android:layout_width="25dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/backss" />
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_bg_shopping_cart_primary"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/backs"
+        app:tint="@color/white" />
 
     <TextView
         android:text="Đăng ký trở thành Người bán FMarket"
@@ -90,46 +93,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgAvartar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/avatar1"
+                />
 
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:maxWidth="20dp"
-                    android:maxHeight="20dp"
-                    android:src="@drawable/pass" />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="true"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtpass"
-                            android:background="@color/transparent"
-                            android:padding="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:hint="Avatar" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <TextView
-                        android:height="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
 
-            </LinearLayout>
             <TextView
                 android:layout_marginTop="20dp"
                 android:textStyle="bold"
@@ -189,47 +160,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_marginTop="10dp"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:maxWidth="20dp"
-                    android:maxHeight="20dp"
-                    android:src="@drawable/pass" />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="true"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:inputType="number"
-                            android:id="@+id/edtAddressShop"
-                            android:background="@color/transparent"
-                            android:padding="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:hint="Banner" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <TextView
-                        android:height="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imgBanner"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/avatar1"
+                />
 
             <Button
                 android:id="@+id/btnRegisMember"
