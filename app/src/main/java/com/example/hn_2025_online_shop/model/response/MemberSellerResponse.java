@@ -12,6 +12,14 @@ public class MemberSellerResponse {
         this.message = message;
     }
 
+    @Override
+    public String toString() {
+        return "MemberSellerResponse{" +
+                "code=" + code +
+                ", message='" + message + '\'' +
+                '}';
+    }
+
     public int getCode() {
         return code;
     }
