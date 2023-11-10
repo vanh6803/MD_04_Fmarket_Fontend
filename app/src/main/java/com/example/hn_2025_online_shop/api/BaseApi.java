@@ -30,7 +30,7 @@ import retrofit2.http.Path;
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.106:3000/api/")
+            .baseUrl("http://192.168.100.4:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -81,6 +81,8 @@ public interface BaseApi {
 
     @GET("products/detail-product/{idProduct}")
     Call<DetailProductResponse> getDetailProduct(@Path("idProduct") String idProduct);
+    @GET("products//similar-product/{idProduct}")
+    Call<ProductResponse> getDataSimilarlProduct(@Path("idProduct") String idProduct);
 
 
     @GET("banner/get-list")
