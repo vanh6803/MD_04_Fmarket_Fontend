@@ -33,6 +33,7 @@ import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
@@ -71,12 +72,11 @@ public class DetailProduct extends AppCompatActivity {
         productList = new ArrayList<>();
         voucherList = new ArrayList<>();
         for (int i = 1 ; i< 4; i++){
-            productList.add(new Product("1", "sản phẩm", true, "https://vtv1.mediacdn.vn/2019/10/10/photo-1-15706463929181755249740.jpg", 11100000, 5.0, 1 ));
             voucherList.add(new Voucher("Giảm"+i+"%", "1234", ""));
         }
         productAdapter = new ProductAdapter(this, productList);
         voucherAdapter = new VoucherAdapter(this, voucherList);
-        binding.recyProductSame.setAdapter(productAdapter);
+        binding.recyProductSimilar.setAdapter(productAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
 
         binding.showshop.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +86,7 @@ public class DetailProduct extends AppCompatActivity {
             }
         });
         callApiDetailProduct();
+        setDataSimilarProduct();
 
     }
     public void callApiDetailProduct(){
@@ -132,21 +133,48 @@ public class DetailProduct extends AppCompatActivity {
                 String linkImg = response1.getResult().getImage().get(i);
                 listImg.add(new SlideModel(linkImg, ScaleTypes.FIT));
             }
-            if(response1.getResult().getOption() != null){
+            Log.d(TAG.toString, "setDataUi: " + response1.getResult().getOption());
+            if(response1.getResult().getOption().size() != 0){
                 binding.tvPrice.setText(response1.getResult().getOption().get(0).getPrice()+ "" + "đ");
             }else{
+                binding.tvPrice.setText("Không có dữ liệu trả về");
                 Toast.makeText(this, response1.getMessage(), Toast.LENGTH_SHORT).show();
             }
-            binding.imgProduct.setImageList(listImg, ScaleTypes.FIT);
-            binding.tvName.setText(response1.getResult().getName());
 
-            binding.tvShop.setText(response1.getResult().getStore_id().getName());
-            binding.diachiShop.setText(response1.getResult().getStore_id().getAddress());
-            Glide.with(this)
-                    .load(response1.getResult().getStore_id().getAvatar())
-                    .placeholder(R.drawable.loading)
-                    .error(R.drawable.error)
-                    .into(binding.imgShop);
+            if(response1.getResult().getImage() != null){
+                binding.imgProduct.setImageList(listImg, ScaleTypes.FIT);
+            }else {
+                Glide.with(DetailProduct.this).load(R.drawable.error);
+            }
+
+            if(response1.getResult().getName() != null){
+                binding.tvName.setText(response1.getResult().getName());
+            }else{
+                binding.tvName.setText("Không có dữ liệu trả về");
+            }
+
+            if (response1.getResult().getStore_id().getName() != null) {
+                binding.tvShop.setText(response1.getResult().getStore_id().getName());
+            }else{
+                binding.tvShop.setText("Không có dữ liệu trả về");
+            }
+
+            if(response1.getResult().getStore_id().getAddress() != null){
+                binding.diachiShop.setText(response1.getResult().getStore_id().getAddress());
+            }else {
+                binding.diachiShop.setText("Không có dữ liệu trả về");
+            }
+
+            if(response1.getResult().getStore_id().getAvatar() != null){
+                Glide.with(this)
+                        .load(response1.getResult().getStore_id().getAvatar())
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.error)
+                        .into(binding.imgShop);
+            }else {
+                Glide.with(this).load(R.drawable.error);
+            }
+
         }else{
             Toast.makeText(this, "Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
         }
@@ -171,6 +199,13 @@ public class DetailProduct extends AppCompatActivity {
                 binding.specialFeature.setText("SpecialFeature: "+ response1.getResult().getSpecialFeature());
                 binding.manufacturer.setText("Manufacturer: "+response1.getResult().getManufacturer());
                 binding.other.setText("Other: "+response1.getResult().getOther());
+                binding.btnbutton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
                 builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -179,6 +214,29 @@ public class DetailProduct extends AppCompatActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+    }
+
+    public void setDataSimilarProduct(){
+        dialog.show();
+        Intent intent = getIntent();
+        String id_product = intent.getStringExtra("id_product");
+        BaseApi.API.getDataSimilarlProduct(id_product).enqueue(new Callback<ProductResponse>() {
+            @Override
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                if(response.isSuccessful()){
+                    ProductResponse productResponse = response.body();
+                    productAdapter.setProductList(productResponse.getResult());
+                    binding.recyProductSimilar.setAdapter(productAdapter);
+                }else {
+                    Toast.makeText(DetailProduct.this, "Get Data Product Similar Error", Toast.LENGTH_SHORT).show();
+                }
+                dialog.dismiss();
+            }
+            @Override
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+                Toast.makeText(DetailProduct.this, "call api err", Toast.LENGTH_SHORT).show();
             }
         });
     }
