@@ -36,6 +36,7 @@ import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.login.Login;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentProductStore;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
 
 import org.json.JSONException;
@@ -50,6 +51,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailProduct extends AppCompatActivity {
+    public static String storeId;
     public DetailProductBinding binding;
     List<Product> productList;
     List<Voucher> voucherList;
@@ -79,6 +81,7 @@ public class DetailProduct extends AppCompatActivity {
         binding.recyProductSimilar.setAdapter(productAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
 
+
         binding.showshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,6 +91,17 @@ public class DetailProduct extends AppCompatActivity {
         callApiDetailProduct();
         setDataSimilarProduct();
 
+    }
+    public void showShop(DetailProductResponse response1){
+        binding.showshop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storeId = response1.getResult().getStore_id().toString();
+                Intent intent = new Intent(DetailProduct.this, FragmentProductStore.class);
+                intent.putExtra("storeId",storeId);
+                startActivity(intent);
+            }
+        });
     }
     public void callApiDetailProduct(){
         dialog.show();
