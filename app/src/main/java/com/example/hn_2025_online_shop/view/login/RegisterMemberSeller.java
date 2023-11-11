@@ -10,7 +10,6 @@ import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -18,14 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.RegisterBinding;
 import com.example.hn_2025_online_shop.databinding.RegisterMemberSellerBinding;
-import com.example.hn_2025_online_shop.model.response.MemberSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.ultil.Validator;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import org.json.JSONException;
@@ -150,13 +146,13 @@ public class RegisterMemberSeller extends AppCompatActivity {
             String idUser = AccountUltil.USER.getId();
             RequestBody requestBodyName = RequestBody.create(MediaType.parse("multipart/form-data"), name);
             RequestBody requestBodyAddress = RequestBody.create(MediaType.parse("multipart/form-data"), address);
-            BaseApi.API.registerMemberSeller(idUser, fileImgAvatar, fileImgBanner, requestBodyName, requestBodyAddress).enqueue(new Callback<MemberSellerResponse>() {
+            BaseApi.API.registerMemberSeller(idUser, fileImgAvatar, fileImgBanner, requestBodyName, requestBodyAddress).enqueue(new Callback<ServerResponse>() {
                 @Override
-                public void onResponse(Call<MemberSellerResponse> call, Response<MemberSellerResponse> response) {
+                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                     if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                        MemberSellerResponse memberSellerResponse = response.body();
-                        Log.d(TAG.toString, "onResponse-registerMemberSeller: " + memberSellerResponse.toString());
-                        if(memberSellerResponse.getCode() == 200 || memberSellerResponse.getCode() == 201) {
+                        ServerResponse serverResponse = response.body();
+                        Log.d(TAG.toString, "onResponse-registerMemberSeller: " + serverResponse.toString());
+                        if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                             Intent intent = new Intent(RegisterMemberSeller.this, CreateStoreSuccessActivity.class);
                             startActivity(intent);
                         }
@@ -177,7 +173,7 @@ public class RegisterMemberSeller extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<MemberSellerResponse> call, Throwable t) {
+                public void onFailure(Call<ServerResponse> call, Throwable t) {
                     Toast.makeText(RegisterMemberSeller.this, t.toString(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG.toString, "onFailure-registerMemberSeller: " + t.toString());
                     loadingDialog.dismiss();

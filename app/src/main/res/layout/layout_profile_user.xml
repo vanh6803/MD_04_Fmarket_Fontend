@@ -1,238 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="22dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <ImageView
-            android:id="@+id/imgBack"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/custom_bg_shopping_cart_primary"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:src="@drawable/backs"
-            app:tint="@color/white" />
-
-        <TextView
-            android:text="Thông tin người dùng"
-            android:textSize="@dimen/font_size_text_title"
-            android:textColor="@color/color_chudao"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
-
-        android:orientation="vertical">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:orientation="horizontal"
-            android:background="@drawable/custom_bg_avartar_user"
-            android:layout_gravity="center">
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/imgAvartar"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/custom_bg_avartar_user"
-                    android:src="@drawable/avatar1"
-                    app:layout_constraintBaseline_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:ignore="MissingConstraints" />
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
 
                 <ImageView
-                    android:id="@+id/imgMayAnh"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/mayanh"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintVertical_bias="1.0"
-                    tools:ignore="MissingConstraints" />
+                    android:id="@+id/imgBack"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@drawable/custom_bg_shopping_cart_primary"
+                    android:padding="5dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/backs"
+                    app:tint="@color/white" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:text="Thông tin người dùng"
+                    android:textSize="@dimen/font_size_text_title"
+                    android:textColor="@color/color_chudao"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="UserName"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/edtUserName"
-                android:layout_marginTop="5dp"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nhập username"
-                android:padding="10dp"
-                android:background="@drawable/custom_bg_edt_user"/>
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/imgupdate"
-                android:layout_gravity="center"/>
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:orientation="horizontal"
+                    android:background="@drawable/custom_bg_avartar_user"
+                    android:layout_gravity="center">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgAvartar"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/custom_bg_avartar_user"
+                        android:src="@drawable/avatar1"
+                        app:layout_constraintBaseline_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="MissingConstraints" />
+
+                    <ImageView
+                        android:id="@+id/imgMayAnh"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/mayanh"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintVertical_bias="1.0"
+                        app:tint="@color/white"
+                        tools:ignore="MissingConstraints" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên người dùng"
+                    android:layout_marginTop="35dp"
+                    android:textSize="@dimen/font_size_text_title_medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/edtUserName"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:hint="Nhập username"
+                        android:padding="20dp"
+                        android:background="@drawable/custom_bg_edt_user"/>
+                    <ImageView
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/imgupdate"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sinh nhật"
+                    android:layout_marginTop="20dp"
+                    android:textSize="@dimen/font_size_text_title_medium"
+                    android:textStyle="bold"
+                    android:textColor="@color/primary"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/linearCalander"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/edtBirthday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/custom_bg_edt_user"
+                        android:hint="Chọn ngày sinh"
+                        android:padding="20dp" />
+
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:src="@drawable/imgngaysinh" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnSave"
+                android:elevation="10dp"
+                android:layout_marginTop="40dp"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:height="40dp"
+                android:background="@drawable/custom_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textColor="@color/primary"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/edtEmail"
-                android:layout_marginTop="5dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:hint="Nhập email"
-                android:background="@drawable/custom_bg_edt_user"/>
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/imgupdate"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phone Number"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/edtPhone"
-                android:layout_marginTop="5dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:hint="Nhập số điện thoại"
-                android:padding="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_bg_edt_user"/>
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/imgupdate"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ngày sinh"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/edtBirday"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_weight="1"
-                android:background="@drawable/custom_bg_edt_user"
-                android:hint="Chọn ngày sinh"
-                android:padding="10dp" />
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="11dp"
-
-                android:src="@drawable/imgngaysinh" />
-        </LinearLayout>
-        <TextView
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Địa chỉ"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            android:textColor="@color/primary"
-            />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <EditText
-                android:id="@+id/edtAddress"
-                android:layout_marginTop="5dp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Nhập địa chỉ"
-                android:padding="10dp"
-                android:background="@drawable/custom_bg_edt_user"/>
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:src="@drawable/imgupdate"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-
-
-
-
-    </LinearLayout>
-
-
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
