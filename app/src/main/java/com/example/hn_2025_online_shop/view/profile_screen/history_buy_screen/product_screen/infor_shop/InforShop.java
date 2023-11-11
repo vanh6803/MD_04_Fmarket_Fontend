@@ -1,6 +1,8 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.page_view.ViewPageStoreAdapter;
 import com.example.hn_2025_online_shop.databinding.LayoutStoreBinding;
+import com.example.hn_2025_online_shop.ultil.TAG;
 
 public class InforShop  extends AppCompatActivity {
     private LayoutStoreBinding binding;
@@ -40,5 +43,8 @@ public class InforShop  extends AppCompatActivity {
                 binding.viewPagerHome.setCurrentItem(curentIndex);
             }
         });
+        Intent intent = getIntent();
+        String storeId = intent.getStringExtra("storeId");
+        Log.d(TAG.toString, "onCreate: " + storeId);
     }
 }

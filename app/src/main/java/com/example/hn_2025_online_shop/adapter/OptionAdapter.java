@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
@@ -15,15 +16,17 @@ import com.example.hn_2025_online_shop.model.OptionProduct;
 import java.util.List;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionViewHolder>{
-    private List<OptionProduct> list;
     private Context context;
+    private List<OptionProduct> list;
 
-    public OptionAdapter(Context context) {
+
+    public OptionAdapter(Context context, List<OptionProduct> list) {
         this.context = context;
-    }
-
-    public void setListOptionProduct(List<OptionProduct> list) {
         this.list = list;
+    }
+    public void setDataListOptionProduct(List<OptionProduct> list){
+        this.list=list;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -35,7 +38,9 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
 
     @Override
     public void onBindViewHolder(@NonNull OptionViewHolder holder, int position) {
-
+          OptionProduct optionProduct = list.get(position);
+          holder.binding.tvColorOption.setText(optionProduct.getName_color());
+          Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
     }
 
     @Override

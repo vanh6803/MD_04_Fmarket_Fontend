@@ -5,8 +5,9 @@ import com.google.gson.annotations.SerializedName;
 public class OptionProduct {
     @SerializedName("_id")
     private String id;
-    Number product_id;
+    String product_id;
     String name_color;
+    String image;
     String color_code;
     Number ram;
     Number rom;
@@ -15,13 +16,22 @@ public class OptionProduct {
     Number quantity;
     Number soldQuantity;
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public OptionProduct() {
     }
 
-    public OptionProduct(String id, Number product_id, String name_color, String color_code, Number ram, Number rom, Number price, Number discount_value, Number quantity, Number soldQuantity) {
+    public OptionProduct(String id, String product_id, String name_color, String image, String color_code, Number ram, Number rom, Number price, Number discount_value, Number quantity, Number soldQuantity) {
         this.id = id;
         this.product_id = product_id;
         this.name_color = name_color;
+        this.image = image;
         this.color_code = color_code;
         this.ram = ram;
         this.rom = rom;
@@ -39,11 +49,11 @@ public class OptionProduct {
         this.id = id;
     }
 
-    public Number getProduct_id() {
+    public String getProduct_id() {
         return product_id;
     }
 
-    public void setProduct_id(Number product_id) {
+    public void setProduct_id(String product_id) {
         this.product_id = product_id;
     }
 

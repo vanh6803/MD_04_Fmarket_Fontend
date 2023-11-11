@@ -1,6 +1,7 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop;
 
 import static android.content.Intent.getIntent;
+import static android.content.Intent.getIntentOld;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.StoreUltil;
+import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
@@ -41,12 +44,9 @@ import retrofit2.Response;
 
 public class FragmentProductStore extends Fragment {
     private FragmentProductStoreBinding binding;
-    private DetailProduct detailProduct;
     private List<Product> productList;
     ProductAdapter productAdapter;
     ProgressLoadingDialog dialog;
-
-
 
     public FragmentProductStore() {
     }
@@ -74,13 +74,18 @@ public class FragmentProductStore extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.rcvProductStore.setLayoutManager(layoutManager);
         productList = new ArrayList<>();
+        Log.d(TAG.toString, "onViewCreated: "+ StoreUltil.store.getId());
+
+
         productAdapter = new ProductAdapter(getActivity(), productList);
         binding.rcvProductStore.setAdapter(productAdapter);
-        setDataProductStore();
+       setDataProductStore();
     }
-    private void setDataProductStore(){
+    public void setDataProductStore(){
+
+
         dialog.show();
-        BaseApi.API.getDataProductStore(DetailProduct.storeId).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){
@@ -108,7 +113,8 @@ public class FragmentProductStore extends Fragment {
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                Toast.makeText(detailProduct, "Không Call đươc API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Không Call đươc API", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }
