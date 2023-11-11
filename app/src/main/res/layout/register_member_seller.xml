@@ -3,29 +3,37 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="12dp"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/backRegi"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:background="@drawable/custom_bg_shopping_cart_primary"
-        android:padding="5dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/backs"
-        app:tint="@color/white" />
-
-    <TextView
-        android:text="Đăng ký trở thành Người bán FMarket"
-        android:textSize="@dimen/font_size_text_title"
-        android:gravity="center"
-        android:textColor="@color/color_chudao"
-        android:textStyle="bold"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="15dp"
+        >
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_bg_shopping_cart_white"
+            android:padding="5dp"
+            android:src="@drawable/backs"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:text="Thông tin người dùng"
+            android:textSize="@dimen/font_size_text_title_s"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
     <ScrollView
+        android:paddingHorizontal="22dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,17 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_marginTop="40dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Tên Shop"
-                android:textSize="@dimen/font_size_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/custom_edittext"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -84,34 +84,50 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Avatar"
-                android:textSize="@dimen/font_size_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/imgAvartar"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/avatar1"
-                />
-
-
-            <TextView
                 android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Địa chỉ"
-                android:textSize="@dimen/font_size_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="100dp">
+
+                <ImageView
+                    android:id="@+id/imgAvartar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/custom_create_image"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_add"
+                        app:tint="@color/primary"
+                        android:layout_gravity="center"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thêm Avatar"
+                        android:textColor="@color/primary"
+                        />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/custom_edittext"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -131,7 +147,6 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:gravity="center"
-                        app:passwordToggleEnabled="true"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center">
                         <com.google.android.material.textfield.TextInputEditText
@@ -151,21 +166,49 @@
 
             </LinearLayout>
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
-                android:text="Banner"
-                android:textSize="@dimen/font_size_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
 
-            <ImageView
-                android:id="@+id/imgBanner"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/avatar1"
-                />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:id="@+id/imgBanner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/custom_create_image"
+                    />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    >
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_add"
+                        android:scaleType="centerCrop"
+                        app:tint="@color/primary"
+                        android:layout_gravity="center"
+                        />
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Thêm banner"
+                        android:textColor="@color/primary"
+                        />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/btnRegisMember"
@@ -186,9 +229,5 @@
 
         </LinearLayout>
     </ScrollView>
-
-
-
-
 
 </LinearLayout>
