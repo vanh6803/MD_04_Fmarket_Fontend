@@ -3,7 +3,6 @@ package com.example.hn_2025_online_shop.api;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
-import com.example.hn_2025_online_shop.model.response.MemberSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
@@ -32,7 +31,8 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/api/")
+
+            .baseUrl("http://10.0.2.2:3000/api/")          
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -92,11 +92,24 @@ public interface BaseApi {
 
     @Multipart
     @POST("store/create/{idUser}")
-    Call<MemberSellerResponse> registerMemberSeller(@Path("idUser") String idUser,
+    Call<ServerResponse> registerMemberSeller(@Path("idUser") String idUser,
                                                     @Part MultipartBody.Part avatar,
                                                     @Part MultipartBody.Part banner,
                                                     @Part("name") RequestBody name,
                                                     @Part("address") RequestBody address);
     @GET("products/all-product-by-store/{storeId}")
     Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId);
+
+    @Multipart
+    @PUT("user/upload-avatar/{idUser}")
+    Call<ServerResponse> uploadAvatar(@Header("Authorization") String authorization,
+                                      @Path("idUser") String idUser,
+                                      @Part MultipartBody.Part avatar);
+
+    @FormUrlEncoded
+    @PUT("user/edit-profile/{idUser}")
+    Call<ServerResponse> editProfile(@Header("Authorization") String authorization,
+                                     @Path("idUser") String idUser,
+                                     @Field("username") String username,
+                                     @Field("birthday") String birthday);
 }
