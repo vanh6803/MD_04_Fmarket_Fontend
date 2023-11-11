@@ -203,7 +203,6 @@ public class FragmentProfile extends Fragment {
                 Window window = dialog.getWindow();
                 window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
                 window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
                 bindingLogout.btnCancelLogout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

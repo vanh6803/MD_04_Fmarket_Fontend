@@ -7,10 +7,10 @@ import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.pr
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentStore;
 
 public class ViewPageStoreAdapter extends FragmentPagerAdapter {
+
     public ViewPageStoreAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
-
     @NonNull
     @Override
     public Fragment getItem(int position) {
@@ -23,9 +23,9 @@ public class ViewPageStoreAdapter extends FragmentPagerAdapter {
                 return null;
         }
     }
-
     @Override
     public int getCount() {
         return 2;
     }
 }
+

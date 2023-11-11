@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +22,14 @@ import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.OptionAdapter;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.adapter.VoucherAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
+import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBinding;
+import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
 import com.example.hn_2025_online_shop.model.ProductType;
@@ -33,11 +39,13 @@ import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentProductStore;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,7 +59,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DetailProduct extends AppCompatActivity {
-    public static String storeId;
+
     public DetailProductBinding binding;
     List<Product> productList;
     List<Voucher> voucherList;
@@ -82,12 +90,14 @@ public class DetailProduct extends AppCompatActivity {
         binding.recyVoucher.setAdapter(voucherAdapter);
 
 
-        binding.showshop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DetailProduct.this, InforShop.class));
-            }
-        });
+
+
+//        binding.showshop.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(DetailProduct.this, InforShop.class));
+//            }
+//        });
         callApiDetailProduct();
         setDataSimilarProduct();
 
@@ -96,9 +106,10 @@ public class DetailProduct extends AppCompatActivity {
         binding.showshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                storeId = response1.getResult().getStore_id().toString();
-                Intent intent = new Intent(DetailProduct.this, FragmentProductStore.class);
+                String storeId = response1.getResult().getStore_id().toString();
+                Intent intent = new Intent(DetailProduct.this, InforShop.class);
                 intent.putExtra("storeId",storeId);
+                StoreUltil.store = response1.getResult().getStore_id();
                 startActivity(intent);
             }
         });
@@ -115,6 +126,9 @@ public class DetailProduct extends AppCompatActivity {
                     if (response1.getCode() == 200){
                         setDataUi(response1);
                         showDetailProductDialog(response1);
+                        showShop(response1);
+                        onClickShowOptionProduct(response1);
+
                         Toast.makeText(DetailProduct.this, response1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -155,31 +169,31 @@ public class DetailProduct extends AppCompatActivity {
                 Toast.makeText(this, response1.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            if(response1.getResult().getImage() != null){
+            if(response1.getResult().getImage().size() != 0){
                 binding.imgProduct.setImageList(listImg, ScaleTypes.FIT);
             }else {
                 Glide.with(DetailProduct.this).load(R.drawable.error);
             }
 
-            if(response1.getResult().getName() != null){
+            if(response1.getResult().getName().length() != 0){
                 binding.tvName.setText(response1.getResult().getName());
             }else{
                 binding.tvName.setText("Không có dữ liệu trả về");
             }
 
-            if (response1.getResult().getStore_id().getName() != null) {
+            if (response1.getResult().getStore_id().getName().length() != 0) {
                 binding.tvShop.setText(response1.getResult().getStore_id().getName());
             }else{
                 binding.tvShop.setText("Không có dữ liệu trả về");
             }
 
-            if(response1.getResult().getStore_id().getAddress() != null){
+            if(response1.getResult().getStore_id().getAddress().length() != 0){
                 binding.diachiShop.setText(response1.getResult().getStore_id().getAddress());
             }else {
                 binding.diachiShop.setText("Không có dữ liệu trả về");
             }
 
-            if(response1.getResult().getStore_id().getAvatar() != null){
+            if(response1.getResult().getStore_id().getAvatar().length() != 0){
                 Glide.with(this)
                         .load(response1.getResult().getStore_id().getAvatar())
                         .placeholder(R.drawable.loading)
@@ -251,6 +265,49 @@ public class DetailProduct extends AppCompatActivity {
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(DetailProduct.this, "call api err", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    public void onClickShowOptionProduct(DetailProductResponse response1){
+        binding.btnBuyDetail.setOnClickListener(new View.OnClickListener() {
+            List<OptionProduct> optionProductList;
+            OptionAdapter optionAdapter;
+            @Override
+            public void onClick(View view) {
+                BottomSheetDialog dialog1 = new BottomSheetDialog(DetailProduct.this);
+                LayoutDialigOptionProductBinding bindingoption = LayoutDialigOptionProductBinding.inflate(getLayoutInflater());
+                dialog1.setContentView(bindingoption.getRoot());
+                Window window = dialog1.getWindow();
+                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+                if(response1.getResult().getOption().size() != 0){
+                    Glide.with(DetailProduct.this).load(response1.getResult().getOption().get(0).getImage()).into(bindingoption.imageView);
+                }else {
+                    Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imageView);
+                }
+                if(response1.getResult().getOption().size() != 0){
+                    bindingoption.textView.setText(response1.getResult().getOption().get(0).getPrice() + "" + "đ");
+                }else {
+                    bindingoption.textView.setText("No data");
+                }
+
+                if(response1.getResult().getOption().size() != 0){
+                    bindingoption.textView2.setText(response1.getResult().getOption().get(0).getSoldQuantity() + "");
+                }else {
+                    bindingoption.textView2.setText("No data");
+                }
+
+
+                optionProductList = new ArrayList<>();
+//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
+//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
+//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
+//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
+
+                optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList);
+                optionAdapter.setDataListOptionProduct(response1.getResult().getOption());
+                bindingoption.rcvOptionProduct.setAdapter(optionAdapter);
+                dialog1.dismiss();
+                dialog1.show();
             }
         });
     }
