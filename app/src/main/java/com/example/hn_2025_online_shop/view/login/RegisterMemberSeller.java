@@ -64,7 +64,7 @@ public class RegisterMemberSeller extends AppCompatActivity {
             }
         });
 
-        binding.backRegi.setOnClickListener(new View.OnClickListener() {
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
