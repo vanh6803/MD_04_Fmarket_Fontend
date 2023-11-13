@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
     android:padding="5dp"
     android:background="@color/white"
+    android:layout_marginBottom="5dp"
     >
 
     <CheckBox
@@ -60,35 +60,36 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_edittext"
-            android:layout_marginTop="15dp"
+            android:background="@drawable/bg_boder_gray"
             >
             <TextView
                 android:id="@+id/btnMinus"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:text="-"
                 android:gravity="center"
+                android:background="@drawable/bg_custom_number"
                 android:textStyle="bold"
                 />
 
             <TextView
                 android:id="@+id/tvQuantity"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/btnPlus"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:text="+"
                 android:gravity="center"
+                android:background="@drawable/bg_custom_number"
                 android:textStyle="bold"
                 />
 

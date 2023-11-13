@@ -3,8 +3,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentProductStore;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentStore;
+import com.example.hn_2025_online_shop.view.infor_shop.FragmentProductStore;
+import com.example.hn_2025_online_shop.view.infor_shop.FragmentStore;
 
 public class ViewPageStoreAdapter extends FragmentPagerAdapter {
 

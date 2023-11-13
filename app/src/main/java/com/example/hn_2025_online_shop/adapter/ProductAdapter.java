@@ -15,6 +15,7 @@ import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
@@ -50,7 +51,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
         holder.binding.tvName.setText(product.getName());
-        holder.binding.tvPrice.setText(product.getMinPrice() + "");
+        DecimalFormat df = new DecimalFormat("###,###,###");
+        holder.binding.tvPrice.setText(df.format(product.getMinPrice()) + " đ");
         Glide.with(context).load(product.getImage()).into(holder.binding.imgProduct);
         holder.binding.ratingBar.setRating((float) product.getAverageRate());
         holder.binding.tvReview.setText("Đã bán " + product.getReview());

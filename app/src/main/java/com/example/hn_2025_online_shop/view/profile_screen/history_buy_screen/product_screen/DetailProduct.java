@@ -31,16 +31,21 @@ import com.example.hn_2025_online_shop.model.ProductDetail;
 import com.example.hn_2025_online_shop.model.Voucher;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
+import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +53,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailProduct extends AppCompatActivity {
+public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     private DetailProductBinding binding;
     private List<Product> productList;
@@ -59,6 +64,9 @@ public class DetailProduct extends AppCompatActivity {
     private ProductDetail productDetail;
     private List<OptionProduct> optionProductList;
     private OptionAdapter optionAdapter;
+    private int quantityProduct = 1;
+    private OptionProduct optionProduct;
+    private LayoutDialigOptionProductBinding bindingOption;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,7 +138,8 @@ public class DetailProduct extends AppCompatActivity {
             }
             Log.d(TAG.toString, "setDataUi: " + detailProductResponse.getResult().getOption());
             if(detailProductResponse.getResult().getOption().size() != 0){
-                binding.tvPrice.setText(detailProductResponse.getResult().getOption().get(0).getPrice()+ "" + "đ");
+                DecimalFormat df = new DecimalFormat("###,###,###");
+                binding.tvPrice.setText(df.format(detailProductResponse.getResult().getOption().get(0).getPrice())+" đ");
             }else{
                 binding.tvPrice.setText("Không có dữ liệu trả về");
                 Toast.makeText(this, detailProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -236,47 +245,6 @@ public class DetailProduct extends AppCompatActivity {
         dialog.show();
     }
 
-    private void showBottomSheetDialog(Boolean isCheck) {
-        if(productDetail == null) {
-            return;
-        }
-
-        BottomSheetDialog dialog1 = new BottomSheetDialog(DetailProduct.this);
-        LayoutDialigOptionProductBinding bindingoption = LayoutDialigOptionProductBinding.inflate(getLayoutInflater());
-        dialog1.setContentView(bindingoption.getRoot());
-        Window window = dialog1.getWindow();
-        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        setDataBottomSheetDialog(isCheck, bindingoption); // Set data cho bottom sheet
-        optionProductList = new ArrayList<>();
-        optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList);
-        optionAdapter.setDataListOptionProduct(productDetail.getOption());
-        bindingoption.rcvOptionProduct.setAdapter(optionAdapter);
-        dialog1.show();
-    }
-
-    private void setDataBottomSheetDialog(Boolean isCheck, LayoutDialigOptionProductBinding bindingoption) {
-        if(isCheck) {
-            bindingoption.btnSave.setText("Mua ngay");
-        } else {
-            bindingoption.btnSave.setText("Thêm vào giỏ hàng");
-        }
-        if(productDetail.getOption().size() != 0){
-            Glide.with(DetailProduct.this).load(productDetail.getOption().get(0).getImage()).into(bindingoption.imageView);
-        }else {
-            Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imageView);
-        }
-        if(productDetail.getOption().size() != 0){
-            bindingoption.textView.setText(productDetail.getOption().get(0).getPrice() + "" + "đ");
-        }else {
-            bindingoption.textView.setText("No data");
-        }
-        if(productDetail.getOption().size() != 0){
-            bindingoption.textView2.setText(productDetail.getOption().get(0).getSoldQuantity() + "");
-        }else {
-            bindingoption.textView2.setText("No data");
-        }
-    }
-
     private void initController() {
         binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,13 +286,148 @@ public class DetailProduct extends AppCompatActivity {
                 showDialogDetail();
             }
         });
+
+        binding.imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailProduct.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
-
 
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
         binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
     }
 
+    // --------------------------------- BottomSheetDialog --------------------------------------------
+
+    private void showBottomSheetDialog(Boolean isCheck) {
+        if(productDetail == null) {
+            return;
+        }
+
+        BottomSheetDialog dialog1 = new BottomSheetDialog(DetailProduct.this);
+        bindingOption = LayoutDialigOptionProductBinding.inflate(getLayoutInflater());
+        dialog1.setContentView(bindingOption.getRoot());
+        Window window = dialog1.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        setDataBottomSheetDialog(isCheck, bindingOption); // Set data cho bottom sheet
+        optionProductList = new ArrayList<>();
+        optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList, this);
+        optionAdapter.setDataListOptionProduct(productDetail.getOption());
+        bindingOption.rcvOptionProduct.setAdapter(optionAdapter);
+        dialog1.show();
+
+        setOnclickBottomDialog(isCheck, bindingOption);
+    }
+
+    private void setOnclickBottomDialog(Boolean isCheck, LayoutDialigOptionProductBinding bindingOption) {
+        bindingOption.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isCheck) {
+                    Intent intent = new Intent(DetailProduct.this, CartActivity.class);
+                    startActivity(intent);
+                } else {
+                    urlCartAdd(bindingOption);
+                }
+            }
+        });
+
+        bindingOption.btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(quantityProduct < 20) {
+                    quantityProduct += 1;
+                    bindingOption.tvQuantity.setText(quantityProduct + "");
+                }
+            }
+        });
+
+        bindingOption.btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(quantityProduct > 1) {
+                    quantityProduct -= 1;
+                    bindingOption.tvQuantity.setText(quantityProduct + "");
+                }
+            }
+        });
+    }
+
+    private void urlCartAdd(LayoutDialigOptionProductBinding bindingOption) {
+        if(optionProduct == null) {
+            Toast.makeText(this, "Mời chọn sản phẩm", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String optionId = optionProduct.getId();
+        quantityProduct = Integer.parseInt(bindingOption.tvQuantity.getText().toString());
+        BaseApi.API.createCartItem(token, optionId, quantityProduct).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-cartAdd: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200) {
+                        Toast.makeText(DetailProduct.this, "Thêm cart thành công!", Toast.LENGTH_SHORT).show();
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-cartAdd: " + errorMessage);
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(DetailProduct.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-cartAdd: " + t.toString());
+            }
+        });
+    }
+
+    private void setDataBottomSheetDialog(Boolean isCheck, LayoutDialigOptionProductBinding bindingoption) {
+        if(isCheck) {
+            bindingoption.btnSave.setText("Mua ngay");
+        } else {
+            bindingoption.btnSave.setText("Thêm vào giỏ hàng");
+        }
+        if(productDetail.getOption().size() != 0){
+            Glide.with(DetailProduct.this).load(productDetail.getOption().get(0).getImage()).into(bindingoption.imgProduct);
+        }else {
+            Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imgProduct);
+        }
+        if(productDetail.getOption().size() != 0){
+            bindingoption.textView.setText(productDetail.getOption().get(0).getPrice() + "" + "đ");
+        }else {
+            bindingoption.textView.setText("No data");
+        }
+        if(productDetail.getOption().size() != 0){
+            bindingoption.textView2.setText(productDetail.getOption().get(0).getSoldQuantity() + "");
+        }else {
+            bindingoption.textView2.setText("No data");
+        }
+    }
+
+
+    @Override
+    public void onclickObject(Object object) {
+        optionProduct = (OptionProduct) object;
+        Glide.with(this)
+                .load(optionProduct.getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(bindingOption.imgProduct);
+    }
 }

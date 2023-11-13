@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop;
+package com.example.hn_2025_online_shop.view.infor_shop;
 
 import android.content.Intent;
 import android.os.Bundle;

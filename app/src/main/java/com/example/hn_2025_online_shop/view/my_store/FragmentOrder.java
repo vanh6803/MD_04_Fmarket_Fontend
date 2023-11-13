@@ -17,8 +17,6 @@ import com.example.hn_2025_online_shop.R;
  */
 public class FragmentOrder extends Fragment {
 
-
-
     public FragmentOrder() {
         // Required empty public constructor
     }

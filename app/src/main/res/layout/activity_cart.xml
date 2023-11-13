@@ -170,26 +170,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         >
 
-        <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_centerInParent="true"
-            >
-            <ImageView
-                android:layout_marginLeft="15dp"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/baseline_check_box_outline_blank_24"
-                android:layout_gravity="center"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Tất cả"
-                android:textColor="@color/black" />
-        </LinearLayout>
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -218,7 +198,7 @@
             android:layout_height="55dp"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:background="@drawable/custom_button"
+            android:background="@drawable/custom_button_rectangular"
             android:gravity="center"
             android:text="Mua Hàng"
             android:textColor="@color/white"

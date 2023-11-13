@@ -21,8 +21,10 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentHomeBinding;
 import com.example.hn_2025_online_shop.model.Banner;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
+import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.google.android.material.tabs.TabLayout;
 
@@ -131,7 +133,7 @@ public class FragmentHome extends Fragment {
         binding.buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), HistoryBuyScreen.class);
+                Intent intent = new Intent(getActivity(), CartActivity.class);
                 startActivity(intent);
             }
         });
