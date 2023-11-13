@@ -23,38 +23,40 @@
                 >
                 <ImageView
                     android:id="@+id/imgProduct"
-                    android:layout_width="0dp"
+                    android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginEnd="10dp"
                     android:background="@drawable/custom_img_option_product"
                     android:src="@drawable/anhdt1"
-                    app:layout_constraintBottom_toTopOf="@+id/textView"
-                    app:layout_constraintEnd_toStartOf="@+id/textView2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="76dp"
                     android:text="5.000.000đ"
                     android:textColor="@color/red"
                     android:textSize="17dp"
                     app:layout_constraintStart_toEndOf="@+id/imgProduct"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tvWarehouseQuantity"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    />
                 <TextView
-                    android:id="@+id/textView2"
+                    android:id="@+id/tvWarehouseQuantity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="161dp"
                     android:layout_marginBottom="16dp"
                     android:text="Kho: 37"
                     android:textColor="@color/black"
                     android:textSize="15dp"
+                    android:layout_marginStart="10dp"
                     app:layout_constraintBottom_toBottomOf="@+id/imgProduct"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imgProduct" />
+                    app:layout_constraintStart_toEndOf="@+id/imgProduct"
+                    app:layout_constraintTop_toBottomOf="@id/tvPrice"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
         <LinearLayout

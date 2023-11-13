@@ -1,12 +1,14 @@
 package com.example.hn_2025_online_shop.view.cart_screen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
@@ -15,11 +17,15 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityCartBinding;
 import com.example.hn_2025_online_shop.model.CartOfList;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.CartInterface;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.ultil.swipe.ItemTouchHelperListener;
+import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,11 +38,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartActivity extends AppCompatActivity implements CartInterface{
+public class CartActivity extends AppCompatActivity implements CartInterface, ItemTouchHelperListener {
 
     private ActivityCartBinding binding;
     private CartAdapter cartAdapter;
-    private List<CartOfList> listCart;
     private int totalPrice = 0;
     private ProgressLoadingDialog loadingDialog;
 
@@ -48,47 +53,8 @@ public class CartActivity extends AppCompatActivity implements CartInterface{
 
         initView();
         initController();
-        getListCart();
-    }
-
-
-    private void getListCart() {
-        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
-        BaseApi.API.allCartUser(token).enqueue(new Callback<CartReponse>() {
-            @Override
-            public void onResponse(Call<CartReponse> call, Response<CartReponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    CartReponse cartReponse = response.body();
-                    Log.d(TAG.toString, "onResponse-allCartUser: " + cartReponse.toString());
-                    if(cartReponse.getCode() == 200) {
-                        listCart = cartReponse.getData();
-                        cartAdapter.setListCart(listCart);
-                        setTotalPrice();
-                    }
-                } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-allCartUser: " + errorMessage);
-                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                loadingDialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<CartReponse> call, Throwable t) {
-                Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
-                Log.d(TAG.toString, "onFailure-allCartUser: " + t.toString());
-                loadingDialog.dismiss();
-            }
-        });
+        // Hàm này có sẵn ở đâu cx gọi đc
+        ApiUtil.getAllCart(this, loadingDialog, cartAdapter);
     }
 
     private void initController() {
@@ -102,11 +68,21 @@ public class CartActivity extends AppCompatActivity implements CartInterface{
     }
 
     private void initView() {
+        // Xóa toàn bộ list đc chọn cũ
+        CartUtil.listCartCheck.clear();
+
+        // recycleView
         loadingDialog = new ProgressLoadingDialog(this);
-        cartAdapter = new CartAdapter(this, listCart, this);
+        cartAdapter = new CartAdapter(this, CartUtil.listCart, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvCart.setLayoutManager(layoutManager);
         binding.rcvCart.setAdapter(cartAdapter);
+
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        binding.rcvCart.addItemDecoration(itemDecoration);
+
+        ItemTouchHelper.SimpleCallback simpleCallback = new RecycleViewItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.rcvCart);
     }
 
     @Override
@@ -127,8 +103,8 @@ public class CartActivity extends AppCompatActivity implements CartInterface{
         int quantity = cart.getQuantity();
         if(quantity > 1) {
             quantity -= 1;
-            listCart.get(position).setQuantity(quantity);
-            cartAdapter.setListCart(listCart);
+            CartUtil.listCart.get(position).setQuantity(quantity);
+            cartAdapter.setListCart(CartUtil.listCart);
             setTotalPrice();
         }
     }
@@ -138,8 +114,56 @@ public class CartActivity extends AppCompatActivity implements CartInterface{
         CartOfList cart = (CartOfList) object;
         int quantity = cart.getQuantity();
         quantity += 1;
-        listCart.get(position).setQuantity(quantity);
-        cartAdapter.setListCart(listCart);
+        CartUtil.listCart.get(position).setQuantity(quantity);
+        cartAdapter.setListCart(CartUtil.listCart);
         setTotalPrice();
+    }
+
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder) {
+        if(viewHolder instanceof CartAdapter.CartViewHolder) {
+            CartOfList cart = CartUtil.listCart.get(viewHolder.getAdapterPosition());
+            int indexDelete = viewHolder.getAdapterPosition();
+            deleteCart(cart, indexDelete);
+        }
+    }
+
+    private void deleteCart(CartOfList cart, int indexDelete) {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String cartId = cart.getId();
+        loadingDialog.show();
+        BaseApi.API.deleteCartItem(token, cartId).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-deleteCartItem: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200) {
+                        cartAdapter.removeItem(indexDelete);
+                        setTotalPrice();
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-deleteCartItem: " + errorMessage);
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-deleteCartItem: " + t.toString());
+                loadingDialog.dismiss();
+            }
+        });
     }
 }

@@ -33,6 +33,7 @@ import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
@@ -78,6 +79,13 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         getVoucher();
         callApiDetailProduct();
         setDataSimilarProduct();
+        setNumberCart();
+    }
+
+
+    private void setNumberCart() {
+        // Lấy danh sách cart
+        binding.tvQuantityCart.setText(CartUtil.listCart.size() + "");
     }
 
     private void getVoucher() {
@@ -104,7 +112,6 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                     if (detailProductResponse.getCode() == 200){
                         productDetail = detailProductResponse.getResult();
                         setDataUi(detailProductResponse);
-                        Toast.makeText(DetailProduct.this, detailProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     try {
@@ -365,6 +372,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String optionId = optionProduct.getId();
         quantityProduct = Integer.parseInt(bindingOption.tvQuantity.getText().toString());
+        dialog.show();
         BaseApi.API.createCartItem(token, optionId, quantityProduct).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -387,12 +395,14 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
+                dialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<ServerResponse> call, Throwable t) {
                 Toast.makeText(DetailProduct.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-cartAdd: " + t.toString());
+                dialog.dismiss();
             }
         });
     }
@@ -409,14 +419,15 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imgProduct);
         }
         if(productDetail.getOption().size() != 0){
-            bindingoption.textView.setText(productDetail.getOption().get(0).getPrice() + "" + "đ");
+            DecimalFormat df = new DecimalFormat("###,###,###");
+            bindingoption.tvPrice.setText(df.format(productDetail.getOption().get(0).getPrice()) + " đ");
         }else {
-            bindingoption.textView.setText("No data");
+            bindingoption.tvPrice.setText("No data");
         }
         if(productDetail.getOption().size() != 0){
-            bindingoption.textView2.setText(productDetail.getOption().get(0).getSoldQuantity() + "");
+            bindingoption.tvWarehouseQuantity.setText("Kho: " + productDetail.getOption().get(0).getSoldQuantity());
         }else {
-            bindingoption.textView2.setText("No data");
+            bindingoption.tvWarehouseQuantity.setText("No data");
         }
     }
 

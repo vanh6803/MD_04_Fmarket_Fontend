@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -107,6 +108,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView btnMinus;
         private TextView btnPlus;
 
+        public LinearLayout layoutForeground;
+
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             chkPurchase = itemView.findViewById(R.id.chkPurchase);
@@ -116,6 +119,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             btnPlus = itemView.findViewById(R.id.btnPlus);
+            layoutForeground = itemView.findViewById(R.id.layoutForeground);
         }
+    }
+
+    public void removeItem(int index) {
+        listCart.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void undoItem(CartOfList cart, int index) {
+        listCart.add(index, cart);
+        notifyItemInserted(index);
     }
 }
