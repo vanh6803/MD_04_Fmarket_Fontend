@@ -190,7 +190,37 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             Toast.makeText(this, "Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
         }
     }
-
+    public void showDetailProductDialog(DetailProductResponse response1){
+        binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailProduct.this);
+                LayoutDialogDetailProductBinding binding = LayoutDialogDetailProductBinding.inflate(getLayoutInflater());;
+                builder.setView(binding.getRoot());
+                binding.description.setText(response1.getResult().getDescription());
+                binding.screen.setText("Screen: "+response1.getResult().getScreen());
+                binding.camera.setText(response1.getResult().getCamera());
+                binding.chipset.setText("Chipset: " + response1.getResult().getChipset());
+                binding.cpu.setText("Cpu: "+response1.getResult().getCpu());
+                binding.gpu.setText("Gpu: "+response1.getResult().getGpu());
+                binding.operatingSystem.setText("OperatingSystem: "+response1.getResult().getOperatingSystem());
+                binding.battery.setText("Battery: " + response1.getResult().getBattery());
+                binding.weight.setText("Weight: " + response1.getResult().getWeight());
+                binding.connection.setText("Connection: "+response1.getResult().getConnection());
+                binding.specialFeature.setText("SpecialFeature: "+ response1.getResult().getSpecialFeature());
+                binding.manufacturer.setText("Manufacturer: "+response1.getResult().getManufacturer());
+                binding.other.setText("Other: "+response1.getResult().getOther());
+                builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+    }
 
     public void setDataSimilarProduct(){
         dialog.show();
@@ -235,12 +265,6 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         binding.specialFeature.setText("SpecialFeature: "+ productDetail.getSpecialFeature());
         binding.manufacturer.setText("Manufacturer: "+productDetail.getManufacturer());
         binding.other.setText("Other: "+productDetail.getOther());
-        binding.btnbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
-            }
-        });
 
         builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
             @Override

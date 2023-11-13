@@ -70,14 +70,11 @@ public class FragmentProductStore extends Fragment {
         productList = new ArrayList<>();
         Log.d(TAG.toString, "onViewCreated: "+ StoreUltil.store.getId());
 
-
         productAdapter = new ProductAdapter(getActivity(), productList);
         binding.rcvProductStore.setAdapter(productAdapter);
        setDataProductStore();
     }
     public void setDataProductStore(){
-
-
         dialog.show();
         BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
             @Override
