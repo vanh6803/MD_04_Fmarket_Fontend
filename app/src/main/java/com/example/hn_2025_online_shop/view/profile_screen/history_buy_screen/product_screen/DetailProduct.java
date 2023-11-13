@@ -227,13 +227,6 @@ public class DetailProduct extends AppCompatActivity {
                 binding.specialFeature.setText("SpecialFeature: "+ response1.getResult().getSpecialFeature());
                 binding.manufacturer.setText("Manufacturer: "+response1.getResult().getManufacturer());
                 binding.other.setText("Other: "+response1.getResult().getOther());
-                binding.btnbutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
                 builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

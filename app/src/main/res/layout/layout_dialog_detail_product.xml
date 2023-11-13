@@ -110,14 +110,6 @@
                 android:textSize="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-            <Button
-                android:id="@+id/btnbutton"
-                android:layout_marginVertical="20dp"
-                android:background="@drawable/custom_btn_muaangay"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:text="Mua Ngay"/>
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
