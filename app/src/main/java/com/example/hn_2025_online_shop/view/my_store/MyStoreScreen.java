@@ -23,6 +23,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
     private static final int Fragment_xuatkho = 3;
     private static final int Fragment_taoVoucher = 4;
     private static final int Fragment_baoCaoDoanhThu = 5;
+    private static final int Fragment_CreateProductMyStore = 6;
     private int mcurrentFrg = Fragment_home;
     private DrawerLayout drawerLayout;
 
@@ -81,6 +82,11 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         }
         else if(id == R.id.dangsanpham){
+            if(mcurrentFrg != Fragment_CreateProductMyStore){
+                replaceFragment(new FragmentCreateProductMyStore());
+                mcurrentFrg = Fragment_CreateProductMyStore;
+            }
+
 
         }
         else if(id == R.id.xuatkho){
