@@ -48,14 +48,38 @@
                         android:layout_height="30dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <ImageView
-                android:layout_marginHorizontal="5dp"
-                android:src="@drawable/giohang"
-                android:background="@drawable/custom_bg_icon"
-                android:padding="7dp"
-                android:scaleType="centerCrop"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgCart"
+                    android:src="@drawable/giohang"
+                    android:background="@drawable/custom_bg_icon"
+                    android:padding="7dp"
+                    android:scaleType="centerCrop"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tvQuantityCart"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/cumtom_bg_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/imgCart"
+                    app:layout_constraintEnd_toEndOf="@+id/imgCart"
+                    app:layout_constraintStart_toEndOf="@+id/imgCart"
+                    app:layout_constraintTop_toTopOf="@+id/imgCart" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:layout_marginHorizontal="5dp"

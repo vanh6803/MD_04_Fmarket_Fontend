@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
         android:layout_marginBottom="5dp"
         >
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -27,41 +25,23 @@
                 android:id="@+id/imgProduct"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 android:src="@drawable/test"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints" />
 
-            <ImageView
-                android:id="@+id/backDetailProduct"
-                app:tint="@color/primary"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/custom_bg_shopping_cart_white"
-                android:padding="5dp"
-                android:layout_marginTop="20dp"
-                android:src="@drawable/backs"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.041"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints"
-                />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="260dp"
+                android:layout_marginTop="300dp"
                 android:background="@drawable/custom_detail_product"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingVertical="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="MissingConstraints">
@@ -376,5 +356,54 @@
             app:backgroundTint="@null"
             android:textColor="@color/white"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/backDetailProduct"
+        app:tint="@color/white"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_bg_shopping_cart_primary"
+        android:padding="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:src="@drawable/backs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imgCart"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/giohang"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvQuantityCart"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/cumtom_bg_red"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/imgCart"
+            app:layout_constraintEnd_toEndOf="@+id/imgCart"
+            app:layout_constraintStart_toEndOf="@+id/imgCart"
+            app:layout_constraintTop_toTopOf="@+id/imgCart" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

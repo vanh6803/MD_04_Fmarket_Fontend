@@ -1,64 +1,49 @@
 package com.example.hn_2025_online_shop.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Cart {
-    private int idProduct;
-    private String name;
-    private String image;
-    private int price;
+    @SerializedName("_id")
+    private String id;
+    @SerializedName("user_id")
+    private String userId;
+    @SerializedName("option_id")
+    private String optionId;
     private int quantity;
 
     public Cart() {
+
     }
 
-    public Cart(int idProduct, String name, String image, int price, int quantity) {
-        this.idProduct = idProduct;
-        this.name = name;
-        this.image = image;
-        this.price = price;
+    public Cart(String id, String userId, String optionId, int quantity) {
+        this.id = id;
+        this.userId = userId;
+        this.optionId = optionId;
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "idProduct=" + idProduct +
-                ", name='" + name + '\'' +
-                ", image='" + image + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+    public String getId() {
+        return id;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getName() {
-        return name;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getOptionId() {
+        return optionId;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public void setOptionId(String optionId) {
+        this.optionId = optionId;
     }
 
     public int getQuantity() {
