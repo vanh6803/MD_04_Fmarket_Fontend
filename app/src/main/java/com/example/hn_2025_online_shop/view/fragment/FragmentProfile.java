@@ -28,6 +28,7 @@ import com.example.hn_2025_online_shop.databinding.LayoutDialogFeedbackBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
 
 
+import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
@@ -116,9 +117,43 @@ public class FragmentProfile extends Fragment {
         binding.imgMyStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), MyStoreScreen.class);
-                startActivity(intent);
-                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+                loadingDialog.show();
+                String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+                BaseApi.API.checkStoreExiting(token).enqueue(new Callback<CheckStoreResponse>() {
+                    @Override
+                    public void onResponse(Call<CheckStoreResponse> call, Response<CheckStoreResponse> response) {
+                        if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                            CheckStoreResponse response1 = response.body();
+                            Log.d(TAG.toString, "onResponse-logout: " + response1.toString());
+                            if(response1.getCode() == 200) {
+                                Toast.makeText(getActivity(), "Bạn cần dky để trở thành người bán", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getActivity(), RegisterMemberSeller.class));
+                                getActivity().finishAffinity();
+                            }
+                        } else { // nhận các đầu status #200
+                            try {
+
+                                String errorBody = response.errorBody().string();
+                                JSONObject errorJson = new JSONObject(errorBody);
+                                String errorMessage = errorJson.getString("message");
+                                startActivity(new Intent(getActivity(), MyStoreScreen.class));
+                                getActivity().finishAffinity();
+                                Log.d(TAG.toString, "onResponse-logout: " + errorMessage);
+                                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                            }catch (IOException e){
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        loadingDialog.dismiss();
+                    }
+                    @Override
+                    public void onFailure(Call<CheckStoreResponse> call, Throwable t) {
+                        Log.d("aaa", "onFailure: " + t.getMessage());
+
+                    }
+                });
             }
         });
     }
