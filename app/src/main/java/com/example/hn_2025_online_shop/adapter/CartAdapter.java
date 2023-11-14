@@ -7,16 +7,18 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.model.Cart;
+import com.example.hn_2025_online_shop.model.CartOfList;
 import com.example.hn_2025_online_shop.ultil.CartInterface;
-import com.example.hn_2025_online_shop.ultil.CartUltil;
+import com.example.hn_2025_online_shop.ultil.CartUtil;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -24,16 +26,16 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private Context context;
-    private List<Cart> listCart;
+    private List<CartOfList> listCart;
     private CartInterface cartInterface;
 
-    public CartAdapter(Context context, List<Cart> listCart, CartInterface cartInterface) {
+    public CartAdapter(Context context, List<CartOfList> listCart, CartInterface cartInterface) {
         this.context = context;
         this.listCart = listCart;
         this.cartInterface = cartInterface;
     }
 
-    public void setListCart(List<Cart> listCart) {
+    public void setListCart(List<CartOfList> listCart) {
         this.listCart = listCart;
         notifyDataSetChanged();
     }
@@ -47,44 +49,31 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Cart cart = listCart.get(position);
+        CartOfList cart = listCart.get(position);
         if(cart == null) {
             return;
         }
-        holder.tvName.setText(cart.getName());
+        holder.tvName.setText(cart.getOptionProduct().getProduct().getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
-        holder.tvPrice.setText(df.format(cart.getPrice()) + " đ");
+        holder.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + "đ");
         holder.tvQuantity.setText(cart.getQuantity() + "");
         Glide.with(context)
-                .load(cart.getImage())
-                .error(R.mipmap.ic_launcher)
+                .load(cart.getOptionProduct().getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
                 .into(holder.imgProduct);
-
-
 
         holder.btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = cart.getQuantity();
-                if(quantity > 1) {
-                    quantity -= 1;
-                    CartUltil.listCart.get(position).setQuantity(quantity);
-                    cartInterface.setTotalPrice();
-                    notifyDataSetChanged();
-                }
+                cartInterface.onclickMinus(cart, position);
             }
         });
 
         holder.btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = cart.getQuantity();
-                if(quantity < 10) {
-                    quantity += 1;
-                    CartUltil.listCart.get(position).setQuantity(quantity);
-                    cartInterface.setTotalPrice();
-                    notifyDataSetChanged();
-                }
+                cartInterface.onclickPlus(cart, position);
             }
         });
 
@@ -92,10 +81,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked == true) {
-                    CartUltil.listBuyCart.add(cart);
+                    CartUtil.listCartCheck.add(cart);
                     cartInterface.setTotalPrice();
                 } else {
-                    CartUltil.listBuyCart.remove(cart);
+                    CartUtil.listCartCheck.remove(cart);
                     cartInterface.setTotalPrice();
                 }
             }
@@ -119,6 +108,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView btnMinus;
         private TextView btnPlus;
 
+        public LinearLayout layoutForeground;
+
         public CartViewHolder(@NonNull View itemView) {
             super(itemView);
             chkPurchase = itemView.findViewById(R.id.chkPurchase);
@@ -128,6 +119,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             btnMinus = itemView.findViewById(R.id.btnMinus);
             btnPlus = itemView.findViewById(R.id.btnPlus);
+            layoutForeground = itemView.findViewById(R.id.layoutForeground);
         }
+    }
+
+    public void removeItem(int index) {
+        listCart.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void undoItem(CartOfList cart, int index) {
+        listCart.add(index, cart);
+        notifyItemInserted(index);
     }
 }

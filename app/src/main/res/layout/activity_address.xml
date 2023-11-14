@@ -38,13 +38,15 @@
             android:text="Địa chỉ"/>
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
-        tools:listitem="@layout/layout_iteam_address"
+        android:id="@+id/rcvInfo"
+        tools:listitem="@layout/layout_item_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
+        android:id="@+id/addAddress"
         android:layout_margin="10dp"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -61,8 +63,6 @@
             android:text="Thêm địa chỉ mới"
             android:textSize="20dp"/>
     </LinearLayout>
-
-
 
 
 </LinearLayout>

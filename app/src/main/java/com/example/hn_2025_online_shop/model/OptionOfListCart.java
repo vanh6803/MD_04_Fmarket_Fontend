@@ -2,11 +2,11 @@ package com.example.hn_2025_online_shop.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class OptionProduct {
+public class OptionOfListCart {
     @SerializedName("_id")
     private String id;
     @SerializedName("product_id")
-    private String productId;
+    private Product product;
     @SerializedName("name_color")
     private String nameColor;
     @SerializedName("color_code")
@@ -21,12 +21,12 @@ public class OptionProduct {
     private int soldQuantity;
     private boolean hot_option;
 
-    public OptionProduct() {
+    public OptionOfListCart() {
     }
 
-    public OptionProduct(String id, String productId, String nameColor, String colorCode, String image, int ram, int rom, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
+    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int ram, int rom, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
         this.id = id;
-        this.productId = productId;
+        this.product = product;
         this.nameColor = nameColor;
         this.colorCode = colorCode;
         this.image = image;
@@ -43,7 +43,7 @@ public class OptionProduct {
     public String toString() {
         return "Option{" +
                 "id='" + id + '\'' +
-                ", productId='" + productId + '\'' +
+                ", product='" + product + '\'' +
                 ", nameColor='" + nameColor + '\'' +
                 ", colorCode='" + colorCode + '\'' +
                 ", image='" + image + '\'' +
@@ -65,12 +65,12 @@ public class OptionProduct {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getNameColor() {

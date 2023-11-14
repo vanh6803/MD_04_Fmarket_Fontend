@@ -25,6 +25,7 @@ import com.example.hn_2025_online_shop.model.Banner;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
@@ -69,6 +70,12 @@ public class FragmentProduct extends Fragment {
         initController();
         callApiBanner();
         callApiGetListAllProducts();
+        setNumberCart();
+    }
+
+    private void setNumberCart() {
+        // Lấy danh sách cart
+        binding.tvQuantityCart.setText(CartUtil.listCart.size() + "");
     }
 
     private void callApiBanner() {

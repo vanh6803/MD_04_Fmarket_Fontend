@@ -30,15 +30,18 @@
         android:layout_height="40dp"
         android:textSize="18dp"/>
     <EditText
+        android:id="@+id/edtUsername"
         android:gravity="center_vertical"
         android:hint="Họ và tên"
         android:layout_width="match_parent"
+        android:background="@null"
         android:layout_height="50dp"
         android:textSize="18dp"/>
     <EditText
-
+        android:id="@+id/edtPhoneNumber"
         android:gravity="center_vertical"
         android:hint="Số điện thoại"
+        android:background="@null"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:textSize="18dp"/>
@@ -49,19 +52,16 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textSize="18dp"/>
-    <EditText
-        android:gravity="center_vertical"
-        android:hint="Họ và tên"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="18dp"/>
-    <EditText
 
+    <EditText
+        android:id="@+id/edtAddress"
         android:gravity="center_vertical"
-        android:hint="Số điện thoại"
+        android:hint="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@null"
         android:textSize="18dp"/>
+
     <TextView
         android:background="#F6F6F6"
         android:gravity="center_vertical"
@@ -76,16 +76,21 @@
         android:orientation="horizontal">
         <EditText
             android:gravity="center_vertical"
-            android:text="Đặt làm địa chỉ mặc định"
+            android:hint="Đặt làm địa chỉ mặc định"
             android:layout_width="300dp"
             android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:enabled="false"
             android:textSize="18dp"/>
-        <RadioButton
-            android:layout_marginLeft="70dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"/>
+        <CheckBox
+            android:id="@+id/chkChooseDefault"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
     <TextView
+        android:id="@+id/btnSave"
         android:layout_marginTop="20dp"
         android:background="@drawable/custom_btn_muaangay"
         android:gravity="center"

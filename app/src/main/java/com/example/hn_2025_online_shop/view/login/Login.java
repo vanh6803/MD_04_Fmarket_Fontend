@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
@@ -86,8 +87,11 @@ public class Login extends AppCompatActivity{
                             Log.d(TAG.toString, "onResponse-Token: " + AccountUltil.TOKEN);
                             // Đăng nhập thành công thì lấy ra detail user rồi cho vào 1 biến để có thể tái sử dụng
                             ApiUtil.getDetailUser(Login.this, loadingDialog);
+                            // Lấy danh sách cart
+                            ApiUtil.getAllCart(Login.this, loadingDialog, null);
                             Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             screenSwitch(Login.this, MainActivity.class);
+                            finishAffinity();
                         }
                     } else {
                         try {
