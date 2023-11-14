@@ -33,11 +33,13 @@ import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -68,6 +70,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     private int quantityProduct = 1;
     private OptionProduct optionProduct;
     private LayoutDialigOptionProductBinding bindingOption;
+    private int totalPrice = 0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -358,11 +361,16 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         bindingOption.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isCheck) {
-                    Intent intent = new Intent(DetailProduct.this, CartActivity.class);
-                    startActivity(intent);
+                if(optionProduct != null) {
+                    if(isCheck) {
+                        Intent intent = new Intent(DetailProduct.this, PayActivity.class);
+                        intent.putExtra("totalPrice" , totalPrice);
+                        startActivity(intent);
+                    } else {
+                        urlCartAdd(bindingOption);
+                    }
                 } else {
-                    urlCartAdd(bindingOption);
+                    Toast.makeText(DetailProduct.this, "Mời chọn sản phẩm", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -388,11 +396,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         });
     }
 
+
     private void urlCartAdd(LayoutDialigOptionProductBinding bindingOption) {
-        if(optionProduct == null) {
-            Toast.makeText(this, "Mời chọn sản phẩm", Toast.LENGTH_SHORT).show();
-            return;
-        }
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String optionId = optionProduct.getId();
         quantityProduct = Integer.parseInt(bindingOption.tvQuantity.getText().toString());

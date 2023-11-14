@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +27,8 @@ import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.ultil.swipe.ItemTouchHelperListener;
 import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
+import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,6 +66,19 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             public void onClick(View v) {
                 finish();
                 overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+            }
+        });
+
+        binding.btnPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(CartUtil.listCartCheck.size() > 0) {
+                    Intent intent = new Intent(CartActivity.this, PayActivity.class);
+                    intent.putExtra("totalPrice" , totalPrice);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CartActivity.this, "Mời bạn chọn sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

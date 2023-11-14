@@ -6,13 +6,13 @@ public class CartOfList {
     @SerializedName("_id")
     private String id;
     @SerializedName("option_id")
-    private OptionProduct optionProduct;
+    private OptionOfListCart optionProduct;
     private int quantity;
 
     public CartOfList() {
     }
 
-    public CartOfList(String id, OptionProduct optionProduct, int quantity) {
+    public CartOfList(String id, OptionOfListCart optionProduct, int quantity) {
         this.id = id;
         this.optionProduct = optionProduct;
         this.quantity = quantity;
@@ -35,11 +35,11 @@ public class CartOfList {
         this.id = id;
     }
 
-    public OptionProduct getOptionProduct() {
+    public OptionOfListCart getOptionProduct() {
         return optionProduct;
     }
 
-    public void setOptionProduct(OptionProduct optionProduct) {
+    public void setOptionProduct(OptionOfListCart optionProduct) {
         this.optionProduct = optionProduct;
     }
 

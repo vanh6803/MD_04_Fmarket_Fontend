@@ -53,9 +53,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         if(cart == null) {
             return;
         }
-        holder.tvName.setText(cart.getOptionProduct().getNameColor());
+        holder.tvName.setText(cart.getOptionProduct().getProduct().getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
-        holder.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + " đ");
+        holder.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + "đ");
         holder.tvQuantity.setText(cart.getQuantity() + "");
         Glide.with(context)
                 .load(cart.getOptionProduct().getImage())

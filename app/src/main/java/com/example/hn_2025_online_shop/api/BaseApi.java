@@ -1,9 +1,11 @@
 package com.example.hn_2025_online_shop.api;
 
+import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
+import com.example.hn_2025_online_shop.model.response.InfoResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
@@ -17,6 +19,7 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -34,7 +37,7 @@ public interface BaseApi {
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
 
-            .baseUrl("http://192.168.0.106:3000/api/")
+            .baseUrl("http://172.20.10.3:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -129,4 +132,19 @@ public interface BaseApi {
     @DELETE("cart/delete-cart-item/{idCart}")
     Call<ServerResponse> deleteCartItem(@Header("Authorization") String authorization,
                                         @Path("idCart") String idCart);
+
+    @FormUrlEncoded
+    @POST("info/add")
+    Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
+                                 @Field("name") String name,
+                                 @Field("address") String address,
+                                 @Field("phone_number") String phone_number,
+                                 @Field("checked") Boolean checked);
+
+    @GET("info")
+    Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
+
+    @POST("order/create-order")
+    Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
+                                     @Body PurchaseBody purchaseBody);
 }
