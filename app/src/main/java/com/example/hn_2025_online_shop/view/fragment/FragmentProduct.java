@@ -1,6 +1,7 @@
 package com.example.hn_2025_online_shop.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,8 +27,11 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,7 +44,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentProduct extends Fragment {
+public class FragmentProduct extends Fragment implements ObjectUtil {
 
     private List<Product> listProdcut;
     private ProductAdapter productAdapter;
@@ -120,6 +124,14 @@ public class FragmentProduct extends Fragment {
     }
 
     private void initController() {
+        binding.imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CartActivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+            }
+        });
     }
 
     private void initView() {
@@ -127,7 +139,7 @@ public class FragmentProduct extends Fragment {
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recycleProduct.setLayoutManager(layoutManager);
         listProdcut = new ArrayList<>();
-        productAdapter = new ProductAdapter(getContext(), listProdcut);
+        productAdapter = new ProductAdapter(getContext(), listProdcut, this);
         productAdapter.setProductList(listProdcut);
         binding.recycleProduct.setAdapter(productAdapter);
     }
@@ -152,5 +164,15 @@ public class FragmentProduct extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        Product product = (Product) object;
+        String id = product.getId();
+        Intent intent = new Intent(getActivity(), DetailProduct.class);
+        intent.putExtra("id_product", id);
+        getActivity().startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
     }
 }

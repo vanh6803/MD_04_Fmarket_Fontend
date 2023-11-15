@@ -23,6 +23,9 @@
             android:name=".view.buy_product.UpdateAddressActivity"
             android:exported="false" />
         <activity
+            android:name=".view.success_screen.OrderSuccessActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.buy_product.AddAddressActivity"
             android:exported="false" />
         <activity
@@ -32,24 +35,19 @@
             android:name=".view.buy_product.PayActivity"
             android:exported="false" />
         <activity
-            android:name=".view.login.CreateStoreSuccessActivity"
+            android:name=".view.success_screen.CreateStoreSuccessActivity"
             android:exported="false" />
         <activity
-            android:name=".view.login.RegisterSuccess"
+            android:name=".view.success_screen.RegisterSuccess"
             android:exported="true" />
         <activity
             android:name=".view.profile_screen.ProfileUserScreen"
             android:exported="false" />
-        <activity android:name=".voucher.VoucherScreen" />
-        <activity
-            android:name=".view.my_store.MyStoreScreen"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".view.voucher.VoucherScreen" />
+
+        <activity android:name=".view.my_store.MyStoreScreen" />
+
         <activity
             android:name=".view.profile_screen.ChatScreen"
             android:exported="false" />
@@ -92,6 +90,11 @@
         <activity
             android:name=".view.login.Splash"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
     </application>

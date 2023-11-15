@@ -15,6 +15,7 @@ import com.example.hn_2025_online_shop.databinding.VerifiPassBinding;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.success_screen.RegisterSuccess;
 
 import org.json.JSONException;
 import org.json.JSONObject;

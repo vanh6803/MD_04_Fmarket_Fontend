@@ -10,6 +10,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +29,8 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBinding;
+import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionOfListCart;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
@@ -41,6 +47,7 @@ import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -52,6 +59,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -97,7 +105,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         for (int i = 1 ; i< 4; i++){
             voucherList.add(new Voucher("Giảm"+i+"%", "1234", ""));
         }
-        productAdapter = new ProductAdapter(this, productList);
+        productAdapter = new ProductAdapter(this, productList, this);
         voucherAdapter = new VoucherAdapter(this, voucherList);
         binding.recyProductSimilar.setAdapter(productAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
@@ -283,7 +291,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackActivity();
             }
         });
 
@@ -325,10 +333,23 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailProduct.this, CartActivity.class);
-                startActivity(intent);
+                mActivityResultLauncher.launch(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
+
+    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK) {
+                        Intent intent = result.getData();
+                        int cartSize = intent.getIntExtra("data_cart_size", 0);
+                        binding.tvQuantityCart.setText(cartSize + "");
+                }
+            }
+    });
 
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
@@ -363,12 +384,22 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             public void onClick(View view) {
                 if(optionProduct != null) {
                     if(isCheck) {
+                        // set dữ liệu vào CartUtil.listCartCheck  để có thể mua ngay
+//                        CartOfList cartOfList = new CartOfList();
+//                        cartOfList.setQuantity(quantityProduct);
+//                        cartOfList.setId(optionProduct.getId());
+//                        CartUtil.listCartCheck.add(cartOfList);
+//
+//                        // tính tổng giá tiền
+//                        totalPrice = quantityProduct * optionProduct.getPrice();
+
                         Intent intent = new Intent(DetailProduct.this, PayActivity.class);
                         intent.putExtra("totalPrice" , totalPrice);
                         startActivity(intent);
                     } else {
                         urlCartAdd(bindingOption);
                     }
+                    overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                 } else {
                     Toast.makeText(DetailProduct.this, "Mời chọn sản phẩm", Toast.LENGTH_SHORT).show();
                 }
@@ -408,8 +439,9 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
                     Log.d(TAG.toString, "onResponse-cartAdd: " + serverResponse.toString());
-                    if(serverResponse.getCode() == 200) {
-                        Toast.makeText(DetailProduct.this, "Thêm cart thành công!", Toast.LENGTH_SHORT).show();
+                    if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+                        Toast.makeText(DetailProduct.this, "Thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+                        ApiUtil.setTitleQuantityCart(DetailProduct.this, dialog, binding.tvQuantityCart);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -469,5 +501,20 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .into(bindingOption.imgProduct);
+    }
+
+    @Override
+    public void onBackPressed() {
+        onBackActivity();
+    }
+
+    private void onBackActivity() {
+        // Đoạn này chưa hiểu lắm nhưng kể cả truyền cho màn hình nào thì tất cả
+        // registerForActivityResult onBack đểu đc chạy
+        Intent intent = new Intent(DetailProduct.this, MainActivity.class);
+        intent.putExtra("data_cart_size", CartUtil.listCart.size());
+        setResult(RESULT_OK, intent);
+        finish();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

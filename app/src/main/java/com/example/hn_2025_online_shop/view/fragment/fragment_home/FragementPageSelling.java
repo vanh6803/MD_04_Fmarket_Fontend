@@ -15,17 +15,21 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentFragementPageSellingBinding;
+import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.login.Register;
 import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,12 +42,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragementPageSelling extends Fragment {
+public class FragementPageSelling extends Fragment implements ObjectUtil {
 
     private ProgressLoadingDialog loadingDialog;
     private ProductByCategoryAdapter productAdapter;
     private List<ProductByCategory> productList;
-
     private FragmentFragementPageSellingBinding binding;
 
     public FragementPageSelling() {
@@ -82,7 +85,7 @@ public class FragementPageSelling extends Fragment {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         productList = new ArrayList<>();
-        productAdapter = new ProductByCategoryAdapter(getActivity(), productList);
+        productAdapter = new ProductByCategoryAdapter(getActivity(), productList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         binding.recycleProductMain.setLayoutManager(linearLayoutManager);
         binding.recycleProductMain.setAdapter(productAdapter);
@@ -125,5 +128,22 @@ public class FragementPageSelling extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.d(TAG.toString, "onResume: ");
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        Product product = (Product) object;
+        String id = product.getId();
+        Intent intent = new Intent(getActivity(), DetailProduct.class);
+        intent.putExtra("id_product", id);
+        getActivity().startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG.toString, "onStart: ");
     }
 }

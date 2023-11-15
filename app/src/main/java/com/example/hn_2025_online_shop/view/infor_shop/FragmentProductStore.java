@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.infor_shop;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,14 +17,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductStoreBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentProductStore extends Fragment {
+public class FragmentProductStore extends Fragment implements ObjectUtil {
     private FragmentProductStoreBinding binding;
     private List<Product> productList;
     ProductAdapter productAdapter;
@@ -69,11 +73,11 @@ public class FragmentProductStore extends Fragment {
         binding.rcvProductStore.setLayoutManager(layoutManager);
         productList = new ArrayList<>();
         Log.d(TAG.toString, "onViewCreated: "+ StoreUltil.store.getId());
-
-        productAdapter = new ProductAdapter(getActivity(), productList);
+        productAdapter = new ProductAdapter(getActivity(), productList, this);
         binding.rcvProductStore.setAdapter(productAdapter);
        setDataProductStore();
     }
+
     public void setDataProductStore(){
         dialog.show();
         BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
@@ -108,5 +112,15 @@ public class FragmentProductStore extends Fragment {
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        Product product = (Product) object;
+        String id = product.getId();
+        Intent intent = new Intent(getActivity(), DetailProduct.class);
+        intent.putExtra("id_product", id);
+        getActivity().startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
     }
 }

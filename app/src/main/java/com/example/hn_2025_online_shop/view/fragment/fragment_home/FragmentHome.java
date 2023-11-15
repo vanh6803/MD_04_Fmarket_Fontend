@@ -1,9 +1,14 @@
 package com.example.hn_2025_online_shop.view.fragment.fragment_home;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -16,11 +21,15 @@ import android.widget.Toast;
 
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentHomeBinding;
 import com.example.hn_2025_online_shop.model.Banner;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
+import com.example.hn_2025_online_shop.model.response.CartReponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
@@ -29,6 +38,7 @@ import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +55,7 @@ import retrofit2.Response;
 public class FragmentHome extends Fragment {
 
     private FragmentHomeBinding binding;
-    private ViewPageHomeAdapter adapter;
+    private ViewPageHomeAdapter viewPageHomeAdapter;
     private ProgressLoadingDialog loadingDialog;
 
     public FragmentHome() {
@@ -78,12 +88,7 @@ public class FragmentHome extends Fragment {
         initController();
         callApiBanner();
         setTab();
-        setNumberCart();
-    }
-
-    private void setNumberCart() {
-        // Lấy danh sách cart
-        binding.tvQuantityCart.setText(CartUtil.listCart.size() + "");
+        ApiUtil.setTitleQuantityCart(getActivity(), loadingDialog, binding.tvQuantityCart);
     }
 
     private void callApiBanner() {
@@ -128,14 +133,29 @@ public class FragmentHome extends Fragment {
     }
 
     private void setTab() {
-        List<String> tabTitles = new ArrayList<>();
-        tabTitles.add("Sản phẩm");
-        tabTitles.add("Giảm giá");
-        tabTitles.add("Nổi bật");
-        adapter = new ViewPageHomeAdapter(getActivity().getSupportFragmentManager(),tabTitles);
-        binding.viewPagerHome.setAdapter(adapter);
-        binding.tabHome.setupWithViewPager(binding.viewPagerHome);
-        setTabTitles(tabTitles);
+        viewPageHomeAdapter = new ViewPageHomeAdapter(getActivity());
+        binding.viewPagerHome.setAdapter(viewPageHomeAdapter);
+
+        TabLayoutMediator mediator = new TabLayoutMediator(binding.tabHome, binding.viewPagerHome, new TabLayoutMediator.TabConfigurationStrategy() {
+            @Override
+            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                switch (position) {
+                    case 0:
+                        tab.setText("Sản phẩm");
+                        break;
+                    case 1:
+                        tab.setText("Giảm giá");
+                        break;
+                    case 2:
+                        tab.setText("Nổi bật");
+                        break;
+                    default:
+                        tab.setText("Liên quan");
+                }
+            }
+        });
+
+        mediator.attach();
     }
 
     private void initController() {
@@ -143,10 +163,23 @@ public class FragmentHome extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CartActivity.class);
-                startActivity(intent);
+                mActivityResultLauncher.launch(intent);
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
+
+    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == getActivity().RESULT_OK) {
+                        Intent intent = result.getData();
+                        int cartSize = intent.getIntExtra("data_cart_size", 0);
+                        binding.tvQuantityCart.setText(cartSize + "");
+                    }
+                }
+            });
 
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());

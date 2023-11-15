@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import java.text.DecimalFormat;
@@ -21,10 +22,12 @@ import java.util.List;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private Context context;
     private List<Product> productList;
+    private ObjectUtil objectUtil;
 
-    public ProductAdapter(Context context, List<Product> productList) {
+    public ProductAdapter(Context context, List<Product> productList, ObjectUtil objectUtil) {
         this.productList = productList;
         this.context = context;
+        this.objectUtil = objectUtil;
     }
 
     public void setProductList(List<Product> productList) {
@@ -52,17 +55,18 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.binding.tvName.setText(product.getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
         holder.binding.tvPrice.setText(df.format(product.getMinPrice()) + " đ");
-        Glide.with(context).load(product.getImage()).into(holder.binding.imgProduct);
+        Glide.with(context)
+                .load(product.getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(holder.binding.imgProduct);
         holder.binding.ratingBar.setRating((float) product.getAverageRate());
         holder.binding.tvReview.setText("Đã bán " + product.getReview());
 
         holder.binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String id = product.getId();
-                Intent intent = new Intent(context, DetailProduct.class);
-                intent.putExtra("id_product", id);
-                context.startActivity(intent);
+                objectUtil.onclickObject(product);
             }
         });
     }
