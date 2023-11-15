@@ -25,6 +25,8 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBinding;
+import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionOfListCart;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
@@ -97,7 +99,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         for (int i = 1 ; i< 4; i++){
             voucherList.add(new Voucher("Giảm"+i+"%", "1234", ""));
         }
-        productAdapter = new ProductAdapter(this, productList);
+        productAdapter = new ProductAdapter(this, productList, this);
         voucherAdapter = new VoucherAdapter(this, voucherList);
         binding.recyProductSimilar.setAdapter(productAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
@@ -284,6 +286,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             @Override
             public void onClick(View v) {
                 finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
             }
         });
 
@@ -326,6 +329,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             public void onClick(View view) {
                 Intent intent = new Intent(DetailProduct.this, CartActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
@@ -363,12 +367,22 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             public void onClick(View view) {
                 if(optionProduct != null) {
                     if(isCheck) {
+                        // set dữ liệu vào CartUtil.listCartCheck  để có thể mua ngay
+//                        CartOfList cartOfList = new CartOfList();
+//                        cartOfList.setQuantity(quantityProduct);
+//                        cartOfList.setId(optionProduct.getId());
+//                        CartUtil.listCartCheck.add(cartOfList);
+//
+//                        // tính tổng giá tiền
+//                        totalPrice = quantityProduct * optionProduct.getPrice();
+
                         Intent intent = new Intent(DetailProduct.this, PayActivity.class);
                         intent.putExtra("totalPrice" , totalPrice);
                         startActivity(intent);
                     } else {
                         urlCartAdd(bindingOption);
                     }
+                    overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                 } else {
                     Toast.makeText(DetailProduct.this, "Mời chọn sản phẩm", Toast.LENGTH_SHORT).show();
                 }
@@ -469,5 +483,12 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .into(bindingOption.imgProduct);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }
