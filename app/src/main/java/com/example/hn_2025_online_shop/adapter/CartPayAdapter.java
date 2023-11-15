@@ -49,7 +49,7 @@ public class CartPayAdapter extends RecyclerView.Adapter<CartPayAdapter.CartPayV
     public void onBindViewHolder(@NonNull CartPayViewHolder holder, int position) {
         CartOfList cart = cartList.get(position);
         holder.binding.tvProductName.setText(cart.getOptionProduct().getProduct().getName() + "");
-        holder.binding.tvNameColor.setText("Màu sắc: " + cart.getOptionProduct().getNameColor());
+        holder.binding.tvNameColor.setText("Phân loại: " + cart.getOptionProduct().getNameColor());
         holder.binding.tvQuantity.setText("Số lương: x" + cart.getQuantity());
         DecimalFormat df = new DecimalFormat("###,###,###");
         holder.binding.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + " đ");

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,16 +13,19 @@ import com.example.hn_2025_online_shop.databinding.LayoutItemAddressBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
 import java.util.List;
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
     private Context context;
     private List<Info> infoList;
+    private ObjectUtil objectUtil;
 
-    public InfoAdapter(Context context, List<Info> infoList) {
+    public InfoAdapter(Context context, List<Info> infoList, ObjectUtil objectUtil) {
         this.context = context;
         this.infoList = infoList;
+        this.objectUtil = objectUtil;
     }
 
     public void setInfoList(List<Info> infoList) {
@@ -47,9 +51,19 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         holder.binding.tvPhoneNumber.setText(info.getPhoneNumber());
         if(info.getChecked()) {
             holder.binding.tvDefault.setVisibility(View.VISIBLE);
+            holder.binding.chkChooseInfo.setChecked(true);
         } else {
             holder.binding.tvDefault.setVisibility(View.GONE);
+            holder.binding.chkChooseInfo.setChecked(false);
         }
+        holder.binding.chkChooseInfo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if(isChecked) {
+                    objectUtil.onclickObject(info);
+                }
+            }
+        });
     }
 
     @Override

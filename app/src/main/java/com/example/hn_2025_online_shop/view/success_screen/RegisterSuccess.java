@@ -1,12 +1,12 @@
-package com.example.hn_2025_online_shop.view.login;
+package com.example.hn_2025_online_shop.view.success_screen;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ActivityRegisterSuccessBinding;
+import com.example.hn_2025_online_shop.view.login.Login;
 
 public class RegisterSuccess extends AppCompatActivity {
     ActivityRegisterSuccessBinding binding;

@@ -15,10 +15,13 @@
         android:id="@+id/toolbar"
         >
         <ImageView
-
-            android:background="@drawable/backss"
+            android:id="@+id/imgBack"
             android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp"
+            android:background="@drawable/custom_bg_shopping_cart_primary"
+            android:padding="5dp"
+            android:src="@drawable/backs"
+            app:tint="@color/white" />
         <TextView
             android:gravity="center"
             android:layout_width="match_parent"

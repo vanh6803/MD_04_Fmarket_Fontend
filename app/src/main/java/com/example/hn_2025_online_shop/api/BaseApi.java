@@ -132,6 +132,11 @@ public interface BaseApi {
     @DELETE("cart/delete-cart-item/{idCart}")
     Call<ServerResponse> deleteCartItem(@Header("Authorization") String authorization,
                                         @Path("idCart") String idCart);
+    @FormUrlEncoded
+    @PUT("cart/update-quantity/{idCart}")
+    Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
+                                            @Path("idCart") String idCart,
+                                            @Field("quantity") int quantity);
 
     @FormUrlEncoded
     @POST("info/add")

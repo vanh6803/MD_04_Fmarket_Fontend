@@ -2,7 +2,9 @@ package com.example.hn_2025_online_shop.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Info {
+import java.io.Serializable;
+
+public class Info implements Serializable {
     @SerializedName("_id")
     private String id;
     @SerializedName("user_id")

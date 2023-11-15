@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
+            android:textColor="@color/gray99"
             android:text="Màu sắc : Blue"/>
 
 
@@ -51,6 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+                android:textColor="@color/gray99"
                 android:text="Số lượng : x1" />
         </RelativeLayout>
     </LinearLayout>

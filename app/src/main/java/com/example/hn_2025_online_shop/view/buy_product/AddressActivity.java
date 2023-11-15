@@ -17,8 +17,12 @@ import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.CartUtil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddressActivity extends AppCompatActivity {
+public class AddressActivity extends AppCompatActivity implements ObjectUtil {
     private ActivityAddressBinding binding;
     private List<Info> infoList;
     private InfoAdapter infoAdapter;
@@ -102,7 +106,7 @@ public class AddressActivity extends AppCompatActivity {
         infoList = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvInfo.setLayoutManager(layoutManager);
-        infoAdapter = new InfoAdapter(this, infoList);
+        infoAdapter = new InfoAdapter(this, infoList, this);
         binding.rcvInfo.setAdapter(infoAdapter);
     }
 
@@ -111,5 +115,18 @@ public class AddressActivity extends AppCompatActivity {
         super.onBackPressed();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
 
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        // Bắt sự kiện check
+        Info info = (Info) object;
+        Intent intent = new Intent(AddressActivity.this, PayActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("object_info", info);
+        intent.putExtras(bundle);
+        setResult(RESULT_OK, intent);
+        finish();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

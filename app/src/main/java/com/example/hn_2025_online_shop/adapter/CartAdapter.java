@@ -57,6 +57,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         DecimalFormat df = new DecimalFormat("###,###,###");
         holder.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + "đ");
         holder.tvQuantity.setText(cart.getQuantity() + "");
+        holder.tvColorOption.setText("Phân loại: " + cart.getOptionProduct().getNameColor());
         Glide.with(context)
                 .load(cart.getOptionProduct().getImage())
                 .placeholder(R.drawable.loading)
@@ -107,6 +108,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         private TextView tvQuantity;
         private TextView btnMinus;
         private TextView btnPlus;
+        private TextView tvColorOption;
 
         public LinearLayout layoutForeground;
 
@@ -120,6 +122,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             btnMinus = itemView.findViewById(R.id.btnMinus);
             btnPlus = itemView.findViewById(R.id.btnPlus);
             layoutForeground = itemView.findViewById(R.id.layoutForeground);
+            tvColorOption = itemView.findViewById(R.id.tvColorOption);
         }
     }
 
