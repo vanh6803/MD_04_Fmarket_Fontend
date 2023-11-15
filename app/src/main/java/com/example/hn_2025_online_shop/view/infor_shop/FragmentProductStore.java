@@ -73,6 +73,7 @@ public class FragmentProductStore extends Fragment {
         binding.rcvProductStore.setAdapter(productAdapter);
        setDataProductStore();
     }
+
     public void setDataProductStore(){
         dialog.show();
         BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
