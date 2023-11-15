@@ -40,7 +40,6 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 app:passwordToggleEnabled="false"
-
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
