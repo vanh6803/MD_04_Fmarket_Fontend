@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Sửa Địa chỉ"
+        android:textColor="@color/color_chudao"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="30dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="2dp"
+        android:background="@drawable/backss"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:background="#F6F6F6"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Liên Hệ"
+            android:gravity="center_vertical"/>
+
+        <EditText
+            android:id="@+id/edtUsername"
+            android:gravity="center_vertical"
+            android:hint="Họ và tên"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:layout_height="50dp"
+            android:textSize="18dp"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:background="@color/gray" />
+
+        <EditText
+            android:id="@+id/edtPhoneNumber"
+            android:gravity="center_vertical"
+            android:hint="Số điện thoại"
+            android:background="@null"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="18dp"/>
+        <TextView
+            android:background="#F6F6F6"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Địa chỉ"
+            android:gravity="center_vertical"/>
+
+        <EditText
+            android:id="@+id/edtAddress"
+            android:gravity="center_vertical"
+            android:hint="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:background="#F6F6F6"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Cài đặt"
+            android:gravity="center_vertical"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:gravity="center_vertical"
+                android:hint="Đặt làm địa chỉ mặc định"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:enabled="false"
+                android:textSize="18dp"/>
+            <CheckBox
+                android:id="@+id/chkChooseDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <TextView
+            android:background="#F6F6F6"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+
+            android:gravity="center_vertical"/>
+        <TextView
+            android:id="@+id/tvXoaDiaChi"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/red"
+            android:textSize="17dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Xóa địa chỉ"
+
+            android:gravity="center_horizontal"/>
+
+
+        <TextView
+            android:id="@+id/btnSave"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/custom_btn_muaangay"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="HOÀN THÀNH"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
