@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Nguyễn Thế Ngọc | "/>
+        <TextView
+            android:id="@+id/tvPhoneNumber"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="0347587528  "/>
+        <TextView
+            android:textColor="@color/red"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            android:text="Sửa  "/>
+    </LinearLayout>
+    <LinearLayout
+        android:padding="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvAddress"
+            android:textSize="15dp"
+            android:maxLines="2"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Xóm 1 Thôn Yên Nội Xã Đồng Quang Huyện Quốc Oai, Hà Nội"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDefault"
+        android:padding="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mặc định"
+        />
+
+</LinearLayout>

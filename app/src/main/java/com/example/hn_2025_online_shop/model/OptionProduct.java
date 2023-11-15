@@ -5,40 +5,56 @@ import com.google.gson.annotations.SerializedName;
 public class OptionProduct {
     @SerializedName("_id")
     private String id;
-    String product_id;
-    String name_color;
-    String image;
-    String color_code;
-    Number ram;
-    Number rom;
-    Number price;
-    Number discount_value;
-    Number quantity;
-    Number soldQuantity;
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
+    @SerializedName("product_id")
+    private String productId;
+    @SerializedName("name_color")
+    private String nameColor;
+    @SerializedName("color_code")
+    private String colorCode;
+    private String image;
+    private int ram;
+    private int rom;
+    private int price;
+    @SerializedName("discount_value")
+    private int discountValue;
+    private int quantity;
+    private int soldQuantity;
+    private boolean hot_option;
 
     public OptionProduct() {
     }
 
-    public OptionProduct(String id, String product_id, String name_color, String image, String color_code, Number ram, Number rom, Number price, Number discount_value, Number quantity, Number soldQuantity) {
+    public OptionProduct(String id, String productId, String nameColor, String colorCode, String image, int ram, int rom, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
         this.id = id;
-        this.product_id = product_id;
-        this.name_color = name_color;
+        this.productId = productId;
+        this.nameColor = nameColor;
+        this.colorCode = colorCode;
         this.image = image;
-        this.color_code = color_code;
         this.ram = ram;
         this.rom = rom;
         this.price = price;
-        this.discount_value = discount_value;
+        this.discountValue = discount_value;
         this.quantity = quantity;
         this.soldQuantity = soldQuantity;
+        this.hot_option = hot_option;
+    }
+
+    @Override
+    public String toString() {
+        return "Option{" +
+                "id='" + id + '\'' +
+                ", productId='" + productId + '\'' +
+                ", nameColor='" + nameColor + '\'' +
+                ", colorCode='" + colorCode + '\'' +
+                ", image='" + image + '\'' +
+                ", ram=" + ram +
+                ", rom=" + rom +
+                ", price=" + price +
+                ", discount_value=" + discountValue +
+                ", quantity=" + quantity +
+                ", soldQuantity=" + soldQuantity +
+                ", hot_option=" + hot_option +
+                '}';
     }
 
     public String getId() {
@@ -49,75 +65,91 @@ public class OptionProduct {
         this.id = id;
     }
 
-    public String getProduct_id() {
-        return product_id;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setProduct_id(String product_id) {
-        this.product_id = product_id;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public String getName_color() {
-        return name_color;
+    public String getNameColor() {
+        return nameColor;
     }
 
-    public void setName_color(String name_color) {
-        this.name_color = name_color;
+    public void setNameColor(String nameColor) {
+        this.nameColor = nameColor;
     }
 
-    public String getColor_code() {
-        return color_code;
+    public String getColorCode() {
+        return colorCode;
     }
 
-    public void setColor_code(String color_code) {
-        this.color_code = color_code;
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
 
-    public Number getRam() {
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getRam() {
         return ram;
     }
 
-    public void setRam(Number ram) {
+    public void setRam(int ram) {
         this.ram = ram;
     }
 
-    public Number getRom() {
+    public int getRom() {
         return rom;
     }
 
-    public void setRom(Number rom) {
+    public void setRom(int rom) {
         this.rom = rom;
     }
 
-    public Number getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(Number price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public Number getDiscount_value() {
-        return discount_value;
+    public int getDiscountValue() {
+        return discountValue;
     }
 
-    public void setDiscount_value(Number discount_value) {
-        this.discount_value = discount_value;
+    public void setDiscountValue(int discount_value) {
+        this.discountValue = discount_value;
     }
 
-    public Number getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Number quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public Number getSoldQuantity() {
+    public int getSoldQuantity() {
         return soldQuantity;
     }
 
-    public void setSoldQuantity(Number soldQuantity) {
+    public void setSoldQuantity(int soldQuantity) {
         this.soldQuantity = soldQuantity;
+    }
+
+    public boolean isHot_option() {
+        return hot_option;
+    }
+
+    public void setHot_option(boolean hot_option) {
+        this.hot_option = hot_option;
     }
 }

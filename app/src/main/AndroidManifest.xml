@@ -19,6 +19,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.buy_product.AddAddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.buy_product.AddressActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.buy_product.PayActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.login.CreateStoreSuccessActivity"
             android:exported="false" />
         <activity
@@ -66,7 +75,7 @@
             android:name=".view.profile_screen.HistoryBuyScreen"
             android:exported="true" />
         <activity
-            android:name=".view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop"
+            android:name=".view.infor_shop.InforShop"
             android:exported="true" />
         <activity
             android:name=".view.login.Splash"

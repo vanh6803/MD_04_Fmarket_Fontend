@@ -1,17 +1,13 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -32,25 +28,27 @@ import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBind
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
-import com.example.hn_2025_online_shop.model.ProductType;
 import com.example.hn_2025_online_shop.model.Voucher;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
-import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ApiUtil;
+import com.example.hn_2025_online_shop.ultil.CartUtil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
-import com.example.hn_2025_online_shop.view.login.Login;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.FragmentProductStore;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop.InforShop;
+import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
+import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,27 +56,42 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DetailProduct extends AppCompatActivity {
+public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
-    public DetailProductBinding binding;
-    List<Product> productList;
-    List<Voucher> voucherList;
-    ProductAdapter productAdapter;
-    VoucherAdapter voucherAdapter;
-    ProgressLoadingDialog dialog;
+    private DetailProductBinding binding;
+    private List<Product> productList;
+    private List<Voucher> voucherList;
+    private ProductAdapter productAdapter;
+    private VoucherAdapter voucherAdapter;
+    private ProgressLoadingDialog dialog;
+    private ProductDetail productDetail;
+    private List<OptionProduct> optionProductList;
+    private OptionAdapter optionAdapter;
+    private int quantityProduct = 1;
+    private OptionProduct optionProduct;
+    private LayoutDialigOptionProductBinding bindingOption;
+    private int totalPrice = 0;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DetailProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        dialog = new ProgressLoadingDialog(this);
-        binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        initView();
+        initController();
+        getVoucher();
+        callApiDetailProduct();
+        setDataSimilarProduct();
+        setNumberCart();
+    }
+
+
+    private void setNumberCart() {
+        // Lấy danh sách cart
+        binding.tvQuantityCart.setText(CartUtil.listCart.size() + "");
+    }
+
+    private void getVoucher() {
         productList = new ArrayList<>();
         voucherList = new ArrayList<>();
         for (int i = 1 ; i< 4; i++){
@@ -88,32 +101,8 @@ public class DetailProduct extends AppCompatActivity {
         voucherAdapter = new VoucherAdapter(this, voucherList);
         binding.recyProductSimilar.setAdapter(productAdapter);
         binding.recyVoucher.setAdapter(voucherAdapter);
-
-
-
-
-//        binding.showshop.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(DetailProduct.this, InforShop.class));
-//            }
-//        });
-        callApiDetailProduct();
-        setDataSimilarProduct();
-
     }
-    public void showShop(DetailProductResponse response1){
-        binding.showshop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String storeId = response1.getResult().getStore_id().toString();
-                Intent intent = new Intent(DetailProduct.this, InforShop.class);
-                intent.putExtra("storeId",storeId);
-                StoreUltil.store = response1.getResult().getStore_id();
-                startActivity(intent);
-            }
-        });
-    }
+
     public void callApiDetailProduct(){
         dialog.show();
         Intent intent = getIntent();
@@ -122,14 +111,10 @@ public class DetailProduct extends AppCompatActivity {
             @Override
             public void onResponse(Call<DetailProductResponse> call, Response<DetailProductResponse> response) {
                 if(response.isSuccessful()){
-                    DetailProductResponse response1 = response.body();
-                    if (response1.getCode() == 200){
-                        setDataUi(response1);
-                        showDetailProductDialog(response1);
-                        showShop(response1);
-                        onClickShowOptionProduct(response1);
-
-                        Toast.makeText(DetailProduct.this, response1.getMessage(), Toast.LENGTH_SHORT).show();
+                    DetailProductResponse detailProductResponse = response.body();
+                    if (detailProductResponse.getCode() == 200){
+                        productDetail = detailProductResponse.getResult();
+                        setDataUi(detailProductResponse);
                     }
                 } else {
                     try {
@@ -153,49 +138,50 @@ public class DetailProduct extends AppCompatActivity {
             }
         });
     }
-    private void setDataUi(DetailProductResponse response1) {
+    private void setDataUi(DetailProductResponse detailProductResponse) {
 
-        if(response1 != null){
+        if(detailProductResponse != null){
             List<SlideModel> listImg = new ArrayList<>();
-            for(int i = 0; i< response1.getResult().getImage().size(); i++){
-                String linkImg = response1.getResult().getImage().get(i);
+            for(int i = 0; i< detailProductResponse.getResult().getImage().size(); i++){
+                String linkImg = detailProductResponse.getResult().getImage().get(i);
                 listImg.add(new SlideModel(linkImg, ScaleTypes.FIT));
             }
-            Log.d(TAG.toString, "setDataUi: " + response1.getResult().getOption());
-            if(response1.getResult().getOption().size() != 0){
-                binding.tvPrice.setText(response1.getResult().getOption().get(0).getPrice()+ "" + "đ");
+            Log.d(TAG.toString, "setDataUi: " + detailProductResponse.getResult().getOption());
+            if(detailProductResponse.getResult().getOption().size() != 0){
+                DecimalFormat df = new DecimalFormat("###,###,###");
+                binding.tvPrice.setText(df.format(detailProductResponse.getResult().getOption().get(0).getPrice())+" đ");
             }else{
                 binding.tvPrice.setText("Không có dữ liệu trả về");
-                Toast.makeText(this, response1.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, detailProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            if(response1.getResult().getImage().size() != 0){
+            if(detailProductResponse.getResult().getImage().size() != 0){
                 binding.imgProduct.setImageList(listImg, ScaleTypes.FIT);
             }else {
                 Glide.with(DetailProduct.this).load(R.drawable.error);
             }
 
-            if(response1.getResult().getName().length() != 0){
-                binding.tvName.setText(response1.getResult().getName());
+            if(detailProductResponse.getResult().getName().length() != 0){
+                binding.tvName.setText(detailProductResponse.getResult().getName());
             }else{
                 binding.tvName.setText("Không có dữ liệu trả về");
             }
 
-            if (response1.getResult().getStore_id().getName().length() != 0) {
-                binding.tvShop.setText(response1.getResult().getStore_id().getName());
+            if (detailProductResponse.getResult().getStore_id().getName().length() != 0) {
+                binding.tvShop.setText(detailProductResponse.getResult().getStore_id().getName());
             }else{
                 binding.tvShop.setText("Không có dữ liệu trả về");
             }
 
-            if(response1.getResult().getStore_id().getAddress().length() != 0){
-                binding.diachiShop.setText(response1.getResult().getStore_id().getAddress());
+            if(detailProductResponse.getResult().getStore_id().getAddress().length() != 0){
+                binding.diachiShop.setText(detailProductResponse.getResult().getStore_id().getAddress());
             }else {
                 binding.diachiShop.setText("Không có dữ liệu trả về");
             }
 
-            if(response1.getResult().getStore_id().getAvatar().length() != 0){
+            if(detailProductResponse.getResult().getStore_id().getAvatar().length() != 0){
                 Glide.with(this)
-                        .load(response1.getResult().getStore_id().getAvatar())
+                        .load(detailProductResponse.getResult().getStore_id().getAvatar())
                         .placeholder(R.drawable.loading)
                         .error(R.drawable.error)
                         .into(binding.imgShop);
@@ -227,13 +213,6 @@ public class DetailProduct extends AppCompatActivity {
                 binding.specialFeature.setText("SpecialFeature: "+ response1.getResult().getSpecialFeature());
                 binding.manufacturer.setText("Manufacturer: "+response1.getResult().getManufacturer());
                 binding.other.setText("Other: "+response1.getResult().getOther());
-                binding.btnbutton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
-
                 builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -268,47 +247,227 @@ public class DetailProduct extends AppCompatActivity {
             }
         });
     }
-    public void onClickShowOptionProduct(DetailProductResponse response1){
-        binding.btnBuyDetail.setOnClickListener(new View.OnClickListener() {
-            List<OptionProduct> optionProductList;
-            OptionAdapter optionAdapter;
+
+    private void showDialogDetail() {
+        if(productDetail == null) {
+            return;
+        }
+        AlertDialog.Builder builder = new AlertDialog.Builder(DetailProduct.this);
+        LayoutDialogDetailProductBinding binding = LayoutDialogDetailProductBinding.inflate(getLayoutInflater());;
+        builder.setView(binding.getRoot());
+        binding.description.setText(productDetail.getDescription());
+        binding.screen.setText("Screen: "+productDetail.getScreen());
+        binding.camera.setText("Cammera: " + productDetail.getCamera());
+        binding.chipset.setText("Chipset: " + productDetail.getChipset());
+        binding.cpu.setText("Cpu: "+productDetail.getCpu());
+        binding.gpu.setText("Gpu: "+productDetail.getGpu());
+        binding.operatingSystem.setText("OperatingSystem: "+productDetail.getOperatingSystem());
+        binding.battery.setText("Battery: " + productDetail.getBattery());
+        binding.weight.setText("Weight: " + productDetail.getWeight());
+        binding.connection.setText("Connection: "+productDetail.getConnection());
+        binding.specialFeature.setText("SpecialFeature: "+ productDetail.getSpecialFeature());
+        binding.manufacturer.setText("Manufacturer: "+productDetail.getManufacturer());
+        binding.other.setText("Other: "+productDetail.getOther());
+
+        builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                BottomSheetDialog dialog1 = new BottomSheetDialog(DetailProduct.this);
-                LayoutDialigOptionProductBinding bindingoption = LayoutDialigOptionProductBinding.inflate(getLayoutInflater());
-                dialog1.setContentView(bindingoption.getRoot());
-                Window window = dialog1.getWindow();
-                window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-                if(response1.getResult().getOption().size() != 0){
-                    Glide.with(DetailProduct.this).load(response1.getResult().getOption().get(0).getImage()).into(bindingoption.imageView);
-                }else {
-                    Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imageView);
-                }
-                if(response1.getResult().getOption().size() != 0){
-                    bindingoption.textView.setText(response1.getResult().getOption().get(0).getPrice() + "" + "đ");
-                }else {
-                    bindingoption.textView.setText("No data");
-                }
-
-                if(response1.getResult().getOption().size() != 0){
-                    bindingoption.textView2.setText(response1.getResult().getOption().get(0).getSoldQuantity() + "");
-                }else {
-                    bindingoption.textView2.setText("No data");
-                }
-
-
-                optionProductList = new ArrayList<>();
-//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
-//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
-//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
-//                optionProductList.add(new OptionProduct("1", "1", "Gold","https://cdn.tgdd.vn/Products/Images/42/251192/iphone-14-pro-max-vang-thumb-600x600.jpg", "#fffff", 1, 1, 1, 1, 1, 1 ));
-
-                optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList);
-                optionAdapter.setDataListOptionProduct(response1.getResult().getOption());
-                bindingoption.rcvOptionProduct.setAdapter(optionAdapter);
-                dialog1.dismiss();
-                dialog1.show();
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
             }
         });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void initController() {
+        binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        binding.showshop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(productDetail!= null) {
+                    String storeId = productDetail.getStore_id().toString();
+                    Intent intent = new Intent(DetailProduct.this, InforShop.class);
+                    intent.putExtra("storeId",storeId);
+                    StoreUltil.store = productDetail.getStore_id();
+                    startActivity(intent);
+                }
+            }
+        });
+
+        binding.btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheetDialog(false);
+            }
+        });
+
+        binding.btnBuyDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheetDialog(true);
+            }
+        });
+
+        binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogDetail();
+            }
+        });
+
+        binding.imgCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailProduct.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initView() {
+        dialog = new ProgressLoadingDialog(this);
+        binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+    }
+
+    // --------------------------------- BottomSheetDialog --------------------------------------------
+
+    private void showBottomSheetDialog(Boolean isCheck) {
+        if(productDetail == null) {
+            return;
+        }
+
+        BottomSheetDialog dialog1 = new BottomSheetDialog(DetailProduct.this);
+        bindingOption = LayoutDialigOptionProductBinding.inflate(getLayoutInflater());
+        dialog1.setContentView(bindingOption.getRoot());
+        Window window = dialog1.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        setDataBottomSheetDialog(isCheck, bindingOption); // Set data cho bottom sheet
+        optionProductList = new ArrayList<>();
+        optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList, this);
+        optionAdapter.setDataListOptionProduct(productDetail.getOption());
+        bindingOption.rcvOptionProduct.setAdapter(optionAdapter);
+        dialog1.show();
+
+        setOnclickBottomDialog(isCheck, bindingOption);
+    }
+
+    private void setOnclickBottomDialog(Boolean isCheck, LayoutDialigOptionProductBinding bindingOption) {
+        bindingOption.btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(optionProduct != null) {
+                    if(isCheck) {
+                        Intent intent = new Intent(DetailProduct.this, PayActivity.class);
+                        intent.putExtra("totalPrice" , totalPrice);
+                        startActivity(intent);
+                    } else {
+                        urlCartAdd(bindingOption);
+                    }
+                } else {
+                    Toast.makeText(DetailProduct.this, "Mời chọn sản phẩm", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        bindingOption.btnPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(quantityProduct < 20) {
+                    quantityProduct += 1;
+                    bindingOption.tvQuantity.setText(quantityProduct + "");
+                }
+            }
+        });
+
+        bindingOption.btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(quantityProduct > 1) {
+                    quantityProduct -= 1;
+                    bindingOption.tvQuantity.setText(quantityProduct + "");
+                }
+            }
+        });
+    }
+
+
+    private void urlCartAdd(LayoutDialigOptionProductBinding bindingOption) {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String optionId = optionProduct.getId();
+        quantityProduct = Integer.parseInt(bindingOption.tvQuantity.getText().toString());
+        dialog.show();
+        BaseApi.API.createCartItem(token, optionId, quantityProduct).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-cartAdd: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200) {
+                        Toast.makeText(DetailProduct.this, "Thêm cart thành công!", Toast.LENGTH_SHORT).show();
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-cartAdd: " + errorMessage);
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(DetailProduct.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-cartAdd: " + t.toString());
+                dialog.dismiss();
+            }
+        });
+    }
+
+    private void setDataBottomSheetDialog(Boolean isCheck, LayoutDialigOptionProductBinding bindingoption) {
+        if(isCheck) {
+            bindingoption.btnSave.setText("Mua ngay");
+        } else {
+            bindingoption.btnSave.setText("Thêm vào giỏ hàng");
+        }
+        if(productDetail.getOption().size() != 0){
+            Glide.with(DetailProduct.this).load(productDetail.getOption().get(0).getImage()).into(bindingoption.imgProduct);
+        }else {
+            Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imgProduct);
+        }
+        if(productDetail.getOption().size() != 0){
+            DecimalFormat df = new DecimalFormat("###,###,###");
+            bindingoption.tvPrice.setText(df.format(productDetail.getOption().get(0).getPrice()) + " đ");
+        }else {
+            bindingoption.tvPrice.setText("No data");
+        }
+        if(productDetail.getOption().size() != 0){
+            bindingoption.tvWarehouseQuantity.setText("Kho: " + productDetail.getOption().get(0).getSoldQuantity());
+        }else {
+            bindingoption.tvWarehouseQuantity.setText("No data");
+        }
+    }
+
+
+    @Override
+    public void onclickObject(Object object) {
+        optionProduct = (OptionProduct) object;
+        Glide.with(this)
+                .load(optionProduct.getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(bindingOption.imgProduct);
     }
 }

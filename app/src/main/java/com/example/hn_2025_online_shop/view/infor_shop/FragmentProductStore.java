@@ -1,9 +1,5 @@
-package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.infor_shop;
+package com.example.hn_2025_online_shop.view.infor_shop;
 
-import static android.content.Intent.getIntent;
-import static android.content.Intent.getIntentOld;
-
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,12 +20,10 @@ import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductStoreBinding;
 import com.example.hn_2025_online_shop.model.Product;
-import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,8 +74,6 @@ public class FragmentProductStore extends Fragment {
        setDataProductStore();
     }
     public void setDataProductStore(){
-
-
         dialog.show();
         BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
             @Override

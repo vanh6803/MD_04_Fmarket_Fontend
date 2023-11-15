@@ -1,0 +1,155 @@
+package com.example.hn_2025_online_shop.model;
+
+import com.google.gson.annotations.SerializedName;
+
+public class OptionOfListCart {
+    @SerializedName("_id")
+    private String id;
+    @SerializedName("product_id")
+    private Product product;
+    @SerializedName("name_color")
+    private String nameColor;
+    @SerializedName("color_code")
+    private String colorCode;
+    private String image;
+    private int ram;
+    private int rom;
+    private int price;
+    @SerializedName("discount_value")
+    private int discountValue;
+    private int quantity;
+    private int soldQuantity;
+    private boolean hot_option;
+
+    public OptionOfListCart() {
+    }
+
+    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int ram, int rom, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
+        this.id = id;
+        this.product = product;
+        this.nameColor = nameColor;
+        this.colorCode = colorCode;
+        this.image = image;
+        this.ram = ram;
+        this.rom = rom;
+        this.price = price;
+        this.discountValue = discount_value;
+        this.quantity = quantity;
+        this.soldQuantity = soldQuantity;
+        this.hot_option = hot_option;
+    }
+
+    @Override
+    public String toString() {
+        return "Option{" +
+                "id='" + id + '\'' +
+                ", product='" + product + '\'' +
+                ", nameColor='" + nameColor + '\'' +
+                ", colorCode='" + colorCode + '\'' +
+                ", image='" + image + '\'' +
+                ", ram=" + ram +
+                ", rom=" + rom +
+                ", price=" + price +
+                ", discount_value=" + discountValue +
+                ", quantity=" + quantity +
+                ", soldQuantity=" + soldQuantity +
+                ", hot_option=" + hot_option +
+                '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public String getNameColor() {
+        return nameColor;
+    }
+
+    public void setNameColor(String nameColor) {
+        this.nameColor = nameColor;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public int getRom() {
+        return rom;
+    }
+
+    public void setRom(int rom) {
+        this.rom = rom;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public int getDiscountValue() {
+        return discountValue;
+    }
+
+    public void setDiscountValue(int discount_value) {
+        this.discountValue = discount_value;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getSoldQuantity() {
+        return soldQuantity;
+    }
+
+    public void setSoldQuantity(int soldQuantity) {
+        this.soldQuantity = soldQuantity;
+    }
+
+    public boolean isHot_option() {
+        return hot_option;
+    }
+
+    public void setHot_option(boolean hot_option) {
+        this.hot_option = hot_option;
+    }
+}
