@@ -691,7 +691,7 @@
 
     <TextView
         app:layout_constraintTop_toTopOf="@+id/ln"
-        android:id="@+id/textView3"
+        android:id="@+id/btnHuy"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="22dp"
@@ -704,13 +704,14 @@
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/constraint"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintEnd_toStartOf="@+id/btnLuu"
         app:layout_constraintStart_toStartOf="@+id/constraint"
         tools:ignore="NotSibling" />
 
     <TextView
+
         android:layout_marginRight="20dp"
-        android:id="@+id/textView4"
+        android:id="@+id/btnLuu"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginBottom="0dp"
@@ -722,7 +723,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/constraint"
         app:layout_constraintEnd_toEndOf="@+id/constraint"
-        app:layout_constraintStart_toEndOf="@+id/textView3" />
+        app:layout_constraintStart_toEndOf="@+id/btnHuy" />
 
 
 
