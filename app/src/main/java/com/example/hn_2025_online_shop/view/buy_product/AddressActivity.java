@@ -99,6 +99,14 @@ public class AddressActivity extends AppCompatActivity implements ObjectUtil {
                 overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
+
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+            }
+        });
     }
 
     private void initView() {

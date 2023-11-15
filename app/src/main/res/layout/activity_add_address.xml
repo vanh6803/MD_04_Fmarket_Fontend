@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray_ground"
     android:orientation="vertical">
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:padding="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/white"
         android:orientation="horizontal">
         <ImageView
-            android:layout_gravity="center"
+            android:id="@+id/imgBack"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/backss"/>
+            android:background="@drawable/custom_bg_shopping_cart_primary"
+            android:padding="5dp"
+            android:src="@drawable/backs"
+            app:tint="@color/white" />
         <TextView
            android:gravity="center"
             android:layout_width="match_parent"
@@ -22,84 +30,116 @@
             />
 
     </LinearLayout>
-    <TextView
-        android:background="#F6F6F6"
-        android:gravity="center_vertical"
-        android:text="Liên hệ"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="18dp"/>
-    <EditText
-        android:id="@+id/edtUsername"
-        android:gravity="center_vertical"
-        android:hint="Họ và tên"
-        android:layout_width="match_parent"
-        android:background="@null"
-        android:layout_height="50dp"
-        android:textSize="18dp"/>
-    <EditText
-        android:id="@+id/edtPhoneNumber"
-        android:gravity="center_vertical"
-        android:hint="Số điện thoại"
-        android:background="@null"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="18dp"/>
-    <TextView
-        android:background="#F6F6F6"
-        android:gravity="center_vertical"
-        android:text="Địa Chỉ"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="18dp"/>
 
-    <EditText
-        android:id="@+id/edtAddress"
-        android:gravity="center_vertical"
-        android:hint="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
+    <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@null"
-        android:textSize="18dp"/>
+        android:layout_height="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
 
-    <TextView
-        android:background="#F6F6F6"
-        android:gravity="center_vertical"
-        android:text="Cài đặt"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="18dp"/>
+            <TextView
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
+                android:text="Liên hệ"
+                android:textColor="@color/gray99"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="12dp"
+                android:textSize="14dp"/>
+            <EditText
+                android:id="@+id/edtUsername"
+                android:gravity="center_vertical"
+                android:hint="Họ và tên"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/gray_ground"
+                />
+            <EditText
+                android:id="@+id/edtPhoneNumber"
+                android:gravity="center_vertical"
+                android:hint="Số điện thoại"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
+            <TextView
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
+                android:text="Địa Chỉ"
+                android:textColor="@color/gray99"
+                android:layout_marginHorizontal="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textSize="14dp"/>
+            <EditText
+                android:id="@+id/edtAddress"
+                android:gravity="center_vertical"
+                android:hint="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@color/white"
+                android:textSize="18dp"/>
+            <TextView
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
+                android:text="Cài đặt"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:textColor="@color/gray99"
+                android:layout_marginHorizontal="12dp"
+                android:textSize="14dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal">
+                <EditText
+                    android:gravity="center_vertical"
+                    android:hint="Đặt làm địa chỉ mặc định"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:padding="12dp"
+                    android:background="@null"
+                    android:textColor="@color/gray99"
+                    android:enabled="false"
+                    android:textSize="18dp"/>
+                <CheckBox
+                    android:id="@+id/chkChooseDefault"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/btnSave"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_button_rectangular"
+                android:padding="12dp"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="HOÀN THÀNH"
+                android:textColor="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <EditText
-            android:gravity="center_vertical"
-            android:hint="Đặt làm địa chỉ mặc định"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:enabled="false"
-            android:textSize="18dp"/>
-        <CheckBox
-            android:id="@+id/chkChooseDefault"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/btnSave"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/custom_btn_muaangay"
-        android:gravity="center"
-        android:textSize="20dp"
-        android:text="HOÀN THÀNH"
-        android:textColor="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"/>
 
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
