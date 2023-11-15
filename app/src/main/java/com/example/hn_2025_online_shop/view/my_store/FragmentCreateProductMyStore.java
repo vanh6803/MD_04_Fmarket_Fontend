@@ -144,6 +144,7 @@ public class FragmentCreateProductMyStore extends Fragment {
 
             }
         });
+
         binding.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,6 +152,7 @@ public class FragmentCreateProductMyStore extends Fragment {
                 startActivity(intent);
             }
         });
+
         binding.btnLuu.setOnClickListener(new View.OnClickListener() {
             private DialogCreateOptionProductBinding binding1;
 

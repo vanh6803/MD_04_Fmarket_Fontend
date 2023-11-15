@@ -38,8 +38,6 @@ public class UpdateAddressActivity extends AppCompatActivity {
                 });
 
                 dialog.show();
-
-
             }
         });
     }
