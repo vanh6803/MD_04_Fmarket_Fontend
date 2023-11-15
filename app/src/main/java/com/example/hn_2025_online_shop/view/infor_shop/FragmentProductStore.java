@@ -73,7 +73,6 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
         binding.rcvProductStore.setLayoutManager(layoutManager);
         productList = new ArrayList<>();
         Log.d(TAG.toString, "onViewCreated: "+ StoreUltil.store.getId());
-
         productAdapter = new ProductAdapter(getActivity(), productList, this);
         binding.rcvProductStore.setAdapter(productAdapter);
        setDataProductStore();
