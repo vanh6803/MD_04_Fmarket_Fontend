@@ -10,6 +10,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -43,6 +47,7 @@ import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -54,6 +59,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -285,8 +291,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+                onBackActivity();
             }
         });
 
@@ -328,11 +333,23 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailProduct.this, CartActivity.class);
-                startActivity(intent);
+                mActivityResultLauncher.launch(intent);
                 overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
+
+    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK) {
+                        Intent intent = result.getData();
+                        int cartSize = intent.getIntExtra("data_cart_size", 0);
+                        binding.tvQuantityCart.setText(cartSize + "");
+                }
+            }
+    });
 
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
@@ -422,8 +439,9 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
                     Log.d(TAG.toString, "onResponse-cartAdd: " + serverResponse.toString());
-                    if(serverResponse.getCode() == 200) {
-                        Toast.makeText(DetailProduct.this, "Thêm cart thành công!", Toast.LENGTH_SHORT).show();
+                    if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+                        Toast.makeText(DetailProduct.this, "Thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+                        ApiUtil.setTitleQuantityCart(DetailProduct.this, dialog, binding.tvQuantityCart);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -487,7 +505,15 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        onBackActivity();
+    }
+
+    private void onBackActivity() {
+        // Đoạn này chưa hiểu lắm nhưng kể cả truyền cho màn hình nào thì tất cả
+        // registerForActivityResult onBack đểu đc chạy
+        Intent intent = new Intent(DetailProduct.this, MainActivity.class);
+        intent.putExtra("data_cart_size", CartUtil.listCart.size());
+        setResult(RESULT_OK, intent);
         finish();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }

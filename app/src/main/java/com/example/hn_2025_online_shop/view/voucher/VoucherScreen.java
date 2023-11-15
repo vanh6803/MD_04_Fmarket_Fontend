@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.voucher;
+package com.example.hn_2025_online_shop.view.voucher;
 
 import androidx.appcompat.app.AppCompatActivity;
 

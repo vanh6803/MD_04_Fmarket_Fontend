@@ -17,7 +17,6 @@ import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityCartBinding;
 import com.example.hn_2025_online_shop.model.CartOfList;
-import com.example.hn_2025_online_shop.model.response.CartReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
@@ -28,14 +27,16 @@ import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.ultil.swipe.ItemTouchHelperListener;
 import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
+import com.example.hn_2025_online_shop.view.success_screen.OrderSuccessActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -61,11 +62,11 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
     }
 
     private void initController() {
-        binding.arrowBackDetailProduct.setOnClickListener(new View.OnClickListener() {
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+                onBackActivity();
+                updateCart();
             }
         });
 
@@ -76,6 +77,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                     Intent intent = new Intent(CartActivity.this, PayActivity.class);
                     intent.putExtra("totalPrice" , totalPrice);
                     startActivity(intent);
+                    updateCart();
                     overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                 } else {
                     Toast.makeText(CartActivity.this, "Mời bạn chọn sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
@@ -157,6 +159,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                     Log.d(TAG.toString, "onResponse-deleteCartItem: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200) {
                         cartAdapter.removeItem(indexDelete);
+                        CartUtil.listCartCheck.remove(cart);
                         setTotalPrice();
                     }
                 } else { // nhận các đầu status #200
@@ -186,7 +189,65 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        updateCart();
+        onBackActivity();
+    }
+
+    private void updateCart() {
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        for (int i = 0; i < CartUtil.listCart.size(); i++) {
+            int position = i;
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    updateQuantityCart(CartUtil.listCart.get(position));
+                }
+            });
+        }
+    }
+
+    private void updateQuantityCart(CartOfList cart) {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String cartId = cart.getId();
+        int quantity = cart.getQuantity();
+
+        BaseApi.API.updateQuantityCartItem(token, cartId, quantity).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-updateQuantityCartItem: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200) {
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-updateQuantityCartItem: " + errorMessage);
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-updateQuantityCartItem: " + t.toString());
+            }
+        });
+    }
+
+    private void onBackActivity() {
+        // Đoạn này chưa hiểu lắm nhưng kể cả truyền cho màn hình nào thì tất cả
+        // registerForActivityResult onBack đểu đc chạy
+        Intent intent = new Intent(CartActivity.this, MainActivity.class);
+        intent.putExtra("data_cart_size", CartUtil.listCart.size());
+        setResult(RESULT_OK, intent);
         finish();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }

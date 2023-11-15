@@ -67,19 +67,29 @@
                 android:id="@+id/tvName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textColor="@color/black"
                 android:text="Tên sp"
+                />
+
+            <TextView
+                android:id="@+id/tvColorOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/gray99"
+                android:text="Phân loại: màu đỏ"
+                android:layout_marginTop="5dp"
                 />
 
             <TextView
                 android:id="@+id/tvPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:text="65,000,000đ"
-                android:textColor="@color/red"
                 android:textStyle="bold"
+                android:textColor="@color/red"
                 android:layout_marginTop="5dp"
                 />
 

@@ -55,7 +55,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.binding.tvName.setText(product.getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
         holder.binding.tvPrice.setText(df.format(product.getMinPrice()) + " đ");
-        Glide.with(context).load(product.getImage()).into(holder.binding.imgProduct);
+        Glide.with(context)
+                .load(product.getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(holder.binding.imgProduct);
         holder.binding.ratingBar.setRating((float) product.getAverageRate());
         holder.binding.tvReview.setText("Đã bán " + product.getReview());
 
