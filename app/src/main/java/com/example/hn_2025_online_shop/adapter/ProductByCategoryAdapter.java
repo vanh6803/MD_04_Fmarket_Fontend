@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.hn_2025_online_shop.databinding.ItemProductByCategoryBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
 import java.util.List;
 
@@ -19,15 +20,18 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
     private List<ProductByCategory> productByCategoryList;
 
     private ProductAdapter productAdapter;
+    private ObjectUtil objectUtil;
 
     public void setListProductType(List<ProductByCategory> productByCategoryList) {
         this.productByCategoryList = productByCategoryList;
         notifyDataSetChanged();
+
     }
 
-    public ProductByCategoryAdapter(Context context, List<ProductByCategory> productByCategoryList) {
+    public ProductByCategoryAdapter(Context context, List<ProductByCategory> productByCategoryList, ObjectUtil objectUtil) {
         this.context = context;
         this.productByCategoryList = productByCategoryList;
+        this.objectUtil = objectUtil;
     }
 
     @NonNull
@@ -48,7 +52,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
     }
 
     private void setDataRcvProduct(List<Product> productList, ItemProductByCategoryBinding binding) {
-        productAdapter = new ProductAdapter(context, productList);
+        productAdapter = new ProductAdapter(context, productList, objectUtil);
         GridLayoutManager gridLayout = new GridLayoutManager(context, 2);
         binding.rcvProduct.setLayoutManager(gridLayout);
         binding.rcvProduct.setAdapter(productAdapter);

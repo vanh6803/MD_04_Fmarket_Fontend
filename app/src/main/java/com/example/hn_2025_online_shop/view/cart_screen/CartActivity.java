@@ -76,6 +76,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                     Intent intent = new Intent(CartActivity.this, PayActivity.class);
                     intent.putExtra("totalPrice" , totalPrice);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                 } else {
                     Toast.makeText(CartActivity.this, "Mời bạn chọn sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
@@ -181,5 +182,12 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                 loadingDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

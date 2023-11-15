@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.CartPayAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityPayBinding;
@@ -117,6 +118,7 @@ public class PayActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PayActivity.this, AddressActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
 
@@ -137,6 +139,7 @@ public class PayActivity extends AppCompatActivity {
             String token = AccountUltil.BEARER + AccountUltil.TOKEN;
             PurchaseBody purchaseBody = new PurchaseBody();
             purchaseBody.setInfoId(info.getId());
+            purchaseBody.setUserId(AccountUltil.USER.getId());
             purchaseBody.setProductsOrder(CartUtil.listCartCheck);
             loadingDialog.show();
             BaseApi.API.createOrder(token, purchaseBody).enqueue(new Callback<ServerResponse>() {
@@ -148,6 +151,7 @@ public class PayActivity extends AppCompatActivity {
 
                         if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                             Toast.makeText(PayActivity.this, serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            CartUtil.listCartCheck.clear();
                         }
                     } else { // nhận các đầu status #200
                         try {
@@ -195,5 +199,11 @@ public class PayActivity extends AppCompatActivity {
         binding.rcvProduct.setLayoutManager(linearLayoutManager);
         cartPayAdapter = new CartPayAdapter(this, CartUtil.listCartCheck);
         binding.rcvProduct.setAdapter(cartPayAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

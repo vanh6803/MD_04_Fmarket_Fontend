@@ -92,6 +92,7 @@ public class AddressActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(AddressActivity.this, AddAddressActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
     }
@@ -103,5 +104,12 @@ public class AddressActivity extends AppCompatActivity {
         binding.rcvInfo.setLayoutManager(layoutManager);
         infoAdapter = new InfoAdapter(this, infoList);
         binding.rcvInfo.setAdapter(infoAdapter);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+
     }
 }

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityAddAddressBinding;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
@@ -68,6 +69,8 @@ public class AddAddressActivity extends AppCompatActivity {
                     if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                         Intent intent = new Intent(AddAddressActivity.this, AddressActivity.class);
                         startActivity(intent);
+                        finish();
+                        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -110,5 +113,11 @@ public class AddAddressActivity extends AppCompatActivity {
 
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }
