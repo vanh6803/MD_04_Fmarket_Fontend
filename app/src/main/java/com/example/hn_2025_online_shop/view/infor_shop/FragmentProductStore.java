@@ -77,6 +77,7 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
         binding.rcvProductStore.setAdapter(productAdapter);
        setDataProductStore();
     }
+
     public void setDataProductStore(){
         dialog.show();
         BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
