@@ -10,22 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.databinding.LayoutItemAddressBinding;
-import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Info;
-import com.example.hn_2025_online_shop.model.Product;
-import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.InfoInterface;
 
 import java.util.List;
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
     private Context context;
     private List<Info> infoList;
-    private ObjectUtil objectUtil;
+    private InfoInterface infoInterface;
 
-    public InfoAdapter(Context context, List<Info> infoList, ObjectUtil objectUtil) {
+    public InfoAdapter(Context context, List<Info> infoList, InfoInterface infoInterface) {
         this.context = context;
         this.infoList = infoList;
-        this.objectUtil = objectUtil;
+        this.infoInterface = infoInterface;
     }
 
     public void setInfoList(List<Info> infoList) {
@@ -60,8 +58,15 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if(isChecked) {
-                    objectUtil.onclickObject(info);
+                    infoInterface.onclickObject(info);
                 }
+            }
+        });
+
+        holder.binding.tvUpdateInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                infoInterface.updateObject(info);
             }
         });
     }
