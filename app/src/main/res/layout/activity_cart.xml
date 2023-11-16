@@ -82,6 +82,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#F4F4F4"
+            tools:listitem="@layout/layout_iteam_cart"
+            tools:itemCount="2"
             />
     </FrameLayout>
 
@@ -117,8 +119,8 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_gravity="center"
             android:layout_marginLeft="220dp"
             android:src="@drawable/baseline_arrow_forward_ios_24" />
@@ -137,7 +139,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintBottom_toTopOf="@+id/imageView17"
         >
         <ImageView
             android:layout_gravity="center"
@@ -155,10 +157,18 @@
         <ImageView
             android:layout_marginLeft="95dp"
             android:layout_gravity="center"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:src="@drawable/baseline_arrow_forward_ios_24"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageView17"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="#F6F6F6"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        />
 
 
     <RelativeLayout
