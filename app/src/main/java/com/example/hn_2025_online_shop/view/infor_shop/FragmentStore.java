@@ -77,6 +77,7 @@ public class FragmentStore extends Fragment implements ObjectUtil {
         list.add(new Voucher("10%", "400k", "còn 4 ngày"));
         list.add(new Voucher("40%", "100k", "còn 4 ngày"));
         list.add(new Voucher("40%", "220k", "còn 4 ngày"));
+        list.add(new Voucher("50%", "220k", "còn 5 ngày"));
         adapter = new StoreAdapter(list,getContext());
         binding.gridStore.setAdapter(adapter);
         productList = new ArrayList<>();
@@ -122,6 +123,6 @@ public class FragmentStore extends Fragment implements ObjectUtil {
         Intent intent = new Intent(getActivity(), DetailProduct.class);
         intent.putExtra("id_product", id);
         getActivity().startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left); 
     }
 }
