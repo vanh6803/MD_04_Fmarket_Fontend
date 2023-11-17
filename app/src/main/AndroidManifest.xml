@@ -2,99 +2,57 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.HN2025Onlineshop"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.buy_product.UpdateAddressActivity"
-            android:exported="false" />
+            android:name=".MainActivity"
+            android:exported="true">
+        </activity>
         <activity
-            android:name=".view.success_screen.OrderSuccessActivity"
-            android:exported="false" />
+            android:name=".login.Login"
+            android:exported="true">
+        </activity>
         <activity
-            android:name=".view.buy_product.AddAddressActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.buy_product.AddressActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.buy_product.PayActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.success_screen.CreateStoreSuccessActivity"
-            android:exported="false" />
-        <activity
-            android:name=".view.success_screen.RegisterSuccess"
-            android:exported="true" />
-        <activity
-            android:name=".view.profile_screen.ProfileUserScreen"
-            android:exported="false" />
-
-        <activity android:name=".view.voucher.VoucherScreen" />
-
-        <activity android:name=".view.my_store.MyStoreScreen" />
+            android:name=".login.Register"
+            android:exported="true">
+        </activity>
 
         <activity
-            android:name=".view.profile_screen.ChatScreen"
-            android:exported="false" />
+            android:name=".login.ResetPassWord"
+            android:exported="true">
+        </activity>
         <activity
-            android:name=".view.cart_screen.CartActivity"
-            android:exported="true" />
+            android:name=".login.ResetPassWordSuccess"
+            android:exported="true">
+        </activity>
         <activity
-            android:name=".view.home_screen.MainActivity"
-            android:exported="true" />
+            android:name=".login.VerifiPassWord"
+            android:exported="true">
+        </activity>
         <activity
-            android:name=".view.login.Login"
-            android:exported="true" />
+            android:name=".login.ForgotPassWord"
+            android:exported="true">
+        </activity>
         <activity
-            android:name=".view.login.Register"
-            android:exported="true" />
-        <activity
-            android:name=".view.login.ResetPassWord"
-            android:exported="true" />
-        <activity
-            android:name=".view.login.ResetPassWordSuccess"
-            android:exported="true" />
-        <activity
-            android:name=".view.login.VerifiPassWord"
-            android:exported="true" />
-        <activity
-            android:name=".view.login.ForgotPassWord"
-            android:exported="true" />
-        <activity
-            android:name=".view.profile_screen.history_buy_screen.product_screen.DetailProduct"
-            android:exported="true" />
-        <activity
-            android:name=".view.login.RegisterMemberSeller"
-            android:exported="true" />
-        <activity
-            android:name=".view.profile_screen.HistoryBuyScreen"
-            android:exported="true" />
-        <activity
-            android:name=".view.infor_shop.InforShop"
-            android:exported="true" />
-        <activity
-            android:name=".view.login.Splash"
+            android:name=".login.splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
 
         </activity>
     </application>
