@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:title="Tổng quan"
+            android:icon="@drawable/home"/>
+        <item
+            android:id="@+id/khosanpham"
+            android:title="Kho sản phẩm"
+            android:icon="@drawable/sanphamprodcut"/>
+        <item
+            android:id="@+id/dondathang"
+            android:title="Đơn đặt hàng"
+            android:icon="@drawable/dondathang"/>
+        <item
+            android:id="@+id/taovoucher"
+            android:title="Tạo voucher"
+            android:icon="@drawable/tao"/>
+        <item
+            android:id="@+id/taobanner"
+            android:title="Tạo banner"
+            android:icon="@drawable/taobanner"/>
+        <item
+            android:id="@+id/dangsanpham"
+            android:title="Đăng sản phẩm"
+            android:icon="@drawable/dangsanpham"/>
+        <item
+            android:id="@+id/xuatkho"
+            android:title="Xuất kho"
+            android:icon="@drawable/xuatkho"/>
+        <item
+            android:id="@+id/hoadon"
+            android:title="Hóa đơn"
+            android:icon="@drawable/hoadon"/>
+        <item
+            android:id="@+id/doanhthu"
+            android:title="Doanh thu"
+            android:icon="@drawable/doanhthu"/>
+    </group>
+
+</menu>
