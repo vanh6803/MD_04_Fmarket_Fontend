@@ -175,4 +175,5 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
         getActivity().startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
     }
+
 }
