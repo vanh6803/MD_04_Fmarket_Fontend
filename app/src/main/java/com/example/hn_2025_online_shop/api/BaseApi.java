@@ -38,7 +38,7 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/api/")
+            .baseUrl("http://192.168.0.106:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -181,4 +181,17 @@ public interface BaseApi {
     Call<StoreIdResponse> getidMyStore(@Header("Authorization") String authorization,
                                        @Path("accountId") String accountId);
 
+
+    @FormUrlEncoded
+    @PUT("info/edit-info/{idInfo}")
+    Call<ServerResponse> editInfo(@Header("Authorization") String authorization,
+                                  @Path("idInfo") String idInfo,
+                                  @Field("name") String name,
+                                  @Field("address") String address,
+                                  @Field("phone_number") String phone_number,
+                                  @Field("checked") Boolean checked);
+
+    @DELETE("info/delete/{idInfo}")
+    Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
+                                    @Path("idInfo") String idInfo);
 }

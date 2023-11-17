@@ -16,7 +16,6 @@ import java.util.List;
 
 public class ViewPageHomeAdapter extends FragmentStateAdapter {
 
-
     public ViewPageHomeAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
