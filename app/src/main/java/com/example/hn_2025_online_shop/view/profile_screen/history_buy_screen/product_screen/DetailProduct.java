@@ -100,7 +100,6 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     }
 
     private void getVoucher() {
-        productList = new ArrayList<>();
         voucherList = new ArrayList<>();
         for (int i = 1 ; i< 4; i++){
             voucherList.add(new Voucher("Giảm"+i+"%", "1234", ""));
@@ -242,6 +241,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){
                     ProductResponse productResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-setDataSimilarProduct: " + productResponse.getResult().toString());
                     productAdapter.setProductList(productResponse.getResult());
                     binding.recyProductSimilar.setAdapter(productAdapter);
                 }else {
@@ -354,6 +354,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
         binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        productList = new ArrayList<>();
+        productAdapter = new ProductAdapter(this, productList, this);
     }
 
     // --------------------------------- BottomSheetDialog --------------------------------------------
@@ -495,12 +497,22 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     @Override
     public void onclickObject(Object object) {
-        optionProduct = (OptionProduct) object;
-        Glide.with(this)
-                .load(optionProduct.getImage())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .into(bindingOption.imgProduct);
+        // Do dùng trung 1 hàm lên phải kiểm tra xem giá trị trả về là của OptionProduct Hay Product
+        if(object instanceof OptionProduct) {
+            optionProduct = (OptionProduct) object;
+            Glide.with(this)
+                    .load(optionProduct.getImage())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.error)
+                    .into(bindingOption.imgProduct);
+        } else if(object instanceof Product) {
+            Product product = (Product) object;
+            String id = product.getId();
+            Intent intent = new Intent(this, DetailProduct.class);
+            intent.putExtra("id_product", id);
+            startActivity(intent);
+            overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+        }
     }
 
     @Override
