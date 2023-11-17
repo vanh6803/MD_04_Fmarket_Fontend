@@ -5,7 +5,7 @@
     android:background="@drawable/custom_ln_thanhtoan"
     android:padding="10dp"
     android:gravity="center"
-    android:layout_marginBottom="2dp"
+    android:layout_marginTop="4dp"
     >
 
     <ImageView

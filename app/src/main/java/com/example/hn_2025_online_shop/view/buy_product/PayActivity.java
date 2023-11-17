@@ -141,6 +141,11 @@ public class PayActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.imgBack.setOnClickListener(view -> {
+            finish();
+            overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+        });
     }
     private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {

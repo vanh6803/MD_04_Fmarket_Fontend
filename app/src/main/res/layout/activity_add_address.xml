@@ -41,8 +41,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-
-
             <TextView
                 android:background="#F6F6F6"
                 android:gravity="center_vertical"

@@ -268,7 +268,7 @@ public class FragmentProfile extends Fragment {
         });
     }
     private void logOut() {
-        binding.layoutLogout.setOnClickListener(new View.OnClickListener() {
+        binding.btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LayoutDialogLogoutBinding bindingLogout = LayoutDialogLogoutBinding.inflate(getLayoutInflater());

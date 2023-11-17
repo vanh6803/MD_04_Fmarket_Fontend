@@ -1,5 +1,9 @@
 package com.example.hn_2025_online_shop.view.buy_product;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -15,14 +19,10 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityAddressBinding;
 import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
-import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.CartUtil;
-import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.InfoInterface;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
-import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddressActivity extends AppCompatActivity implements ObjectUtil {
+public class AddressActivity extends AppCompatActivity implements InfoInterface {
     private ActivityAddressBinding binding;
     private List<Info> infoList;
     private InfoAdapter infoAdapter;
@@ -122,7 +122,6 @@ public class AddressActivity extends AppCompatActivity implements ObjectUtil {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
-
     }
 
     @Override
@@ -137,4 +136,26 @@ public class AddressActivity extends AppCompatActivity implements ObjectUtil {
         finish();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
+
+    @Override
+    public void updateObject(Object object) {
+        Info info = (Info) object;
+        Log.d(TAG.toString, "updateObject: " + info.toString());
+        Intent intent = new Intent(this, UpdateAddressActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("info", info);
+        intent.putExtras(bundle);
+        mActivityResultLauncher.launch(intent);
+        overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+    }
+
+    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == RESULT_OK) {
+                        urlGetAllInfo();
+                    }
+                }
+            });
 }
