@@ -150,6 +150,8 @@ public class ProfileUserScreen extends AppCompatActivity {
         }
     }
 
+
+
     private String getPath(Uri uri){
         String result;
         Cursor cursor = getContentResolver()

@@ -170,7 +170,6 @@ public interface BaseApi {
 
     @GET("info")
     Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
-
     @POST("order/create-order")
     Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
                                      @Body PurchaseBody purchaseBody);
