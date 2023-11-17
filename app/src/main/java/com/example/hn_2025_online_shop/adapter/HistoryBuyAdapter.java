@@ -43,7 +43,6 @@ public class HistoryBuyAdapter extends RecyclerView.Adapter<HistoryBuyAdapter.Vi
         holder.binding.txtNamehis.setText(historyBuy.getName());
         holder.binding.txtnametypeHis.setText(historyBuy.getTypeColor());
         holder.binding.txtPriceHis.setText(historyBuy.getPrice());
-        holder.binding.txtPriceSaleHis.setText(historyBuy.getPriceSale());
         Picasso.get().load(list.get(position).getImg()).into(holder.binding.img);
     }
 
@@ -58,8 +57,6 @@ public class HistoryBuyAdapter extends RecyclerView.Adapter<HistoryBuyAdapter.Vi
         public ViewHolder(ItemHistoryBuyBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            binding.txtPriceSaleHis.setPaintFlags(binding.txtPriceSaleHis.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-
         }
     }
 }

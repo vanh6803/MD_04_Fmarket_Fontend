@@ -229,6 +229,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                         }
                     } else { // nhận các đầu status #200
                         try {
+
                             assert response.errorBody() != null;
                             String errorBody = response.errorBody().string();
                             JSONObject errorJson = new JSONObject(errorBody);
@@ -288,6 +289,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.avatar1)
                 .into(binding.imgAvartar);
+
     }
 
     @Override

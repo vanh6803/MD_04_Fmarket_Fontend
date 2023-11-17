@@ -38,7 +38,7 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/api/")
+            .baseUrl("http://192.168.0.106:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -170,6 +170,16 @@ public interface BaseApi {
 
     @GET("info")
     Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
+    @POST("order/create-order")
+    Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
+                                     @Body PurchaseBody purchaseBody);
+    @GET("store/check-exiting")
+    Call<CheckStoreResponse> checkStoreExiting(@Header("Authorization") String authorization);
+
+    @GET("store/get-store-id/{accountId}")
+    Call<StoreIdResponse> getidMyStore(@Header("Authorization") String authorization,
+                                       @Path("accountId") String accountId);
+
 
     @FormUrlEncoded
     @PUT("info/edit-info/{idInfo}")
@@ -183,15 +193,4 @@ public interface BaseApi {
     @DELETE("info/delete/{idInfo}")
     Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
                                     @Path("idInfo") String idInfo);
-
-    @POST("order/create-order")
-    Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
-                                     @Body PurchaseBody purchaseBody);
-    @GET("store/check-exiting")
-    Call<CheckStoreResponse> checkStoreExiting(@Header("Authorization") String authorization);
-
-    @GET("store/get-store-id/{accountId}")
-    Call<StoreIdResponse> getidMyStore(@Header("Authorization") String authorization,
-                                       @Path("accountId") String accountId);
-
 }

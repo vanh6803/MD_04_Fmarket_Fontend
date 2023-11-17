@@ -219,7 +219,6 @@
                         <TextView
                             android:id="@+id/tvShop"
                             android:layout_gravity="center"
-                            android:gravity="start"
                             android:text="Laptop AZ"
                             android:textStyle="normal"
                             android:textSize="@dimen/font_size_text_title_medium"
@@ -336,6 +335,7 @@
                     android:id="@+id/recy_product_similar"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/layout_item_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

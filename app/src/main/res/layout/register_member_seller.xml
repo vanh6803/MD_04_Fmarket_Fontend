@@ -3,231 +3,200 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/gray_ground"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
+        android:background="@color/white"
         android:paddingHorizontal="12dp"
-        android:paddingVertical="15dp"
+        android:paddingVertical="17dp"
         >
         <ImageView
             android:id="@+id/imgBack"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/custom_bg_shopping_cart_white"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/custom_bg_shopping_cart_primary"
             android:padding="5dp"
             android:src="@drawable/backs"
-            app:tint="@color/primary" />
+            app:tint="@color/white" />
 
         <TextView
-            android:text="Đăng ký trở thành người bán"
+            android:text="Đăng ký thành người bán"
             android:textSize="@dimen/font_size_text_title_s"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:paddingHorizontal="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-    <ScrollView
-        android:paddingHorizontal="22dp"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
+                android:text="Tên shop"
+                android:textColor="@color/gray99"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="12dp"
+                android:textSize="14dp"/>
+            <EditText
+                android:id="@+id/edtNameShop"
+                android:gravity="center_vertical"
+                android:hint="Nhập tên shop"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
             <LinearLayout
-                android:layout_marginTop="30dp"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:maxWidth="20dp"
-                    android:maxHeight="20dp"
-                    android:src="@drawable/person" />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtNameShop"
-                            android:background="@color/transparent"
-                            android:padding="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:hint="Tên Shop" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <TextView
-                        android:height="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="100dp"
-                android:layout_marginTop="20dp"
-                android:layout_height="100dp">
-
-                <ImageView
-                    android:id="@+id/imgAvartar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/custom_create_image"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@color/white"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_margin="12dp"
                     >
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_add"
-                        app:tint="@color/primary"
-                        android:layout_gravity="center"
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thêm Avatar"
-                        android:textColor="@color/primary"
-                        />
-
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:maxWidth="20dp"
-                    android:maxHeight="20dp"
-                    android:src="@drawable/pass" />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/imgAvartar"
                         android:layout_width="match_parent"
-                        android:gravity="center"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtDiachi"
-                            android:background="@color/transparent"
-                            android:padding="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:hint="Địa chỉ" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <TextView
-                        android:height="6dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:layout_height="200dp">
-
-                <ImageView
-                    android:id="@+id/imgBanner"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/custom_create_image"
-                    />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    >
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_add"
+                        android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        app:tint="@color/primary"
-                        android:layout_gravity="center"
+                        android:src="@drawable/custom_create_image"
                         />
-                    
-                    <TextView
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Thêm banner"
-                        android:textColor="@color/primary"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_add"
+                            app:tint="@color/primary"
+                            android:layout_gravity="center"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thêm Avatar"
+                            android:textColor="@color/primary"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <TextView
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
+                android:text="Địa chỉ"
+                android:textColor="@color/gray99"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="12dp"
+                android:textSize="14dp"/>
+            <EditText
+                android:id="@+id/edtDiachi"
+                android:gravity="center_vertical"
+                android:hint="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_margin="12dp"
+                    android:layout_height="200dp">
+
+                    <ImageView
+                        android:id="@+id/imgBanner"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/custom_create_image"
                         />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_add"
+                            android:scaleType="centerCrop"
+                            app:tint="@color/primary"
+                            android:layout_gravity="center"
+                            />
 
-            <Button
-                android:id="@+id/btnRegisMember"
-                android:elevation="10dp"
-                android:layout_marginTop="40dp"
-                android:text="Tiếp tục"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:height="40dp"
-                android:background="@drawable/custom_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Thêm banner"
+                            android:textColor="@color/primary"
+                            />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
 
             <TextView
+                android:id="@+id/btnRegisMember"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/custom_button_rectangular"
+                android:padding="12dp"
+                android:gravity="center"
+                android:textSize="18dp"
+                android:text="Register"
+                android:textColor="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                />
+
 
         </LinearLayout>
-    </ScrollView>
-
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>
