@@ -3,21 +3,29 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:paddingHorizontal="22dp"
+    android:layout_marginHorizontal="16dp"
     android:layout_height="match_parent">
 
     <TextView
         android:layout_marginTop="50dp"
         android:text="Đăng nhập"
-        android:textSize="@dimen/font_size_text_title"
+        android:textSize="30dp"
         android:textColor="@color/color_chudao"
         android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Email hoặc số điện thoại"
+        android:textColor="@color/black"
+        android:textSize="14dp"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_edittext"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -30,28 +38,24 @@
             android:maxWidth="20dp"
             android:maxHeight="20dp"
             android:src="@drawable/person" />
-
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
                 android:gravity="center"
                 app:passwordToggleEnabled="false"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtEmail"
-                    android:text="thuanncph26023@fpt.edu.vn"
+                    android:id="@+id/edtName"
                     android:background="@color/transparent"
-                    android:padding="10dp"
+                    android:padding="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="16sp"
-                    android:hint="Email" />
+                    android:hint="Email hoặc số điện thoại" />
             </com.google.android.material.textfield.TextInputLayout>
             <TextView
                 android:height="6dp"
@@ -61,9 +65,17 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="Mật khẩu"
+        android:textSize="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_edittext"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -81,21 +93,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.google.android.material.textfield.TextInputLayout
-
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:gravity="center"
                 app:passwordToggleEnabled="true"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edtPass"
+                    android:id="@+id/edtRepass"
                     android:background="@color/transparent"
-                    android:padding="6dp"
-                    android:text="123456"
-
+                    android:padding="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:layout_gravity="center"
                     android:hint="Mật khẩu" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -108,7 +116,6 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnLogin"
         android:elevation="10dp"
         android:layout_marginTop="40dp"
         android:text="Đăng Nhập"
@@ -125,18 +132,16 @@
          android:orientation="horizontal"
          android:layout_width="match_parent"
          android:layout_height="wrap_content">
-
          <TextView
              android:id="@+id/txtRegister"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
              android:layout_gravity="center"
              android:gravity="center"
-             android:text="Bạn chưa có tài khoản?"
-             android:textSize="@dimen/font_size_text"
              android:textStyle="bold"
-             android:textColor="@drawable/custom_text_primary_press" />
-
+             android:textColor="@color/color_chudao"
+             android:text="Bạn chưa có tài khoản?"
+             android:textSize="14dp"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"/>
          <TextView
              android:layout_gravity="center"
              android:layout_weight="1"
@@ -148,11 +153,11 @@
              android:layout_gravity="center"
              android:gravity="center"
              android:textStyle="bold"
+             android:textColor="@color/color_chudao"
              android:text="Quên mật khẩu?"
-             android:textSize="@dimen/font_size_text"
+             android:textSize="14dp"
              android:layout_width="wrap_content"
-             android:layout_height="match_parent"
-             android:textColor="@drawable/custom_text_primary_press"/>
+             android:layout_height="match_parent"/>
      </LinearLayout>
 
     <LinearLayout
@@ -222,5 +227,7 @@
         android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+
+
 
 </LinearLayout>
