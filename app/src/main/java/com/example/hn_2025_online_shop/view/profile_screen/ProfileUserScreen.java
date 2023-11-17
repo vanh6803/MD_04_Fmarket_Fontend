@@ -286,6 +286,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.avatar1)
                 .into(binding.imgAvartar);
+
     }
 
     @Override
