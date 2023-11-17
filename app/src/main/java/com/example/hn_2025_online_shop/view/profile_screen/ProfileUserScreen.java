@@ -1,13 +1,14 @@
 package com.example.hn_2025_online_shop.view.profile_screen;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
-import android.icu.text.DecimalFormat;
 import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.Bundle;
@@ -35,7 +36,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -54,7 +54,6 @@ public class ProfileUserScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = LayoutProfileUserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         initData();
         initController();
 
@@ -80,6 +79,17 @@ public class ProfileUserScreen extends AppCompatActivity {
             }
         });
 
+        binding.updatePro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.edtUserName.setEnabled(true);
+                binding.edtBirthday.setEnabled(true);
+                binding.linearCalander.setClickable(true);
+                binding.sdt.setEnabled(true);
+                binding.btnSave.setEnabled(true);
+            }
+        });
+
         binding.linearCalander.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +102,12 @@ public class ProfileUserScreen extends AppCompatActivity {
             public void onClick(View view) {
                 String username = binding.edtUserName.getText().toString().trim();
                 String birthday = binding.edtBirthday.getText().toString().trim();
-                apiDetailProfile(username, birthday);
+                String phone = binding.sdt.getText().toString().trim();
+                binding.edtUserName.setEnabled(false);
+                binding.edtBirthday.setEnabled(false);
+                binding.linearCalander.setClickable(false);
+                binding.sdt.setEnabled(false);
+                apiEditProfile(username, birthday, phone);
             }
         });
     }
@@ -119,6 +134,7 @@ public class ProfileUserScreen extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK) {
+            assert data != null;
             Uri uri = data.getData();
             File file = new File(getPath(uri));
             RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
@@ -155,9 +171,10 @@ public class ProfileUserScreen extends AppCompatActivity {
         loadingDialog.show();
         BaseApi.API.uploadAvatar(token, idUser, fileImgAvatar).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
+                    assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-uploadAvatar: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                         Toast.makeText(ProfileUserScreen.this, serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -166,6 +183,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -181,7 +199,7 @@ public class ProfileUserScreen extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(ProfileUserScreen.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-uploadAvatar: " + t.toString());
                 loadingDialog.dismiss();
@@ -189,17 +207,18 @@ public class ProfileUserScreen extends AppCompatActivity {
         });
     }
 
-    private void apiDetailProfile(String username, String birthday) {
+    private void apiEditProfile(String username, String birthday, String phone) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String idUser = AccountUltil.USER.getId();
 
-        if(validateValue(username, birthday)) {
+        if(validateValue(username, birthday, phone)) {
             loadingDialog.show();
             BaseApi.API.editProfile(token, idUser, username, birthday).enqueue(new Callback<ServerResponse>() {
                 @Override
-                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                     if(response.isSuccessful()){ // chỉ nhận đầu status 200
                         ServerResponse serverResponse = response.body();
+                        assert serverResponse != null;
                         Log.d(TAG.toString, "onResponse-editProfile: " + serverResponse.toString());
                         if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                             Toast.makeText(ProfileUserScreen.this, serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -208,6 +227,8 @@ public class ProfileUserScreen extends AppCompatActivity {
                         }
                     } else { // nhận các đầu status #200
                         try {
+
+                            assert response.errorBody() != null;
                             String errorBody = response.errorBody().string();
                             JSONObject errorJson = new JSONObject(errorBody);
                             String errorMessage = errorJson.getString("message");
@@ -223,7 +244,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<ServerResponse> call, Throwable t) {
+                public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                     Toast.makeText(ProfileUserScreen.this, t.toString(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG.toString, "onFailure-editProfile: " + t.toString());
                     loadingDialog.dismiss();
@@ -233,9 +254,13 @@ public class ProfileUserScreen extends AppCompatActivity {
 
     }
 
-    private boolean validateValue(String username, String birthday) {
+    private boolean validateValue(String username, String birthday, String phone) {
         if(TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Mời điền thông tin username", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(TextUtils.isEmpty(phone)) {
+            Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }
 
@@ -249,16 +274,20 @@ public class ProfileUserScreen extends AppCompatActivity {
         return true;
     }
 
+    @SuppressLint({"SimpleDateFormat", "ResourceAsColor"})
     private void initData() {
         formatter = new SimpleDateFormat("dd/MM/yyyy");
         loadingDialog = new ProgressLoadingDialog(this);
         binding.edtUserName.setText(AccountUltil.USER.getUsername());
         binding.edtBirthday.setText(AccountUltil.USER.getBirthday());
+        binding.sdt.setText(AccountUltil.USER.getPhone());
+        binding.email.setText(AccountUltil.USER.getEmail());
         Glide.with(this)
                 .load(AccountUltil.USER.getAvatar())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.avatar1)
                 .into(binding.imgAvartar);
+
     }
 
     @Override

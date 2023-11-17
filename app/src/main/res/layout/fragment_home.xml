@@ -106,7 +106,7 @@
                 app:iss_period="1000"
                 app:iss_auto_cycle="true"
                 android:background="@color/white"
-                app:iss_delay="3000"
+                app:iss_delay="5000"
                 app:iss_corner_radius="20"
                 android:layout_height="200dp"/>
 

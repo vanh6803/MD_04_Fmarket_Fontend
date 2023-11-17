@@ -22,7 +22,7 @@
             app:tint="@color/primary" />
 
         <TextView
-            android:text="Thông tin người dùng"
+            android:text="Đăng ký trở thành người bán"
             android:textSize="@dimen/font_size_text_title_s"
             android:gravity="center"
             android:textColor="@color/white"
