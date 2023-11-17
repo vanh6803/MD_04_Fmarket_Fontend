@@ -54,6 +54,14 @@ public class AddAddressActivity extends AppCompatActivity {
             }
         });
 
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+            }
+        });
+
     }
 
     private void urlAddInfo(String address, String phoneNumber, String name) {

@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.hn_2025_online_shop.adapter.CartAdapter;
 
 public class RecycleViewItemTouchHelper extends ItemTouchHelper.SimpleCallback {
-
     private ItemTouchHelperListener listener;
 
     public RecycleViewItemTouchHelper(int dragDirs, int swipeDirs, ItemTouchHelperListener listener) {
@@ -49,7 +48,7 @@ public class RecycleViewItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         View foreGroundView = ((CartAdapter.CartViewHolder) viewHolder).layoutForeground;
-        getDefaultUIUtil().onDrawOver(c, recyclerView, foreGroundView, dX, dY, actionState, isCurrentlyActive);
+        getDefaultUIUtil().onDraw(c, recyclerView, foreGroundView, dX, dY, actionState, isCurrentlyActive);
     }
 
     @Override
