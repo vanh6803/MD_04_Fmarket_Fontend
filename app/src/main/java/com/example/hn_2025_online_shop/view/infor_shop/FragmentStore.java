@@ -86,8 +86,6 @@ public class FragmentStore extends Fragment implements ObjectUtil {
     }
     private void initView() {
         dialog = new ProgressLoadingDialog(getContext());
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        binding.recyStore.setLayoutManager(layoutManager);
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(getContext(), productList, this);
         productAdapter.setProductList(productList);

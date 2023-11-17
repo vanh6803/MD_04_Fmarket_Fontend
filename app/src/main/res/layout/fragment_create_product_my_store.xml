@@ -56,6 +56,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtNameProduct"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -99,6 +100,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtSoLuong"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -156,6 +158,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="65dp"
                 android:background="@drawable/custom_edittext" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Is Active"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/spinnerIsActive"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:background="@drawable/custom_edittext" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -180,6 +195,7 @@
                         android:gravity="center"
                         app:passwordToggleEnabled="false">
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtMota"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -221,6 +237,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtSC"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -262,6 +279,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtCamera"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -303,6 +321,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtChipset"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -344,6 +363,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtCpu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -390,6 +410,7 @@
                             android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:hint="Gpu"
+                            android:id="@+id/edtGpu"
                             android:padding="10dp"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -431,6 +452,7 @@
                             android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:hint="Hệ Điều Hành"
+                            android:id="@+id/edtHeDieuHanh"
                             android:padding="10dp"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -468,6 +490,7 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
+                            android:id="@+id/edtBatrery"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:background="@color/transparent"
@@ -511,6 +534,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:id="@+id/edtWeight"
                             android:background="@color/transparent"
                             android:hint="Weight"
                             android:padding="10dp"
@@ -549,6 +573,7 @@
                         app:passwordToggleEnabled="false">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtConnection"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -593,6 +618,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:id="@+id/edtSpecialFeature"
                             android:background="@color/transparent"
                             android:hint="SpecialFeature"
                             android:padding="10dp"
@@ -633,6 +659,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/edtManufacturer"
                             android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:hint="Manufacturer"
@@ -675,6 +702,7 @@
                             android:layout_gravity="center"
                             android:background="@color/transparent"
                             android:hint="Other"
+                            android:id="@+id/edtOther"
                             android:padding="10dp"
                             android:textSize="16sp" />
                     </com.google.android.material.textfield.TextInputLayout>

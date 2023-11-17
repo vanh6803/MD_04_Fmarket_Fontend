@@ -12,6 +12,7 @@ import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
+import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -37,7 +38,7 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.106:3000/api/")
+            .baseUrl("http://10.0.2.2:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -75,6 +76,27 @@ public interface BaseApi {
     @POST("forgot-password")
     Call<ServerResponse> forgotPassword(@Field("email") String email);
 
+    @FormUrlEncoded
+    @POST("products/create-product")
+    Call<ProductResponse> createProductMyStore(@Field("store_id") String store_id,
+                                               @Field("category_id") String category_id,
+                                               @Field("name") String name,
+                                               @Field("description") String description,
+                                               @Field("status") String status,
+                                               @Field("discounted") boolean discounted,
+                                               @Field("is_active") boolean is_active,
+                                               @Field("screen") String screen,
+                                               @Field("camera") String camera,
+                                               @Field("chipset") String chipset,
+                                               @Field("cpu") String cpu,
+                                               @Field("gpu") String gpu,
+                                               @Field("operatingSystem") String operatingSystem,
+                                               @Field("battery") String battery,
+                                               @Field("weight") int weight,
+                                               @Field("connection") String connection,
+                                               @Field("specialFeature") String specialFeature,
+                                               @Field("manufacturer") String manufacturer,
+                                               @Field("other") String other);
     @GET("products/all-product")
     Call<ProductResponse> getListAllProduct();
 
@@ -167,4 +189,9 @@ public interface BaseApi {
                                      @Body PurchaseBody purchaseBody);
     @GET("store/check-exiting")
     Call<CheckStoreResponse> checkStoreExiting(@Header("Authorization") String authorization);
+
+    @GET("store/get-store-id/{accountId}")
+    Call<StoreIdResponse> getidMyStore(@Header("Authorization") String authorization,
+                                       @Path("accountId") String accountId);
+
 }
