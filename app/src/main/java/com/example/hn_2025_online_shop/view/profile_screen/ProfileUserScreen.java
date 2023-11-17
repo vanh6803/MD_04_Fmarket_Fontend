@@ -227,6 +227,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                         }
                     } else { // nhận các đầu status #200
                         try {
+
                             assert response.errorBody() != null;
                             String errorBody = response.errorBody().string();
                             JSONObject errorJson = new JSONObject(errorBody);
