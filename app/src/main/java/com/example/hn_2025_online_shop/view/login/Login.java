@@ -89,7 +89,7 @@ public class Login extends AppCompatActivity{
                             ApiUtil.getDetailUser(Login.this, loadingDialog);
                             // Lấy danh sách cart
                             ApiUtil.getAllCart(Login.this, loadingDialog, null);
-                            Toast.makeText(Login.this,"Bạn đã đăng nhập thành công!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             screenSwitch(Login.this, MainActivity.class);
                             finishAffinity();
                         }
@@ -123,10 +123,10 @@ public class Login extends AppCompatActivity{
 
     private boolean validateLogin(String email, String pass) {
         if (areEditTextsEmpty(binding.edtEmail, binding.edtPass)){
-            Toast.makeText(Login.this,"Bạn đừng để trống chỗ nhập nhé!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this,"Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
             return false;
         } else if(!Validator.isValidEmail(email)) {
-            Toast.makeText(Login.this,"Bạn hãy nhập đúng định dạnh email!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Login.this,"Nhập đúng định dạnh email!", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
