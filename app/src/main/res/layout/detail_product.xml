@@ -51,8 +51,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
+                    android:layout_marginHorizontal="8dp"
                     android:text="Ốp lưng iPhone 14 Pro Spigen Liquid Air màu Deep Purple"
                     android:textColor="@color/black"
                     android:textSize="@dimen/font_size_text_title_medium"
@@ -61,8 +61,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="8dp"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -103,8 +103,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -145,9 +145,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="20dp"
                     android:gravity="start"
+                    android:layout_marginHorizontal="8dp"
                     android:text="Miễn phí vận chuyển"
                     android:textColor="@color/gray69"
                     android:textSize="@dimen/font_size_text"
@@ -163,8 +163,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
+                    android:layout_marginHorizontal="8dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -180,10 +180,10 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recy_voucher"
                         android:layout_width="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:orientation="horizontal"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                        android:orientation="horizontal" />
 
 
                 </LinearLayout>
@@ -211,41 +211,38 @@
                         android:src="@drawable/test" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:orientation="vertical">
-
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/tvShop"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:gravity="start"
                             android:text="Laptop AZ"
-                            android:textColor="@color/black"
+                            android:textStyle="normal"
                             android:textSize="@dimen/font_size_text_title_medium"
-                            android:textStyle="normal" />
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:orientation="horizontal">
-
+                            android:orientation="horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
                             <ImageView
-                                android:layout_width="12dp"
-                                android:layout_height="12dp"
                                 android:layout_gravity="center"
-                                android:src="@drawable/location" />
+                                android:src="@drawable/location"
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"/>
 
                             <TextView
                                 android:id="@+id/diachiShop"
+                                android:layout_marginLeft="4dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="16dp"
                                 android:layout_gravity="center"
-                                android:layout_marginLeft="4dp"
                                 android:text="Laptop AZ"
                                 android:textColor="@color/black"
                                 android:textSize="10dp"
@@ -253,21 +250,20 @@
 
                         </LinearLayout>
                     </LinearLayout>
-
                     <TextView
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_height="wrap_content"/>
 
                     <Button
                         android:id="@+id/showshop"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
                         android:background="@drawable/custom_btn_boder"
-                        android:text="Xem Shop"
                         android:textColor="@color/color_chudao"
                         android:textSize="@dimen/font_size_text"
-                        android:textStyle="normal" />
+                        android:textStyle="normal"
+                        android:text="Xem Shop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -275,23 +271,39 @@
                     android:layout_height="5dp"
                     android:layout_marginVertical="10dp"
                     android:background="@color/color_edittext" />
-
-                <Button
-                    android:id="@+id/btnShowDetailProduct"
-                    android:layout_width="150dp"
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:background="@drawable/custom_btn_detail_prodcut"
-                    android:text="Xem chi tiết sản phẩm"
-                    android:textColor="@color/red"
-                    android:textSize="11dp" />
+                    android:orientation="horizontal">
+                    <Button
+                        android:layout_marginRight="80dp"
+                        android:id="@+id/btnShowDetailProduct"
+                        android:background="@drawable/custom_btn_detail_prodcut"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:textSize="11dp"
+                        android:textColor="@color/color_chudao"
+                        android:text="Xem chi tiết sản phẩm"/>
+                    <Button
+                        android:id="@+id/btnShowDanhGiaSanPham"
+                        android:background="@drawable/custom_btn_detail_prodcut"
+                        android:layout_width="150dp"
+                        android:layout_height="40dp"
+                        android:textSize="11dp"
+                        android:textColor="@color/color_chudao"
+                        android:text="Xem đánh giá sản phẩm"/>
+                </LinearLayout>
+
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginHorizontal="8dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -306,9 +318,9 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:layout_marginHorizontal="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="5dp"
                         android:layout_weight="1"
                         android:gravity="end"
                         android:text="Xem tất cả"
@@ -321,10 +333,10 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recy_product_similar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
