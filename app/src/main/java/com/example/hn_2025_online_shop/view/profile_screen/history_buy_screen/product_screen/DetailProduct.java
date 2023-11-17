@@ -29,8 +29,6 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBinding;
-import com.example.hn_2025_online_shop.model.CartOfList;
-import com.example.hn_2025_online_shop.model.OptionOfListCart;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
@@ -59,7 +57,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -122,6 +119,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                     DetailProductResponse detailProductResponse = response.body();
                     if (detailProductResponse.getCode() == 200){
                         productDetail = detailProductResponse.getResult();
+                        Log.d("gggg", "onResponse: " + detailProductResponse.getResult());
                         setDataUi(detailProductResponse);
                     }
                 } else {
@@ -233,6 +231,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         });
     }
 
+
     public void setDataSimilarProduct(){
         dialog.show();
         Intent intent = getIntent();
@@ -287,6 +286,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         dialog.show();
     }
 
+
     private void initController() {
         binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -299,9 +299,11 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             @Override
             public void onClick(View view) {
                 if(productDetail!= null) {
+                    String productId = productDetail.getId();
                     String storeId = productDetail.getStore_id().toString();
                     Intent intent = new Intent(DetailProduct.this, InforShop.class);
                     intent.putExtra("storeId",storeId);
+                    intent.putExtra("id_product",productId);
                     StoreUltil.store = productDetail.getStore_id();
                     startActivity(intent);
                 }
@@ -505,6 +507,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         onBackActivity();
     }
 

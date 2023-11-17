@@ -88,6 +88,7 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
                     if (response1.getCode() == 200){
                         productAdapter.setProductList(response1.getResult());
                         binding.rcvProductStore.setAdapter(productAdapter);
+                        Log.d("cccc", "onResponse: " + response1.getResult());
                         Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 } else {
