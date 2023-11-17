@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/color_chudao"
+        android:paddingHorizontal="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginHorizontal="10dp"
+                app:cardElevation="10dp"
+                app:cardCornerRadius="10dp"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:paddingVertical="6dp"
+                    android:paddingHorizontal="12dp"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_gravity="center"
+                        android:src="@drawable/tiemkiem"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"/>
+
+                    <EditText
+                        android:layout_gravity="center"
+                        android:hint="Tìm kiếm..."
+                        android:background="@color/transparent"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="16sp"
+                        android:layout_height="30dp"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgCart"
+                    android:src="@drawable/giohang"
+                    android:background="@drawable/custom_bg_icon"
+                    android:padding="7dp"
+                    android:scaleType="centerCrop"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tvQuantityCart"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/cumtom_bg_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/imgCart"
+                    app:layout_constraintEnd_toEndOf="@+id/imgCart"
+                    app:layout_constraintStart_toEndOf="@+id/imgCart"
+                    app:layout_constraintTop_toTopOf="@+id/imgCart" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:layout_marginHorizontal="5dp"
+                android:src="@drawable/messg"
+                android:background="@drawable/custom_bg_icon"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginHorizontal="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginTop="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardBackgroundColor="@color/color_chudao"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/sliderProduct"
+                android:layout_width="match_parent"
+                app:iss_period="1000"
+                app:iss_auto_cycle="true"
+                app:iss_delay="5000"
+                android:background="@color/white"
+                app:iss_corner_radius="20"
+                android:layout_height="200dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            tools:listitem="@layout/item_product"
+
+            android:id="@+id/recycleProduct"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
