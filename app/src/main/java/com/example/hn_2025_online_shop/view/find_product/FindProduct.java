@@ -39,7 +39,7 @@ public class FindProduct extends AppCompatActivity  {
         binding.deleteText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.etdFind.setText(" ");
+                binding.etdFind.setText("");
             }
         });
 
