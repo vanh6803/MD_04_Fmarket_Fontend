@@ -172,7 +172,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 binding.tvName.setText("Không có dữ liệu trả về");
             }
 
-            if (detailProductResponse.getResult().getStore_id().getName().length() != 0) {
+            if (detailProductResponse.getResult().getStore_id().getName().length() != 0 || detailProductResponse.getResult().getStore_id().getName() != null) {
                 binding.tvShop.setText(detailProductResponse.getResult().getStore_id().getName());
             }else{
                 binding.tvShop.setText("Không có dữ liệu trả về");

@@ -54,6 +54,10 @@
         <activity
             android:name=".view.cart_screen.CartActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".view.find_product.FindProduct"
+            android:exported="true" />
         <activity
             android:name=".view.home_screen.MainActivity"
             android:exported="true" />
