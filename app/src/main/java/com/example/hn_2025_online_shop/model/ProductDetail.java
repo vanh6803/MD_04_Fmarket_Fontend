@@ -20,6 +20,8 @@ public class ProductDetail {
     private String chipset;
     private String cpu;
     private String gpu;
+    private int ram;
+    private int rom;
     private String operatingSystem;
     private String battery;
     private int weight;
@@ -33,7 +35,23 @@ public class ProductDetail {
     public ProductDetail() {
     }
 
-    public ProductDetail(String id, Store store_id, ProductType category_id, String name, List<String> image, String description, String status, boolean discounted, boolean is_active, String screen, String camera, String chipset, String cpu, String gpu, String operatingSystem, String battery, int weight, String connection, String specialFeature, String manufacturer, String other, List<OptionProduct> option, List<ProductRate> product_review) {
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public int getRom() {
+        return rom;
+    }
+
+    public void setRom(int rom) {
+        this.rom = rom;
+    }
+
+    public ProductDetail(String id, Store store_id, ProductType category_id, String name, List<String> image, String description, String status, boolean discounted, boolean is_active, String screen, String camera, String chipset, String cpu, String gpu, int ram, int rom, String operatingSystem, String battery, int weight, String connection, String specialFeature, String manufacturer, String other, List<OptionProduct> option, List<ProductRate> product_review) {
         this.id = id;
         this.store_id = store_id;
         this.category_id = category_id;
@@ -48,6 +66,8 @@ public class ProductDetail {
         this.chipset = chipset;
         this.cpu = cpu;
         this.gpu = gpu;
+        this.ram = ram;
+        this.rom = rom;
         this.operatingSystem = operatingSystem;
         this.battery = battery;
         this.weight = weight;
@@ -61,7 +81,7 @@ public class ProductDetail {
 
     @Override
     public String toString() {
-        return "DetailProduct{" +
+        return "ProductDetail{" +
                 "id='" + id + '\'' +
                 ", store_id=" + store_id +
                 ", category_id=" + category_id +
@@ -76,6 +96,8 @@ public class ProductDetail {
                 ", chipset='" + chipset + '\'' +
                 ", cpu='" + cpu + '\'' +
                 ", gpu='" + gpu + '\'' +
+                ", ram=" + ram +
+                ", rom=" + rom +
                 ", operatingSystem='" + operatingSystem + '\'' +
                 ", battery='" + battery + '\'' +
                 ", weight=" + weight +

@@ -170,7 +170,6 @@ public interface BaseApi {
 
     @GET("info")
     Call<InfoResponse> getInfo(@Header("Authorization") String authorization);
-
     @POST("order/create-order")
     Call<ServerResponse> createOrder(@Header("Authorization") String authorization,
                                      @Body PurchaseBody purchaseBody);
@@ -181,4 +180,17 @@ public interface BaseApi {
     Call<StoreIdResponse> getidMyStore(@Header("Authorization") String authorization,
                                        @Path("accountId") String accountId);
 
+
+    @FormUrlEncoded
+    @PUT("info/edit-info/{idInfo}")
+    Call<ServerResponse> editInfo(@Header("Authorization") String authorization,
+                                  @Path("idInfo") String idInfo,
+                                  @Field("name") String name,
+                                  @Field("address") String address,
+                                  @Field("phone_number") String phone_number,
+                                  @Field("checked") Boolean checked);
+
+    @DELETE("info/delete/{idInfo}")
+    Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
+                                    @Path("idInfo") String idInfo);
 }
