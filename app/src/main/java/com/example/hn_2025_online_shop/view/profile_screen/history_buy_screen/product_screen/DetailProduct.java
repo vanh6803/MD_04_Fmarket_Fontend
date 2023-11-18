@@ -211,6 +211,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 binding.chipset.setText("Chipset: " + response1.getResult().getChipset());
                 binding.cpu.setText("Cpu: "+response1.getResult().getCpu());
                 binding.gpu.setText("Gpu: "+response1.getResult().getGpu());
+                binding.ram.setText("Ram: "+response1.getResult().getRam() +"GB");
+                binding.rom.setText("Rom: "+response1.getResult().getRom()+"GB");
                 binding.operatingSystem.setText("OperatingSystem: "+response1.getResult().getOperatingSystem());
                 binding.battery.setText("Battery: " + response1.getResult().getBattery());
                 binding.weight.setText("Weight: " + response1.getResult().getWeight());
@@ -268,6 +270,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         binding.chipset.setText("Chipset: " + productDetail.getChipset());
         binding.cpu.setText("Cpu: "+productDetail.getCpu());
         binding.gpu.setText("Gpu: "+productDetail.getGpu());
+        binding.ram.setText("Ram: "+productDetail.getRam() +"GB");
+        binding.rom.setText("Rom: "+productDetail.getRom()+"GB");
         binding.operatingSystem.setText("OperatingSystem: "+productDetail.getOperatingSystem());
         binding.battery.setText("Battery: " + productDetail.getBattery());
         binding.weight.setText("Weight: " + productDetail.getWeight());
