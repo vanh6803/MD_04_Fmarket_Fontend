@@ -35,6 +35,7 @@ import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.find_product.FindProduct;
 import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.google.android.material.tabs.TabLayout;
@@ -165,6 +166,18 @@ public class FragmentHome extends Fragment {
                 Intent intent = new Intent(getActivity(), CartActivity.class);
                 mActivityResultLauncher.launch(intent);
                 getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+            }
+        });
+
+
+
+        binding.findPro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindProduct.class);
+                mActivityResultLauncher.launch(intent);
+                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+
             }
         });
     }
