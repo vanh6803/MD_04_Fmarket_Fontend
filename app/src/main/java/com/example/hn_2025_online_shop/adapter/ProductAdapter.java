@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,15 +14,18 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.model.Product_find;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private Context context;
     private List<Product> productList;
+    private List<Product> filteredItems;
     private ObjectUtil objectUtil;
 
     public ProductAdapter(Context context, List<Product> productList, ObjectUtil objectUtil) {
@@ -32,6 +36,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+        this.filteredItems = new ArrayList<>(productList);
         notifyDataSetChanged();
     }
 
@@ -77,5 +82,22 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void filterItem(String query) {
+        productList.clear();
+        if (query.isEmpty()) {
+            productList.addAll(filteredItems);
+
+        } else {
+            for (Product item : filteredItems) {
+                if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+                    productList.add(item);
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 }

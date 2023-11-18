@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,6 +134,31 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
                 getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
+
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() > 0){
+                    productAdapter.filterItem(s.toString());
+
+                }else {
+                    productAdapter.filterItem(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+        binding.find.addTextChangedListener(textWatcher);
+        binding.recycleProduct.setAdapter(productAdapter);
     }
 
     private void initView() {
