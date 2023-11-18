@@ -24,7 +24,7 @@
             <com.denzcoskun.imageslider.ImageSlider
                 android:id="@+id/imgProduct"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="400dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/test"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="300dp"
+                android:layout_marginTop="400dp"
                 android:background="@drawable/custom_detail_product"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -335,6 +335,7 @@
                     android:id="@+id/recy_product_similar"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/layout_item_product"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
