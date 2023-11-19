@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -41,6 +42,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         NavigationView navigationView = findViewById(R.id.navigation_View);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
