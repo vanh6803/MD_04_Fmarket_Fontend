@@ -35,22 +35,6 @@ public class ProductDetail {
     public ProductDetail() {
     }
 
-    public int getRam() {
-        return ram;
-    }
-
-    public void setRam(int ram) {
-        this.ram = ram;
-    }
-
-    public int getRom() {
-        return rom;
-    }
-
-    public void setRom(int rom) {
-        this.rom = rom;
-    }
-
     public ProductDetail(String id, Store store_id, ProductType category_id, String name, List<String> image, String description, String status, boolean discounted, boolean is_active, String screen, String camera, String chipset, String cpu, String gpu, int ram, int rom, String operatingSystem, String battery, int weight, String connection, String specialFeature, String manufacturer, String other, List<OptionProduct> option, List<ProductRate> product_review) {
         this.id = id;
         this.store_id = store_id;
@@ -292,5 +276,21 @@ public class ProductDetail {
 
     public void setProduct_review(List<ProductRate> product_review) {
         this.product_review = product_review;
+    }
+
+    public int getRam() {
+        return ram;
+    }
+
+    public void setRam(int ram) {
+        this.ram = ram;
+    }
+
+    public int getRom() {
+        return rom;
+    }
+
+    public void setRom(int rom) {
+        this.rom = rom;
     }
 }

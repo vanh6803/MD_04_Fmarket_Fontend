@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +17,7 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.CartPayAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityPayBinding;
-import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionAndQuantity;
 import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
@@ -27,7 +26,6 @@ import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.success_screen.CreateStoreSuccessActivity;
 import com.example.hn_2025_online_shop.view.success_screen.OrderSuccessActivity;
 
 import org.json.JSONException;
@@ -230,7 +228,7 @@ public class PayActivity extends AppCompatActivity {
         }
     }
 
-    private void deleteCart(CartOfList cart) {
+    private void deleteCart(OptionAndQuantity cart) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String cartId = cart.getId();
         loadingDialog.show();

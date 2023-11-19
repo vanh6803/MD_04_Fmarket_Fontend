@@ -86,7 +86,7 @@
             android:name=".view.login.RegisterMemberSeller"
             android:exported="true" />
         <activity
-            android:name=".view.profile_screen.HistoryBuyScreen"
+            android:name=".view.profile_screen.OrderProductScreen"
             android:exported="true" />
         <activity
             android:name=".view.infor_shop.InforShop"

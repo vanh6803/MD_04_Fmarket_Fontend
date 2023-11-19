@@ -1,10 +1,10 @@
 package com.example.hn_2025_online_shop.model;
 
-public class Product_find {
+public class ProductFind {
     private String name;
     private String img;
 
-    public Product_find(String name, String img) {
+    public ProductFind(String name, String img) {
         this.name = name;
         this.img = img;
     }
