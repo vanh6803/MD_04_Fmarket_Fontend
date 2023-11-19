@@ -6,18 +6,32 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityMainBinding;
+import com.example.hn_2025_online_shop.model.response.OrderResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.fragment.FragmentFavorite;
 import com.example.hn_2025_online_shop.view.fragment.fragment_home.FragmentHome;
 import com.example.hn_2025_online_shop.view.fragment.FragmentNotification;
 import com.example.hn_2025_online_shop.view.fragment.FragmentProduct;
 import com.example.hn_2025_online_shop.view.fragment.FragmentProfile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
@@ -29,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickBottomNav();
+
+
     }
 
     private void onClickBottomNav() {

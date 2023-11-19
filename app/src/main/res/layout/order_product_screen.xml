@@ -62,41 +62,15 @@
             android:layout_marginHorizontal="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabIndicatorColor="@color/color_chudao"
-            app:tabSelectedTextAppearance="@color/color_chudao"
-            app:tabSelectedTextColor="@color/color_chudao">
+            app:tabIndicatorColor="@color/primary"
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Đang giao "
-                android:textAlignment="center" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Đã giao"
-                android:textAlignment="center" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Đã hủy"
-                android:textAlignment="center" />
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Trả hàng"
-                android:textAlignment="center" />
-
+            app:tabSelectedTextAppearance="@color/primary"
+            app:tabSelectedTextColor="@color/primary">
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPagerHistory"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

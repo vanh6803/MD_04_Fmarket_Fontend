@@ -1,29 +1,24 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.hn_2025_online_shop.adapter.HistoryBuyAdapter;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveringBinding;
-import com.example.hn_2025_online_shop.model.HistoryBuy;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
-import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
-import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
 import org.json.JSONException;
@@ -37,14 +32,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageDelivering extends Fragment {
+public class FragmentPageDelivered extends Fragment {
     private FragmentPageDeliveringBinding binding;
     private List<Order> orderList;
     private OrderAdapter orderAdapter;
     private ProgressLoadingDialog loadingDialog;
 
+    public static FragmentPageDelivered newInstance(String param1, String param2) {
+        FragmentPageDelivered fragment = new FragmentPageDelivered();
+        return fragment;
+    }
+
     public static Fragment newInstance() {
-        FragmentPageDelivering fragment = new FragmentPageDelivering();
+        FragmentPageDelivered fragment = new FragmentPageDelivered();
             return fragment;
         }
 

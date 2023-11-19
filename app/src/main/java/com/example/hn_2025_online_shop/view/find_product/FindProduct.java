@@ -13,8 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.adapter.FindAdapter;
 import com.example.hn_2025_online_shop.databinding.FindProductBinding;
-import com.example.hn_2025_online_shop.model.Product;
-import com.example.hn_2025_online_shop.model.Product_find;
+import com.example.hn_2025_online_shop.model.ProductFind;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ import java.util.List;
 public class FindProduct extends AppCompatActivity  {
     private FindProductBinding binding;
     FindAdapter adapter;
-    List<Product_find> product;
+    List<ProductFind> product;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,7 +117,7 @@ public class FindProduct extends AppCompatActivity  {
     private  void initView(){
         product = new ArrayList<>();
         for (int i = 0 ; i< 10; i++){
-            product.add(new Product_find("Điện thoại "+ i, "https://res.cloudinary.com/dwxavjnvc/image/upload/v1699708633/Product/csddbopt4d1xeeivy8bc.png"));
+            product.add(new ProductFind("Điện thoại "+ i, "https://res.cloudinary.com/dwxavjnvc/image/upload/v1699708633/Product/csddbopt4d1xeeivy8bc.png"));
         }
 
         adapter = new FindAdapter(this, product);

@@ -16,7 +16,7 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityCartBinding;
-import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionAndQuantity;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
@@ -28,7 +28,6 @@ import com.example.hn_2025_online_shop.ultil.swipe.ItemTouchHelperListener;
 import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
-import com.example.hn_2025_online_shop.view.success_screen.OrderSuccessActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -118,7 +117,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
     @Override
     public void onclickMinus(Object object, int position) {
-        CartOfList cart = (CartOfList) object;
+        OptionAndQuantity cart = (OptionAndQuantity) object;
         int quantity = cart.getQuantity();
         if(quantity > 1) {
             quantity -= 1;
@@ -130,7 +129,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
     @Override
     public void onclickPlus(Object object, int position) {
-        CartOfList cart = (CartOfList) object;
+        OptionAndQuantity cart = (OptionAndQuantity) object;
         int quantity = cart.getQuantity();
         quantity += 1;
         CartUtil.listCart.get(position).setQuantity(quantity);
@@ -141,13 +140,13 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder) {
         if(viewHolder instanceof CartAdapter.CartViewHolder) {
-            CartOfList cart = CartUtil.listCart.get(viewHolder.getAdapterPosition());
+            OptionAndQuantity cart = CartUtil.listCart.get(viewHolder.getAdapterPosition());
             int indexDelete = viewHolder.getAdapterPosition();
             deleteCart(cart, indexDelete);
         }
     }
 
-    private void deleteCart(CartOfList cart, int indexDelete) {
+    private void deleteCart(OptionAndQuantity cart, int indexDelete) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String cartId = cart.getId();
         loadingDialog.show();
@@ -207,7 +206,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         }
     }
 
-    private void updateQuantityCart(CartOfList cart) {
+    private void updateQuantityCart(OptionAndQuantity cart) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String cartId = cart.getId();
         int quantity = cart.getQuantity();

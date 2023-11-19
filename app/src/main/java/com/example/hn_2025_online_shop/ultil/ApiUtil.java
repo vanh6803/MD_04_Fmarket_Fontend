@@ -7,17 +7,13 @@ import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.model.CartOfList;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
-import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

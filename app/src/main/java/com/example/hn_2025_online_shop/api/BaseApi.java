@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.api;
 
+import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
@@ -7,6 +8,7 @@ import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
+import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
@@ -38,7 +40,7 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/api/")
+            .baseUrl("http://172.20.10.3:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -193,4 +195,8 @@ public interface BaseApi {
     @DELETE("info/delete/{idInfo}")
     Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
                                     @Path("idInfo") String idInfo);
+
+
+    @GET("order")
+    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization);
 }
