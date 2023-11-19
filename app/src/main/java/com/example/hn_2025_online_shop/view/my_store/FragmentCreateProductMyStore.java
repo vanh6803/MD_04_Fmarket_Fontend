@@ -30,6 +30,7 @@ import com.example.hn_2025_online_shop.databinding.FragmentCreateProductMyStoreB
 import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -45,6 +46,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -56,6 +58,7 @@ import retrofit2.Response;
 
 public class FragmentCreateProductMyStore extends Fragment {
     private MultipartBody.Part fileImgAvatar;
+    private HashMap<String, String> categoryMap = new HashMap<>();
 
     private int isCheckImage = 0; // 1 là avatar
     private boolean isCamera = false; // kiểm tra xem avatar có dữ liệu hay chưa
@@ -150,6 +153,10 @@ public class FragmentCreateProductMyStore extends Fragment {
         binding.lnCpu.setVisibility(View.GONE);
         binding.tvGpu.setVisibility(View.GONE);
         binding.lnGpu.setVisibility(View.GONE);
+        binding.tvRam.setVisibility(View.GONE);
+        binding.lnRam.setVisibility(View.GONE);
+        binding.tvRom.setVisibility(View.GONE);
+        binding.lnRom.setVisibility(View.GONE);
         binding.tvHeDieuHanh.setVisibility(View.GONE);
         binding.lnHeDieuHanh.setVisibility(View.GONE);
         binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -168,7 +175,13 @@ public class FragmentCreateProductMyStore extends Fragment {
                     binding.lnCpu.setVisibility(View.VISIBLE);
                     binding.tvGpu.setVisibility(View.VISIBLE);
                     binding.lnGpu.setVisibility(View.VISIBLE);
-                    selectedOption = categoryIdDienThoai;
+                    binding.tvRam.setVisibility(View.VISIBLE);
+                    binding.lnRam.setVisibility(View.VISIBLE);
+                    binding.tvRom.setVisibility(View.VISIBLE);
+                    binding.lnRom.setVisibility(View.VISIBLE);
+                    categoryMap.put(selectedOption, categoryIdDienThoai);
+                    String selected = categoryMap.get(selectedOption);
+                    selected = categoryIdDienThoai;
                 } else if (selectedOption.equals("Laptop")) {
                     binding.tvSc.setVisibility(View.VISIBLE);
                     binding.lnSc.setVisibility(View.VISIBLE);
@@ -178,6 +191,10 @@ public class FragmentCreateProductMyStore extends Fragment {
                     binding.lnCpu.setVisibility(View.VISIBLE);
                     binding.tvGpu.setVisibility(View.VISIBLE);
                     binding.lnGpu.setVisibility(View.VISIBLE);
+                    binding.tvRam.setVisibility(View.VISIBLE);
+                    binding.lnRam.setVisibility(View.VISIBLE);
+                    binding.tvRom.setVisibility(View.VISIBLE);
+                    binding.lnRom.setVisibility(View.VISIBLE);
                     selectedOption = categoryIdLaptop;
                 } else if (selectedOption.equals("Tai Nghe")) {
                     binding.tvSc.setVisibility(View.GONE);
@@ -190,6 +207,10 @@ public class FragmentCreateProductMyStore extends Fragment {
                     binding.lnCpu.setVisibility(View.GONE);
                     binding.tvGpu.setVisibility(View.GONE);
                     binding.lnGpu.setVisibility(View.GONE);
+                    binding.tvRam.setVisibility(View.GONE);
+                    binding.lnRam.setVisibility(View.GONE);
+                    binding.tvRom.setVisibility(View.GONE);
+                    binding.lnRom.setVisibility(View.GONE);
                     binding.tvHeDieuHanh.setVisibility(View.GONE);
                     binding.lnHeDieuHanh.setVisibility(View.GONE);
                     selectedOption = categoryIdTaiNghe;
@@ -247,7 +268,7 @@ public class FragmentCreateProductMyStore extends Fragment {
     }
 
     public void createProductMyStore(){
-        String store_Id = idStore;
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String categoryId = binding.spinnerCategory.getSelectedItem().toString();
         String name = binding.edtNameProduct.toString();
         String description = binding.edtMota.toString();
@@ -268,17 +289,17 @@ public class FragmentCreateProductMyStore extends Fragment {
         String other = binding.edtOther.toString();
         dialog.show();
         BaseApi.API.createProductMyStore(
-                store_Id, categoryId, name, description,
+                token, categoryId, name, description,
                 status, discounted, is_active, screen, camera,
                 chipset, cpu, gpu, operatingSystem,
                 battery, weight, connection, specialFeature,
-                manufacturer, other).enqueue(new Callback<ProductResponse>() {
+                manufacturer, other).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    ProductResponse productResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-createProduct: " + productResponse.toString());
-                    if(productResponse.getCode() == 200 || productResponse.getCode() == 201) {
+                    ServerResponse ServerResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-createProduct: " + ServerResponse.toString());
+                    if(ServerResponse.getCode() == 200 || ServerResponse.getCode() == 201) {
                         Toast.makeText(getContext(), "Create Product Is Successfully!", Toast.LENGTH_SHORT).show();
                     }
                 } else { // nhận các đầu status #200
@@ -298,7 +319,7 @@ public class FragmentCreateProductMyStore extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Call api Error", Toast.LENGTH_SHORT).show();
 
             }

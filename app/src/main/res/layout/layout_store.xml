@@ -69,7 +69,6 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_marginLeft="20dp"
                     android:id="@+id/tvNameStore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,7 +85,6 @@
                     tools:ignore="MissingConstraints">
 
                     <ImageView
-                        android:layout_marginLeft="20dp"
                         android:layout_width="17dp"
                         android:layout_height="15dp"
                         android:layout_gravity="center"
@@ -97,7 +95,7 @@
                         android:layout_height="15dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
-                        android:text="4.7/5.0  |  38.5k Người theo dõi"
+                        android:text="4.7 / 5.0 Followers"
                         android:textSize="12dp"
                         />
                 </LinearLayout>
