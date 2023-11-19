@@ -40,7 +40,7 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://172.20.10.3:3000/api/")
+            .baseUrl("http://10.0.3.2:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -161,7 +161,11 @@ public interface BaseApi {
     Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
                                             @Path("idCart") String idCart,
                                             @Field("quantity") int quantity);
-
+    @FormUrlEncoded
+    @PUT("store/edit-avatar/{storeId}")
+    Call<ServerResponse> updateAvatarStore(@Header("Authorization") String authorization,
+                                           @Path("storeId") String storeId,
+                                           @Part MultipartBody.Part avatar);
     @FormUrlEncoded
     @POST("info/add")
     Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
