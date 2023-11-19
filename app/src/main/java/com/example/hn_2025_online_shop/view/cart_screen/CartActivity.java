@@ -189,6 +189,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         updateCart();
         onBackActivity();
     }

@@ -79,7 +79,6 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         return 0;
     }
 
-
     public class InfoViewHolder extends RecyclerView.ViewHolder {
         private LayoutItemAddressBinding binding;
         public InfoViewHolder(LayoutItemAddressBinding binding) {
