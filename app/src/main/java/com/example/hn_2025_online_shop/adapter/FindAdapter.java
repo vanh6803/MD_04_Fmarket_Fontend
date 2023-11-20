@@ -10,18 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ItemProductFindBinding;
-import com.example.hn_2025_online_shop.model.Product;
-import com.example.hn_2025_online_shop.model.Product_find;
+import com.example.hn_2025_online_shop.model.ProductFind;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
     private Context context;
-    private List<Product_find> productList;
-    private List<Product_find> filteredItems;
+    private List<ProductFind> productList;
+    private List<ProductFind> filteredItems;
 
-    public FindAdapter(Context context, List<Product_find> productList) {
+    public FindAdapter(Context context, List<ProductFind> productList) {
         this.context = context;
         this.productList = productList;
         this.filteredItems = new ArrayList<>(productList);
@@ -36,7 +35,7 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product_find product = productList.get(position);
+        ProductFind product = productList.get(position);
         Glide.with(context)
                 .load(product.getImg())
                 .placeholder(R.drawable.loading)
@@ -76,7 +75,7 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
             productList.addAll(filteredItems);
 
         } else {
-            for (Product_find item : filteredItems) {
+            for (ProductFind item : filteredItems) {
                 if (item.getName().toLowerCase().contains(query.toLowerCase())) {
                     productList.add(item);
                 }

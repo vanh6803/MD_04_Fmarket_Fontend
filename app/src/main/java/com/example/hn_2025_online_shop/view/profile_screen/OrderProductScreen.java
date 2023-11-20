@@ -9,21 +9,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHistoryAdapter;
-import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
-import com.example.hn_2025_online_shop.databinding.HistoryBuyBinding;
+import com.example.hn_2025_online_shop.databinding.OrderProductScreenBinding;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class HistoryBuyScreen extends AppCompatActivity {
+public class OrderProductScreen extends AppCompatActivity {
     private ViewPageHistoryAdapter viewPageHistoryAdapter;
-    private HistoryBuyBinding binding;
+    private OrderProductScreenBinding binding;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = HistoryBuyBinding.inflate(getLayoutInflater());
+        binding = OrderProductScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         initView();
@@ -41,7 +39,7 @@ public class HistoryBuyScreen extends AppCompatActivity {
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 switch (position) {
                     case 0:
-                        tab.setText("Chờ xác nhận");
+                        tab.setText("Chờ xử lý");
                         break;
                     case 1:
                         tab.setText("Đang giao");
@@ -50,6 +48,9 @@ public class HistoryBuyScreen extends AppCompatActivity {
                         tab.setText("Đã giao");
                         break;
                     case 3:
+                        tab.setText("Giao thành công");
+                        break;
+                    case 4:
                         tab.setText("Đã hủy");
                         break;
                 }
@@ -57,6 +58,15 @@ public class HistoryBuyScreen extends AppCompatActivity {
         });
 
         mediator.attach();
+
+        // Đặt số lượng tab hiển thị ban đầu và chế độ cuộn
+        binding.tabHistory.setTabMode(TabLayout.MODE_SCROLLABLE);
+        binding.tabHistory.setTabGravity(TabLayout.GRAVITY_START);
+        binding.tabHistory.setTabMode(TabLayout.MODE_FIXED);
+        binding.tabHistory.setTabMode(TabLayout.MODE_AUTO);
+
+        // Đặt số lượng tab hiển thị ban đầu
+        binding.viewPagerHistory.setOffscreenPageLimit(3);
     }
 
     private void initController() {
@@ -70,15 +80,6 @@ public class HistoryBuyScreen extends AppCompatActivity {
     }
 
     private void initView() {
-    }
-
-    private void setTabTitles(List<String> tabTitles) {
-        for (int i = 0; i < tabTitles.size(); i++) {
-            TabLayout.Tab tab = binding.tabHistory.getTabAt(i);
-            if (tab != null) {
-                tab.setText(tabTitles.get(i));
-            }
-        }
     }
 
     @Override

@@ -12,8 +12,6 @@ public class OptionOfListCart {
     @SerializedName("color_code")
     private String colorCode;
     private String image;
-    private int ram;
-    private int rom;
     private int price;
     @SerializedName("discount_value")
     private int discountValue;
@@ -24,14 +22,12 @@ public class OptionOfListCart {
     public OptionOfListCart() {
     }
 
-    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int ram, int rom, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
+    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
         this.id = id;
         this.product = product;
         this.nameColor = nameColor;
         this.colorCode = colorCode;
         this.image = image;
-        this.ram = ram;
-        this.rom = rom;
         this.price = price;
         this.discountValue = discount_value;
         this.quantity = quantity;
@@ -47,8 +43,6 @@ public class OptionOfListCart {
                 ", nameColor='" + nameColor + '\'' +
                 ", colorCode='" + colorCode + '\'' +
                 ", image='" + image + '\'' +
-                ", ram=" + ram +
-                ", rom=" + rom +
                 ", price=" + price +
                 ", discount_value=" + discountValue +
                 ", quantity=" + quantity +
@@ -95,22 +89,6 @@ public class OptionOfListCart {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public int getRam() {
-        return ram;
-    }
-
-    public void setRam(int ram) {
-        this.ram = ram;
-    }
-
-    public int getRom() {
-        return rom;
-    }
-
-    public void setRom(int rom) {
-        this.rom = rom;
     }
 
     public int getPrice() {

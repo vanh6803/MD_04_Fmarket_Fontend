@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.my_store.UpdateAvtStoreFragment">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/primary"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/custom_bg_shopping_cart_white"
+            android:padding="5dp"
+            android:src="@drawable/backs"
+            app:tint="@color/primary" />
+
+        <TextView
+            android:layout_weight="1"
+            android:text="Cập nhật Avatar"
+            android:textSize="@dimen/font_size_text_title_s"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingHorizontal="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:background="@drawable/custom_bg_avartar_user"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgAvtStore"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/custom_bg_avartar_user"
+            android:src="@drawable/avatar1"
+            app:layout_constraintBaseline_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/imgMayAnh"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/mayanh"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            app:tint="@color/white"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package com.example.hn_2025_online_shop.view.fragment.fragment_home;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -22,22 +21,16 @@ import android.widget.Toast;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentHomeBinding;
 import com.example.hn_2025_online_shop.model.Banner;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
-import com.example.hn_2025_online_shop.model.response.CartReponse;
-import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
-import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.find_product.FindProduct;
-import com.example.hn_2025_online_shop.view.login.Login;
-import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -48,7 +41,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.internal.Util;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -91,6 +83,7 @@ public class FragmentHome extends Fragment {
         setTab();
         ApiUtil.setTitleQuantityCart(getActivity(), loadingDialog, binding.tvQuantityCart);
     }
+
 
     private void callApiBanner() {
         BaseApi.API.getListBanner().enqueue(new Callback<BannerReponse>() {

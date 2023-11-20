@@ -1,25 +1,29 @@
 package com.example.hn_2025_online_shop.adapter;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private final Context context;
+    private Context context;
     private List<Product> productList;
     private List<Product> filteredItems;
-    private final ObjectUtil objectUtil;
+    private ObjectUtil objectUtil;
 
     public ProductAdapter(Context context, List<Product> productList, ObjectUtil objectUtil) {
         this.productList = productList;
@@ -27,7 +31,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         this.objectUtil = objectUtil;
     }
 
-    @SuppressLint("NotifyDataSetChanged")
     public void setProductList(List<Product> productList) {
         this.productList = productList;
         this.filteredItems = new ArrayList<>(productList);
@@ -48,7 +51,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return 0;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
@@ -72,7 +74,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
-        private final LayoutItemProductBinding binding;
+        private LayoutItemProductBinding binding;
         public ProductViewHolder(LayoutItemProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

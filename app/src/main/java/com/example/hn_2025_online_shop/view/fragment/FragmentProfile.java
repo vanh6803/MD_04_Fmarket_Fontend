@@ -29,7 +29,6 @@ import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
 
 
 import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
-import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
@@ -42,7 +41,7 @@ import com.example.hn_2025_online_shop.view.login.RegisterMemberSeller;
 import com.example.hn_2025_online_shop.view.my_store.MyStoreScreen;
 import com.example.hn_2025_online_shop.view.login.ResetPassWord;
 import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
-import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
+import com.example.hn_2025_online_shop.view.profile_screen.OrderProductScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
 
 import org.json.JSONException;
@@ -231,7 +230,7 @@ public class FragmentProfile extends Fragment {
         binding.layoutHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), HistoryBuyScreen.class));
+                startActivity(new Intent(getActivity(), OrderProductScreen.class));
                 getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
@@ -259,7 +258,7 @@ public class FragmentProfile extends Fragment {
                 bindingLogout.btnPhanHoi.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(getActivity(), HistoryBuyScreen.class));
+                        startActivity(new Intent(getActivity(), OrderProductScreen.class));
                         getActivity().finish();
                     }
                 });
