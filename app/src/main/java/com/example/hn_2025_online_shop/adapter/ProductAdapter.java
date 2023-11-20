@@ -1,32 +1,25 @@
 package com.example.hn_2025_online_shop.adapter;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Product;
-import com.example.hn_2025_online_shop.model.Product_find;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
-    private Context context;
+    private final Context context;
     private List<Product> productList;
     private List<Product> filteredItems;
-    private ObjectUtil objectUtil;
+    private final ObjectUtil objectUtil;
 
     public ProductAdapter(Context context, List<Product> productList, ObjectUtil objectUtil) {
         this.productList = productList;
@@ -34,6 +27,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         this.objectUtil = objectUtil;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setProductList(List<Product> productList) {
         this.productList = productList;
         this.filteredItems = new ArrayList<>(productList);
@@ -54,6 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         return 0;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         Product product = productList.get(position);
@@ -77,7 +72,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
-        private LayoutItemProductBinding binding;
+        private final LayoutItemProductBinding binding;
         public ProductViewHolder(LayoutItemProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
