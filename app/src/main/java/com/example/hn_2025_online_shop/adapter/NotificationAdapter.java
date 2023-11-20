@@ -13,7 +13,7 @@ import java.util.List;
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
     private Context context;
 
-    private List<NotificationModel> list;
+    private final List<NotificationModel> list;
 
     public NotificationAdapter(Context context, List<NotificationModel> list) {
         this.context = context;
