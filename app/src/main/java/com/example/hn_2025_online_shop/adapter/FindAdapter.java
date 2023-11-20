@@ -1,5 +1,4 @@
 package com.example.hn_2025_online_shop.adapter;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,14 +10,13 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ItemProductFindBinding;
 import com.example.hn_2025_online_shop.model.ProductFind;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
-    private Context context;
-    private List<ProductFind> productList;
-    private List<ProductFind> filteredItems;
+    private final Context context;
+    private final List<ProductFind> productList;
+    private final List<ProductFind> filteredItems;
 
     public FindAdapter(Context context, List<ProductFind> productList) {
         this.context = context;
@@ -58,7 +56,7 @@ public class FindAdapter extends RecyclerView.Adapter<FindAdapter.ViewHolder> {
     }
 
     public  class ViewHolder extends  RecyclerView.ViewHolder{
-        private ItemProductFindBinding binding;
+        private final ItemProductFindBinding binding;
 
         public ViewHolder(ItemProductFindBinding binding) {
             super(binding.getRoot());

@@ -1,25 +1,22 @@
 package com.example.hn_2025_online_shop.adapter;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamOptionProductBinding;
-import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
 import java.util.List;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionViewHolder>{
-    private Context context;
+    private final Context context;
     private List<OptionProduct> list;
-    private ObjectUtil objectUtil;
+    private final ObjectUtil objectUtil;
 
 
     public OptionAdapter(Context context, List<OptionProduct> list, ObjectUtil objectUtil) {
@@ -27,6 +24,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
         this.list = list;
         this.objectUtil = objectUtil;
     }
+    @SuppressLint("NotifyDataSetChanged")
     public void setDataListOptionProduct(List<OptionProduct> list){
         this.list=list;
         notifyDataSetChanged();
@@ -62,7 +60,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
     }
 
     public  class OptionViewHolder extends RecyclerView.ViewHolder {
-        private LayoutIteamOptionProductBinding binding;
+        private final LayoutIteamOptionProductBinding binding;
         public OptionViewHolder(LayoutIteamOptionProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
