@@ -15,6 +15,7 @@ import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
+import com.example.hn_2025_online_shop.model.response.store.InfoStore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -203,4 +204,8 @@ public interface BaseApi {
 
     @GET("order")
     Call<OrderResponse> getListOrder(@Header("Authorization") String authorization);
+
+
+    @GET("store/info")
+    Call<InfoStore> getInfoStore(@Header("Authorization") String authorization);
 }
