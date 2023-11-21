@@ -1,29 +1,27 @@
-package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
+package com.example.hn_2025_online_shop.view.my_store.OrderStore.fragment;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.hn_2025_online_shop.adapter.HistoryBuyAdapter;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
+import com.example.hn_2025_online_shop.adapter.OrderStoreAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveringBinding;
-import com.example.hn_2025_online_shop.model.HistoryBuy;
+import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveredBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveredStoreBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
-import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
-import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
 import org.json.JSONException;
@@ -37,14 +35,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageDelivering extends Fragment {
-    private FragmentPageDeliveringBinding binding;
+public class FragmentPageDeliveredStore extends Fragment implements ObjectUtil {
+    private FragmentPageDeliveredStoreBinding binding;
     private List<Order> orderList;
-    private OrderAdapter orderAdapter;
+    private OrderStoreAdapter orderStoreAdapter;
     private ProgressLoadingDialog loadingDialog;
 
+    public static FragmentPageDeliveredStore newInstance(String param1, String param2) {
+        FragmentPageDeliveredStore fragment = new FragmentPageDeliveredStore();
+        return fragment;
+    }
+
     public static Fragment newInstance() {
-        FragmentPageDelivering fragment = new FragmentPageDelivering();
+        FragmentPageDeliveredStore fragment = new FragmentPageDeliveredStore();
             return fragment;
         }
 
@@ -57,7 +60,7 @@ public class FragmentPageDelivering extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPageDeliveringBinding.inflate(inflater, container, false);
+        binding = FragmentPageDeliveredStoreBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -72,16 +75,16 @@ public class FragmentPageDelivering extends Fragment {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
-        orderAdapter = new OrderAdapter(getActivity(), orderList);
+        orderStoreAdapter = new OrderStoreAdapter(getActivity(), orderList, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvOrder.setLayoutManager(layoutManager);
-        binding.rcvOrder.setAdapter(orderAdapter);
+        binding.rcvOrder.setAdapter(orderStoreAdapter);
     }
 
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         loadingDialog.show();
-        BaseApi.API.getListOrder(token).enqueue(new Callback<OrderResponse>() {
+        BaseApi.API.getListOrderStore(token, TAG.DELIVERED).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
@@ -89,7 +92,7 @@ public class FragmentPageDelivering extends Fragment {
                     Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse.toString());
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
-                        orderAdapter.setListOrder(orderList);
+                        orderStoreAdapter.setListOrder(orderList);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -114,5 +117,10 @@ public class FragmentPageDelivering extends Fragment {
                 loadingDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+
     }
 }

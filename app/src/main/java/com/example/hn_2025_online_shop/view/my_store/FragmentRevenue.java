@@ -35,7 +35,6 @@ import java.util.List;
 
 public class FragmentRevenue extends Fragment {
     private FragmentRevenueBinding binding;
-    private HorizontalBarChart mChart;
 
     public FragmentRevenue() {
         // Required empty public constructor

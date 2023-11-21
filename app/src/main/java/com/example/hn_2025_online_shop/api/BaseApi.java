@@ -35,6 +35,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
@@ -203,6 +204,18 @@ public interface BaseApi {
 
 
     @GET("order")
+    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization,
+                                     @Query("status") String status);
+
+    @GET("order/order-for-store")
+    Call<OrderResponse> getListOrderStore(@Header("Authorization") String authorization,
+                                     @Query("status") String status);
+
+    @FormUrlEncoded
+    @PUT("order/update-order-status/{idOrder}")
+    Call<ServerResponse> updateOrderStatus(@Header("Authorization") String authorization,
+                                     @Path("idOrder") String idOrder,
+                                     @Field("status") String status);
     Call<OrderResponse> getListOrder(@Header("Authorization") String authorization);
 
 

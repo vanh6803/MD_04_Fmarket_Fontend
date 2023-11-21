@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveringBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageWaitConfirmBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
@@ -32,19 +32,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageCancleOrder extends Fragment {
-    private FragmentPageDeliveringBinding binding;
+public class FragmentPageWaitConfirm extends Fragment {
+    private FragmentPageWaitConfirmBinding binding;
     private List<Order> orderList;
     private OrderAdapter orderAdapter;
     private ProgressLoadingDialog loadingDialog;
 
-    public static FragmentPageCancleOrder newInstance(String param1, String param2) {
-        FragmentPageCancleOrder fragment = new FragmentPageCancleOrder();
+    public static FragmentPageWaitConfirm newInstance(String param1, String param2) {
+        FragmentPageWaitConfirm fragment = new FragmentPageWaitConfirm();
         return fragment;
     }
 
     public static Fragment newInstance() {
-        FragmentPageCancleOrder fragment = new FragmentPageCancleOrder();
+        FragmentPageWaitConfirm fragment = new FragmentPageWaitConfirm();
             return fragment;
         }
 
@@ -57,7 +57,7 @@ public class FragmentPageCancleOrder extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPageDeliveringBinding.inflate(inflater, container, false);
+        binding = FragmentPageWaitConfirmBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -81,7 +81,7 @@ public class FragmentPageCancleOrder extends Fragment {
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         loadingDialog.show();
-        BaseApi.API.getListOrder(token).enqueue(new Callback<OrderResponse>() {
+        BaseApi.API.getListOrder(token, TAG.WAIT_CONFIRM).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200

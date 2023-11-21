@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
+package com.example.hn_2025_online_shop.view.my_store.OrderStore.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
+import com.example.hn_2025_online_shop.adapter.OrderStoreAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveringBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageCancelledBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageCancelledStoreBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
@@ -32,19 +35,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageSuccessfulDelivery extends Fragment {
-    private FragmentPageDeliveringBinding binding;
+public class FragmentPageCancelledStore extends Fragment implements ObjectUtil {
+    private FragmentPageCancelledStoreBinding binding;
     private List<Order> orderList;
-    private OrderAdapter orderAdapter;
+    private OrderStoreAdapter orderStoreAdapter;
     private ProgressLoadingDialog loadingDialog;
 
-    public static FragmentPageSuccessfulDelivery newInstance(String param1, String param2) {
-        FragmentPageSuccessfulDelivery fragment = new FragmentPageSuccessfulDelivery();
+    public static FragmentPageCancelledStore newInstance(String param1, String param2) {
+        FragmentPageCancelledStore fragment = new FragmentPageCancelledStore();
         return fragment;
     }
 
     public static Fragment newInstance() {
-        FragmentPageSuccessfulDelivery fragment = new FragmentPageSuccessfulDelivery();
+        FragmentPageCancelledStore fragment = new FragmentPageCancelledStore();
             return fragment;
         }
 
@@ -57,7 +60,7 @@ public class FragmentPageSuccessfulDelivery extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPageDeliveringBinding.inflate(inflater, container, false);
+        binding = FragmentPageCancelledStoreBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -72,16 +75,16 @@ public class FragmentPageSuccessfulDelivery extends Fragment {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
-        orderAdapter = new OrderAdapter(getActivity(), orderList);
+        orderStoreAdapter = new OrderStoreAdapter(getActivity(), orderList, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvOrder.setLayoutManager(layoutManager);
-        binding.rcvOrder.setAdapter(orderAdapter);
+        binding.rcvOrder.setAdapter(orderStoreAdapter);
     }
 
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         loadingDialog.show();
-        BaseApi.API.getListOrder(token).enqueue(new Callback<OrderResponse>() {
+        BaseApi.API.getListOrderStore(token, TAG.CANCELLED).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
@@ -89,7 +92,7 @@ public class FragmentPageSuccessfulDelivery extends Fragment {
                     Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse.toString());
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
-                        orderAdapter.setListOrder(orderList);
+                        orderStoreAdapter.setListOrder(orderList);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -114,5 +117,10 @@ public class FragmentPageSuccessfulDelivery extends Fragment {
                 loadingDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+
     }
 }

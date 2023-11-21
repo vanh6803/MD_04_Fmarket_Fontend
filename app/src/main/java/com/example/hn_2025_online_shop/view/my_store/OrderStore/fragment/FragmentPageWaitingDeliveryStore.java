@@ -1,4 +1,4 @@
-package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
+package com.example.hn_2025_online_shop.view.my_store.OrderStore.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +13,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
+import com.example.hn_2025_online_shop.adapter.OrderStoreAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveredBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageWaitingDeliveryBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageWaitingDeliveryStoreBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
@@ -32,19 +36,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageDelivered extends Fragment {
-    private FragmentPageDeliveredBinding binding;
+public class FragmentPageWaitingDeliveryStore extends Fragment implements ObjectUtil {
+    private FragmentPageWaitingDeliveryStoreBinding binding;
     private List<Order> orderList;
-    private OrderAdapter orderAdapter;
+    private OrderStoreAdapter orderStoreAdapter;
     private ProgressLoadingDialog loadingDialog;
 
-    public static FragmentPageDelivered newInstance(String param1, String param2) {
-        FragmentPageDelivered fragment = new FragmentPageDelivered();
-        return fragment;
-    }
-
     public static Fragment newInstance() {
-        FragmentPageDelivered fragment = new FragmentPageDelivered();
+        FragmentPageWaitingDeliveryStore fragment = new FragmentPageWaitingDeliveryStore();
             return fragment;
         }
 
@@ -57,7 +56,7 @@ public class FragmentPageDelivered extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPageDeliveredBinding.inflate(inflater, container, false);
+        binding = FragmentPageWaitingDeliveryStoreBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -72,16 +71,16 @@ public class FragmentPageDelivered extends Fragment {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
-        orderAdapter = new OrderAdapter(getActivity(), orderList);
+        orderStoreAdapter = new OrderStoreAdapter(getActivity(), orderList, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvOrder.setLayoutManager(layoutManager);
-        binding.rcvOrder.setAdapter(orderAdapter);
+        binding.rcvOrder.setAdapter(orderStoreAdapter);
     }
 
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         loadingDialog.show();
-        BaseApi.API.getListOrder(token, TAG.DELIVERED).enqueue(new Callback<OrderResponse>() {
+        BaseApi.API.getListOrderStore(token, TAG.WAIT_DELIVERY).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
@@ -89,7 +88,7 @@ public class FragmentPageDelivered extends Fragment {
                     Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse.toString());
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
-                        orderAdapter.setListOrder(orderList);
+                        orderStoreAdapter.setListOrder(orderList);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -111,6 +110,50 @@ public class FragmentPageDelivered extends Fragment {
             public void onFailure(Call<OrderResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
+                loadingDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        Order order = (Order) object;
+        udpateStatusOrder(order);
+    }
+
+    private void udpateStatusOrder(Order order) {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        loadingDialog.show();
+        BaseApi.API.updateOrderStatus(token, order.getId(), TAG.DELIVERED).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-updateOrderStatus: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200) {
+                        orderList.remove(order);
+                        orderStoreAdapter.setListOrder(orderList);
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-updateOrderStatus: " + errorMessage);
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-updateOrderStatus: " + t.toString());
                 loadingDialog.dismiss();
             }
         });
