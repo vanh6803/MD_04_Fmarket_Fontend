@@ -1,29 +1,30 @@
 package com.example.hn_2025_online_shop.adapter;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.hn_2025_online_shop.databinding.ItemProductByCategoryBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCategoryAdapter.ViewHolder> {
-    private Context context;
+    private final Context context;
     private List<ProductByCategory> productByCategoryList;
-
+    private List<ProductByCategory> filteredItems;
     private ProductAdapter productAdapter;
     private ObjectUtil objectUtil;
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setListProductType(List<ProductByCategory> productByCategoryList) {
         this.productByCategoryList = productByCategoryList;
+        this.filteredItems = new ArrayList<>(productByCategoryList);
         notifyDataSetChanged();
 
     }
@@ -67,11 +68,27 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemProductByCategoryBinding binding;
+        private final ItemProductByCategoryBinding binding;
         public ViewHolder(ItemProductByCategoryBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    public void filterItem(String query) {
+        productByCategoryList.clear();
+        if (query.isEmpty()) {
+            productByCategoryList.addAll(filteredItems);
+
+        } else {
+            for (ProductByCategory item : filteredItems) {
+                if (item.getNameCategory().toLowerCase().contains(query.toLowerCase())) {
+                    productByCategoryList.add(item);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }
 

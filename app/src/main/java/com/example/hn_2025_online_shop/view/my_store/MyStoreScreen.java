@@ -8,6 +8,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.Objects;
 
 public class MyStoreScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final int Fragment_home = 0;
@@ -35,6 +38,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Thay tên cửa hàng lấy từ api vào đây");
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close);
         drawerLayout.addDrawerListener(toggle);
@@ -42,6 +46,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         NavigationView navigationView = findViewById(R.id.navigation_View);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);

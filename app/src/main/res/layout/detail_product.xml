@@ -168,6 +168,7 @@
                     android:orientation="horizontal">
 
                     <TextView
+                        android:id="@+id/count"
                         android:layout_width="184dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -218,6 +219,7 @@
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/tvShop"
+                            android:gravity="center|left"
                             android:layout_gravity="center"
                             android:text="Laptop AZ"
                             android:textStyle="normal"

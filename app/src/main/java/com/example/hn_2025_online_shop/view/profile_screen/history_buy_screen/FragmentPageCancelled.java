@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -90,6 +91,7 @@ public class FragmentPageCancelled extends Fragment {
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
                         orderAdapter.setListOrder(orderList);
+                        orderAdapter.notifyDataSetChanged();
                     }
                 } else { // nhận các đầu status #200
                     try {

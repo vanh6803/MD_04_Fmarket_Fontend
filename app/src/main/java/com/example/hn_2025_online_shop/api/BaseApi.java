@@ -162,7 +162,11 @@ public interface BaseApi {
     Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
                                             @Path("idCart") String idCart,
                                             @Field("quantity") int quantity);
-
+    @FormUrlEncoded
+    @PUT("store/edit-avatar/{storeId}")
+    Call<ServerResponse> updateAvatarStore(@Header("Authorization") String authorization,
+                                           @Path("storeId") String storeId,
+                                           @Part MultipartBody.Part avatar);
     @FormUrlEncoded
     @POST("info/add")
     Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
