@@ -91,6 +91,11 @@ public class FragmentPageDelivered extends Fragment implements ObjectUtil {
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
                         orderAdapter.setListOrder(orderList);
+                        if(orderList.size() == 0) {
+                            binding.layoutDrum.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.layoutDrum.setVisibility(View.GONE);
+                        }
                     }
                 } else { // nhận các đầu status #200
                     try {

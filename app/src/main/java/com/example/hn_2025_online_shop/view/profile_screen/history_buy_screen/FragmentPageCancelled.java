@@ -40,10 +40,6 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
     private OrderAdapter orderAdapter;
     private ProgressLoadingDialog loadingDialog;
 
-    public static FragmentPageCancelled newInstance(String param1, String param2) {
-        FragmentPageCancelled fragment = new FragmentPageCancelled();
-        return fragment;
-    }
 
     public static Fragment newInstance() {
         FragmentPageCancelled fragment = new FragmentPageCancelled();
@@ -92,7 +88,11 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
                         orderAdapter.setListOrder(orderList);
-                        orderAdapter.notifyDataSetChanged();
+                        if(orderList.size() == 0) {
+                            binding.layoutDrum.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.layoutDrum.setVisibility(View.GONE);
+                        }
                     }
                 } else { // nhận các đầu status #200
                     try {
