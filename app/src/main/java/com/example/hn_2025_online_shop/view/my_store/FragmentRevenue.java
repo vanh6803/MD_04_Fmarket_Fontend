@@ -93,6 +93,10 @@ public class FragmentRevenue extends Fragment {
         entries.add(new Entry(5, 3));
         entries.add(new Entry(6, 1));
         entries.add(new Entry(8, 3));
+        entries.add(new Entry(9, 3));
+        entries.add(new Entry(10, 3));
+        entries.add(new Entry(11, 3));
+        entries.add(new Entry(12, 3));
 
         // Tạo LineDataSet từ danh sách các điểm dữ liệu
         LineDataSet lineDataSet = new LineDataSet(entries, "Thu nhập");
@@ -118,6 +122,11 @@ public class FragmentRevenue extends Fragment {
         entries.add(new BarEntry(5, 4));
         entries.add(new BarEntry(6, 1));
         entries.add(new BarEntry(7, 3));
+        entries.add(new BarEntry(8, 3));
+        entries.add(new BarEntry(9, 3));
+        entries.add(new BarEntry(10, 3));
+        entries.add(new BarEntry(11, 3));
+        entries.add(new BarEntry(12, 3));
 
         // Tạo BarDataSet từ danh sách các điểm dữ liệu
         BarDataSet barDataSet = new BarDataSet(entries, "Chi phí");
