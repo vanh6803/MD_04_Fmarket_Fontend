@@ -11,18 +11,20 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCategoryAdapter.ViewHolder> {
     private final Context context;
     private List<ProductByCategory> productByCategoryList;
-
+    private List<ProductByCategory> filteredItems;
     private ProductAdapter productAdapter;
     private ObjectUtil objectUtil;
 
     @SuppressLint("NotifyDataSetChanged")
     public void setListProductType(List<ProductByCategory> productByCategoryList) {
         this.productByCategoryList = productByCategoryList;
+        this.filteredItems = new ArrayList<>(productByCategoryList);
         notifyDataSetChanged();
 
     }
@@ -71,6 +73,22 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    public void filterItem(String query) {
+        productByCategoryList.clear();
+        if (query.isEmpty()) {
+            productByCategoryList.addAll(filteredItems);
+
+        } else {
+            for (ProductByCategory item : filteredItems) {
+                if (item.getNameCategory().toLowerCase().contains(query.toLowerCase())) {
+                    productByCategoryList.add(item);
+                }
+            }
+        }
+
+        notifyDataSetChanged();
     }
 }
 

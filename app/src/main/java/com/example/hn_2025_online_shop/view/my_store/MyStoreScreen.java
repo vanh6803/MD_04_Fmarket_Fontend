@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.hn_2025_online_shop.R;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class MyStoreScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final int Fragment_home = 0;
     private static final int Fragment_khosanpham = 1;
@@ -35,6 +37,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Thay tên cửa hàng lấy từ api vào đây");
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close);
         drawerLayout.addDrawerListener(toggle);
