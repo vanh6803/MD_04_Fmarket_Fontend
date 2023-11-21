@@ -15,6 +15,8 @@ public class Order {
     @SerializedName("total_price")
     private int totalPrice;
     private String status;
+    private String createdAt;
+    private String updatedAt;
 
     public Order(String id, User user, Info info, List<OptionAndQuantity> productsOrder, int totalPrice, String status) {
         this.id = id;
@@ -83,5 +85,13 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 }

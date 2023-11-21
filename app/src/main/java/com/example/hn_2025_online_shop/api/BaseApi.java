@@ -34,13 +34,14 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000/api/")
+            .baseUrl("http://192.168.0.106:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -202,5 +203,16 @@ public interface BaseApi {
 
 
     @GET("order")
-    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization);
+    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization,
+                                     @Query("status") String status);
+
+    @GET("order/order-for-store")
+    Call<OrderResponse> getListOrderStore(@Header("Authorization") String authorization,
+                                     @Query("status") String status);
+
+    @FormUrlEncoded
+    @PUT("order/update-order-status/{idOrder}")
+    Call<ServerResponse> updateOrderStatus(@Header("Authorization") String authorization,
+                                     @Path("idOrder") String idOrder,
+                                     @Field("status") String status);
 }

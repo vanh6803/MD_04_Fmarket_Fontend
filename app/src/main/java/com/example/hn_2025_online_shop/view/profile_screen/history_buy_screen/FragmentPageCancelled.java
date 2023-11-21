@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveringBinding;
+import com.example.hn_2025_online_shop.databinding.FragmentPageCancelledBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
@@ -33,19 +33,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageHandle extends Fragment {
-    private FragmentPageDeliveringBinding binding;
+public class FragmentPageCancelled extends Fragment {
+    private FragmentPageCancelledBinding binding;
     private List<Order> orderList;
     private OrderAdapter orderAdapter;
     private ProgressLoadingDialog loadingDialog;
 
-    public static FragmentPageHandle newInstance(String param1, String param2) {
-        FragmentPageHandle fragment = new FragmentPageHandle();
+    public static FragmentPageCancelled newInstance(String param1, String param2) {
+        FragmentPageCancelled fragment = new FragmentPageCancelled();
         return fragment;
     }
 
     public static Fragment newInstance() {
-        FragmentPageHandle fragment = new FragmentPageHandle();
+        FragmentPageCancelled fragment = new FragmentPageCancelled();
             return fragment;
         }
 
@@ -58,7 +58,7 @@ public class FragmentPageHandle extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPageDeliveringBinding.inflate(inflater, container, false);
+        binding = FragmentPageCancelledBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -82,8 +82,7 @@ public class FragmentPageHandle extends Fragment {
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         loadingDialog.show();
-        BaseApi.API.getListOrder(token).enqueue(new Callback<OrderResponse>() {
-            @SuppressLint("NotifyDataSetChanged")
+        BaseApi.API.getListOrder(token, TAG.CANCELLED).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200

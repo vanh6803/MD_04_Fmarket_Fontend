@@ -163,7 +163,6 @@ public class FragmentProfile extends Fragment {
     }
 
     private void callIdMyStore(String token) {
-
         BaseApi.API.getidMyStore(token,AccountUltil.USER.getId()).enqueue(new Callback<StoreIdResponse>() {
             @Override
             public void onResponse(Call<StoreIdResponse> call, Response<StoreIdResponse> response) {
@@ -174,17 +173,17 @@ public class FragmentProfile extends Fragment {
                         StoreUltil.idStore = storeIdResponse.getData();
                     }
                 } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
-                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+//                    try {
+//                        String errorBody = response.errorBody().string();
+//                        JSONObject errorJson = new JSONObject(errorBody);
+//                        String errorMessage = errorJson.getString("message");
+//                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
+//                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+//                    }catch (IOException e){
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
                 }
             }
 
