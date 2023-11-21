@@ -1,29 +1,24 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.hn_2025_online_shop.adapter.HistoryBuyAdapter;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.databinding.FragmentPageDeliveringBinding;
-import com.example.hn_2025_online_shop.model.HistoryBuy;
+import com.example.hn_2025_online_shop.databinding.FragmentPageWaitConfirmBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
-import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
-import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
 import org.json.JSONException;
@@ -37,14 +32,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageDelivering extends Fragment {
-    private FragmentPageDeliveringBinding binding;
+public class FragmentPageWaitConfirm extends Fragment {
+    private FragmentPageWaitConfirmBinding binding;
     private List<Order> orderList;
     private OrderAdapter orderAdapter;
     private ProgressLoadingDialog loadingDialog;
 
+    public static FragmentPageWaitConfirm newInstance(String param1, String param2) {
+        FragmentPageWaitConfirm fragment = new FragmentPageWaitConfirm();
+        return fragment;
+    }
+
     public static Fragment newInstance() {
-        FragmentPageDelivering fragment = new FragmentPageDelivering();
+        FragmentPageWaitConfirm fragment = new FragmentPageWaitConfirm();
             return fragment;
         }
 
@@ -57,7 +57,7 @@ public class FragmentPageDelivering extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentPageDeliveringBinding.inflate(inflater, container, false);
+        binding = FragmentPageWaitConfirmBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -81,7 +81,7 @@ public class FragmentPageDelivering extends Fragment {
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         loadingDialog.show();
-        BaseApi.API.getListOrder(token).enqueue(new Callback<OrderResponse>() {
+        BaseApi.API.getListOrder(token, TAG.WAIT_CONFIRM).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200

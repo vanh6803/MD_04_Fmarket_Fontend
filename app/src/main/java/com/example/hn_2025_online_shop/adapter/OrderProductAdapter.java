@@ -46,13 +46,13 @@ public class OrderProductAdapter extends RecyclerView.Adapter<OrderProductAdapte
         }
         holder.binding.tvNameProduct.setText(option.getOptionProduct().getProduct().getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
-        holder.binding.tvQuantityPrice.setText(listOption.size() +  " x " + df.format(option.getOptionProduct().getPrice()));
+        holder.binding.tvQuantityPrice.setText(option.getQuantity() +  " x " + df.format(option.getOptionProduct().getPrice()));
+        holder.binding.tvNameColor.setText("Loại: " + option.getOptionProduct().getNameColor());
         Glide.with(context)
                 .load(option.getOptionProduct().getImage())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .into(holder.binding.imgProduct);
-
     }
 
     @Override
