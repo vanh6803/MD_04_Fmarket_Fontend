@@ -9,6 +9,7 @@
     tools:context=".view.my_store.FragmentCreateProductMyStore">
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
+        android:layout_marginBottom="50dp"
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -28,6 +29,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Create Product"
+                android:textStyle="italic"
+                android:textFontWeight="@integer/material_motion_duration_medium_2"
                 android:textColor="@color/color_chudao"
                 android:textSize="25dp" />
 
@@ -718,13 +721,13 @@
     </ScrollView>
 
     <TextView
-        app:layout_constraintTop_toTopOf="@+id/ln"
+
         android:id="@+id/btnHuy"
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginStart="22dp"
         android:layout_marginEnd="73dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_btn_muaangay"
         android:gravity="center"
         android:text="Hủy"
@@ -733,16 +736,18 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/constraint"
         app:layout_constraintEnd_toStartOf="@+id/btnLuu"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="@+id/constraint"
+        app:layout_constraintTop_toTopOf="@+id/ln"
         tools:ignore="NotSibling" />
 
     <TextView
-
-        android:layout_marginRight="20dp"
         android:id="@+id/btnLuu"
+
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/custom_btn_muaangay"
         android:gravity="center"
         android:text="Lưu"
@@ -751,6 +756,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/constraint"
         app:layout_constraintEnd_toEndOf="@+id/constraint"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/btnHuy" />
 
 

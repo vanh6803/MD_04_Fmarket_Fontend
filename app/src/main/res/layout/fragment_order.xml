@@ -71,6 +71,7 @@
 
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:id="@+id/rcvListOrder"
         tools:listitem="@layout/layout_iteam_order"
         android:layout_marginTop="20dp"
