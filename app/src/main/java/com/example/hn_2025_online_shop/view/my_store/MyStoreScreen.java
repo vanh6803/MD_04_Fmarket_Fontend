@@ -7,8 +7,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -16,9 +18,23 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
+import com.example.hn_2025_online_shop.api.BaseApi;
+import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
+import com.example.hn_2025_online_shop.model.response.store.InfoStore;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.StoreUltil;
+import com.example.hn_2025_online_shop.ultil.TAG;
 import com.google.android.material.navigation.NavigationView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyStoreScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private static final int Fragment_home = 0;
@@ -30,15 +46,16 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
     private static final int Fragment_CreateProductMyStore = 6;
     private int mcurrentFrg = Fragment_home;
     private DrawerLayout drawerLayout;
+    private String nameStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_store_screen);
-
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Thay tên cửa hàng lấy từ api vào đây");
+        getProfileStore(token);
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close);
         drawerLayout.addDrawerListener(toggle);
@@ -50,6 +67,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
 
     }
 
@@ -128,4 +146,39 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         transaction.replace(R.id.content_frame, fragment);
         transaction.commit();
     }
+
+
+    private void getProfileStore(String token) {
+
+        BaseApi.API.getInfoStore(token).enqueue(new Callback<InfoStore>() {
+            @Override
+            public void onResponse(Call<InfoStore> call, Response<InfoStore> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    InfoStore storeIdResponse = response.body();
+                    if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
+                        nameStore = storeIdResponse.getData().getName();
+                        Objects.requireNonNull(getSupportActionBar()).setTitle(nameStore);
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<InfoStore> call, Throwable t) {
+
+            }
+        });
+
+    }
+
 }

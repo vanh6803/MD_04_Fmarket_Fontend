@@ -15,6 +15,7 @@ import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
+import com.example.hn_2025_online_shop.model.response.store.InfoStore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -41,7 +42,7 @@ public interface BaseApi {
     // 10.0.2.2
     // 10.0.3.2
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.106:3000/api/")
+            .baseUrl("http://10.0.2.2:3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -215,4 +216,9 @@ public interface BaseApi {
     Call<ServerResponse> updateOrderStatus(@Header("Authorization") String authorization,
                                      @Path("idOrder") String idOrder,
                                      @Field("status") String status);
+    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization);
+
+
+    @GET("store/info")
+    Call<InfoStore> getInfoStore(@Header("Authorization") String authorization);
 }
