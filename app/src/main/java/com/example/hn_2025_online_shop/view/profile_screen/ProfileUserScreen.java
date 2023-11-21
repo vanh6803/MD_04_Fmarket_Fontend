@@ -261,6 +261,7 @@ public class ProfileUserScreen extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }
+
         if(TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
@@ -272,7 +273,6 @@ public class ProfileUserScreen extends AppCompatActivity {
             Toast.makeText(this, "Nhập đúng định dạng ngày tháng dd/MM/yyyy", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
     }
 
@@ -289,7 +289,6 @@ public class ProfileUserScreen extends AppCompatActivity {
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.avatar1)
                 .into(binding.imgAvartar);
-
     }
 
     @Override

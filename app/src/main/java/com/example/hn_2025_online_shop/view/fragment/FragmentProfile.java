@@ -124,7 +124,6 @@ public class FragmentProfile extends Fragment {
                             if(response1.getCode() == 200) {
                                 Toast.makeText(getActivity(), "Bạn cần dky để trở thành người bán", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getActivity(), RegisterMemberSeller.class));
-                                requireActivity().finishAffinity();
                             }
                         } else { // nhận các đầu status #200
                             try {
@@ -133,9 +132,7 @@ public class FragmentProfile extends Fragment {
                                 JSONObject errorJson = new JSONObject(errorBody);
                                 String errorMessage = errorJson.getString("message");
                                 startActivity(new Intent(getActivity(), MyStoreScreen.class));
-                                requireActivity().finishAffinity();
                                 Log.d(TAG.toString, "onResponse-logout: " + errorMessage);
-                                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
                             }catch (IOException e){
                                 e.printStackTrace();
                             } catch (JSONException e) {

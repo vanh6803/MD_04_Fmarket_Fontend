@@ -17,7 +17,9 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentPageWaitConfirmBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
@@ -32,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageWaitConfirm extends Fragment {
+public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
     private FragmentPageWaitConfirmBinding binding;
     private List<Order> orderList;
     private OrderAdapter orderAdapter;
@@ -72,7 +74,7 @@ public class FragmentPageWaitConfirm extends Fragment {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
-        orderAdapter = new OrderAdapter(getActivity(), orderList);
+        orderAdapter = new OrderAdapter(getActivity(), orderList, this, 1);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvOrder.setLayoutManager(layoutManager);
         binding.rcvOrder.setAdapter(orderAdapter);
@@ -90,6 +92,11 @@ public class FragmentPageWaitConfirm extends Fragment {
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
                         orderAdapter.setListOrder(orderList);
+                        if(orderList.size() == 0) {
+                            binding.layoutDrum.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.layoutDrum.setVisibility(View.GONE);
+                        }
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -111,6 +118,50 @@ public class FragmentPageWaitConfirm extends Fragment {
             public void onFailure(Call<OrderResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
+                loadingDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+        Order order = (Order) object;
+        udpateStatusOrder(order);
+    }
+
+    private void udpateStatusOrder(Order order) {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        loadingDialog.show();
+        BaseApi.API.updateOrderStatus(token, order.getId(), TAG.CANCELLED).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-updateOrderStatus: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200) {
+                        orderList.remove(order);
+                        orderAdapter.setListOrder(orderList);
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-updateOrderStatus: " + errorMessage);
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-updateOrderStatus: " + t.toString());
                 loadingDialog.dismiss();
             }
         });
