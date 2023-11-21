@@ -19,6 +19,7 @@ import com.example.hn_2025_online_shop.databinding.FragmentPageCancelledBinding;
 import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
@@ -33,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentPageCancelled extends Fragment {
+public class FragmentPageCancelled extends Fragment implements ObjectUtil {
     private FragmentPageCancelledBinding binding;
     private List<Order> orderList;
     private OrderAdapter orderAdapter;
@@ -73,7 +74,7 @@ public class FragmentPageCancelled extends Fragment {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
-        orderAdapter = new OrderAdapter(getActivity(), orderList);
+        orderAdapter = new OrderAdapter(getActivity(), orderList, this, 4);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvOrder.setLayoutManager(layoutManager);
         binding.rcvOrder.setAdapter(orderAdapter);
@@ -116,5 +117,10 @@ public class FragmentPageCancelled extends Fragment {
                 loadingDialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onclickObject(Object object) {
+
     }
 }

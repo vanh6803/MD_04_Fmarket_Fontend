@@ -118,7 +118,7 @@
             android:id="@+id/btnConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/custom_button_rectangular"
+            android:background="@drawable/custom_button_rectangular_border"
             android:gravity="center"
             android:text="Xác nhận"
             android:textColor="@color/white"
