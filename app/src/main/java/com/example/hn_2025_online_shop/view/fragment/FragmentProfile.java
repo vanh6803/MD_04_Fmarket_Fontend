@@ -34,7 +34,6 @@ import com.example.hn_2025_online_shop.view.login.Login;
 import com.example.hn_2025_online_shop.view.login.RegisterMemberSeller;
 import com.example.hn_2025_online_shop.view.my_store.MyStoreScreen;
 import com.example.hn_2025_online_shop.view.login.ResetPassWord;
-import com.example.hn_2025_online_shop.view.profile_screen.ChatScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.OrderProductScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
 import org.json.JSONException;
@@ -94,7 +93,6 @@ public class FragmentProfile extends Fragment {
 
     private void initController() {
         HistoryDon();//theo dõi đơn hàng
-        chat(); // chat với khách hàng
         phanHoiKhieuNai();//phan hoi khieu nai
         SignUpBuier();//đăng kí thành người bạn
         resetPass();
@@ -223,16 +221,7 @@ public class FragmentProfile extends Fragment {
             }
         });
     }
-    private void chat() {
-        binding.layoutHoiDap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), ChatScreen.class));
-                requireActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
-            }
-        });
 
-    }
     private void phanHoiKhieuNai() {
         binding.layoutPhanhoi.setOnClickListener(new View.OnClickListener() {
             @Override

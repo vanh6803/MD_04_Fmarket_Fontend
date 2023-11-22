@@ -75,7 +75,7 @@ public class FragmentPageConfirmStore extends Fragment implements ObjectUtil {
     private void initView() {
         loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
-        orderStoreAdapter = new OrderStoreAdapter(getActivity(), orderList, this);
+        orderStoreAdapter = new OrderStoreAdapter(getActivity(), orderList, this, 1);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.rcvOrder.setLayoutManager(layoutManager);
         binding.rcvOrder.setAdapter(orderStoreAdapter);
