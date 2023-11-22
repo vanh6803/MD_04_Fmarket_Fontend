@@ -1,6 +1,5 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +28,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +53,7 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPageCancelledBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -68,7 +68,7 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
+        loadingDialog = new ProgressLoadingDialog(requireActivity());
         orderList = new ArrayList<>();
         orderAdapter = new OrderAdapter(getActivity(), orderList, this, 4);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -81,9 +81,10 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
         loadingDialog.show();
         BaseApi.API.getListOrder(token, TAG.CANCELLED).enqueue(new Callback<OrderResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     OrderResponse orderResponse = response.body();
+                    assert orderResponse != null;
                     Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse.toString());
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
@@ -96,6 +97,7 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -111,7 +113,7 @@ public class FragmentPageCancelled extends Fragment implements ObjectUtil {
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
                 loadingDialog.dismiss();

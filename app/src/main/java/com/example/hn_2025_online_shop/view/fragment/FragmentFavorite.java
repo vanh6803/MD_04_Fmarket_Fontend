@@ -27,6 +27,7 @@ public class FragmentFavorite extends Fragment {
 
 
 
+    @NonNull
     public static FragmentFavorite newInstance() {
         FragmentFavorite fragment = new FragmentFavorite();
         return fragment;

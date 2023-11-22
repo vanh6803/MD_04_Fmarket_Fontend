@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.adapter;
 import android.content.Context;
+import android.graphics.Paint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
@@ -35,6 +36,9 @@ public class ProductFavoriteAdapter extends RecyclerView.Adapter<ProductFavorite
                 .error(R.drawable.error)
                 .into(holder.binding.imgProduct);
         holder.binding.tvName.setText(product.getName());
+        holder.binding.txtCount.setText("10");
+        holder.binding.txtSale.setText("200.000đ");
+        holder.binding.txtSale.setPaintFlags(holder.binding.txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
     }
 

@@ -1,17 +1,14 @@
 package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentPageWaitConfirmBinding;
@@ -22,14 +19,11 @@ import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,7 +51,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentPageWaitConfirmBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -72,7 +66,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
+        loadingDialog = new ProgressLoadingDialog(requireActivity());
         orderList = new ArrayList<>();
         orderAdapter = new OrderAdapter(getActivity(), orderList, this, 1);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -85,10 +79,11 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
         loadingDialog.show();
         BaseApi.API.getListOrder(token, TAG.WAIT_CONFIRM).enqueue(new Callback<OrderResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     OrderResponse orderResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse.toString());
+                    assert orderResponse != null;
+                    Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse);
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
                         orderAdapter.setListOrder(orderList);
@@ -100,6 +95,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -115,7 +111,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
                 loadingDialog.dismiss();
@@ -134,9 +130,10 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
         loadingDialog.show();
         BaseApi.API.updateOrderStatus(token, order.getId(), TAG.CANCELLED).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
+                    assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-updateOrderStatus: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200) {
                         orderList.remove(order);
@@ -144,6 +141,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -159,7 +157,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-updateOrderStatus: " + t.toString());
                 loadingDialog.dismiss();

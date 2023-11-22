@@ -1,37 +1,26 @@
 package com.example.hn_2025_online_shop.view.my_store;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.ImageView;
-import android.widget.Toast;
-
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.example.hn_2025_online_shop.api.BaseApi;
-import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.google.android.material.navigation.NavigationView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.Objects;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -152,15 +141,17 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         BaseApi.API.getInfoStore(token).enqueue(new Callback<InfoStore>() {
             @Override
-            public void onResponse(Call<InfoStore> call, Response<InfoStore> response) {
+            public void onResponse(@NonNull Call<InfoStore> call, @NonNull Response<InfoStore> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     InfoStore storeIdResponse = response.body();
+                    assert storeIdResponse != null;
                     if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
                         nameStore = storeIdResponse.getData().getName();
                         Objects.requireNonNull(getSupportActionBar()).setTitle(nameStore);
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -174,7 +165,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
             }
 
             @Override
-            public void onFailure(Call<InfoStore> call, Throwable t) {
+            public void onFailure(@NonNull Call<InfoStore> call, @NonNull Throwable t) {
 
             }
         });
