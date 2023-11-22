@@ -9,10 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.example.hn_2025_online_shop.adapter.OrderAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentOrderBinding;
-import com.example.hn_2025_online_shop.model.Order1;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class FragmentOrder extends Fragment {
