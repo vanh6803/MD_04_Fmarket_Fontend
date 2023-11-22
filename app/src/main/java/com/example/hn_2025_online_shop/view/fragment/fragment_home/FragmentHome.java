@@ -30,6 +30,7 @@ import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
+import com.example.hn_2025_online_shop.view.chat_message.ChatActivity;
 import com.example.hn_2025_online_shop.view.find_product.FindProduct;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -170,8 +171,13 @@ public class FragmentHome extends Fragment {
                 Intent intent = new Intent(getActivity(), FindProduct.class);
                 mActivityResultLauncher.launch(intent);
                 getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
-
             }
+        });
+
+        binding.imgChat.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
         });
     }
 

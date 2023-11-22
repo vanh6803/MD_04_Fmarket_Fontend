@@ -61,6 +61,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
+                android:id="@+id/imgChat"
                 android:src="@drawable/messg"
                 android:layout_marginHorizontal="5dp"
                 android:layout_width="30dp"

@@ -56,6 +56,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
             holder.binding.btnItem.setText("Hủy hàng");
             int color = Color.parseColor("#FFCC00");
             holder.binding.tvStatus.setTextColor(color);
+        } else if(status == 2) {
+            holder.binding.btnItem.setVisibility(View.GONE);
         } else if(status == 3) {
             holder.binding.btnItem.setText("Mua lại");
         } else if(status == 4) {
