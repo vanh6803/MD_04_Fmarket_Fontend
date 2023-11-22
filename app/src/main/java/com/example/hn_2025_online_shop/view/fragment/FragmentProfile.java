@@ -154,9 +154,10 @@ public class FragmentProfile extends Fragment {
     private void callIdMyStore(String token) {
         BaseApi.API.getidMyStore(token,AccountUltil.USER.getId()).enqueue(new Callback<StoreIdResponse>() {
             @Override
-            public void onResponse(Call<StoreIdResponse> call, Response<StoreIdResponse> response) {
+            public void onResponse(@NonNull Call<StoreIdResponse> call, @NonNull Response<StoreIdResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     StoreIdResponse storeIdResponse = response.body();
+                    assert storeIdResponse != null;
                     Log.d("aaaaaa", "onResponse-createProduct: " + storeIdResponse.toString());
                     if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
                         StoreUltil.idStore = storeIdResponse.getData();

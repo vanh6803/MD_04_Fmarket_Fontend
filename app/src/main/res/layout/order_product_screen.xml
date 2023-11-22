@@ -57,9 +57,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.tabs.TabLayout
-            android:layout_marginTop="20dp"
             android:id="@+id/tabHistory"
-            android:layout_marginHorizontal="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabIndicatorColor="@color/primary"
