@@ -92,11 +92,11 @@
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:background="#F6F6F6"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
+        app:layout_constraintBottom_toTopOf="@+id/listVoucher"
         />
 
     <LinearLayout
-        android:id="@+id/linearLayout6"
+        android:id="@+id/listVoucher"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,6 +29,7 @@ import com.example.hn_2025_online_shop.ultil.swipe.ItemTouchHelperListener;
 import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
+import com.example.hn_2025_online_shop.view.voucher.VoucherScreen;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,6 +68,14 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             public void onClick(View v) {
                 onBackActivity();
                 updateCart();
+            }
+        });
+
+        binding.listVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, VoucherScreen.class);
+                startActivity(intent);
             }
         });
 

@@ -73,11 +73,12 @@ public class FragmentStore extends Fragment implements ObjectUtil {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         list = new ArrayList<>();
-        list.add(new Voucher("20%", "200k", "còn 4 ngày"));
-        list.add(new Voucher("10%", "400k", "còn 4 ngày"));
-        list.add(new Voucher("40%", "100k", "còn 4 ngày"));
-        list.add(new Voucher("40%", "220k", "còn 4 ngày"));
-        list.add(new Voucher("50%", "220k", "còn 5 ngày"));
+        list.add(new Voucher("Miễn phí vận chuyển", "400k", "11/12/2023", "12%"));
+        list.add(new Voucher("Miễn phí vận chuyển", "400k", "11/12/2023", "12%"));
+        list.add(new Voucher("Miễn phí vận chuyển", "400k", "11/12/2023", "12%"));
+        list.add(new Voucher("Miễn phí vận chuyển", "400k", "11/12/2023", "12%"));
+        list.add(new Voucher("Miễn phí vận chuyển", "400k", "11/12/2023", "12%"));
+        list.add(new Voucher("Miễn phí vận chuyển", "400k", "11/12/2023", "12%"));
         adapter = new StoreAdapter(list,getContext());
         binding.gridStore.setAdapter(adapter);
         productList = new ArrayList<>();
