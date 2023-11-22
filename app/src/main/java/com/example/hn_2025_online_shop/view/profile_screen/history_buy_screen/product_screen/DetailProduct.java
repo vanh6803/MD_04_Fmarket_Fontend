@@ -100,7 +100,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     private void getVoucher() {
         voucherList = new ArrayList<>();
         for (int i = 1 ; i< 6; i++){
-            voucherList.add(new Voucher("Giảm"+i+"%", "1234", ""));
+            voucherList.add(new Voucher("Giảm"+ i +"% đối với đơn hàng trên 100k","Giảm"+i+"%", "1234", ""));
         }
         binding.count.setText(voucherList.size() + " mã giảm giá");
         productAdapter = new ProductAdapter(this, productList, this);

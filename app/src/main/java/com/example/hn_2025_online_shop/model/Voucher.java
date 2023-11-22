@@ -4,11 +4,13 @@ public class Voucher {
     String nameVoucher;
     String price;
     String date;
+    String sale;
 
-    public Voucher(String nameVoucher, String price, String date) {
+    public Voucher(String nameVoucher, String price, String date, String sale) {
         this.nameVoucher = nameVoucher;
         this.price = price;
         this.date = date;
+        this.sale = sale;
     }
 
     public String getNameVoucher() {
@@ -33,5 +35,13 @@ public class Voucher {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getSale() {
+        return sale;
+    }
+
+    public void setSale(String sale) {
+        this.sale = sale;
     }
 }
