@@ -124,7 +124,7 @@ public class FragmentProfile extends Fragment {
 
                 loadingDialog.show();
                 String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-                callIdMyStore(token);
+//                callIdMyStore(token);
                 BaseApi.API.checkStoreExiting(token).enqueue(new Callback<CheckStoreResponse>() {
                     @Override
                     public void onResponse(Call<CheckStoreResponse> call, Response<CheckStoreResponse> response) {
@@ -134,7 +134,6 @@ public class FragmentProfile extends Fragment {
                             if(response1.getCode() == 200) {
                                 Toast.makeText(getActivity(), "Bạn cần dky để trở thành người bán", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getActivity(), RegisterMemberSeller.class));
-                                getActivity().finishAffinity();
                             }
                         } else { // nhận các đầu status #200
                             try {
@@ -142,9 +141,7 @@ public class FragmentProfile extends Fragment {
                                 JSONObject errorJson = new JSONObject(errorBody);
                                 String errorMessage = errorJson.getString("message");
                                 startActivity(new Intent(getActivity(), MyStoreScreen.class));
-                                getActivity().finishAffinity();
                                 Log.d(TAG.toString, "onResponse-logout: " + errorMessage);
-                                Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
                             }catch (IOException e){
                                 e.printStackTrace();
                             } catch (JSONException e) {
@@ -163,39 +160,39 @@ public class FragmentProfile extends Fragment {
         });
     }
 
-    private void callIdMyStore(String token) {
-
-        BaseApi.API.getidMyStore(token,AccountUltil.USER.getId()).enqueue(new Callback<StoreIdResponse>() {
-            @Override
-            public void onResponse(Call<StoreIdResponse> call, Response<StoreIdResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    StoreIdResponse storeIdResponse = response.body();
-                    Log.d("aaaaaa", "onResponse-createProduct: " + storeIdResponse.toString());
-                    if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
-                        StoreUltil.idStore = storeIdResponse.getData();
-                    }
-                } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
-                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<StoreIdResponse> call, Throwable t) {
-
-            }
-        });
-
-    }
+//    private void callIdMyStore(String token) {
+//
+//        BaseApi.API.getidMyStore(token,AccountUltil.USER.getId()).enqueue(new Callback<StoreIdResponse>() {
+//            @Override
+//            public void onResponse(Call<StoreIdResponse> call, Response<StoreIdResponse> response) {
+//                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+//                    StoreIdResponse storeIdResponse = response.body();
+//                    Log.d("aaaaaa", "onResponse-createProduct: " + storeIdResponse.toString());
+//                    if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
+//                        StoreUltil.idStore = storeIdResponse.getData();
+//                    }
+//                } else { // nhận các đầu status #200
+//                    try {
+//                        String errorBody = response.errorBody().string();
+//                        JSONObject errorJson = new JSONObject(errorBody);
+//                        String errorMessage = errorJson.getString("message");
+//                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
+//                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+//                    }catch (IOException e){
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<StoreIdResponse> call, Throwable t) {
+//
+//            }
+//        });
+//
+//    }
 
     private void profile() {
         binding.layoutProfile.setOnClickListener(new View.OnClickListener() {

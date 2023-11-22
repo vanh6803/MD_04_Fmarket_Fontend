@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,11 +25,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.SpinnerCategoryAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DialogCreateOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.FragmentCreateProductMyStoreBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
+import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.model.ProductType;
+import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
@@ -46,7 +52,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -59,6 +67,7 @@ import retrofit2.Response;
 public class FragmentCreateProductMyStore extends Fragment {
     private MultipartBody.Part fileImgAvatar;
     private HashMap<String, String> categoryMap = new HashMap<>();
+    private SpinnerCategoryAdapter spinnerCategoryAdapter;
 
     private int isCheckImage = 0; // 1 là avatar
     private boolean isCamera = false; // kiểm tra xem avatar có dữ liệu hay chưa
@@ -99,6 +108,43 @@ public class FragmentCreateProductMyStore extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         initView();
         initController();
+        spinnerCategoryAdapter = new SpinnerCategoryAdapter(getContext(), R.layout.iteam_selected, getListCategory());
+        binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
+    }
+
+    private List<ProductType> getListCategory() {
+        List<ProductType> list = new ArrayList<>();
+        BaseApi.API.getListTypeProduct().enqueue(new Callback<ProductTypeResponse>() {
+            @Override
+            public void onResponse(Call<ProductTypeResponse> call, Response<ProductTypeResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ProductTypeResponse reponse = response.body();
+                    Log.d(TAG.toString, "onResponse-getListProductType: " + reponse.toString());
+                    if(reponse.getCode() == 200) {
+
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-getListProductType: " + errorMessage);
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProductTypeResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        return list;
     }
 
     private void initController() {
@@ -133,10 +179,6 @@ public class FragmentCreateProductMyStore extends Fragment {
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         binding.spinnerTinhTrang.setAdapter(adapterTinhTrang);
 
-        String[] optionCategory = {"Điện Thoai", "Laptop", "Tai Nghe", "Bàn Phím", "Pc"};
-        ArrayAdapter<String> adapterCategory = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, optionCategory);
-        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        binding.spinnerCategory.setAdapter(adapterCategory);
 
         String[] optionIsAvtive = {"Có", "Không"};
         ArrayAdapter<String> adapterIsAvtive = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, optionIsAvtive);
@@ -159,69 +201,7 @@ public class FragmentCreateProductMyStore extends Fragment {
         binding.lnRom.setVisibility(View.GONE);
         binding.tvHeDieuHanh.setVisibility(View.GONE);
         binding.lnHeDieuHanh.setVisibility(View.GONE);
-        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            String categoryIdDienThoai = "654df46fde2dd24f7fc38944";
-            String categoryIdLaptop = "654df48cde2dd24f7fc38947";
-            String categoryIdTaiNghe = "654df49ade2dd24f7fc3894a";
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                String selectedOption = optionCategory[i];
-                if(selectedOption.equals("Điện Thoại")){
-                    binding.tvSc.setVisibility(View.VISIBLE);
-                    binding.lnSc.setVisibility(View.VISIBLE);
-                    binding.tvCamera.setVisibility(View.VISIBLE);
-                    binding.lnCamera.setVisibility(View.VISIBLE);
-                    binding.tvCpu.setVisibility(View.VISIBLE);
-                    binding.lnCpu.setVisibility(View.VISIBLE);
-                    binding.tvGpu.setVisibility(View.VISIBLE);
-                    binding.lnGpu.setVisibility(View.VISIBLE);
-                    binding.tvRam.setVisibility(View.VISIBLE);
-                    binding.lnRam.setVisibility(View.VISIBLE);
-                    binding.tvRom.setVisibility(View.VISIBLE);
-                    binding.lnRom.setVisibility(View.VISIBLE);
-                    categoryMap.put(selectedOption, categoryIdDienThoai);
-                    String selected = categoryMap.get(selectedOption);
-                    selected = categoryIdDienThoai;
-                } else if (selectedOption.equals("Laptop")) {
-                    binding.tvSc.setVisibility(View.VISIBLE);
-                    binding.lnSc.setVisibility(View.VISIBLE);
-                    binding.tvCamera.setVisibility(View.VISIBLE);
-                    binding.lnCamera.setVisibility(View.VISIBLE);
-                    binding.tvCpu.setVisibility(View.VISIBLE);
-                    binding.lnCpu.setVisibility(View.VISIBLE);
-                    binding.tvGpu.setVisibility(View.VISIBLE);
-                    binding.lnGpu.setVisibility(View.VISIBLE);
-                    binding.tvRam.setVisibility(View.VISIBLE);
-                    binding.lnRam.setVisibility(View.VISIBLE);
-                    binding.tvRom.setVisibility(View.VISIBLE);
-                    binding.lnRom.setVisibility(View.VISIBLE);
-                    selectedOption = categoryIdLaptop;
-                } else if (selectedOption.equals("Tai Nghe")) {
-                    binding.tvSc.setVisibility(View.GONE);
-                    binding.lnSc.setVisibility(View.GONE);
-                    binding.tvCamera.setVisibility(View.GONE);
-                    binding.lnCamera.setVisibility(View.GONE);
-                    binding.tvChipset.setVisibility(View.GONE);
-                    binding.lnChipset.setVisibility(View.GONE);
-                    binding.tvCpu.setVisibility(View.GONE);
-                    binding.lnCpu.setVisibility(View.GONE);
-                    binding.tvGpu.setVisibility(View.GONE);
-                    binding.lnGpu.setVisibility(View.GONE);
-                    binding.tvRam.setVisibility(View.GONE);
-                    binding.lnRam.setVisibility(View.GONE);
-                    binding.tvRom.setVisibility(View.GONE);
-                    binding.lnRom.setVisibility(View.GONE);
-                    binding.tvHeDieuHanh.setVisibility(View.GONE);
-                    binding.lnHeDieuHanh.setVisibility(View.GONE);
-                    selectedOption = categoryIdTaiNghe;
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
         binding.spinnerIsActive.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -263,9 +243,79 @@ public class FragmentCreateProductMyStore extends Fragment {
                 dialog1.dismiss();
             }
         });
+        binding1.btnLuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = binding1.edtNameColor.getText().toString();
+                int price = Integer.parseInt(binding1.edtPrice.getText().toString());
+                int discount = Integer.parseInt(binding1.edtDiscountValue.getText().toString());
+                int quantity = Integer.parseInt(binding1.edtQuantity.getText().toString());
+                CreateOptionProduct(name, price, discount, quantity);
+            }
+        });
 
         dialog1.show();
     }
+
+    private void CreateOptionProduct(String name, int price, int discount, int quantity) {
+        if (checkValidateOptionProduct(name, price, discount, quantity)){
+            dialog.show();
+            String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+            String productId = "aaa";
+            BaseApi.API.createOption(token, productId, name, fileImgAvatar, price, discount, quantity ).enqueue(new Callback<ServerResponse>() {
+                @Override
+                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                    if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                        ServerResponse serverResponse = response.body();
+                        Log.d(TAG.toString, "onResponse-CreateOptionProduct: " + serverResponse.toString());
+                        if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+                            Toast.makeText(getContext(), "Create Option Product Successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    } else { // nhận các đầu status #200
+                        try {
+                            String errorBody = response.errorBody().string();
+                            JSONObject errorJson = new JSONObject(errorBody);
+                            String errorMessage = errorJson.getString("message");
+                            Log.d(TAG.toString, "onResponse-CreateOptionProduct: " + errorMessage);
+                            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<ServerResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG.toString, "onFailure-CreateOptionProduct: " + t.toString());
+                    dialog.dismiss();
+
+                }
+            });
+
+        }
+
+    }
+    private boolean checkValidateOptionProduct(String name, int price, int discount, int quantity ) {
+        if(TextUtils.isEmpty(name)) {
+            Toast.makeText(getContext(), "Mời nhập tên shop", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(!isCamera) {
+            Toast.makeText(getContext(), "Hãy chọn Image", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(price == 0) {
+            Toast.makeText(getContext(), "Mời nhập giá sp", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(quantity == 0) {
+            Toast.makeText(getContext(), "Mời nhập số lượng sản phẩm", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
 
     public void createProductMyStore(){
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
@@ -297,11 +347,14 @@ public class FragmentCreateProductMyStore extends Fragment {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    ServerResponse ServerResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-createProduct: " + ServerResponse.toString());
-                    if(ServerResponse.getCode() == 200 || ServerResponse.getCode() == 201) {
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-createProduct: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                         Toast.makeText(getContext(), "Create Product Is Successfully!", Toast.LENGTH_SHORT).show();
+
+
                     }
+
                 } else { // nhận các đầu status #200
                     try {
                         String errorBody = response.errorBody().string();
