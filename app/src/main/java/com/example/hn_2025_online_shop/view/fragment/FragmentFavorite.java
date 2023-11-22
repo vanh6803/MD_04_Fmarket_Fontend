@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import com.example.hn_2025_online_shop.adapter.ProductFavoriteAdapter;
 import com.example.hn_2025_online_shop.databinding.FragmentFavoriteBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductFind;
+import com.example.hn_2025_online_shop.view.chat_message.ChatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,15 @@ public class FragmentFavorite extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView();
+        initController();
+    }
+
+    private void initController() {
+        binding.imgChat.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+        });
     }
 
 

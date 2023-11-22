@@ -75,6 +75,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
+                android:id="@+id/imgChat"
                 android:src="@drawable/messg"
                 android:layout_marginHorizontal="5dp"
                 android:layout_width="30dp"
@@ -120,27 +121,6 @@
             app:tabIndicatorColor="@color/color_chudao"
             app:tabSelectedTextAppearance="@color/color_chudao"
             app:tabSelectedTextColor="@color/color_chudao">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Bán chạy"
-                android:textAlignment="center" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Đang giảm giá"
-                android:textAlignment="center" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contextClickable="true"
-                android:text="Nổi bật"
-                android:textAlignment="center" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.viewpager2.widget.ViewPager2
