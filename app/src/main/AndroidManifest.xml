@@ -20,6 +20,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".view.chat_message.MessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.chat_message.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.buy_product.UpdateAddressActivity"
             android:exported="false" />
         <activity
@@ -43,18 +49,11 @@
         <activity
             android:name=".view.profile_screen.ProfileUserScreen"
             android:exported="false" />
-
         <activity android:name=".view.voucher.VoucherScreen" />
-
         <activity android:name=".view.my_store.MyStoreScreen" />
-
-        <activity
-            android:name=".view.profile_screen.ChatScreen"
-            android:exported="false" />
         <activity
             android:name=".view.cart_screen.CartActivity"
             android:exported="true" />
-
         <activity
             android:name=".view.find_product.FindProduct"
             android:exported="true" />
@@ -86,7 +85,7 @@
             android:name=".view.login.RegisterMemberSeller"
             android:exported="true" />
         <activity
-            android:name=".view.profile_screen.HistoryBuyScreen"
+            android:name=".view.profile_screen.OrderProductScreen"
             android:exported="true" />
         <activity
             android:name=".view.infor_shop.InforShop"
@@ -99,7 +98,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

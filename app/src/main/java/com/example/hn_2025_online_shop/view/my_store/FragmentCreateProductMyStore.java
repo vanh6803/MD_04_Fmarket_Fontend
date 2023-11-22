@@ -122,6 +122,7 @@ public class FragmentCreateProductMyStore extends Fragment {
                     Log.d(TAG.toString, "onResponse-getListProductType: " + reponse.toString());
                     if(reponse.getCode() == 200) {
 
+
                     }
                 } else { // nhận các đầu status #200
                     try {

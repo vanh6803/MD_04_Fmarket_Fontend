@@ -1,21 +1,14 @@
 package com.example.hn_2025_online_shop.adapter;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.databinding.HistoryBuyBinding;
 import com.example.hn_2025_online_shop.databinding.ItemHistoryBuyBinding;
 import com.example.hn_2025_online_shop.model.HistoryBuy;
-import com.example.hn_2025_online_shop.view.profile_screen.HistoryBuyScreen;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -52,7 +45,7 @@ public class HistoryBuyAdapter extends RecyclerView.Adapter<HistoryBuyAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private ItemHistoryBuyBinding binding;
+        private final ItemHistoryBuyBinding binding;
 
         public ViewHolder(ItemHistoryBuyBinding binding) {
             super(binding.getRoot());

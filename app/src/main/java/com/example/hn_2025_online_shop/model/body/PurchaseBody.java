@@ -1,6 +1,6 @@
 package com.example.hn_2025_online_shop.model.body;
 
-import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionAndQuantity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -10,7 +10,7 @@ public class PurchaseBody {
     private String id;
     @SerializedName("user_id")
     private String userId;
-    private List<CartOfList> productsOrder;
+    private List<OptionAndQuantity> productsOrder;
     @SerializedName("total_price")
     private int totalPrice;
     @SerializedName("info_id")
@@ -19,7 +19,7 @@ public class PurchaseBody {
     public PurchaseBody() {
     }
 
-    public PurchaseBody(String id, String userId, List<CartOfList> productsOrder, int totalPrice, String infoId) {
+    public PurchaseBody(String id, String userId, List<OptionAndQuantity> productsOrder, int totalPrice, String infoId) {
         this.id = id;
         this.userId = userId;
         this.productsOrder = productsOrder;
@@ -36,11 +36,11 @@ public class PurchaseBody {
                 '}';
     }
 
-    public List<CartOfList> getProductsOrder() {
+    public List<OptionAndQuantity> getProductsOrder() {
         return productsOrder;
     }
 
-    public void setProductsOrder(List<CartOfList> productsOrder) {
+    public void setProductsOrder(List<OptionAndQuantity> productsOrder) {
         this.productsOrder = productsOrder;
     }
 

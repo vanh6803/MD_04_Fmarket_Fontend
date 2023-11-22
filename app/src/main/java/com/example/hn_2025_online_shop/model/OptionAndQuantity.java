@@ -2,17 +2,17 @@ package com.example.hn_2025_online_shop.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CartOfList {
+public class OptionAndQuantity {
     @SerializedName("_id")
     private String id;
     @SerializedName("option_id")
     private OptionOfListCart optionProduct;
     private int quantity;
 
-    public CartOfList() {
+    public OptionAndQuantity() {
     }
 
-    public CartOfList(String id, OptionOfListCart optionProduct, int quantity) {
+    public OptionAndQuantity(String id, OptionOfListCart optionProduct, int quantity) {
         this.id = id;
         this.optionProduct = optionProduct;
         this.quantity = quantity;

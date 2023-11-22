@@ -1,17 +1,17 @@
 package com.example.hn_2025_online_shop.model.response;
 
-import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionAndQuantity;
 
 import java.util.List;
 
 public class CartReponse {
     private int code;
-    private List<CartOfList> data;
+    private List<OptionAndQuantity> data;
 
     public CartReponse() {
     }
 
-    public CartReponse(int code, List<CartOfList> data) {
+    public CartReponse(int code, List<OptionAndQuantity> data) {
         this.code = code;
         this.data = data;
     }
@@ -32,11 +32,11 @@ public class CartReponse {
         this.code = code;
     }
 
-    public List<CartOfList> getData() {
+    public List<OptionAndQuantity> getData() {
         return data;
     }
 
-    public void setData(List<CartOfList> data) {
+    public void setData(List<OptionAndQuantity> data) {
         this.data = data;
     }
 }

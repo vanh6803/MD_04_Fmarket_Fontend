@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.api;
 
+import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
@@ -7,12 +8,14 @@ import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
+import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
+import com.example.hn_2025_online_shop.model.response.store.InfoStore;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,6 +35,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
@@ -139,7 +143,11 @@ public interface BaseApi {
     Call<ServerResponse> updateQuantityCartItem(@Header("Authorization") String authorization,
                                             @Path("idCart") String idCart,
                                             @Field("quantity") int quantity);
-
+    @FormUrlEncoded
+    @PUT("store/edit-avatar/{storeId}")
+    Call<ServerResponse> updateAvatarStore(@Header("Authorization") String authorization,
+                                           @Path("storeId") String storeId,
+                                           @Part MultipartBody.Part avatar);
     @FormUrlEncoded
     @POST("info/add")
     Call<ServerResponse> addInfo(@Header("Authorization") String authorization,
@@ -173,6 +181,7 @@ public interface BaseApi {
     @DELETE("info/delete/{idInfo}")
     Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
                                     @Path("idInfo") String idInfo);
+
     @FormUrlEncoded
     @POST("products/create-product")
     Call<ServerResponse> createProductMyStore(@Header("Authorization") String authorization,
@@ -203,5 +212,26 @@ public interface BaseApi {
                                  @Field("price") int price,
                                  @Field("discount_value") int discount_value, @Field("quantity") int quantity);
 
+
+
+
+    @GET("order")
+    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization,
+                                     @Query("status") String status);
+
+    @GET("order/order-for-store")
+    Call<OrderResponse> getListOrderStore(@Header("Authorization") String authorization,
+                                     @Query("status") String status);
+
+    @FormUrlEncoded
+    @PUT("order/update-order-status/{idOrder}")
+    Call<ServerResponse> updateOrderStatus(@Header("Authorization") String authorization,
+                                     @Path("idOrder") String idOrder,
+                                     @Field("status") String status);
+    Call<OrderResponse> getListOrder(@Header("Authorization") String authorization);
+
+
+    @GET("store/info")
+    Call<InfoStore> getInfoStore(@Header("Authorization") String authorization);
 
 }

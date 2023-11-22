@@ -51,6 +51,14 @@ public class InforShop  extends AppCompatActivity {
             }
         });
 
+
+        binding.back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         binding.textproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
