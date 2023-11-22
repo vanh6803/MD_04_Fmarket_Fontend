@@ -29,7 +29,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -67,7 +66,7 @@ public class FragmentPageWaitingDelivery extends Fragment implements ObjectUtil 
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
+        loadingDialog = new ProgressLoadingDialog(requireActivity());
         orderList = new ArrayList<>();
         orderAdapter = new OrderAdapter(getActivity(), orderList, this, 2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -80,10 +79,11 @@ public class FragmentPageWaitingDelivery extends Fragment implements ObjectUtil 
         loadingDialog.show();
         BaseApi.API.getListOrder(token, TAG.WAIT_DELIVERY).enqueue(new Callback<OrderResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     OrderResponse orderResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse.toString());
+                    assert orderResponse != null;
+                    Log.d(TAG.toString, "onResponse-getListOrder: " + orderResponse);
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         orderList = orderResponse.getResult();
                         orderAdapter.setListOrder(orderList);
@@ -95,6 +95,7 @@ public class FragmentPageWaitingDelivery extends Fragment implements ObjectUtil 
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -110,7 +111,7 @@ public class FragmentPageWaitingDelivery extends Fragment implements ObjectUtil 
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
                 loadingDialog.dismiss();

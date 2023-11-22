@@ -5,43 +5,20 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".view.my_store.CreateVoucherFragment">
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/id_toolbarTaoVoucher"
-    android:layout_width="match_parent"
-    android:layout_height="?attr/actionBarSize"
-    android:background="@color/white"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    app:title=" ">
-    <LinearLayout
-
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/id_toolbarTaoVoucher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
-
-        <ImageView
-            app:tint="@color/color_chudao"
-            android:id="@+id/arrowBackDetailProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/custom_btn_boder"
-            android:padding="2dp"
-            android:src="@drawable/baseline_arrow_back_24_black"
-            />
-        <TextView
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:text="Tạo Voucher"
-            android:textColor="@color/color_chudao"
-            android:textSize="@dimen/font_size_text_title" />
-
-    </LinearLayout>
-</androidx.appcompat.widget.Toolbar>
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Tạo Voucher"
+        android:textColor="@color/color_chudao"
+        android:textSize="@dimen/font_size_text_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 <LinearLayout
     android:id="@+id/thetext"
     android:layout_width="match_parent"
