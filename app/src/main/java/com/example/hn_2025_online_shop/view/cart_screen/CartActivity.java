@@ -1,18 +1,16 @@
 package com.example.hn_2025_online_shop.view.cart_screen;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
@@ -30,15 +28,12 @@ import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.voucher.VoucherScreen;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -113,6 +108,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.rcvCart);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void setTotalPrice() {
         totalPrice = 0;
@@ -162,9 +158,10 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         loadingDialog.show();
         BaseApi.API.deleteCartItem(token, cartId).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
+                    assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-deleteCartItem: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200) {
                         cartAdapter.removeItem(indexDelete);
@@ -173,6 +170,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -188,7 +186,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-deleteCartItem: " + t.toString());
                 loadingDialog.dismiss();
@@ -223,14 +221,16 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
         BaseApi.API.updateQuantityCartItem(token, cartId, quantity).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
+                    assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-updateQuantityCartItem: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200) {
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -245,7 +245,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-updateQuantityCartItem: " + t.toString());
             }

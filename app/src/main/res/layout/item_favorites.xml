@@ -45,7 +45,7 @@
              android:layout_gravity="center"
              android:layout_width="20dp"
              android:layout_height="20dp"
-             android:src="@drawable/tym"
+             android:src="@drawable/baseline_favorite_24"
              />
 
      </LinearLayout>
