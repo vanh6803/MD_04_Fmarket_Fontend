@@ -176,7 +176,7 @@ public class FragmentProfile extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<StoreIdResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<StoreIdResponse> call, @NonNull Throwable t) {
 
             }
         });
