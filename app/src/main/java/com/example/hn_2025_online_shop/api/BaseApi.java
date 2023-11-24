@@ -5,6 +5,7 @@ import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
 import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
+import com.example.hn_2025_online_shop.model.response.CreateProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
@@ -184,33 +185,34 @@ public interface BaseApi {
 
     @FormUrlEncoded
     @POST("products/create-product")
-    Call<ServerResponse> createProductMyStore(@Header("Authorization") String authorization,
-                                              @Field("category_id") String category_id,
-                                              @Field("name") String name,
-                                              @Field("description") String description,
-                                              @Field("status") String status,
-                                              @Field("discounted") boolean discounted,
-                                              @Field("is_active") boolean is_active,
-                                              @Field("screen") String screen,
-                                              @Field("camera") String camera,
-                                              @Field("chipset") String chipset,
-                                              @Field("cpu") String cpu,
-                                              @Field("gpu") String gpu,
-                                              @Field("operatingSystem") String operatingSystem,
-                                              @Field("battery") String battery,
-                                              @Field("weight") int weight,
-                                              @Field("connection") String connection,
-                                              @Field("specialFeature") String specialFeature,
-                                              @Field("manufacturer") String manufacturer,
-                                              @Field("other") String other);
-    @FormUrlEncoded
+    Call<CreateProductResponse> createProductMyStore(@Header("Authorization") String authorization,
+                                                     @Field("category_id") String category_id,
+                                                     @Field("name") String name,
+                                                     @Field("description") String description,
+                                                     @Field("status") String status,
+                                                     @Field("screen") String screen,
+                                                     @Field("camera") String camera,
+                                                     @Field("chipset") String chipset,
+                                                     @Field("cpu") String cpu,
+                                                     @Field("gpu") String gpu,
+                                                     @Field("operatingSystem") String operatingSystem,
+                                                     @Field("battery") String battery,
+                                                     @Field("weight") int weight,
+                                                     @Field("connection") String connection,
+                                                     @Field("specialFeature") String specialFeature,
+                                                     @Field("manufacturer") String manufacturer,
+                                                     @Field("other") String other);
+
+    @Multipart
     @POST("products/create-option")
     Call<ServerResponse> createOption(@Header("Authorization") String authorization,
-                                 @Field("product_id") String product_id,
-                                 @Field("name_color") String name_color,
-                                 @Part("image") MultipartBody.Part image,
-                                 @Field("price") int price,
-                                 @Field("discount_value") int discount_value, @Field("quantity") int quantity);
+                                 @Part("product_id") RequestBody product_id,
+                                 @Part("name_color") RequestBody name_color,
+                                 @Part MultipartBody.Part image,
+                                 @Part("price") RequestBody price,
+                                 @Part("discount_value") RequestBody discount_value,
+                                      @Part("quantity") RequestBody quantity);
+
 
 
 
