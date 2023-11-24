@@ -111,7 +111,7 @@ public class FragmentProfile extends Fragment {
 
                 loadingDialog.show();
                 String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-//                callIdMyStore(token);
+//
                 BaseApi.API.checkStoreExiting(token).enqueue(new Callback<CheckStoreResponse>() {
                     @Override
                     public void onResponse(@NonNull Call<CheckStoreResponse> call, @NonNull Response<CheckStoreResponse> response) {
@@ -149,39 +149,6 @@ public class FragmentProfile extends Fragment {
         });
     }
 
-    private void callIdMyStore(String token) {
-        BaseApi.API.getidMyStore(token,AccountUltil.USER.getId()).enqueue(new Callback<StoreIdResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<StoreIdResponse> call, @NonNull Response<StoreIdResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    StoreIdResponse storeIdResponse = response.body();
-                    assert storeIdResponse != null;
-                    Log.d("aaaaaa", "onResponse-createProduct: " + storeIdResponse.toString());
-                    if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
-                        StoreUltil.idStore = storeIdResponse.getData();
-                    }
-                } else { // nhận các đầu status #200
-//                    try {
-//                        String errorBody = response.errorBody().string();
-//                        JSONObject errorJson = new JSONObject(errorBody);
-//                        String errorMessage = errorJson.getString("message");
-//                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
-//                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-//                    }catch (IOException e){
-//                        e.printStackTrace();
-//                    } catch (JSONException e) {
-//                        throw new RuntimeException(e);
-//                    }
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<StoreIdResponse> call, @NonNull Throwable t) {
-
-            }
-        });
-
-    }
 
     private void profile() {
         binding.layoutProfile.setOnClickListener(new View.OnClickListener() {
