@@ -150,8 +150,6 @@ public class FragmentProfile extends Fragment {
     }
 
 
-
-
     private void profile() {
         binding.layoutProfile.setOnClickListener(new View.OnClickListener() {
             @Override
