@@ -8,6 +8,8 @@ import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
+import com.example.hn_2025_online_shop.model.response.ListChatResponse;
+import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
@@ -41,8 +43,12 @@ public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     // 10.0.2.2
     // 10.0.3.2
+
+    // 172.20.10.3
+    // 192.168.0.106
+    String LOCALHOT = "192.168.0.106"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://192.168.0.106:3000/api/")
+            .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -221,4 +227,13 @@ public interface BaseApi {
 
     @GET("store/info")
     Call<InfoStore> getInfoStore(@Header("Authorization") String authorization);
+
+    @GET("message/get-people-msg-list/{idUser}")
+    Call<ListChatResponse> getListPeopleChat(@Header("Authorization") String authorization,
+                                         @Path("idUser") String idUser);
+
+    @GET("message/get-msg-list")
+    Call<ListMessageResponse> getListMessage(@Header("Authorization") String authorization,
+                                             @Query("senderId") String senderId,
+                                             @Query("receiverId") String receiverId);
 }

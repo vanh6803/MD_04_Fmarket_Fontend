@@ -32,6 +32,7 @@ import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBind
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
+import com.example.hn_2025_online_shop.model.Store;
 import com.example.hn_2025_online_shop.model.Voucher;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -312,11 +313,12 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             public void onClick(View view) {
                 if(productDetail!= null) {
                     String productId = productDetail.getId();
-                    String storeId = productDetail.getStore_id().toString();
-                    Intent intent = new Intent(DetailProduct.this, InforShop.class);
-                    intent.putExtra("storeId",storeId);
-                    intent.putExtra("id_product",productId);
+                    Store store = productDetail.getStore_id();
                     StoreUltil.store = productDetail.getStore_id();
+                    Intent intent = new Intent(DetailProduct.this, InforShop.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("store", store);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }

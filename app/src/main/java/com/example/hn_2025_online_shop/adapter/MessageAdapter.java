@@ -10,6 +10,10 @@ import com.example.hn_2025_online_shop.databinding.LayoutItemReceiveMessageBindi
 import com.example.hn_2025_online_shop.databinding.LayoutItemSendMessageBinding;
 import com.example.hn_2025_online_shop.model.Message;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -46,10 +50,26 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Message message = messageList.get(position);
         if(getItemViewType(position) == TYPE_SEND) {
             SendMessViewHolder holderSend = (SendMessViewHolder) holder;
-            holderSend.binding.tvMessage.setText(message.getMessage());
+            holderSend.binding.tvMessage.setText(message.getContent());
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
+                Date date = inputFormat.parse(message.getUpdatedAt());
+                holderSend.binding.tvDatetime.setText(outputFormat.format(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         } else {
             ReceivedViewHolder holderReceive = (ReceivedViewHolder) holder;
-            holderReceive.binding.tvMessage.setText(message.getMessage());
+            holderReceive.binding.tvMessage.setText(message.getContent());
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
+                Date date = inputFormat.parse(message.getCreatedAt());
+                holderReceive.binding.tvDatetime.setText(outputFormat.format(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -65,7 +85,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemViewType(int position) {
         // Kiểm tra nếu sendId Bằng với id đăng nhập thì là Type_send
-        if(messageList.get(position).getSendId().equals(AccountUltil.USER.getId())) {
+        if(messageList.get(position).getSenderId().equals(AccountUltil.USER.getId())) {
             return TYPE_SEND;
         } else {
             return TYPE_RECEIVE;
