@@ -5,20 +5,40 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ChatAdapter;
+import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityChatBinding;
 import com.example.hn_2025_online_shop.model.Chat;
+import com.example.hn_2025_online_shop.model.User;
+import com.example.hn_2025_online_shop.model.response.ListChatResponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.login.Register;
+import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity implements ObjectUtil {
     private ActivityChatBinding binding;
     private ChatAdapter chatAdapter;
-    private List<Chat> chatList;
+    private List<User> chatList;
+    private ProgressLoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +47,46 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
         setContentView(binding.getRoot());
         initView();
         initController();
+        getListPeopleChat();
+    }
+
+    private void getListPeopleChat() {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String idUser = AccountUltil.USER.getId();
+        loadingDialog.show();
+        BaseApi.API.getListPeopleChat(token, idUser).enqueue(new Callback<ListChatResponse>() {
+            @Override
+            public void onResponse(Call<ListChatResponse> call, Response<ListChatResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ListChatResponse listChatResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-getListPeopleChat: " + listChatResponse.toString());
+                    if(listChatResponse.getCode() == 200) {
+                        chatList = listChatResponse.getResult();
+                        chatAdapter.setListChat(chatList);
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-getListPeopleChat: " + errorMessage);
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ListChatResponse> call, Throwable t) {
+                Toast.makeText(ChatActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-getListPeopleChat: " + t.toString());
+                loadingDialog.dismiss();
+            }
+        });
     }
 
     private void initController() {
@@ -37,11 +97,8 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
     }
 
     private void initView() {
+        loadingDialog = new ProgressLoadingDialog(this);
         chatList = new ArrayList<>();
-        chatList.add(new Chat("Nguyễn Chí Thuận", "Mua cho t cái áo !"));
-        chatList.add(new Chat("Nguyễn Minh Phượng", "Đẹp quá shop ơi"));
-        chatList.add(new Chat("Nguyễn Văn Hải", "Đẹp đấy!"));
-
         chatAdapter = new ChatAdapter(this, chatList, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvChat.setLayoutManager(layoutManager);
@@ -56,7 +113,11 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
 
     @Override
     public void onclickObject(Object object) {
+        User user = (User) object;
         Intent intent = new Intent(this, MessageActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("receiver_object",  user);
+        intent.putExtras(bundle);
         startActivity(intent);
         overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
     }
