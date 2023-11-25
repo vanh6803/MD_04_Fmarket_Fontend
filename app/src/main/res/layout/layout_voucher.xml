@@ -7,26 +7,26 @@
     android:orientation="vertical"
     android:background="@color/color_chudao">
     <LinearLayout
-
-        android:layout_marginTop="50dp"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal">
         <ImageView
-
-            android:layout_marginLeft="20dp"
+            android:id="@+id/back"
+            android:layout_gravity="center"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/backkk"/>
         <TextView
-
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Mã Giảm giá"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:textSize="25dp"
-            android:layout_marginLeft="80dp"
 
             />
 
@@ -40,36 +40,17 @@
         android:orientation="horizontal">
         <LinearLayout
             android:layout_margin="10dp"
-
             android:background="@drawable/custom_bg_linear"
             android:paddingVertical="6dp"
-            android:paddingHorizontal="12dp"
             android:orientation="horizontal"
-            android:layout_width="250dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp">
 
             <EditText
-                android:gravity="center"
+                android:layout_marginHorizontal="4dp"
+                android:gravity="center|left"
                 android:layout_gravity="center"
                 android:hint="Tìm mã voucher"
-                android:background="@color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_margin="10dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/custom_bg_linear"
-            android:paddingVertical="6dp"
-            android:paddingHorizontal="12dp"
-            android:orientation="horizontal"
-            android:layout_width="100dp"
-            android:layout_height="50dp">
-
-            <EditText
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:text="Áp dụng"
                 android:background="@color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"/>
