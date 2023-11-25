@@ -24,6 +24,7 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<ProductType> {
     public SpinnerCategoryAdapter(@NonNull Context context, int resource, ObjectUtil objectUtil) {
         super(context, resource);
         this.objectUtil = objectUtil;
+
     }
 
     public SpinnerCategoryAdapter(@NonNull Context context, int resource) {
@@ -61,6 +62,7 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<ProductType> {
             @Override
             public void onClick(View view) {
                 objectUtil.onclickObject(productType);
+
             }
         });
         return convertView;
