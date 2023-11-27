@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 
 import com.example.hn_2025_online_shop.R;
@@ -27,7 +26,7 @@ import com.example.hn_2025_online_shop.model.Voucher;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import java.util.ArrayList;
 import java.util.List;

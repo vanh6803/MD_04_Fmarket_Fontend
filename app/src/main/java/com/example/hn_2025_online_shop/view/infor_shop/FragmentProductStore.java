@@ -27,7 +27,7 @@ import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
