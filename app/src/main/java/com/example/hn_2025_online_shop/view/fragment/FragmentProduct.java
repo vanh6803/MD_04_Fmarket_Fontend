@@ -21,7 +21,6 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
-import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductBinding;
 import com.example.hn_2025_online_shop.model.Banner;
@@ -34,7 +33,7 @@ import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.chat_message.ChatActivity;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;

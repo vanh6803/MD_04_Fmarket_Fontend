@@ -1,7 +1,6 @@
-package com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen;
+package com.example.hn_2025_online_shop.view.product_screen;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -28,7 +26,6 @@ import com.example.hn_2025_online_shop.adapter.VoucherAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DetailProductBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
-import com.example.hn_2025_online_shop.databinding.LayoutDialogDetailProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductDetail;
@@ -48,6 +45,7 @@ import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
+import com.example.hn_2025_online_shop.view.product_screen.fragment_comment.BottomSheetComment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
@@ -77,6 +75,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     private OptionProduct optionProduct;
     private LayoutDialigOptionProductBinding bindingOption;
     private final int totalPrice = 0;
+    private String strDetailProduct = "";
+    private boolean isShowDetail = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -148,6 +148,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             }
         });
     }
+
+
     @SuppressLint({"SetTextI18n", "CheckResult"})
     private void setDataUi(DetailProductResponse detailProductResponse) {
 
@@ -200,43 +202,44 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 Glide.with(this).load(R.drawable.error);
             }
 
+
+            strDetailProduct += productDetail.getDescription() + "\n";
+            strDetailProduct += "...";
+            binding.tvProductDetail.setText(strDetailProduct);
         }else{
             Toast.makeText(this, "Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
         }
     }
-    public void showDetailProductDialog(DetailProductResponse response1){
-        binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailProduct.this);
-                LayoutDialogDetailProductBinding binding = LayoutDialogDetailProductBinding.inflate(getLayoutInflater());;
-                builder.setView(binding.getRoot());
-                binding.description.setText(response1.getResult().getDescription());
-                binding.screen.setText("Screen: "+response1.getResult().getScreen());
-                binding.camera.setText(response1.getResult().getCamera());
-                binding.chipset.setText("Chipset: " + response1.getResult().getChipset());
-                binding.cpu.setText("Cpu: "+response1.getResult().getCpu());
-                binding.gpu.setText("Gpu: "+response1.getResult().getGpu());
-                binding.ram.setText("Ram: "+response1.getResult().getRam() +"GB");
-                binding.rom.setText("Rom: "+response1.getResult().getRom()+"GB");
-                binding.operatingSystem.setText("OperatingSystem: "+response1.getResult().getOperatingSystem());
-                binding.battery.setText("Battery: " + response1.getResult().getBattery());
-                binding.weight.setText("Weight: " + response1.getResult().getWeight());
-                binding.connection.setText("Connection: "+response1.getResult().getConnection());
-                binding.specialFeature.setText("SpecialFeature: "+ response1.getResult().getSpecialFeature());
-                binding.manufacturer.setText("Manufacturer: "+response1.getResult().getManufacturer());
-                binding.other.setText("Other: "+response1.getResult().getOther());
-                builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-        });
+
+    private void setDetailProduct() {
+        if(isShowDetail) {
+            strDetailProduct = "";
+            strDetailProduct += productDetail.getDescription() + "\n";
+            strDetailProduct += "...";
+            binding.tvProductDetail.setText(strDetailProduct);
+            binding.btnShowDetailProduct.setText("Xem thêm");
+            isShowDetail = false;
+        } else {
+            strDetailProduct = "";
+            strDetailProduct += productDetail.getDescription() + "\n" + "\n";
+            strDetailProduct += "Screen: "+productDetail.getScreen() + "\n" + "\n";
+            strDetailProduct += "Camera: " + productDetail.getCamera() + "\n" + "\n";
+            strDetailProduct += "Chipset: " + productDetail.getChipset() + "\n" + "\n";
+            strDetailProduct += "Cpu: "+productDetail.getCpu() + "\n" + "\n";
+            strDetailProduct += "Gpu: "+productDetail.getGpu() + "\n" + "\n";
+            strDetailProduct += "Ram: "+productDetail.getRam() +"GB" + "\n" + "\n";
+            strDetailProduct += "Rom: "+productDetail.getRom()+"GB" + "\n" + "\n";
+            strDetailProduct += "OperatingSystem: "+productDetail.getOperatingSystem()+ "\n" + "\n";
+            strDetailProduct += "Battery: " + productDetail.getBattery() + "\n" + "\n";
+            strDetailProduct += "Weight: " + productDetail.getWeight() + "\n" + "\n";
+            strDetailProduct += "Connection: "+productDetail.getConnection() + "\n" + "\n";
+            strDetailProduct += "SpecialFeature: "+ productDetail.getSpecialFeature() + "\n" + "\n";
+            strDetailProduct += "Manufacturer: "+productDetail.getManufacturer() + "\n" + "\n";
+            strDetailProduct += "Other: "+productDetail.getOther() + "\n" + "\n";
+            binding.tvProductDetail.setText(strDetailProduct);
+            binding.btnShowDetailProduct.setText("Thu gọn");
+            isShowDetail = true;
+        }
     }
 
 
@@ -264,41 +267,6 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             }
         });
     }
-
-    @SuppressLint("SetTextI18n")
-    private void showDialogDetail() {
-        if(productDetail == null) {
-            return;
-        }
-        AlertDialog.Builder builder = new AlertDialog.Builder(DetailProduct.this);
-        LayoutDialogDetailProductBinding binding = LayoutDialogDetailProductBinding.inflate(getLayoutInflater());;
-        builder.setView(binding.getRoot());
-        binding.description.setText(productDetail.getDescription());
-        binding.screen.setText("Screen: "+productDetail.getScreen());
-        binding.camera.setText("Cammera: " + productDetail.getCamera());
-        binding.chipset.setText("Chipset: " + productDetail.getChipset());
-        binding.cpu.setText("Cpu: "+productDetail.getCpu());
-        binding.gpu.setText("Gpu: "+productDetail.getGpu());
-        binding.ram.setText("Ram: "+productDetail.getRam() +"GB");
-        binding.rom.setText("Rom: "+productDetail.getRom()+"GB");
-        binding.operatingSystem.setText("OperatingSystem: "+productDetail.getOperatingSystem());
-        binding.battery.setText("Battery: " + productDetail.getBattery());
-        binding.weight.setText("Weight: " + productDetail.getWeight());
-        binding.connection.setText("Connection: "+productDetail.getConnection());
-        binding.specialFeature.setText("SpecialFeature: "+ productDetail.getSpecialFeature());
-        binding.manufacturer.setText("Manufacturer: "+productDetail.getManufacturer());
-        binding.other.setText("Other: "+productDetail.getOther());
-
-        builder.setPositiveButton("Đóng", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
 
     private void initController() {
         binding.backDetailProduct.setOnClickListener(new View.OnClickListener() {
@@ -338,19 +306,24 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             }
         });
 
-        binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialogDetail();
-            }
-        });
-
         binding.imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(DetailProduct.this, CartActivity.class);
                 mActivityResultLauncher.launch(intent);
                 overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+            }
+        });
+
+        binding.btnDetailComment.setOnClickListener(view -> {
+            BottomSheetComment sheetDialog = BottomSheetComment.newInstance(productDetail);
+            sheetDialog.show(getSupportFragmentManager(), sheetDialog.getTag());
+        });
+
+        binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDetailProduct();
             }
         });
     }
