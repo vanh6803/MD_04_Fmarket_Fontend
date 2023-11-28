@@ -6,21 +6,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemReceiveMessageBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutItemSendMessageBinding;
 import com.example.hn_2025_online_shop.model.Message;
+import com.example.hn_2025_online_shop.model.Store;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<Message> messageList;
+    private Store store;
     private static final int TYPE_SEND = 1;
     private static final int TYPE_RECEIVE = 2;
 
-    public MessageAdapter(Context context, List<Message> messageList) {
+    public MessageAdapter(Context context, List<Message> messageList, Store store) {
         this.context = context;
         this.messageList = messageList;
+        this.store = store;
     }
 
     public void setMessageList(List<Message> messageList) {
@@ -46,10 +56,31 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Message message = messageList.get(position);
         if(getItemViewType(position) == TYPE_SEND) {
             SendMessViewHolder holderSend = (SendMessViewHolder) holder;
-            holderSend.binding.tvMessage.setText(message.getMessage());
+            holderSend.binding.tvMessage.setText(message.getContent());
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
+                Date date = inputFormat.parse(message.getUpdatedAt());
+                holderSend.binding.tvDatetime.setText(outputFormat.format(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         } else {
             ReceivedViewHolder holderReceive = (ReceivedViewHolder) holder;
-            holderReceive.binding.tvMessage.setText(message.getMessage());
+            holderReceive.binding.tvMessage.setText(message.getContent());
+            Glide.with(context)
+                    .load(store.getAvatar())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.avatar1)
+                    .into(holderReceive.binding.imgAvatar);
+            try {
+                SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+                SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
+                Date date = inputFormat.parse(message.getCreatedAt());
+                holderReceive.binding.tvDatetime.setText(outputFormat.format(date));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -65,7 +96,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     @Override
     public int getItemViewType(int position) {
         // Kiểm tra nếu sendId Bằng với id đăng nhập thì là Type_send
-        if(messageList.get(position).getSendId().equals(AccountUltil.USER.getId())) {
+        if(messageList.get(position).getSenderId().equals(AccountUltil.USER.getId())) {
             return TYPE_SEND;
         } else {
             return TYPE_RECEIVE;

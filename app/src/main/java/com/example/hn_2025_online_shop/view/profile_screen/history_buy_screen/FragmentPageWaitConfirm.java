@@ -66,7 +66,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(requireActivity());
+        loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
         orderAdapter = new OrderAdapter(getActivity(), orderList, this, 1);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -76,7 +76,7 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
 
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListOrder(token, TAG.WAIT_CONFIRM).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(@NonNull Call<OrderResponse> call, @NonNull Response<OrderResponse> response) {
@@ -107,14 +107,14 @@ public class FragmentPageWaitConfirm extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(@NonNull Call<OrderResponse> call, @NonNull Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

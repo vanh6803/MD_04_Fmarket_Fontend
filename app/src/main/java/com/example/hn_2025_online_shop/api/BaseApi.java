@@ -5,9 +5,12 @@ import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
 import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
+import com.example.hn_2025_online_shop.model.response.CreateProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
+import com.example.hn_2025_online_shop.model.response.ListChatResponse;
+import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
@@ -41,8 +44,12 @@ public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     // 10.0.2.2
     // 10.0.3.2
+    // 172.20.10.3
+    // 192.168.0.106
+    String LOCALHOT = "10.0.2.2"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://10.0.3.2:3000/api/")
+            .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -80,27 +87,7 @@ public interface BaseApi {
     @POST("forgot-password")
     Call<ServerResponse> forgotPassword(@Field("email") String email);
 
-    @FormUrlEncoded
-    @POST("products/create-product")
-    Call<ProductResponse> createProductMyStore(@Field("store_id") String store_id,
-                                               @Field("category_id") String category_id,
-                                               @Field("name") String name,
-                                               @Field("description") String description,
-                                               @Field("status") String status,
-                                               @Field("discounted") boolean discounted,
-                                               @Field("is_active") boolean is_active,
-                                               @Field("screen") String screen,
-                                               @Field("camera") String camera,
-                                               @Field("chipset") String chipset,
-                                               @Field("cpu") String cpu,
-                                               @Field("gpu") String gpu,
-                                               @Field("operatingSystem") String operatingSystem,
-                                               @Field("battery") String battery,
-                                               @Field("weight") int weight,
-                                               @Field("connection") String connection,
-                                               @Field("specialFeature") String specialFeature,
-                                               @Field("manufacturer") String manufacturer,
-                                               @Field("other") String other);
+
     @GET("products/all-product")
     Call<ProductResponse> getListAllProduct();
 
@@ -202,6 +189,39 @@ public interface BaseApi {
     Call<ServerResponse> deleteInfo(@Header("Authorization") String authorization,
                                     @Path("idInfo") String idInfo);
 
+    @FormUrlEncoded
+    @POST("products/create-product")
+    Call<CreateProductResponse> createProductMyStore(@Header("Authorization") String authorization,
+                                                     @Field("category_id") String category_id,
+                                                     @Field("name") String name,
+                                                     @Field("description") String description,
+                                                     @Field("status") String status,
+                                                     @Field("screen") String screen,
+                                                     @Field("camera") String camera,
+                                                     @Field("chipset") String chipset,
+                                                     @Field("cpu") String cpu,
+                                                     @Field("gpu") String gpu,
+                                                     @Field("operatingSystem") String operatingSystem,
+                                                     @Field("battery") String battery,
+                                                     @Field("weight") int weight,
+                                                     @Field("connection") String connection,
+                                                     @Field("specialFeature") String specialFeature,
+                                                     @Field("manufacturer") String manufacturer,
+                                                     @Field("other") String other);
+
+    @Multipart
+    @POST("products/create-option")
+    Call<ServerResponse> createOption(@Header("Authorization") String authorization,
+                                 @Part("product_id") RequestBody product_id,
+                                 @Part("name_color") RequestBody name_color,
+                                 @Part MultipartBody.Part image,
+                                 @Part("price") RequestBody price,
+                                 @Part("discount_value") RequestBody discount_value,
+                                      @Part("quantity") RequestBody quantity);
+
+
+
+
 
     @GET("order")
     Call<OrderResponse> getListOrder(@Header("Authorization") String authorization,
@@ -221,4 +241,14 @@ public interface BaseApi {
 
     @GET("store/info")
     Call<InfoStore> getInfoStore(@Header("Authorization") String authorization);
+
+    @GET("message/get-people-msg-list/{userId}")
+    Call<ListChatResponse> getListPeopleChat(@Header("Authorization") String authorization,
+                                             @Path("userId") String idUser);
+
+    @GET("message/get-msg-list")
+    Call<ListMessageResponse> getListMessage(@Header("Authorization") String authorization,
+                                             @Query("userId1") String userId1,
+                                             @Query("userId2") String userId2);
+
 }

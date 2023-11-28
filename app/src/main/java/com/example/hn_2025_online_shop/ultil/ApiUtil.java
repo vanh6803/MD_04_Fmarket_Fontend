@@ -2,6 +2,8 @@ package com.example.hn_2025_online_shop.ultil;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -60,9 +62,8 @@ public class ApiUtil {
     }
 
     // lấy getAllCart ở mọi nơi
-    public static void getAllCart(Context context, ProgressLoadingDialog loadingDialog, CartAdapter cartAdapter) {
+    public static void getAllCart(Context context, CartAdapter cartAdapter) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
         BaseApi.API.allCartUser(token).enqueue(new Callback<CartReponse>() {
             @Override
             public void onResponse(Call<CartReponse> call, Response<CartReponse> response) {
@@ -88,21 +89,18 @@ public class ApiUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<CartReponse> call, Throwable t) {
                 Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-allCartUser: " + t.toString());
-                loadingDialog.dismiss();
             }
         });
     }
 
-    public static void setTitleQuantityCart(Context context, ProgressLoadingDialog loadingDialog, TextView tvQuantityCart) {
+    public static void setTitleQuantityCart(Context context, TextView tvQuantityCart) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
         BaseApi.API.allCartUser(token).enqueue(new Callback<CartReponse>() {
             @Override
             public void onResponse(Call<CartReponse> call, Response<CartReponse> response) {
@@ -126,14 +124,12 @@ public class ApiUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<CartReponse> call, Throwable t) {
                 Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-allCartUser: " + t.toString());
-                loadingDialog.dismiss();
             }
         });
     }

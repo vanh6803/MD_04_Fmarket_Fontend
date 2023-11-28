@@ -39,7 +39,6 @@ public class FragmentPageDeliveredStore extends Fragment implements ObjectUtil {
     private FragmentPageDeliveredStoreBinding binding;
     private List<Order> orderList;
     private OrderStoreAdapter orderStoreAdapter;
-    private ProgressLoadingDialog loadingDialog;
 
     public static FragmentPageDeliveredStore newInstance(String param1, String param2) {
         FragmentPageDeliveredStore fragment = new FragmentPageDeliveredStore();
@@ -73,7 +72,6 @@ public class FragmentPageDeliveredStore extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
         orderList = new ArrayList<>();
         orderStoreAdapter = new OrderStoreAdapter(getActivity(), orderList, this, 3);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -83,7 +81,7 @@ public class FragmentPageDeliveredStore extends Fragment implements ObjectUtil {
 
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListOrderStore(token, TAG.DELIVERED).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
@@ -112,14 +110,14 @@ public class FragmentPageDeliveredStore extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

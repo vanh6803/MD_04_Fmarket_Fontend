@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 
 
 import com.example.hn_2025_online_shop.R;
@@ -27,7 +26,7 @@ import com.example.hn_2025_online_shop.model.Voucher;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +44,6 @@ public class FragmentStore extends Fragment implements ObjectUtil {
     ProductAdapter productAdapter;
     StoreAdapter adapter;
     List<Voucher> list;
-    ProgressLoadingDialog dialog;
 
 
     public FragmentStore() {
@@ -86,14 +84,13 @@ public class FragmentStore extends Fragment implements ObjectUtil {
         callApiGetListAllProducts();
     }
     private void initView() {
-        dialog = new ProgressLoadingDialog(getContext());
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(getContext(), productList, this);
         productAdapter.setProductList(productList);
         binding.recyStore.setAdapter(productAdapter);
     }
     public void callApiGetListAllProducts(){
-        dialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
@@ -104,12 +101,12 @@ public class FragmentStore extends Fragment implements ObjectUtil {
                 }else {
                     Toast.makeText(getActivity(), "Call API  Products Error", Toast.LENGTH_SHORT).show();
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
 

@@ -4,6 +4,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.model.Store;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
@@ -56,8 +61,6 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
-
-
     }
 
 
@@ -148,6 +151,12 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
                     if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
                         nameStore = storeIdResponse.getData().getName();
                         Objects.requireNonNull(getSupportActionBar()).setTitle(nameStore);
+                        String storeId = storeIdResponse.getData().get_id();
+                        SharedPreferences sharedPreferences = getSharedPreferences("storeId", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("storeId", storeId);
+                        editor.commit();
+
                     }
                 } else { // nhận các đầu status #200
                     try {

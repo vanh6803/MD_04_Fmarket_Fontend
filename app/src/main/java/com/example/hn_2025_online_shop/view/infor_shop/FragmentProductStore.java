@@ -27,7 +27,7 @@ import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +44,6 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
     private FragmentProductStoreBinding binding;
     private List<Product> productList;
     ProductAdapter productAdapter;
-    ProgressLoadingDialog dialog;
 
     public FragmentProductStore() {
     }
@@ -68,7 +67,6 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dialog = new ProgressLoadingDialog(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.rcvProductStore.setLayoutManager(layoutManager);
         productList = new ArrayList<>();
@@ -79,7 +77,7 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
     }
 
     public void setDataProductStore(){
-        dialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
@@ -88,8 +86,7 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
                     if (response1.getCode() == 200){
                         productAdapter.setProductList(response1.getResult());
                         binding.rcvProductStore.setAdapter(productAdapter);
-                        Log.d("cccc", "onResponse: " + response1.getResult());
-                        Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.d(TAG.toString, "onResponse: " + response1.getResult());
                     }
                 } else {
                     try {
@@ -104,13 +101,13 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Không Call đươc API", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }
