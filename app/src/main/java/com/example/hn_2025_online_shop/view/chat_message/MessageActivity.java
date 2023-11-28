@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityMessageBinding;
 import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.Message;
+import com.example.hn_2025_online_shop.model.Store;
 import com.example.hn_2025_online_shop.model.User;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
 import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
@@ -47,7 +49,7 @@ public class MessageActivity extends AppCompatActivity {
     private MessageAdapter messageAdapter;
     private List<Message> messageList;
     private User userReceiver;
-    private ProgressLoadingDialog loadingDialog;
+    private Store store;
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 
     // socket để thao tác
@@ -123,7 +125,7 @@ public class MessageActivity extends AppCompatActivity {
     private void getListMessage() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String userId = AccountUltil.USER.getId();
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListMessage(token, userId, userReceiver.getId()).enqueue(new Callback<ListMessageResponse>() {
             @Override
             public void onResponse(Call<ListMessageResponse> call, Response<ListMessageResponse> response) {
@@ -147,14 +149,14 @@ public class MessageActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ListMessageResponse> call, Throwable t) {
                 Toast.makeText(MessageActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListMessage: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -167,28 +169,37 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(this);
-        messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(this, messageList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        binding.rcvMesssage.setLayoutManager(layoutManager);
-        binding.rcvMesssage.setAdapter(messageAdapter);
-
-        Intent intent = getIntent(); // Lấy Intent từ Activity hiện tại
+        // Lấy Intent từ Activity hiện tại
+        Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) { // Kiểm tra xem Bundle có tồn tại hay không
             userReceiver = (User) bundle.getSerializable("receiver_object"); // Ép kiểu đối tượng từ Bundle
+            store = (Store) bundle.getSerializable("store");
+        }
+        try {
+            Glide.with(this)
+                    .load(store.getAvatar())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.avatar1)
+                    .into(binding.imgAvatar);
+
+            binding.tvUserName.setText(store.getName());
+        } catch (Exception exception) {
+            Glide.with(this)
+                    .load(userReceiver.getAvatar())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.avatar1)
+                    .into(binding.imgAvatar);
+
+            binding.tvUserName.setText(userReceiver.getUsername());
         }
 
-        Log.d(TAG.toString, "userReceiver: " + userReceiver.toString());
-
-        Glide.with(this)
-                .load(userReceiver.getAvatar())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.avatar1)
-                .into(binding.imgAvatar);
-
-        binding.tvUserName.setText(userReceiver.getUsername());
+        // rcy
+        messageList = new ArrayList<>();
+        messageAdapter = new MessageAdapter(this, messageList, store);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        binding.rcvMesssage.setLayoutManager(layoutManager);
+        binding.rcvMesssage.setAdapter(messageAdapter);
     }
 
     @Override

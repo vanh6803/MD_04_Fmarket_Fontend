@@ -50,8 +50,6 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
 
     private List<Product> listProdcut;
     private ProductAdapter productAdapter;
-
-    private ProgressLoadingDialog dialog;
     private FragmentProductBinding binding;
     public static FragmentProduct newInstance() {
         FragmentProduct fragment = new FragmentProduct();
@@ -167,7 +165,6 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        dialog = new ProgressLoadingDialog(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recycleProduct.setLayoutManager(layoutManager);
         listProdcut = new ArrayList<>();
@@ -177,7 +174,7 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
     }
 
     public void callApiGetListAllProducts(){
-        dialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
@@ -188,12 +185,12 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
                 }else {
                     Toast.makeText(getActivity(), "call list all products err", Toast.LENGTH_SHORT).show();
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "Err", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

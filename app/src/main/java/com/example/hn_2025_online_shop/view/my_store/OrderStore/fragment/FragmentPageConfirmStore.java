@@ -83,7 +83,7 @@ public class FragmentPageConfirmStore extends Fragment implements ObjectUtil {
 
     private void urlListOrder() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListOrderStore(token, TAG.WAIT_CONFIRM).enqueue(new Callback<OrderResponse>() {
             @Override
             public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
@@ -112,14 +112,14 @@ public class FragmentPageConfirmStore extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<OrderResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListOrder: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

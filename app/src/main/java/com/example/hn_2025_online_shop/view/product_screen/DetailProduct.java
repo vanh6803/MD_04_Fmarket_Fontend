@@ -288,6 +288,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                     bundle.putSerializable("store", store);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                 }
             }
         });
@@ -438,7 +439,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                     Log.d(TAG.toString, "onResponse-cartAdd: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                         Toast.makeText(DetailProduct.this, "Thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
-                        ApiUtil.setTitleQuantityCart(DetailProduct.this, dialog, binding.tvQuantityCart);
+                        ApiUtil.setTitleQuantityCart(DetailProduct.this, binding.tvQuantityCart);
                     }
                 } else { // nhận các đầu status #200
                     try {

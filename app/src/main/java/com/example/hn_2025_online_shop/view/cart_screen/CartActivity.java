@@ -43,7 +43,6 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
     private ActivityCartBinding binding;
     private CartAdapter cartAdapter;
     private int totalPrice = 0;
-    private ProgressLoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,12 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         initView();
         initController();
         // Hàm này có sẵn ở đâu cx gọi đc
-        ApiUtil.getAllCart(this, loadingDialog, cartAdapter);
+        ApiUtil.getAllCart(this, cartAdapter);
+        if(CartUtil.listCart.size() == 0) {
+            binding.tvDrum.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvDrum.setVisibility(View.GONE);
+        }
     }
 
     private void initController() {
@@ -95,7 +99,6 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         CartUtil.listCartCheck.clear();
 
         // recycleView
-        loadingDialog = new ProgressLoadingDialog(this);
         cartAdapter = new CartAdapter(this, CartUtil.listCart, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvCart.setLayoutManager(layoutManager);
@@ -155,7 +158,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
     private void deleteCart(OptionAndQuantity cart, int indexDelete) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String cartId = cart.getId();
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.deleteCartItem(token, cartId).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
@@ -167,6 +170,11 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                         cartAdapter.removeItem(indexDelete);
                         CartUtil.listCartCheck.remove(cart);
                         setTotalPrice();
+                        if(CartUtil.listCart.size() == 0) {
+                            binding.tvDrum.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.tvDrum.setVisibility(View.GONE);
+                        }
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -182,14 +190,14 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-deleteCartItem: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

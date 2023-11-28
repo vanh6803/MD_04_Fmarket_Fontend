@@ -85,6 +85,24 @@
             tools:listitem="@layout/layout_iteam_cart"
             tools:itemCount="2"
             />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/tvDrum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Giỏ hàng trống"
+            android:textColor="@color/gray99"
+            android:textSize="16sp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
     </FrameLayout>
 
     <ImageView

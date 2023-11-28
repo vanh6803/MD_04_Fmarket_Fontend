@@ -50,7 +50,6 @@ public class FragmentHome extends Fragment {
 
     private FragmentHomeBinding binding;
     private ViewPageHomeAdapter viewPageHomeAdapter;
-    private ProgressLoadingDialog loadingDialog;
 
     public FragmentHome() {
     }
@@ -82,7 +81,7 @@ public class FragmentHome extends Fragment {
         initController();
         callApiBanner();
         setTab();
-        ApiUtil.setTitleQuantityCart(getActivity(), loadingDialog, binding.tvQuantityCart);
+        ApiUtil.setTitleQuantityCart(getActivity(), binding.tvQuantityCart);
     }
 
 
@@ -194,7 +193,6 @@ public class FragmentHome extends Fragment {
             });
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
     }
 
     private void setTabTitles(List<String> tabTitles) {
