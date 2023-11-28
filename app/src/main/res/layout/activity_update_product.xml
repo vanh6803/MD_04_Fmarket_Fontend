@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:text="Update Option"/>
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvOptionProduct"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             tools:listitem="@layout/layout_iteam_update_option"
@@ -67,10 +68,14 @@
                     android:layout_gravity="center_vertical"
                     android:text="Loại sản phẩm"/>
             </LinearLayout>
-            <Spinner
-                android:id="@+id/spinnerCategory"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"/>
+            <TextView
+                android:gravity="center"
+                android:id="@+id/edtNameCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:hint="Loại sản phẩm"
+                android:textSize="15dp"
+                android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnName"
                 android:background="@color/gray"
@@ -86,7 +91,7 @@
                 <EditText
                     android:id="@+id/edtName"
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:hint="Tên sản phẩm"
                     android:textSize="15dp"
                     android:background="@color/transparent"/>
@@ -124,7 +129,7 @@
             <EditText
                 android:id="@+id/edtMota"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:hint="Mô tả sản phẩm"
                 android:textSize="15dp"
                 android:background="@color/transparent"/>
@@ -143,7 +148,7 @@
             <EditText
                 android:id="@+id/edtSc"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:hint="Screen"
                 android:textSize="15dp"
                 android:background="@color/transparent"/>
@@ -333,7 +338,7 @@
             <EditText
                 android:id="@+id/edtConnection"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:hint="Connection"
                 android:textSize="15dp"
                 android:background="@color/transparent"/>
@@ -352,7 +357,7 @@
             <EditText
                 android:id="@+id/edtSpecialFeature"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:hint="SpecialFeature"
                 android:textSize="15dp"
                 android:background="@color/transparent"/>
@@ -390,10 +395,40 @@
             <EditText
                 android:id="@+id/edtOther"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:hint="Other"
                 android:textSize="15dp"
                 android:background="@color/transparent"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnDong"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="28dp"
+                    android:background="@drawable/custom_btn_muaangay"
+                    android:gravity="center"
+                    android:text="Đóng"
+                    android:textColor="@color/white"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnLuu"
+                    android:layout_width="170dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/custom_btn_muaangay"
+                    android:gravity="center"
+                    android:text="Lưu"
+                    android:textColor="@color/white"
+                    android:textSize="19dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 

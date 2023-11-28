@@ -110,9 +110,7 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
     }
 
     private void getListCategory() {
-
         dialog.show();
-
         BaseApi.API.getListTypeProduct().enqueue(new Callback<ProductTypeResponse>() {
             @Override
             public void onResponse(Call<ProductTypeResponse> call, Response<ProductTypeResponse> response) {
@@ -122,6 +120,7 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
                     if(reponse.getCode() == 200) {
                         List<ProductType> list = reponse.getData();
                         updateCategoryList(list);
+
                         Log.d(TAG.toString, "onResponse: " + list);
                     }
                 } else { // nhận các đầu status #200

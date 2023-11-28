@@ -11,6 +11,7 @@ public class ProductByCategory {
     private List<Product> product;
 
     public ProductByCategory() {
+
     }
 
     public ProductByCategory(String id, String nameCategory, List<Product> product) {
