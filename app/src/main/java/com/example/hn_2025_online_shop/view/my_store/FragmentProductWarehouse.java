@@ -128,6 +128,7 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         String id = product.getId();
         Intent intent = new Intent(getContext(), UpdateProductActivity.class);
         intent.putExtra("id_product", id);
+        Log.d("aaaaa", "onclickObject: "+ id);
         startActivity(intent);
 
     }
