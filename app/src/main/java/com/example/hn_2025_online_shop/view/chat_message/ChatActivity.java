@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
@@ -13,6 +14,7 @@ import com.example.hn_2025_online_shop.adapter.ChatAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityChatBinding;
 import com.example.hn_2025_online_shop.model.Chat;
+import com.example.hn_2025_online_shop.model.PeopleMsg;
 import com.example.hn_2025_online_shop.model.User;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
@@ -37,8 +39,7 @@ import retrofit2.Response;
 public class ChatActivity extends AppCompatActivity implements ObjectUtil {
     private ActivityChatBinding binding;
     private ChatAdapter chatAdapter;
-    private List<User> chatList;
-    private ProgressLoadingDialog loadingDialog;
+    private List<PeopleMsg> chatList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,7 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
     private void getListPeopleChat() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String idUser = AccountUltil.USER.getId();
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListPeopleChat(token, idUser).enqueue(new Callback<ListChatResponse>() {
             @Override
             public void onResponse(Call<ListChatResponse> call, Response<ListChatResponse> response) {
@@ -77,14 +78,14 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ListChatResponse> call, Throwable t) {
                 Toast.makeText(ChatActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListPeopleChat: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -97,7 +98,6 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(this);
         chatList = new ArrayList<>();
         chatAdapter = new ChatAdapter(this, chatList, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -113,10 +113,11 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
 
     @Override
     public void onclickObject(Object object) {
-        User user = (User) object;
+        PeopleMsg peopleMsg = (PeopleMsg) object;
         Intent intent = new Intent(this, MessageActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("receiver_object",  user);
+        bundle.putSerializable("receiver_object",  peopleMsg.getAccount());
+        bundle.putSerializable("store",  peopleMsg.getStore());
         intent.putExtras(bundle);
         startActivity(intent);
         overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);

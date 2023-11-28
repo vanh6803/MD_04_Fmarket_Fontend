@@ -39,7 +39,6 @@ import retrofit2.Response;
 
 public class FragementPageSelling extends Fragment implements ObjectUtil {
 
-    private ProgressLoadingDialog loadingDialog;
     private ProductByCategoryAdapter productAdapter;
     private List<ProductByCategory> productList;
     private FragmentFragementPageSellingBinding binding;
@@ -78,7 +77,6 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
         productList = new ArrayList<>();
         productAdapter = new ProductByCategoryAdapter(getActivity(), productList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -87,7 +85,7 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
     }
 
     private void callApiProductByCategory(){
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListProductByCategory().enqueue(new Callback<ProductByCategoryReponse>() {
             @Override
             public void onResponse(Call<ProductByCategoryReponse> call, Response<ProductByCategoryReponse> response) {
@@ -110,12 +108,12 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductByCategoryReponse> call, Throwable t) {
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

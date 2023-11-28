@@ -6,9 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemReceiveMessageBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutItemSendMessageBinding;
 import com.example.hn_2025_online_shop.model.Message;
+import com.example.hn_2025_online_shop.model.Store;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 
 import java.text.ParseException;
@@ -19,12 +23,14 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<Message> messageList;
+    private Store store;
     private static final int TYPE_SEND = 1;
     private static final int TYPE_RECEIVE = 2;
 
-    public MessageAdapter(Context context, List<Message> messageList) {
+    public MessageAdapter(Context context, List<Message> messageList, Store store) {
         this.context = context;
         this.messageList = messageList;
+        this.store = store;
     }
 
     public void setMessageList(List<Message> messageList) {
@@ -62,6 +68,11 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         } else {
             ReceivedViewHolder holderReceive = (ReceivedViewHolder) holder;
             holderReceive.binding.tvMessage.setText(message.getContent());
+            Glide.with(context)
+                    .load(store.getAvatar())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.avatar1)
+                    .into(holderReceive.binding.imgAvatar);
             try {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
