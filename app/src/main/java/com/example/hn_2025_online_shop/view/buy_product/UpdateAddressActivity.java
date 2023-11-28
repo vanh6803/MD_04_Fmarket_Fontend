@@ -21,11 +21,8 @@ import com.example.hn_2025_online_shop.databinding.LayoutEditAddressBinding;
 import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;

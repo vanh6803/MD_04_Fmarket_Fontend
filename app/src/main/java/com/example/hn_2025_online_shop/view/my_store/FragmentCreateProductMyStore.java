@@ -1,7 +1,5 @@
 package com.example.hn_2025_online_shop.view.my_store;
 
-import static com.example.hn_2025_online_shop.ultil.StoreUltil.idStore;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
@@ -20,8 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
@@ -29,23 +25,15 @@ import com.example.hn_2025_online_shop.adapter.SpinnerCategoryAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.DialogCreateOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.FragmentCreateProductMyStoreBinding;
-import com.example.hn_2025_online_shop.databinding.LayoutDialigOptionProductBinding;
-import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductType;
 import com.example.hn_2025_online_shop.model.response.CreateProductResponse;
-import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
-import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
-import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.buy_product.UpdateAddressActivity;
-import com.example.hn_2025_online_shop.view.login.RegisterMemberSeller;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
-import com.example.hn_2025_online_shop.view.success_screen.CreateStoreSuccessActivity;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -54,8 +42,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -390,6 +376,7 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         ProductType productType = (ProductType) object;
         categoryId  = productType.getId();
         Log.d(TAG.toString, "onclickObject: "+ categoryId);
+
         clickCategory(productType.getName());
     }
 
@@ -513,4 +500,5 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
             binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
         }
     }
+
 }

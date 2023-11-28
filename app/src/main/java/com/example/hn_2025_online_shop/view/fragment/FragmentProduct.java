@@ -21,7 +21,6 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
-import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductBinding;
 import com.example.hn_2025_online_shop.model.Banner;
@@ -34,7 +33,7 @@ import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.chat_message.ChatActivity;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +50,6 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
 
     private List<Product> listProdcut;
     private ProductAdapter productAdapter;
-
-    private ProgressLoadingDialog dialog;
     private FragmentProductBinding binding;
     public static FragmentProduct newInstance() {
         FragmentProduct fragment = new FragmentProduct();
@@ -168,7 +165,6 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
     }
 
     private void initView() {
-        dialog = new ProgressLoadingDialog(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recycleProduct.setLayoutManager(layoutManager);
         listProdcut = new ArrayList<>();
@@ -178,7 +174,7 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
     }
 
     public void callApiGetListAllProducts(){
-        dialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
@@ -189,12 +185,12 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
                 }else {
                     Toast.makeText(getActivity(), "call list all products err", Toast.LENGTH_SHORT).show();
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "Err", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

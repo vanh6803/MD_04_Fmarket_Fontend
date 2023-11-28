@@ -44,7 +44,6 @@ public interface BaseApi {
     Gson gson = new GsonBuilder().setDateFormat("yyyy/MM/dd HH:mm:ss").create();
     // 10.0.2.2
     // 10.0.3.2
-
     // 172.20.10.3
     // 192.168.0.106
     String LOCALHOT = "10.0.2.2"; // đc cho socket
@@ -242,13 +241,13 @@ public interface BaseApi {
     @GET("store/info")
     Call<InfoStore> getInfoStore(@Header("Authorization") String authorization);
 
-    @GET("message/get-people-msg-list/{idUser}")
+    @GET("message/get-people-msg-list/{userId}")
     Call<ListChatResponse> getListPeopleChat(@Header("Authorization") String authorization,
-                                         @Path("idUser") String idUser);
+                                             @Path("userId") String idUser);
 
     @GET("message/get-msg-list")
     Call<ListMessageResponse> getListMessage(@Header("Authorization") String authorization,
-                                             @Query("senderId") String senderId,
-                                             @Query("receiverId") String receiverId);
+                                             @Query("userId1") String userId1,
+                                             @Query("userId2") String userId2);
 
 }

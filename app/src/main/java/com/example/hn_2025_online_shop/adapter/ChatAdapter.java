@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemChatBinding;
 import com.example.hn_2025_online_shop.model.Chat;
+import com.example.hn_2025_online_shop.model.PeopleMsg;
 import com.example.hn_2025_online_shop.model.User;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
@@ -22,17 +23,17 @@ import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder>{
-    private List<User> chatList;
+    private List<PeopleMsg> chatList;
     private Context context;
     private ObjectUtil objectUtil;
 
-    public ChatAdapter(Context context, List<User> chatList, ObjectUtil objectUtil) {
+    public ChatAdapter(Context context, List<PeopleMsg> chatList, ObjectUtil objectUtil) {
         this.context = context;
         this.chatList = chatList;
         this.objectUtil = objectUtil;
     }
 
-    public void setListChat(List<User> chatList) {
+    public void setListChat(List<PeopleMsg> chatList) {
         this.chatList = chatList;
         notifyDataSetChanged();
     }
@@ -46,17 +47,27 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
-        User chat = chatList.get(position);
-        holder.binding.tvUsername.setText(chat.getUsername());
-        Glide.with(context)
-                .load(chat.getAvatar())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.avatar1)
-                .into(holder.binding.imgAvatar);
+        PeopleMsg chat = chatList.get(position);
+        holder.binding.tvMessage.setText(chat.getLatestMessage().getContent());
+        try {
+            holder.binding.tvUsername.setText(chat.getStore().getName());
+            Glide.with(context)
+                    .load(chat.getStore().getAvatar())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.avatar1)
+                    .into(holder.binding.imgAvatar);
+        } catch (Exception exception) {
+            holder.binding.tvUsername.setText(chat.getAccount().getAvatar());
+            Glide.with(context)
+                    .load(chat.getAccount().getAvatar())
+                    .placeholder(R.drawable.loading)
+                    .error(R.drawable.avatar1)
+                    .into(holder.binding.imgAvatar);
+        }
         try {
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
-            Date date = inputFormat.parse(chat.getUpdatedAt());
+            Date date = inputFormat.parse(chat.getLatestMessage().getUpdatedAt());
             holder.binding.tvDate.setText(outputFormat.format(date));
         } catch (ParseException e) {
             e.printStackTrace();

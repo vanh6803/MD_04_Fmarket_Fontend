@@ -1,18 +1,19 @@
 package com.example.hn_2025_online_shop.model.response;
 
+import com.example.hn_2025_online_shop.model.PeopleMsg;
 import com.example.hn_2025_online_shop.model.User;
 
 import java.util.List;
 
 public class ListChatResponse {
     private int code;
-    private List<User> result;
+    private List<PeopleMsg> result;
     private String message;
 
     public ListChatResponse() {
     }
 
-    public ListChatResponse(int code, List<User> result, String message) {
+    public ListChatResponse(int code, List<PeopleMsg> result, String message) {
         this.code = code;
         this.result = result;
         this.message = message;
@@ -35,11 +36,11 @@ public class ListChatResponse {
         this.code = code;
     }
 
-    public List<User> getResult() {
+    public List<PeopleMsg> getResult() {
         return result;
     }
 
-    public void setResult(List<User> result) {
+    public void setResult(List<PeopleMsg> result) {
         this.result = result;
     }
 
