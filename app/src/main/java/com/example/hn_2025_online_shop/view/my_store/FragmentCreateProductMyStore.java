@@ -376,7 +376,129 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         ProductType productType = (ProductType) object;
         categoryId  = productType.getId();
         Log.d(TAG.toString, "onclickObject: "+ categoryId);
-        productType.getName();
+
+        clickCategory(productType.getName());
+    }
+
+    private void clickCategory(String name) {
+        if(name.equals("Tai Nghe")){
+            binding.lnSc.setVisibility(View.GONE);
+            binding.tvSc.setVisibility(View.GONE);
+            binding.lnCamera.setVisibility(View.GONE);
+            binding.tvCamera.setVisibility(View.GONE);
+            binding.lnChipset.setVisibility(View.GONE);
+            binding.tvChipset.setVisibility(View.GONE);
+            binding.lnCpu.setVisibility(View.GONE);
+            binding.tvCpu.setVisibility(View.GONE);
+            binding.lnGpu.setVisibility(View.GONE);
+            binding.tvGpu.setVisibility(View.GONE);
+            binding.lnRam.setVisibility(View.GONE);
+            binding.tvRam.setVisibility(View.GONE);
+            binding.lnRom.setVisibility(View.GONE);
+            binding.tvRom.setVisibility(View.GONE);
+            binding.lnHeDieuHanh.setVisibility(View.GONE);
+            binding.tvHeDieuHanh.setVisibility(View.GONE);
+        } else if (name.equals("Bàn phím cơ")) {
+            binding.lnSc.setVisibility(View.GONE);
+            binding.tvSc.setVisibility(View.GONE);
+            binding.lnCamera.setVisibility(View.GONE);
+            binding.tvCamera.setVisibility(View.GONE);
+            binding.lnChipset.setVisibility(View.GONE);
+            binding.tvChipset.setVisibility(View.GONE);
+            binding.lnCpu.setVisibility(View.GONE);
+            binding.tvCpu.setVisibility(View.GONE);
+            binding.lnGpu.setVisibility(View.GONE);
+            binding.tvGpu.setVisibility(View.GONE);
+            binding.lnRam.setVisibility(View.GONE);
+            binding.tvRam.setVisibility(View.GONE);
+            binding.lnRom.setVisibility(View.GONE);
+            binding.tvRom.setVisibility(View.GONE);
+            binding.lnHeDieuHanh.setVisibility(View.GONE);
+            binding.tvHeDieuHanh.setVisibility(View.GONE);
+        } else if (name.equals("Camera an ninh")) {
+            binding.lnSc.setVisibility(View.GONE);
+            binding.tvSc.setVisibility(View.GONE);
+            binding.lnChipset.setVisibility(View.GONE);
+            binding.tvChipset.setVisibility(View.GONE);
+            binding.lnCpu.setVisibility(View.GONE);
+            binding.tvCpu.setVisibility(View.GONE);
+            binding.lnGpu.setVisibility(View.GONE);
+            binding.tvGpu.setVisibility(View.GONE);
+            binding.lnRam.setVisibility(View.GONE);
+            binding.tvRam.setVisibility(View.GONE);
+            binding.lnRom.setVisibility(View.GONE);
+            binding.tvRom.setVisibility(View.GONE);
+            binding.lnHeDieuHanh.setVisibility(View.GONE);
+            binding.tvHeDieuHanh.setVisibility(View.GONE);
+        } else if (name.equals("Đồ hồ thông minh")) {
+            binding.lnSc.setVisibility(View.VISIBLE);
+            binding.tvSc.setVisibility(View.VISIBLE);
+            binding.lnCamera.setVisibility(View.GONE);
+            binding.tvCamera.setVisibility(View.GONE);
+            binding.lnChipset.setVisibility(View.GONE);
+            binding.tvChipset.setVisibility(View.GONE);
+            binding.lnCpu.setVisibility(View.GONE);
+            binding.tvCpu.setVisibility(View.GONE);
+            binding.lnGpu.setVisibility(View.GONE);
+            binding.tvGpu.setVisibility(View.GONE);
+            binding.lnRam.setVisibility(View.GONE);
+            binding.tvRam.setVisibility(View.GONE);
+            binding.lnRom.setVisibility(View.GONE);
+            binding.tvRom.setVisibility(View.GONE);
+            binding.lnHeDieuHanh.setVisibility(View.GONE);
+            binding.tvHeDieuHanh.setVisibility(View.GONE);
+        } else if (name.equals("Điện Thoại")) {
+            binding.lnSc.setVisibility(View.VISIBLE);
+            binding.tvSc.setVisibility(View.VISIBLE);
+            binding.lnCamera.setVisibility(View.VISIBLE);
+            binding.tvCamera.setVisibility(View.VISIBLE);
+            binding.lnChipset.setVisibility(View.VISIBLE);
+            binding.tvChipset.setVisibility(View.VISIBLE);
+            binding.lnCpu.setVisibility(View.VISIBLE);
+            binding.tvCpu.setVisibility(View.VISIBLE);
+            binding.lnGpu.setVisibility(View.VISIBLE);
+            binding.tvGpu.setVisibility(View.VISIBLE);
+            binding.lnRam.setVisibility(View.VISIBLE);
+            binding.tvRam.setVisibility(View.VISIBLE);
+            binding.lnRom.setVisibility(View.VISIBLE);
+            binding.tvRom.setVisibility(View.VISIBLE);
+            binding.lnHeDieuHanh.setVisibility(View.VISIBLE);
+            binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
+        } else if (name.equals("Laptop")) {
+            binding.lnSc.setVisibility(View.VISIBLE);
+            binding.tvSc.setVisibility(View.VISIBLE);
+            binding.lnCamera.setVisibility(View.VISIBLE);
+            binding.tvCamera.setVisibility(View.VISIBLE);
+            binding.lnChipset.setVisibility(View.VISIBLE);
+            binding.tvChipset.setVisibility(View.VISIBLE);
+            binding.lnCpu.setVisibility(View.VISIBLE);
+            binding.tvCpu.setVisibility(View.VISIBLE);
+            binding.lnGpu.setVisibility(View.VISIBLE);
+            binding.tvGpu.setVisibility(View.VISIBLE);
+            binding.lnRam.setVisibility(View.VISIBLE);
+            binding.tvRam.setVisibility(View.VISIBLE);
+            binding.lnRom.setVisibility(View.VISIBLE);
+            binding.tvRom.setVisibility(View.VISIBLE);
+            binding.lnHeDieuHanh.setVisibility(View.VISIBLE);
+            binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
+        } else if (name.equals("Pc")) {
+            binding.lnSc.setVisibility(View.VISIBLE);
+            binding.tvSc.setVisibility(View.VISIBLE);
+            binding.lnCamera.setVisibility(View.VISIBLE);
+            binding.tvCamera.setVisibility(View.VISIBLE);
+            binding.lnChipset.setVisibility(View.VISIBLE);
+            binding.tvChipset.setVisibility(View.VISIBLE);
+            binding.lnCpu.setVisibility(View.VISIBLE);
+            binding.tvCpu.setVisibility(View.VISIBLE);
+            binding.lnGpu.setVisibility(View.VISIBLE);
+            binding.tvGpu.setVisibility(View.VISIBLE);
+            binding.lnRam.setVisibility(View.VISIBLE);
+            binding.tvRam.setVisibility(View.VISIBLE);
+            binding.lnRom.setVisibility(View.VISIBLE);
+            binding.tvRom.setVisibility(View.VISIBLE);
+            binding.lnHeDieuHanh.setVisibility(View.VISIBLE);
+            binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
+        }
     }
 
 }

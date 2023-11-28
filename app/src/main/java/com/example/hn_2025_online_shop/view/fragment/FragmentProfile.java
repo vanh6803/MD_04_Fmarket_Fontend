@@ -23,6 +23,7 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProfileBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogFeedbackBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutDialogLogoutBinding;
+import com.example.hn_2025_online_shop.model.Store;
 import com.example.hn_2025_online_shop.model.response.CheckStoreResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
