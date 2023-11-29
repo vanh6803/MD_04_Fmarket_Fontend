@@ -286,8 +286,12 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         String cpu = binding.edtCpu.getText().toString();
         String gpu = binding.edtGpu.getText().toString();
 
-        int ram = Integer.parseInt(binding.edtRam.getText().toString());
-        int rom = Integer.parseInt(binding.edtRom.getText().toString());
+        String inputRam = binding.edtRam.getText().toString();
+        String inputRom = binding.edtRom.getText().toString();
+
+        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
+        int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
+
         String operatingSystem = binding.edtHeDieuHanh.getText().toString();
         String battery = binding.edtBatrery.getText().toString();
         int weight = Integer.parseInt(binding.edtWeight.getText().toString());

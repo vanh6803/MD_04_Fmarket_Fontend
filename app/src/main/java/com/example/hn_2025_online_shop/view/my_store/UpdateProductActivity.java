@@ -71,11 +71,14 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 String chipset = binding.edtChipset.getText().toString();
                 String cpu = binding.edtCpu.getText().toString();
                 String gpu = binding.edtGpu.getText().toString();
-                int ram = Integer.parseInt(binding.edtRam.getText().toString() + "");
-                int rom = Integer.parseInt(binding.edtRom.getText().toString()+ "");
+                String inputRam = binding.edtRam.getText().toString();
+                String inputRom = binding.edtRom.getText().toString();
+
+                int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
+                int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
                 String operatingSystem = binding.edtHeDieuHanh.getText().toString();
                 String battery = binding.edtBatrery.getText().toString();
-                int weight = Integer.parseInt(binding.edtWeight.getText().toString()+ "");
+                int weight = Integer.parseInt(binding.edtWeight.getText().toString());
                 String connection = binding.edtConnection.getText().toString();
                 String specialFeature = binding.edtSpecialFeature.getText().toString();
                 String manufacturer = binding.edtManufacturer.getText().toString();

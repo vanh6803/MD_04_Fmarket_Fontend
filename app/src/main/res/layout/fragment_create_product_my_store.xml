@@ -425,7 +425,6 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edtRam"
-                            android:text="8"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
@@ -471,7 +470,6 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edtRom"
-                            android:text="256"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
