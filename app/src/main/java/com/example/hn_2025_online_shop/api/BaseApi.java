@@ -217,8 +217,7 @@ public interface BaseApi {
                                  @Part("name_color") RequestBody name_color,
                                  @Part MultipartBody.Part image,
                                  @Part("price") RequestBody price,
-                                 @Part("discount_value") RequestBody discount_value,
-                                      @Part("quantity") RequestBody quantity);
+                                 @Part("discount_value") RequestBody discount_value, @Part("quantity") RequestBody quantity);
 
 
 
@@ -272,4 +271,21 @@ public interface BaseApi {
                                        @Field("specialFeature") String specialFeature,
                                        @Field("manufacturer") String manufacturer,
                                        @Field("other") String other);
+    @FormUrlEncoded
+    @PUT("products/update-option/{optionId}")
+    Call<ServerResponse> updateOption(@Header("Authorization") String authorization,
+                                      @Path("optionId") String optionId,
+                                      @Field("name_color") String name_color,
+                                      @Field("price") int price,
+                                      @Field("discount_value") int discount_value,
+                                      @Field("quantity") int quantity);
+    @Multipart
+    @PUT("products/updateImage-option/{optionId}")
+    Call<ServerResponse> updateImageOption(@Header("Authorization") String authorization,
+                                           @Path("optionId") String optionId,
+                                           @Part MultipartBody.Part image);
+
+
+
+
 }

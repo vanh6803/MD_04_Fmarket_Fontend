@@ -53,11 +53,11 @@ import retrofit2.Response;
 
 
 public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil {
-    private MultipartBody.Part fileImgAvatar;
+
     private SpinnerCategoryAdapter spinnerCategoryAdapter;
     public static String categoryId;
     public static String productId;
-
+    private MultipartBody.Part fileImgAvatar;
     private int isCheckImage = 0; // 1 là avatar
     private boolean isCamera = false; // kiểm tra xem avatar có dữ liệu hay chưa
     private ProgressLoadingDialog dialog;
@@ -180,6 +180,7 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         dialog1.setContentView(binding1.getRoot());
         Window window = dialog1.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
         binding1.imgCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -210,6 +211,7 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
 
         dialog1.show();
     }
+
 
     private void CreateOptionProduct(String name, int price, int discount, int quantity) {
         if (checkValidateOptionProduct(name, price, discount, quantity)){
