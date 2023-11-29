@@ -31,6 +31,8 @@
                 android:layout_gravity="center"/>
         </LinearLayout>
         <TextView
+            android:textSize="18dp"
+            android:textColor="#013565"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,6 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView
+            android:textSize="18dp"
+            android:textColor="#013565"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,10 +62,11 @@
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/lnCategory"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,10 +83,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnName"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -97,10 +103,11 @@
                     android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnTinhTrang"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -116,10 +123,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnMota"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -135,10 +143,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnSc"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -154,10 +163,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnCamera"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -173,10 +183,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnChipset"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -192,10 +203,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnCpu"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -211,10 +223,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnGpu"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -230,10 +243,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnRam"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -249,10 +263,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnRom"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -268,10 +283,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnHeDieuHanh"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -287,10 +303,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnBattery"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -306,10 +323,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnWeight"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -325,10 +343,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnConnection"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -344,10 +363,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnSpecialFeature"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
+                    android:textColor="#013565"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -363,10 +383,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnManufacturer"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
             <TextView
+                android:textColor="#013565"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -382,10 +403,11 @@
                 android:background="@color/transparent"/>
             <LinearLayout
                 android:id="@+id/lnOther"
-                android:background="@color/gray"
+                android:background="#F6F6F6"
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
             <TextView
+                android:textColor="#013565"
                 android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

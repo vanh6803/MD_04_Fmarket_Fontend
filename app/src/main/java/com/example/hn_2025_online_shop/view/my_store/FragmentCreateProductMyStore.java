@@ -285,6 +285,9 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         String chipset = binding.edtChipset.getText().toString();
         String cpu = binding.edtCpu.getText().toString();
         String gpu = binding.edtGpu.getText().toString();
+
+        int ram = Integer.parseInt(binding.edtRam.getText().toString());
+        int rom = Integer.parseInt(binding.edtRom.getText().toString());
         String operatingSystem = binding.edtHeDieuHanh.getText().toString();
         String battery = binding.edtBatrery.getText().toString();
         int weight = Integer.parseInt(binding.edtWeight.getText().toString());
@@ -296,7 +299,7 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         BaseApi.API.createProductMyStore(
                 token, categoryId, name, description,
                 tinhTrang, screen, camera,
-                chipset, cpu, gpu, operatingSystem,
+                chipset, cpu, gpu,ram, rom, operatingSystem,
                 battery, weight, connection, specialFeature,
                 manufacturer, other).enqueue(new Callback<CreateProductResponse>() {
             @Override

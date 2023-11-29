@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.OptionAdapter;
 import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
 import com.example.hn_2025_online_shop.adapter.UpdateOptionAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
@@ -20,9 +22,13 @@ import com.example.hn_2025_online_shop.model.ProductType;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
+import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.buy_product.AddressActivity;
+import com.example.hn_2025_online_shop.view.buy_product.UpdateAddressActivity;
 import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
@@ -40,7 +46,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
     private ActivityUpdateProductBinding binding;
     private ProgressLoadingDialog dialog;
     private List<OptionProduct> listOption;
-    private UpdateOptionAdapter updateOptionAdapter;
+    private OptionAdapter optionAdapter;
     private ProductDetail productDetail;
     private ProductType productType;
 
@@ -49,15 +55,97 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
         super.onCreate(savedInstanceState);
         binding = ActivityUpdateProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        dialog = new ProgressLoadingDialog(this);
-        listOption = new ArrayList<>();
-        updateOptionAdapter = new UpdateOptionAdapter(this, listOption, this);
         initView();
+        initController();
     }
 
+    private void initController() {
+        binding.btnLuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = binding.edtName.getText().toString();
+                String description = binding.edtMota.getText().toString();
+                String tinhTrang = binding.edtTinhTrang.getText().toString();
+                String screen = binding.edtSc.getText().toString();
+                String camera = binding.edtCamera.getText().toString();
+                String chipset = binding.edtChipset.getText().toString();
+                String cpu = binding.edtCpu.getText().toString();
+                String gpu = binding.edtGpu.getText().toString();
+                int ram = Integer.parseInt(binding.edtRam.getText().toString() + "");
+                int rom = Integer.parseInt(binding.edtRom.getText().toString()+ "");
+                String operatingSystem = binding.edtHeDieuHanh.getText().toString();
+                String battery = binding.edtBatrery.getText().toString();
+                int weight = Integer.parseInt(binding.edtWeight.getText().toString()+ "");
+                String connection = binding.edtConnection.getText().toString();
+                String specialFeature = binding.edtSpecialFeature.getText().toString();
+                String manufacturer = binding.edtManufacturer.getText().toString();
+                String other = binding.edtOther.getText().toString();
+                updateProductMyStore(name, description, tinhTrang, screen,camera,chipset,cpu,gpu,ram,rom,operatingSystem,battery,
+                        weight, connection, specialFeature, manufacturer,other);
+            }
+        });
+        binding.btnDong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+    }
+
+    private void updateProductMyStore(String name, String description, String tinhTrang, String screen, String camera, String chipset,
+                                      String cpu, String gpu, int ram, int rom, String operatingSystem, String battery, int weight,
+                                      String connection, String specialFeature, String manufacturer, String other) {
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        Intent intent = getIntent();
+        String id_product = intent.getStringExtra("id_product");
+
+        dialog.show();
+        BaseApi.API.updateProduct(token, id_product, name, description, tinhTrang, screen, camera, chipset, cpu, gpu, ram, rom,
+                operatingSystem, battery, weight, connection, specialFeature, manufacturer, other).enqueue(new Callback<ServerResponse>() {
+            @Override
+            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    ServerResponse serverResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-editInfo: " + serverResponse.toString());
+                    if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+                        Toast.makeText(getApplicationContext(), "Update Product Successfully ! ", Toast.LENGTH_SHORT).show();
+                        onBackPressed();
+
+                    }
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-editInfo: " + errorMessage);
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ServerResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG.toString, "onFailure-deleteInfo: " + t.toString());
+                dialog.dismiss();
+            }
+        });
+    }
+
+
     private void initView() {
+        dialog = new ProgressLoadingDialog(this);
+        listOption = new ArrayList<>();
+        optionAdapter = new OptionAdapter(this, listOption, this);
         callApiUpdateDetailProduct();
     }
+
 
 
 
@@ -75,8 +163,8 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                     if (detailProductResponse.getCode() == 200){
                         productDetail = detailProductResponse.getResult();
                         binding.edtNameCategory.setText(productDetail.getCategory_id().getName());
-                        updateOptionAdapter.setDataListOptionProduct(productDetail.getOption());
-                        binding.rcvOptionProduct.setAdapter(updateOptionAdapter);
+                        optionAdapter.setDataListOptionProduct(productDetail.getOption());
+                        binding.rcvOptionProduct.setAdapter(optionAdapter);
                         Log.d("gggg", "onResponse: " + detailProductResponse.getResult());
                         setDataUi(detailProductResponse);
                     }
@@ -149,12 +237,14 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
             if(detailProductResponse.getResult().getRam() != 0){
                 binding.edtRam.setText(detailProductResponse.getResult().getRam() + "");
             }else {
-                binding.edtRam.setText("No data");
+                binding.lnRam.setVisibility(View.GONE);
+                binding.edtRam.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getRom() != 0){
                 binding.edtRom.setText(detailProductResponse.getResult().getRam() + "");
             }else {
-                binding.edtRom.setText("No data");
+                binding.lnRom.setVisibility(View.GONE);
+                binding.edtRom.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getOperatingSystem()!= null){
                 binding.edtHeDieuHanh.setText(detailProductResponse.getResult().getOperatingSystem());

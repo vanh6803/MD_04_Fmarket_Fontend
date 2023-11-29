@@ -200,6 +200,8 @@ public interface BaseApi {
                                                      @Field("chipset") String chipset,
                                                      @Field("cpu") String cpu,
                                                      @Field("gpu") String gpu,
+                                                     @Field("ram") int ram,
+                                                     @Field("rom") int rom,
                                                      @Field("operatingSystem") String operatingSystem,
                                                      @Field("battery") String battery,
                                                      @Field("weight") int weight,
@@ -249,5 +251,25 @@ public interface BaseApi {
     Call<ListMessageResponse> getListMessage(@Header("Authorization") String authorization,
                                              @Query("userId1") String userId1,
                                              @Query("userId2") String userId2);
-
+    @FormUrlEncoded
+    @PUT("products/update-product/{productId}")
+    Call<ServerResponse> updateProduct(@Header("Authorization") String authorization,
+                                       @Path("productId") String productId,
+                                       @Field("name") String name,
+                                       @Field("description") String description,
+                                       @Field("status") String status,
+                                       @Field("screen") String screen,
+                                       @Field("camera") String camera,
+                                       @Field("chipset") String chipset,
+                                       @Field("cpu") String cpu,
+                                       @Field("gpu") String gpu,
+                                       @Field("ram") int ram,
+                                       @Field("rom") int rom,
+                                       @Field("operatingSystem") String operatingSystem,
+                                       @Field("battery") String battery,
+                                       @Field("weight") int weight,
+                                       @Field("connection") String connection,
+                                       @Field("specialFeature") String specialFeature,
+                                       @Field("manufacturer") String manufacturer,
+                                       @Field("other") String other);
 }
