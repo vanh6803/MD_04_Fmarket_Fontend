@@ -76,7 +76,7 @@ public class MessageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             try {
                 SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                 SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
-                Date date = inputFormat.parse(message.getCreatedAt());
+                Date date = inputFormat.parse(message.getUpdatedAt());
                 holderReceive.binding.tvDatetime.setText(outputFormat.format(date));
             } catch (ParseException e) {
                 e.printStackTrace();
