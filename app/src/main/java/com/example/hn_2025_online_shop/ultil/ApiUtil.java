@@ -1,16 +1,23 @@
 package com.example.hn_2025_online_shop.ultil;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
+import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
+import com.example.hn_2025_online_shop.view.my_store.UpdateProductActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,6 +67,7 @@ public class ApiUtil {
             }
         });
     }
+
 
     // lấy getAllCart ở mọi nơi
     public static void getAllCart(Context context, CartAdapter cartAdapter) {

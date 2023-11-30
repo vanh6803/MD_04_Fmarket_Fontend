@@ -126,10 +126,20 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
     public void onclickObject(Object object) {
         Product product = (Product) object;
         String id = product.getId();
+//        SharedPreferences sharedPreferences = getContext().getSharedPreferences("id_product", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putString("id_product", id);
+//        editor.apply();
         Intent intent = new Intent(getContext(), UpdateProductActivity.class);
         intent.putExtra("id_product", id);
         Log.d("aaaaa", "onclickObject: "+ id);
         startActivity(intent);
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        callApiShowLishProductMyStore();
     }
 }

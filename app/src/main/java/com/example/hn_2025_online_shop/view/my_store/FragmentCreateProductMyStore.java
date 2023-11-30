@@ -53,12 +53,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
+
 public class FragmentCreateProductMyStore extends Fragment{
-    private MultipartBody.Part fileImgAvatar;
     private SpinnerCategoryAdapter spinnerCategoryAdapter;
     public static String categoryId;
     public static String productId;
-
+    private MultipartBody.Part fileImgAvatar;
     private int isCheckImage = 0; // 1 là avatar
     private boolean isCamera = false; // kiểm tra xem avatar có dữ liệu hay chưa
     private ProgressLoadingDialog dialog;
@@ -96,7 +96,6 @@ public class FragmentCreateProductMyStore extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         initView();
         initController();
-
         getListCategory();
     }
     private void updateCategoryList(List<ProductType> list) {
@@ -190,6 +189,7 @@ public class FragmentCreateProductMyStore extends Fragment{
         dialog1.setContentView(binding1.getRoot());
         Window window = dialog1.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+
         binding1.imgCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,6 +220,7 @@ public class FragmentCreateProductMyStore extends Fragment{
 
         dialog1.show();
     }
+
 
     private void CreateOptionProduct(String name, int price, int discount, int quantity) {
         if (checkValidateOptionProduct(name, price, discount, quantity)){
@@ -295,6 +296,13 @@ public class FragmentCreateProductMyStore extends Fragment{
         String chipset = binding.edtChipset.getText().toString();
         String cpu = binding.edtCpu.getText().toString();
         String gpu = binding.edtGpu.getText().toString();
+
+        String inputRam = binding.edtRam.getText().toString();
+        String inputRom = binding.edtRom.getText().toString();
+
+        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
+        int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
+
         String operatingSystem = binding.edtHeDieuHanh.getText().toString();
         String battery = binding.edtBatrery.getText().toString();
         int weight = Integer.parseInt(binding.edtWeight.getText().toString());
@@ -306,7 +314,7 @@ public class FragmentCreateProductMyStore extends Fragment{
         BaseApi.API.createProductMyStore(
                 token, categoryId, name, description,
                 tinhTrang, screen, camera,
-                chipset, cpu, gpu, operatingSystem,
+                chipset, cpu, gpu,ram, rom, operatingSystem,
                 battery, weight, connection, specialFeature,
                 manufacturer, other).enqueue(new Callback<CreateProductResponse>() {
             @Override
