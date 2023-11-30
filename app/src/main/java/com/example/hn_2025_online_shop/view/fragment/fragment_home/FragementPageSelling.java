@@ -93,7 +93,12 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
                     ProductByCategoryReponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
                     if(reponse.getCode() == 200) {
-                        productAdapter.setListProductType(reponse.getResult());
+                        for (ProductByCategory productByCategory: reponse.getResult()) {
+                            if(productByCategory.getProduct().size() > 0) {
+                                productList.add(productByCategory);
+                            }
+                        }
+                        productAdapter.setListProductType(productList);
                     }
                 } else { // nhận các đầu status #200
                     try {

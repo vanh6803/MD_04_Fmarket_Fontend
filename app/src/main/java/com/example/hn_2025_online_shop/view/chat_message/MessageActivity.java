@@ -91,7 +91,8 @@ public class MessageActivity extends AppCompatActivity {
                         String sender_id = data.getString("sender_id");
                         String receiver_id = data.getString("receiver_id");
                         messageList.add(new Message(sender_id, receiver_id, message, sdf.format(new Date())));
-                        messageAdapter.setMessageList(messageList);
+                        messageAdapter.notifyItemRangeInserted(messageList.size(), messageList.size());
+                        binding.rcvMesssage.smoothScrollToPosition(messageList.size() - 1);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -135,6 +136,7 @@ public class MessageActivity extends AppCompatActivity {
                     if(listMessageResponse.getCode() == 200) {
                         messageList = listMessageResponse.getResult();
                         messageAdapter.setMessageList(messageList);
+                        binding.rcvMesssage.smoothScrollToPosition(messageList.size() - 1);
                     }
                 } else { // nhận các đầu status #200
                     try {
