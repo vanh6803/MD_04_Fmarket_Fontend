@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
@@ -52,8 +53,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil {
 
+public class FragmentCreateProductMyStore extends Fragment{
     private SpinnerCategoryAdapter spinnerCategoryAdapter;
     public static String categoryId;
     public static String productId;
@@ -95,18 +96,26 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
         super.onViewCreated(view, savedInstanceState);
         initView();
         initController();
-
-        spinnerCategoryAdapter = new SpinnerCategoryAdapter(getContext(),R.layout.iteam_selected, this);
-        spinnerCategoryAdapter.setDropDownViewResource(R.layout.iteam_category);
-        binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
         getListCategory();
-
-
     }
     private void updateCategoryList(List<ProductType> list) {
-        spinnerCategoryAdapter.clear();
-        spinnerCategoryAdapter.addAll(list);
-        spinnerCategoryAdapter.notifyDataSetChanged();
+        spinnerCategoryAdapter = new SpinnerCategoryAdapter(getContext(),R.layout.iteam_selected, list);
+        binding.spinnerCategory.setAdapter(spinnerCategoryAdapter);
+
+        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                ProductType productType = (ProductType) spinnerCategoryAdapter.getItem(i);
+                categoryId  = productType.getId();
+                Log.d(TAG.toString, "onclickObject: "+ categoryId);
+                clickCategory(productType.getName());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private void getListCategory() {
@@ -377,15 +386,6 @@ public class FragmentCreateProductMyStore extends Fragment implements ObjectUtil
             cursor.close();
         }
         return result;
-    }
-
-    @Override
-    public void onclickObject(Object object) {
-        ProductType productType = (ProductType) object;
-        categoryId  = productType.getId();
-        Log.d(TAG.toString, "onclickObject: "+ categoryId);
-
-        clickCategory(productType.getName());
     }
 
     private void clickCategory(String name) {

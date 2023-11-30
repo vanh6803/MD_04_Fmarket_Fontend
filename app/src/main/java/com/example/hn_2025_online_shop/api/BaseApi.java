@@ -10,6 +10,7 @@ import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
+import com.example.hn_2025_online_shop.model.response.ListCommentResponse;
 import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
@@ -46,7 +47,7 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
-    String LOCALHOT = "10.0.2.2"; // đc cho socket
+    String LOCALHOT = "192.168.100.4"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -285,4 +286,8 @@ public interface BaseApi {
                                            @Path("optionId") String optionId,
                                            @Part MultipartBody.Part image);
 
+
+    @GET("comment/get-comments-by-product/{productId}")
+    Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
+                                             @Path("productId") String productId);
 }

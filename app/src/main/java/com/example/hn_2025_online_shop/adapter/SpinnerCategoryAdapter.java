@@ -19,18 +19,11 @@ import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import java.util.List;
 
 public class SpinnerCategoryAdapter extends ArrayAdapter<ProductType> {
-    private ObjectUtil objectUtil;
 
-    public SpinnerCategoryAdapter(@NonNull Context context, int resource, ObjectUtil objectUtil) {
-        super(context, resource);
-        this.objectUtil = objectUtil;
 
+    public SpinnerCategoryAdapter(@NonNull Context context, int resource, @NonNull List<ProductType> objects) {
+        super(context, resource, objects);
     }
-
-    public SpinnerCategoryAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
-    }
-
 
     @NonNull
     @Override
@@ -57,14 +50,6 @@ public class SpinnerCategoryAdapter extends ArrayAdapter<ProductType> {
         if (productType!= null){
             tvCategory.setText(productType.getName());
         }
-        LinearLayout lnSpinner = convertView.findViewById(R.id.lnSpinner);
-        lnSpinner.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                objectUtil.onclickObject(productType);
-
-            }
-        });
         return convertView;
     }
 }
