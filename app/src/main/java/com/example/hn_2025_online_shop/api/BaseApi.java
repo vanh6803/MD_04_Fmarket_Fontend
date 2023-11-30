@@ -10,6 +10,7 @@ import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.InfoResponse;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
+import com.example.hn_2025_online_shop.model.response.ListCommentResponse;
 import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
@@ -250,4 +251,8 @@ public interface BaseApi {
                                              @Query("userId1") String userId1,
                                              @Query("userId2") String userId2);
 
+
+    @GET("comment/get-comments-by-product/{productId}")
+    Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
+                                             @Path("productId") String productId);
 }
