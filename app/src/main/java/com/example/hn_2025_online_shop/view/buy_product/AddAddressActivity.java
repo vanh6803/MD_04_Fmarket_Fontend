@@ -295,8 +295,8 @@ public class AddAddressActivity extends AppCompatActivity {
                     ServerResponse serverResponse = response.body();
                     Log.d(TAG.toString, "onResponse-addInfo: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
-                        Intent intent = new Intent(AddAddressActivity.this, AddressActivity.class);
-                        startActivity(intent);
+                        Intent intent = new Intent(AddAddressActivity.this, AddAddressActivity.class);
+                        setResult(RESULT_OK, intent);
                         finish();
                         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
                     }

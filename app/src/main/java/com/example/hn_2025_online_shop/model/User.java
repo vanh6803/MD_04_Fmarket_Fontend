@@ -28,6 +28,11 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String avatar, String username) {
+        this.avatar = avatar;
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "User{" +

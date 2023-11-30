@@ -94,7 +94,7 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddressActivity.this, AddAddressActivity.class);
-                startActivity(intent);
+                mActivityResultLauncher.launch(intent);
                 overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
@@ -153,6 +153,7 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == RESULT_OK) {
                         urlGetAllInfo();
+
                     }
                 }
             });
