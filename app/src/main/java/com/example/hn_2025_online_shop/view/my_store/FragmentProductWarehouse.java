@@ -136,4 +136,10 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         startActivity(intent);
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        callApiShowLishProductMyStore();
+    }
 }

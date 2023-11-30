@@ -280,12 +280,9 @@ public interface BaseApi {
                                       @Field("discount_value") int discount_value,
                                       @Field("quantity") int quantity);
     @Multipart
-    @PUT("products/updateImage-option/{optionId}")
+    @PUT("products/update-option-image/{optionId}")
     Call<ServerResponse> updateImageOption(@Header("Authorization") String authorization,
                                            @Path("optionId") String optionId,
                                            @Part MultipartBody.Part image);
-
-
-
 
 }

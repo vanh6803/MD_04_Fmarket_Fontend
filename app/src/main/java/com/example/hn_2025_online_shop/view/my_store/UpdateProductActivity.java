@@ -436,7 +436,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 isCamera = true;
                 binding1.imgAvartar.setImageURI(uri);
                 fileImgAvatar = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
-//              updateImageOption(fileImgAvatar);
+              updateImageOption(fileImgAvatar);
             }
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(getApplicationContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
@@ -486,5 +486,11 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        callApiUpdateDetailProduct();
     }
 }
