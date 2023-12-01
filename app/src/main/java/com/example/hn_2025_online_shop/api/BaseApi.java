@@ -47,7 +47,7 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
-    String LOCALHOT = "192.168.0.106"; // đc cho socket
+    String LOCALHOT = "192.168.100.4"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -109,8 +109,8 @@ public interface BaseApi {
     Call<BannerReponse> getListBanner();
 
     @Multipart
-    @POST("store/create/{idUser}")
-    Call<ServerResponse> registerMemberSeller(@Path("idUser") String idUser,
+    @POST("store/create")
+    Call<ServerResponse> registerMemberSeller(@Header("Authorization") String authorization,
                                                     @Part MultipartBody.Part avatar,
                                                     @Part MultipartBody.Part banner,
                                                     @Part("name") RequestBody name,
@@ -293,4 +293,18 @@ public interface BaseApi {
     @GET("comment/get-comments-by-product/{productId}")
     Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
                                              @Path("productId") String productId);
+
+    @Multipart
+    @PUT("store/edit-avatar}")
+    Call<ServerResponse> updateAvartarStore(@Header("Authorization") String authorization,
+                                           @Part MultipartBody.Part avatar);
+    @Multipart
+    @PUT("store/edit-banner")
+    Call<ServerResponse> updateBannerStore(@Header("Authorization") String authorization,
+                                           @Part MultipartBody.Part banner);
+    @FormUrlEncoded
+    @PUT("store/update")
+    Call<ServerResponse> updateStore(@Header("Authorization") String authorization,
+                                      @Field("name") String name,
+                                      @Field("address") String address);
 }

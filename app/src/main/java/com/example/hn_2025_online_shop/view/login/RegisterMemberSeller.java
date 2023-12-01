@@ -364,10 +364,10 @@ public class RegisterMemberSeller extends AppCompatActivity {
     private void registerMemberSeller(String name, String address) {
         if(checkRegister(name,address)) {
             loadingDialog.show();
-            String idUser = AccountUltil.USER.getId();
+            String token = AccountUltil.BEARER + AccountUltil.TOKEN;
             RequestBody requestBodyName = RequestBody.create(MediaType.parse("multipart/form-data"), name);
             RequestBody requestBodyAddress = RequestBody.create(MediaType.parse("multipart/form-data"), address);
-            BaseApi.API.registerMemberSeller(idUser, fileImgAvatar, fileImgBanner, requestBodyName, requestBodyAddress).enqueue(new Callback<ServerResponse>() {
+            BaseApi.API.registerMemberSeller(token, fileImgAvatar, fileImgBanner, requestBodyName, requestBodyAddress).enqueue(new Callback<ServerResponse>() {
                 @Override
                 public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                     if(response.isSuccessful()){ // chỉ nhận đầu status 200
