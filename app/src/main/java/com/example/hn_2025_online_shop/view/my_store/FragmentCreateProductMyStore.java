@@ -31,7 +31,6 @@ import com.example.hn_2025_online_shop.model.response.CreateProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.buy_product.UpdateAddressActivity;
@@ -157,30 +156,71 @@ public class FragmentCreateProductMyStore extends Fragment{
         });
     }
 
-    private void initController() {
-        binding.btnHuy.setOnClickListener(new View.OnClickListener() {
+    public void createProductMyStore(){
+        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+        String name = binding.edtNameProduct.getText().toString();
+        String description = binding.edtMota.getText().toString();
+        String tinhTrang = binding.edtTinhTrang.getText().toString();
+        String screen = binding.edtSC.getText().toString();
+        String camera = binding.edtCamera.getText().toString();
+        String chipset = binding.edtChipset.getText().toString();
+        String cpu = binding.edtCpu.getText().toString();
+        String gpu = binding.edtGpu.getText().toString();
+
+        String inputRam = binding.edtRam.getText().toString();
+        String inputRom = binding.edtRom.getText().toString();
+
+        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
+        int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
+
+        String operatingSystem = binding.edtHeDieuHanh.getText().toString();
+        String battery = binding.edtBatrery.getText().toString();
+        String inputWeight = binding.edtWeight.getText().toString();
+        int weight = inputWeight.isEmpty() ? 0: Integer.parseInt(inputWeight);
+        String connection = binding.edtConnection.getText().toString();
+        String specialFeature = binding.edtSpecialFeature.getText().toString();
+        String manufacturer = binding.edtManufacturer.getText().toString();
+        String other = binding.edtOther.getText().toString();
+        dialog.show();
+        BaseApi.API.createProductMyStore(
+                token, categoryId, name, description,
+                tinhTrang, screen, camera,
+                chipset, cpu, gpu,ram, rom, operatingSystem,
+                battery, weight, connection, specialFeature,
+                manufacturer, other).enqueue(new Callback<CreateProductResponse>() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), UpdateAddressActivity.class);
-                startActivity(intent);
+            public void onResponse(Call<CreateProductResponse> call, Response<CreateProductResponse> response) {
+                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                    CreateProductResponse productResponse = response.body();
+                    Log.d(TAG.toString, "onResponse-createProduct: " + productResponse.toString());
+                    if(productResponse.getCode() == 200 || productResponse.getCode() == 201) {
+                        Toast.makeText(getContext(), "Create Product Is Successfully!", Toast.LENGTH_SHORT).show();
+                        productId = productResponse.getResult().getId();
+                        showDiaLogCreateOptionProduct();
+                    }
+
+                } else { // nhận các đầu status #200
+                    try {
+                        String errorBody = response.errorBody().string();
+                        JSONObject errorJson = new JSONObject(errorBody);
+                        String errorMessage = errorJson.getString("message");
+                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
+                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<CreateProductResponse> call, Throwable t) {
+                Toast.makeText(getContext(), "Call api Error", Toast.LENGTH_SHORT).show();
+
             }
         });
-
-        binding.btnLuu.setOnClickListener(new View.OnClickListener() {
-            private DialogCreateOptionProductBinding binding1;
-
-            @Override
-            public void onClick(View view) {
-                createProductMyStore();
-                showDiaLogCreateOptionProduct();
-            }
-        });
-    }
-
-    private void initView() {
-        dialog = new ProgressLoadingDialog(getContext());
-
-
     }
 
     private void showDiaLogCreateOptionProduct() {
@@ -201,7 +241,7 @@ public class FragmentCreateProductMyStore extends Fragment{
                 isCheckImage = 1;
             }
         });
-        binding1.btnDong.setOnClickListener(new View.OnClickListener() {
+        binding1.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog1.dismiss();
@@ -214,7 +254,9 @@ public class FragmentCreateProductMyStore extends Fragment{
                 int price = Integer.parseInt(binding1.edtPrice.getText().toString());
                 int discount = Integer.parseInt(binding1.edtDiscountValue.getText().toString());
                 int quantity = Integer.parseInt(binding1.edtQuantity.getText().toString());
-                CreateOptionProduct(name, price, discount, quantity);
+                Boolean checkHotOption = binding1.chkHotOption.isChecked();
+
+                CreateOptionProduct(name, price, discount, quantity, checkHotOption);
             }
         });
 
@@ -222,7 +264,7 @@ public class FragmentCreateProductMyStore extends Fragment{
     }
 
 
-    private void CreateOptionProduct(String name, int price, int discount, int quantity) {
+    private void CreateOptionProduct(String name, int price, int discount, int quantity, Boolean checkHotOption) {
         if (checkValidateOptionProduct(name, price, discount, quantity)){
             dialog.show();
             String token = AccountUltil.BEARER + AccountUltil.TOKEN;
@@ -231,7 +273,8 @@ public class FragmentCreateProductMyStore extends Fragment{
             RequestBody requestBodyPrice = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(price));
             RequestBody requestBodyDisscount = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(discount));
             RequestBody requestBodyquantity = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(quantity));
-            BaseApi.API.createOption(token, requestBodyProductId, requestBodyName, fileImgAvatar, requestBodyPrice, requestBodyDisscount, requestBodyquantity ).enqueue(new Callback<ServerResponse>() {
+            RequestBody requestBodyHotOption = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(checkHotOption));
+            BaseApi.API.createOption(token, requestBodyProductId, requestBodyName, fileImgAvatar, requestBodyPrice, requestBodyDisscount, requestBodyquantity, requestBodyHotOption).enqueue(new Callback<ServerResponse>() {
                 @Override
                 public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                     if(response.isSuccessful()){ // chỉ nhận đầu status 200
@@ -286,70 +329,7 @@ public class FragmentCreateProductMyStore extends Fragment{
     }
 
 
-    public void createProductMyStore(){
-        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        String name = binding.edtNameProduct.getText().toString();
-        String description = binding.edtMota.getText().toString();
-        String tinhTrang = binding.edtTinhTrang.getText().toString();
-        String screen = binding.edtSC.getText().toString();
-        String camera = binding.edtCamera.getText().toString();
-        String chipset = binding.edtChipset.getText().toString();
-        String cpu = binding.edtCpu.getText().toString();
-        String gpu = binding.edtGpu.getText().toString();
 
-        String inputRam = binding.edtRam.getText().toString();
-        String inputRom = binding.edtRom.getText().toString();
-
-        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
-        int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
-
-        String operatingSystem = binding.edtHeDieuHanh.getText().toString();
-        String battery = binding.edtBatrery.getText().toString();
-        int weight = Integer.parseInt(binding.edtWeight.getText().toString());
-        String connection = binding.edtConnection.getText().toString();
-        String specialFeature = binding.edtSpecialFeature.getText().toString();
-        String manufacturer = binding.edtManufacturer.getText().toString();
-        String other = binding.edtOther.getText().toString();
-        dialog.show();
-        BaseApi.API.createProductMyStore(
-                token, categoryId, name, description,
-                tinhTrang, screen, camera,
-                chipset, cpu, gpu,ram, rom, operatingSystem,
-                battery, weight, connection, specialFeature,
-                manufacturer, other).enqueue(new Callback<CreateProductResponse>() {
-            @Override
-            public void onResponse(Call<CreateProductResponse> call, Response<CreateProductResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    CreateProductResponse productResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-createProduct: " + productResponse.toString());
-                    if(productResponse.getCode() == 200 || productResponse.getCode() == 201) {
-                        Toast.makeText(getContext(), "Create Product Is Successfully!", Toast.LENGTH_SHORT).show();
-                        productId = productResponse.getResult().getId();
-                    }
-
-                } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
-                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-                dialog.dismiss();
-            }
-
-            @Override
-            public void onFailure(Call<CreateProductResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "Call api Error", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
     private DialogCreateOptionProductBinding binding1;
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -508,5 +488,33 @@ public class FragmentCreateProductMyStore extends Fragment{
             binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
         }
     }
+
+
+    private void initController() {
+        binding.btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), UpdateAddressActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.btnLuu.setOnClickListener(new View.OnClickListener() {
+            private DialogCreateOptionProductBinding binding1;
+
+            @Override
+            public void onClick(View view) {
+                createProductMyStore();
+
+            }
+        });
+    }
+
+    private void initView() {
+        dialog = new ProgressLoadingDialog(getContext());
+
+
+    }
+
 
 }
