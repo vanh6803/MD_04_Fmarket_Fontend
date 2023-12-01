@@ -47,7 +47,7 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
-    String LOCALHOT = "192.168.0.106"; // đc cho socket
+    String LOCALHOT = "192.168.100.4"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -201,6 +201,8 @@ public interface BaseApi {
                                                      @Field("chipset") String chipset,
                                                      @Field("cpu") String cpu,
                                                      @Field("gpu") String gpu,
+                                                     @Field("ram") int ram,
+                                                     @Field("rom") int rom,
                                                      @Field("operatingSystem") String operatingSystem,
                                                      @Field("battery") String battery,
                                                      @Field("weight") int weight,
@@ -216,8 +218,7 @@ public interface BaseApi {
                                  @Part("name_color") RequestBody name_color,
                                  @Part MultipartBody.Part image,
                                  @Part("price") RequestBody price,
-                                 @Part("discount_value") RequestBody discount_value,
-                                      @Part("quantity") RequestBody quantity);
+                                 @Part("discount_value") RequestBody discount_value, @Part("quantity") RequestBody quantity);
 
 
 
@@ -250,6 +251,40 @@ public interface BaseApi {
     Call<ListMessageResponse> getListMessage(@Header("Authorization") String authorization,
                                              @Query("userId1") String userId1,
                                              @Query("userId2") String userId2);
+    @FormUrlEncoded
+    @PUT("products/update-product/{productId}")
+    Call<ServerResponse> updateProduct(@Header("Authorization") String authorization,
+                                       @Path("productId") String productId,
+                                       @Field("name") String name,
+                                       @Field("description") String description,
+                                       @Field("status") String status,
+                                       @Field("screen") String screen,
+                                       @Field("camera") String camera,
+                                       @Field("chipset") String chipset,
+                                       @Field("cpu") String cpu,
+                                       @Field("gpu") String gpu,
+                                       @Field("ram") int ram,
+                                       @Field("rom") int rom,
+                                       @Field("operatingSystem") String operatingSystem,
+                                       @Field("battery") String battery,
+                                       @Field("weight") int weight,
+                                       @Field("connection") String connection,
+                                       @Field("specialFeature") String specialFeature,
+                                       @Field("manufacturer") String manufacturer,
+                                       @Field("other") String other);
+    @FormUrlEncoded
+    @PUT("products/update-option/{optionId}")
+    Call<ServerResponse> updateOption(@Header("Authorization") String authorization,
+                                      @Path("optionId") String optionId,
+                                      @Field("name_color") String name_color,
+                                      @Field("price") int price,
+                                      @Field("discount_value") int discount_value,
+                                      @Field("quantity") int quantity);
+    @Multipart
+    @PUT("products/update-option-image/{optionId}")
+    Call<ServerResponse> updateImageOption(@Header("Authorization") String authorization,
+                                           @Path("optionId") String optionId,
+                                           @Part MultipartBody.Part image);
 
 
     @GET("comment/get-comments-by-product/{productId}")
