@@ -3,8 +3,7 @@
     android:layout_width="170dp"
     android:background="@drawable/custom_ln_iteam_product_option"
     android:layout_height="wrap_content"
-    android:layout_marginRight="20dp"
-    android:layout_marginBottom="10dp"
+    android:layout_margin="10dp"
     android:orientation="horizontal"
     >
     <ImageView

@@ -201,7 +201,7 @@ public class FragmentCreateProductMyStore extends Fragment{
                 isCheckImage = 1;
             }
         });
-        binding1.btnDong.setOnClickListener(new View.OnClickListener() {
+        binding1.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog1.dismiss();
