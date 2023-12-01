@@ -11,6 +11,7 @@
     <color name="gray_ground">#F6F6F6</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="red">#FF0000</color>
+    <color name="red_click">#CD4545</color>
     <color name="yellow">#FFCA00</color>
     <color name="bg_logout">#fdf7ea</color>
     <color name="blue">#4285F4</color>
