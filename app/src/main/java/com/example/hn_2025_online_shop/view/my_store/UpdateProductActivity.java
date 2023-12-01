@@ -19,30 +19,19 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.OptionAdapter;
-import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
-import com.example.hn_2025_online_shop.adapter.UpdateOptionAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityUpdateProductBinding;
-import com.example.hn_2025_online_shop.databinding.DialogCreateOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.DialogUpdateOptionProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
-import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.ProductDetail;
 import com.example.hn_2025_online_shop.model.ProductType;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
-import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
-import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.OptionUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.buy_product.AddressActivity;
-import com.example.hn_2025_online_shop.view.buy_product.UpdateAddressActivity;
-import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
-import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -318,19 +307,29 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
     @Override
     public void onclickObject(Object object) {
         OptionProduct optionProduct= (OptionProduct) object;
-         optionId = optionProduct.getId();
+        optionId = optionProduct.getId();
         Log.d("optionId", "onclickObject: " + optionId);
-        showDiaLogUpdateOption();
+        showDiaLogUpdateOption(optionProduct);
     }
 
 
-    private void showDiaLogUpdateOption() {
+    private void showDiaLogUpdateOption(OptionProduct optionProduct) {
         BottomSheetDialog dialog1 = new BottomSheetDialog(UpdateProductActivity.this);
         binding1 = DialogUpdateOptionProductBinding.inflate(getLayoutInflater());
         dialog1.setContentView(binding1.getRoot());
         Window window = dialog1.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-//      initData();
+
+        binding1.edtNameColor.setText(optionProduct.getNameColor());
+        binding1.edtPrice.setText(optionProduct.getPrice() + "");
+        binding1.edtQuantity.setText(optionProduct.getQuantity() + "");
+        binding1.edtDiscountValue.setText(optionProduct.getDiscountValue() + "");
+        binding1.chkHotOption.setChecked(optionProduct.isHot_option());
+        Glide.with(this)
+                .load(optionProduct.getImage())
+                .error(R.drawable.error)
+                .into(binding1.imgAvartar);
+
 
         binding1.imgCamera.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -343,7 +342,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 isCheckImage = 1;
             }
         });
-        binding1.btnDong.setOnClickListener(new View.OnClickListener() {
+        binding1.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog1.dismiss();
@@ -356,24 +355,17 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 int price = Integer.parseInt(binding1.edtPrice.getText().toString());
                 int discount = Integer.parseInt(binding1.edtDiscountValue.getText().toString());
                 int quantity = Integer.parseInt(binding1.edtQuantity.getText().toString());
-                UpdateOptionProduct(name, price, discount, quantity);
+                boolean chkHotOption = binding1.chkHotOption.isChecked();
+                UpdateOptionProduct(name, price, discount, quantity, chkHotOption, dialog1);
             }
         });
         dialog1.show();
     }
 
-    private void initData() {
-        binding1.edtNameColor.setText(OptionUltil.OPTION.getNameColor());
-        binding1.edtPrice.setText(OptionUltil.OPTION.getPrice());
-        binding1.edtQuantity.setText(OptionUltil.OPTION.getQuantity());
-        binding1.edtDiscountValue.setText(OptionUltil.OPTION.getDiscountValue());
-        Glide.with(this).load(OptionUltil.OPTION.getImage()).error(R.drawable.error).into(binding1.imgAvartar);
-    }
-
-    private void UpdateOptionProduct(String name, int price, int discount, int quantity) {
+    private void UpdateOptionProduct(String name, int price, int discount, int quantity, boolean chkHotOption, BottomSheetDialog dialog1) {
         dialog.show();
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        BaseApi.API.updateOption(token, optionId, name, price, discount, quantity ).enqueue(new Callback<ServerResponse>() {
+        BaseApi.API.updateOption(token, optionId, name, price, discount, quantity, chkHotOption).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
@@ -381,6 +373,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                     Log.d(TAG.toString, "onResponse-UpdateOptionProduct: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                         Toast.makeText(getApplicationContext(), "Update Option Product Successfully", Toast.LENGTH_SHORT).show();
+                        dialog1.dismiss();
                     }
                 } else { // nhận các đầu status #200
                     try {

@@ -130,4 +130,6 @@ public class OptionProduct {
     public void setHot_option(boolean hot_option) {
         this.hot_option = hot_option;
     }
+
+
 }
