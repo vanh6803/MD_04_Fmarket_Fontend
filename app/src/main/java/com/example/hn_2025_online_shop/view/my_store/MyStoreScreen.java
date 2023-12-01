@@ -11,11 +11,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.LayoutHeaderNavBinding;
+import com.example.hn_2025_online_shop.model.ProductDetail;
 import com.example.hn_2025_online_shop.model.Store;
+import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
+import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
@@ -38,30 +47,37 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
     private static final int Fragment_taoVoucher = 4;
     private static final int Fragment_baoCaoDoanhThu = 5;
     private static final int Fragment_CreateProductMyStore = 6;
+    private static final int Fragment_UpdateInforStore = 7;
     private int mcurrentFrg = Fragment_home;
     private DrawerLayout drawerLayout;
+    private ProgressLoadingDialog dialog;
     private String nameStore;
+    LayoutHeaderNavBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_store_screen);
+        dialog = new ProgressLoadingDialog(this);
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getProfileStore(token);
         drawerLayout = findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_open, R.string.navigation_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = findViewById(R.id.navigation_View);
         navigationView.setNavigationItemSelectedListener(this);
-
-
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+        binding = LayoutHeaderNavBinding.inflate(getLayoutInflater());
+        binding.getRoot();
+        getProfileStore(token);
     }
+
+
+
+
 
 
     @Override
@@ -94,7 +110,11 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
                 mcurrentFrg = Fragment_taoVoucher;
             }
         }
-        else if(id == R.id.taobanner){
+        else if(id == R.id.inforStore){
+            if(mcurrentFrg != Fragment_UpdateInforStore){
+                replaceFragment(new UpdateInforStoreFragment());
+                mcurrentFrg = Fragment_UpdateInforStore;
+            }
 
         }
         else if(id == R.id.dangsanpham){
@@ -152,6 +172,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
                     if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
                         nameStore = storeIdResponse.getData().getName();
                         Objects.requireNonNull(getSupportActionBar()).setTitle(nameStore);
+                        setDataInforStore(storeIdResponse);
                         String storeId = storeIdResponse.getData().get_id();
                         SharedPreferences sharedPreferences = getSharedPreferences("storeId", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -180,6 +201,13 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
             }
         });
 
+    }
+
+    private void setDataInforStore(InfoStore storeIdResponse) {
+        Glide.with(this).load(storeIdResponse.getData().getAvatar()).error(R.drawable.error).into(binding.imgAvartarStore);
+        binding.tvNameStore.setText(storeIdResponse.getData().getName());
+        binding.tvEmail.setText(AccountUltil.USER.getEmail());
+        Log.d("showdata", "setDataInforStore: " + storeIdResponse.getData().getName() );
     }
 
 

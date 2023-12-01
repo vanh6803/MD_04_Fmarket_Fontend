@@ -15,12 +15,14 @@
         android:src="@drawable/profile_2"/>
     <TextView
         android:textStyle="bold"
+        android:id="@+id/tvNameStore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="Ngocntph26008"
         android:layout_marginTop="8dp"/>
     <TextView
+        android:id="@+id/tvEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"

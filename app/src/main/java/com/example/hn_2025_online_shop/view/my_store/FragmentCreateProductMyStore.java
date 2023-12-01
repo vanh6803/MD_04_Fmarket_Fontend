@@ -231,6 +231,7 @@ public class FragmentCreateProductMyStore extends Fragment{
             RequestBody requestBodyPrice = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(price));
             RequestBody requestBodyDisscount = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(discount));
             RequestBody requestBodyquantity = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(quantity));
+
             BaseApi.API.createOption(token, requestBodyProductId, requestBodyName, fileImgAvatar, requestBodyPrice, requestBodyDisscount, requestBodyquantity ).enqueue(new Callback<ServerResponse>() {
                 @Override
                 public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
@@ -300,12 +301,13 @@ public class FragmentCreateProductMyStore extends Fragment{
         String inputRam = binding.edtRam.getText().toString();
         String inputRom = binding.edtRom.getText().toString();
 
-        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
+        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam);
         int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
 
         String operatingSystem = binding.edtHeDieuHanh.getText().toString();
         String battery = binding.edtBatrery.getText().toString();
-        int weight = Integer.parseInt(binding.edtWeight.getText().toString());
+        String inputWeight = binding.edtWeight.getText().toString();
+        int weight = inputWeight.isEmpty() ?0: Integer.parseInt(inputWeight);
         String connection = binding.edtConnection.getText().toString();
         String specialFeature = binding.edtSpecialFeature.getText().toString();
         String manufacturer = binding.edtManufacturer.getText().toString();

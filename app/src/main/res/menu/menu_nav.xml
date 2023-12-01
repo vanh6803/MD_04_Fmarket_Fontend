@@ -19,8 +19,8 @@
             android:title="Tạo voucher"
             android:icon="@drawable/tao"/>
         <item
-            android:id="@+id/taobanner"
-            android:title="Tạo banner"
+            android:id="@+id/inforStore"
+            android:title="Infor Store"
             android:icon="@drawable/taobanner"/>
         <item
             android:id="@+id/dangsanpham"
