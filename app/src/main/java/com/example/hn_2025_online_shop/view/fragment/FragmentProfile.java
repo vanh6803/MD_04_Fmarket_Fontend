@@ -73,8 +73,6 @@ public class FragmentProfile extends Fragment {
         initView();
         initController();
         setData();
-
-
     }
 
     private void setData() {
@@ -95,7 +93,6 @@ public class FragmentProfile extends Fragment {
     private void initController() {
         HistoryDon();//theo dõi đơn hàng
         phanHoiKhieuNai();//phan hoi khieu nai
-        SignUpBuier();//đăng kí thành người bạn
         resetPass();
         profile();
         myStore();
@@ -121,8 +118,8 @@ public class FragmentProfile extends Fragment {
                             assert response1 != null;
                             Log.d(TAG.toString, "onResponse-logout: " + response1.toString());
                             if(response1.getCode() == 200) {
-                                Toast.makeText(getActivity(), "Bạn cần dky để trở thành người bán", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getActivity(), RegisterMemberSeller.class));
+                                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                             }
                         } else { // nhận các đầu status #200
                             try {
@@ -131,6 +128,7 @@ public class FragmentProfile extends Fragment {
                                 JSONObject errorJson = new JSONObject(errorBody);
                                 String errorMessage = errorJson.getString("message");
                                 startActivity(new Intent(getActivity(), MyStoreScreen.class));
+                                getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
                                 Log.d(TAG.toString, "onResponse-logout: " + errorMessage);
                             }catch (IOException e){
                                 e.printStackTrace();
@@ -167,16 +165,6 @@ public class FragmentProfile extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), ResetPassWord.class));
-                requireActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
-            }
-        });
-    }
-
-    private void SignUpBuier(){
-        binding.layoutSignUpBuier.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), RegisterMemberSeller.class));
                 requireActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });

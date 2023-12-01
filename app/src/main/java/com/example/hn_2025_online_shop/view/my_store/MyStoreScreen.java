@@ -131,6 +131,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
             drawerLayout.closeDrawer(GravityCompat.START);
         }else {
             super.onBackPressed();
+            overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
         }
     }
     private void replaceFragment(Fragment fragment){
@@ -180,5 +181,6 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         });
 
     }
+
 
 }
