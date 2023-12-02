@@ -216,15 +216,14 @@
                         android:src="@drawable/test" />
 
                     <LinearLayout
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
                         android:orientation="vertical"
+                        android:layout_weight="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content">
                         <TextView
                             android:id="@+id/tvShop"
                             android:gravity="center|left"
-                            android:layout_gravity="center"
                             android:text="Laptop AZ"
                             android:textStyle="normal"
                             android:textSize="@dimen/font_size_text_title_medium"
@@ -233,12 +232,11 @@
                             android:layout_height="wrap_content"/>
 
                         <LinearLayout
-                            android:layout_gravity="center"
                             android:orientation="horizontal"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            >
                             <ImageView
-                                android:layout_gravity="center"
                                 android:src="@drawable/location"
                                 android:layout_width="12dp"
                                 android:layout_height="12dp"/>
@@ -247,8 +245,9 @@
                                 android:id="@+id/diachiShop"
                                 android:layout_marginLeft="4dp"
                                 android:layout_width="wrap_content"
-                                android:layout_height="16dp"
-                                android:layout_gravity="center"
+                                android:layout_height="wrap_content"
+                                android:maxLines="1"
+                                android:ellipsize="end"
                                 android:text="Laptop AZ"
                                 android:textColor="@color/black"
                                 android:textSize="10dp"
@@ -256,11 +255,6 @@
 
                         </LinearLayout>
                     </LinearLayout>
-                    <TextView
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
                     <Button
                         android:id="@+id/showshop"
                         android:background="@drawable/custom_btn_boder"
@@ -451,15 +445,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/imgCart"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:scaleType="centerCrop"
             android:src="@drawable/giohang"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -468,8 +462,8 @@
 
         <TextView
             android:id="@+id/tvQuantityCart"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:background="@drawable/cumtom_bg_red"
             android:gravity="center"
             android:text="0"
