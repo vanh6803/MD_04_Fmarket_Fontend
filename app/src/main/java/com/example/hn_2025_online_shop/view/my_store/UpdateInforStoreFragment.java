@@ -78,6 +78,7 @@ public class UpdateInforStoreFragment extends Fragment {
     private String strCity = "";
     private String strDistrict = "";
     private String strWard = "";
+    private String[] arrayAddress;
 
 
     public UpdateInforStoreFragment() {
@@ -108,12 +109,13 @@ public class UpdateInforStoreFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         dialog = new ProgressLoadingDialog(getContext());
         getDetailInforStore();
-        initController();
         initView();
-        getListCity();
+        initController();
     }
 
     private void initView() {
+
+
         cityList = new ArrayList<>();
         cityList.add(new City("--Chọn Tỉnh/Thành phố--"));
         cityAdapter = new CityAdapter(getContext(), R.layout.layout_item_spinner_selected, cityList);
@@ -171,6 +173,9 @@ public class UpdateInforStoreFragment extends Fragment {
             }
         });
     }
+
+    // -------------------------- spinner -----------------------------------
+
     private void getListCity() {
         PositionApi.API.getListCity().enqueue(new Callback<CityResponse>() {
             @Override
@@ -223,7 +228,7 @@ public class UpdateInforStoreFragment extends Fragment {
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
                         Log.d(TAG.toString, "onResponse-districtResponse: " + errorMessage);
-                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
                     }catch (IOException e){
                         e.printStackTrace();
                     } catch (JSONException e) {
@@ -234,7 +239,7 @@ public class UpdateInforStoreFragment extends Fragment {
 
             @Override
             public void onFailure(Call<DistrictResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-districtResponse: " + t.toString());
             }
         });
@@ -257,7 +262,7 @@ public class UpdateInforStoreFragment extends Fragment {
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
                         Log.d(TAG.toString, "onResponse-getListWard: " + errorMessage);
-                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), errorMessage, Toast.LENGTH_SHORT).show();
                     }catch (IOException e){
                         e.printStackTrace();
                     } catch (JSONException e) {
@@ -268,15 +273,22 @@ public class UpdateInforStoreFragment extends Fragment {
 
             @Override
             public void onFailure(Call<WardResponse> call, Throwable t) {
-                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getListWard: " + t.toString());
             }
         });
     }
 
     private void spinnerCity(List<City> cityList) {
-        cityAdapter = new CityAdapter(getContext(), R.layout.layout_item_spinner_selected, cityList);
+        cityAdapter = new CityAdapter(getActivity(), R.layout.layout_item_spinner_selected, cityList);
         binding.spnCity.setAdapter(cityAdapter);
+
+        for (int i = 0; i < cityList.size(); i++) {
+            if(cityList.get(i).getProvinceName().equals(arrayAddress[0])) {
+                binding.spnCity.setSelection(i);
+                break;
+            }
+        }
         binding.spnCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -289,12 +301,12 @@ public class UpdateInforStoreFragment extends Fragment {
                 } else {
                     districtList.clear();
                     districtList.add(new District("--Chọn Quận/Huyện--"));
-                    districtAdapter = new DistrictAdapter(getContext(), R.layout.layout_item_spinner_selected, districtList);
+                    districtAdapter = new DistrictAdapter(getActivity(), R.layout.layout_item_spinner_selected, districtList);
                     binding.spnDistrict.setAdapter(districtAdapter);
 
                     wardList.clear();
                     wardList.add(new Ward("--Chọn Phường/Xã--"));
-                    wardAdapter = new WardAdapter(getContext(), R.layout.layout_item_spinner_selected, wardList);
+                    wardAdapter = new WardAdapter(getActivity(), R.layout.layout_item_spinner_selected, wardList);
                     binding.spnWard.setAdapter(wardAdapter);
                     strCity = "";
                     binding.edtDiachi.setText(strCity);
@@ -308,8 +320,15 @@ public class UpdateInforStoreFragment extends Fragment {
     }
 
     private void spinnerDistrict(List<District> districtList) {
-        districtAdapter = new DistrictAdapter(getContext(), R.layout.layout_item_spinner_selected, districtList);
+        districtAdapter = new DistrictAdapter(getActivity(), R.layout.layout_item_spinner_selected, districtList);
         binding.spnDistrict.setAdapter(districtAdapter);
+
+        for (int i = 0; i < districtList.size(); i++) {
+            if(districtList.get(i).getDistrictName().equals(arrayAddress[1])) {
+                binding.spnDistrict.setSelection(i);
+                break;
+            }
+        }
 
         binding.spnDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -323,7 +342,7 @@ public class UpdateInforStoreFragment extends Fragment {
                 } else {
                     wardList.clear();
                     wardList.add(new Ward("--Chọn Phường/Xã--"));
-                    wardAdapter = new WardAdapter(getContext(), R.layout.layout_item_spinner_selected, wardList);
+                    wardAdapter = new WardAdapter(getActivity(), R.layout.layout_item_spinner_selected, wardList);
                     binding.spnWard.setAdapter(wardAdapter);
                     strDistrict = "";
                     binding.edtDiachi.setText(strCity + ", " + strDistrict);
@@ -338,8 +357,15 @@ public class UpdateInforStoreFragment extends Fragment {
     }
 
     private void spinnerWard(List<Ward> wardList) {
-        wardAdapter = new WardAdapter(getContext(), R.layout.layout_item_spinner_selected, wardList);
+        wardAdapter = new WardAdapter(getActivity(), R.layout.layout_item_spinner_selected, wardList);
         binding.spnWard.setAdapter(wardAdapter);
+
+        for (int i = 0; i < wardList.size(); i++) {
+            if(wardList.get(i).getWardName().equals(arrayAddress[2])) {
+                binding.spnWard.setSelection(i);
+                break;
+            }
+        }
 
         binding.spnWard.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -353,7 +379,6 @@ public class UpdateInforStoreFragment extends Fragment {
                     strWard = "";
                     binding.edtDiachi.setText(strCity + ", " + strDistrict + ", " + strWard);
                 }
-
             }
 
             @Override
@@ -363,6 +388,7 @@ public class UpdateInforStoreFragment extends Fragment {
         });
     }
 
+    // -----------------------------------------------------------------------
     private void updateStore(String name, String address) {
         if(validateUpdateStore(name, address)){
             dialog.show();
@@ -424,6 +450,7 @@ public class UpdateInforStoreFragment extends Fragment {
                     assert storeIdResponse != null;
                     if(storeIdResponse.getCode() == 200 || storeIdResponse.getCode() == 201) {
                         setDataInforStore(storeIdResponse);
+                        getListCity();
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -453,6 +480,7 @@ public class UpdateInforStoreFragment extends Fragment {
         Glide.with(getContext()).load(storeIdResponse.getData().getAvatar()).error(R.drawable.error).into(binding.imgAvartar);
         binding.edtDiachi.setText(storeIdResponse.getData().getAddress());
         Glide.with(getContext()).load(storeIdResponse.getData().getBanner()).error(R.drawable.error).into(binding.imgBanner);
+        arrayAddress = storeIdResponse.getData().getAddress().split(", ");
     }
 
     @Override
@@ -580,5 +608,4 @@ public class UpdateInforStoreFragment extends Fragment {
         }
         return result;
     }
-
 }
