@@ -143,7 +143,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         }
         else if(id == R.id.doanhthu){
             if(mcurrentFrg != Fragment_baoCaoDoanhThu){
-                replaceFragment(new FragmentRevenue());
+                replaceFragment(new FragmentStatistical());
                 mcurrentFrg = Fragment_baoCaoDoanhThu;
             }
         }
