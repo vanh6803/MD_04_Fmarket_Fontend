@@ -2,9 +2,10 @@ package com.example.hn_2025_online_shop.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ProductByCategory {
+public class ProductByCategory implements Serializable {
     @SerializedName("_id")
     private String id;
     private String nameCategory;

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -53,6 +54,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
     private ProgressLoadingDialog dialog;
     private String nameStore;
     LayoutHeaderNavBinding binding;
+    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +72,9 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
         replaceFragment(new FragmentHomeStore());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+
         binding = LayoutHeaderNavBinding.inflate(getLayoutInflater());
-        binding.getRoot();
+        view = binding.getRoot();
         getProfileStore(token);
     }
 

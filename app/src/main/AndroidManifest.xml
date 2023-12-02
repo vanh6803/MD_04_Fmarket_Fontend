@@ -19,9 +19,11 @@
         android:theme="@style/Theme.HN2025Onlineshop"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity android:name=".view.my_store.UpdateProductActivity"/>
         <activity
-
+            android:name=".view.fragment.ShowAllProductByCategoryActivity"
+            android:exported="false" />
+        <activity android:name=".view.my_store.UpdateProductActivity" />
+        <activity
             android:name=".view.product_screen.fragment_comment.BottomSheetComment"
             android:exported="false" />
         <activity

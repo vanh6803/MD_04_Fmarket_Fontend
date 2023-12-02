@@ -295,7 +295,7 @@ public interface BaseApi {
                                              @Path("productId") String productId);
 
     @Multipart
-    @PUT("store/edit-avatar}")
+    @PUT("store/edit-avatar")
     Call<ServerResponse> updateAvartarStore(@Header("Authorization") String authorization,
                                            @Part MultipartBody.Part avatar);
     @Multipart
@@ -307,4 +307,12 @@ public interface BaseApi {
     Call<ServerResponse> updateStore(@Header("Authorization") String authorization,
                                       @Field("name") String name,
                                       @Field("address") String address);
+    @GET("products/all-product-by-category")
+    Call<ProductResponse> getAllProductByCategory(@Query("category") String category);
+
+    @GET("products/all-product")
+    Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted);
+
+//    @GET("products/all-product-by-category")
+//    Call<ProductResponse> getTop10ProductBestSeller(@Query("categoryId") String categoryId);
 }

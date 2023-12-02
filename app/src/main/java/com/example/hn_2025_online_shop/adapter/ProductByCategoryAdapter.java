@@ -1,7 +1,10 @@
 package com.example.hn_2025_online_shop.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,6 +13,7 @@ import com.example.hn_2025_online_shop.databinding.ItemProductByCategoryBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +52,25 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         if(productByCategory == null) {
             return;
         }
+
+
         holder.binding.titleType.setText(productByCategory.getNameCategory());
         setDataRcvProduct(productByCategory.getProduct(), holder.binding);
+        holder.binding.tvXemTatCa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("productByCategory", "onClick: " + productByCategory);
+                String categoryId = productByCategory.getId();
+                Log.d("categoryId", "onBindViewHolder: " + categoryId);
+                Intent intent = new Intent(context, ShowAllProductByCategoryActivity.class);
+                intent.putExtra("categoryId", productByCategory);
+                context.startActivity(intent);
+
+            }
+        });
+
+
+
     }
 
     private void setDataRcvProduct(List<Product> productList, ItemProductByCategoryBinding binding) {
@@ -57,6 +78,7 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         GridLayoutManager gridLayout = new GridLayoutManager(context, 2);
         binding.rcvProduct.setLayoutManager(gridLayout);
         binding.rcvProduct.setAdapter(productAdapter);
+
     }
 
     @Override
