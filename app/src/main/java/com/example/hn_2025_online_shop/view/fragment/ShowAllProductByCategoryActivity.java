@@ -19,6 +19,7 @@ import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,6 +77,12 @@ public class ShowAllProductByCategoryActivity extends AppCompatActivity implemen
 
     @Override
     public void onclickObject(Object object) {
+        Product product = (Product) object;
+        String id = product.getId();
+        Intent intent = new Intent(this, DetailProduct.class);
+        intent.putExtra("id_product", id);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
 
     }
 }
