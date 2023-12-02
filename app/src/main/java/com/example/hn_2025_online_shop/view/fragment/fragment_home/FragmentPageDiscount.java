@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.fragment.fragment_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductSaleAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentPageDiscountBinding;
@@ -22,6 +24,7 @@ import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,6 +107,12 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
 
     @Override
     public void onclickObject(Object object) {
+        Product product = (Product) object;
+        String id = product.getId();
+        Intent intent = new Intent(getActivity(), DetailProduct.class);
+        intent.putExtra("id_product", id);
+        getActivity().startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
 
     }
 }
