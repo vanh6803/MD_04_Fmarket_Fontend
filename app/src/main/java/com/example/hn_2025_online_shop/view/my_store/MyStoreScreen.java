@@ -13,8 +13,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -23,9 +23,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutHeaderNavBinding;
-import com.example.hn_2025_online_shop.model.ProductDetail;
-import com.example.hn_2025_online_shop.model.Store;
-import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.example.hn_2025_online_shop.api.BaseApi;
@@ -55,7 +52,11 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
     private ProgressLoadingDialog dialog;
     private String nameStore;
     LayoutHeaderNavBinding binding;
+
+    private View view;
+
     private View mHeaderView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +76,7 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
         binding = LayoutHeaderNavBinding.inflate(getLayoutInflater());
-        binding.getRoot();
+        view = binding.getRoot();
         getProfileStore(token);
         mHeaderView = navigationView.getHeaderView(0);
     }

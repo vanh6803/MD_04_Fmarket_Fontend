@@ -10,8 +10,9 @@
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.recyclerview.widget.RecyclerView
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:id="@+id/recyProSale"
+        app:spanCount="2"
         tools:listitem="@layout/layout_item_product_sale"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -71,6 +71,7 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
         initView();
         initController();
         callApiProductByCategory();
+
     }
 
     private void initController() {
