@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +22,7 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.OptionAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityUpdateProductBinding;
+import com.example.hn_2025_online_shop.databinding.DialogCreateOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.DialogUpdateOptionProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.ProductDetail;
@@ -59,8 +61,10 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
     private ProductDetail productDetail;
     private ProductType productType;
     private MultipartBody.Part fileImgAvatar;
+    private MultipartBody.Part fileImgProduct;
     private int isCheckImage = 0; // 1 là avatar
     private boolean isCamera = false; // kiểm tra xem avatar có dữ liệu hay chưa
+    private boolean isImgProduct = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +108,117 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 onBackPressed();
             }
         });
+        binding.imgCreateOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDiaLogCreateOptionProduct();
+            }
+        });
 
+    }
+
+    private void showDiaLogCreateOptionProduct() {
+        BottomSheetDialog dialog2 = new BottomSheetDialog(this);
+        binding2 = DialogCreateOptionProductBinding.inflate(getLayoutInflater());
+        dialog2.setContentView(binding2.getRoot());
+        Window window = dialog2.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        binding2.imgCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ImagePicker.with((UpdateProductActivity.this))
+                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                        .start();
+                isCheckImage = 2;
+            }
+        });
+        binding2.btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog2.dismiss();
+            }
+        });
+        binding2.btnLuu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = binding2.edtNameColor.getText().toString();
+                int price = Integer.parseInt(binding2.edtPrice.getText().toString());
+                int discount = Integer.parseInt(binding2.edtDiscountValue.getText().toString());
+                int quantity = Integer.parseInt(binding2.edtQuantity.getText().toString());
+                Boolean checkHotOption = binding2.chkHotOption.isChecked();
+                CreateOptionProduct(name, price, discount, quantity, checkHotOption);
+            }
+        });
+
+        dialog2.show();
+    }
+
+    private void CreateOptionProduct(String name, int price, int discount, int quantity, Boolean checkHotOption) {
+        if (checkValidateOptionProduct(name, price, discount, quantity)){
+            dialog.show();
+            Intent intent = getIntent();
+            String id_product = intent.getStringExtra("id_product");
+            String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+            RequestBody requestBodyProductId = RequestBody.create(MediaType.parse("multipart/form-data"), id_product);
+            RequestBody requestBodyName = RequestBody.create(MediaType.parse("multipart/form-data"), name);
+            RequestBody requestBodyPrice = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(price));
+            RequestBody requestBodyDisscount = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(discount));
+            RequestBody requestBodyquantity = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(quantity));
+            RequestBody requestBodyHotOption = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(checkHotOption));
+            BaseApi.API.createOption(token, requestBodyProductId, requestBodyName, fileImgProduct, requestBodyPrice, requestBodyDisscount, requestBodyquantity, requestBodyHotOption).enqueue(new Callback<ServerResponse>() {
+                @Override
+                public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+                    if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                        ServerResponse serverResponse = response.body();
+                        Log.d(TAG.toString, "onResponse-CreateOptionProduct: " + serverResponse.toString());
+                        if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+                            Toast.makeText(getApplicationContext(), "Create Option Product Successfully", Toast.LENGTH_SHORT).show();
+                        }
+                    } else { // nhận các đầu status #200
+                        try {
+                            String errorBody = response.errorBody().string();
+                            JSONObject errorJson = new JSONObject(errorBody);
+                            String errorMessage = errorJson.getString("message");
+                            Log.d(TAG.toString, "onResponse-CreateOptionProduct: " + errorMessage);
+                            Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                    dialog.dismiss();
+                }
+
+                @Override
+                public void onFailure(Call<ServerResponse> call, Throwable t) {
+                    Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG.toString, "onFailure-CreateOptionProduct: " + t.toString());
+                    dialog.dismiss();
+
+                }
+            });
+
+        }
+
+    }
+    private boolean checkValidateOptionProduct(String name, int price, int discount, int quantity ) {
+        if(TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Mời nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(!isImgProduct) {
+            Toast.makeText(this, "Hãy chọn Image", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(price == 0) {
+            Toast.makeText(this, "Mời nhập giá sp", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if(quantity == 0) {
+            Toast.makeText(this, "Mời nhập số lượng sản phẩm", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void updateProductMyStore(String name, String description, String tinhTrang, String screen, String camera, String chipset,
@@ -417,6 +531,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
         }
         return result;
     }
+    private DialogCreateOptionProductBinding binding2;
     private DialogUpdateOptionProductBinding binding1;
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -430,14 +545,20 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                 binding1.imgAvartar.setImageURI(uri);
                 fileImgAvatar = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
                 updateImageOption(fileImgAvatar);
+            } else if (isCheckImage == 2) {
+                isImgProduct= true;
+                binding2.imgAvartar.setImageURI(uri);
+                fileImgProduct = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
             }
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(getApplicationContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
             isCamera = false;
+            isImgProduct= false;
 
         } else {
             Toast.makeText(getApplicationContext(), "Task Cancelled", Toast.LENGTH_SHORT).show();
             isCamera = false;
+            isImgProduct= false;
         }
     }
 

@@ -76,6 +76,7 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         adapter = new ProductAdapter(getContext(), list, this);
         binding.recycleView.setAdapter(adapter);
         callApiShowLishProductMyStore();
+        clickCreateProduct();
     }
 
     private void callApiShowLishProductMyStore() {
@@ -119,6 +120,15 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
             }
         });
 
+    }
+    public void clickCreateProduct(){
+        binding.imgCreateProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), FragmentCreateProductMyStore.class);
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
 

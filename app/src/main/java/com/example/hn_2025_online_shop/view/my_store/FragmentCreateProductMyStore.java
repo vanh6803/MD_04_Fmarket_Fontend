@@ -255,7 +255,6 @@ public class FragmentCreateProductMyStore extends Fragment{
                 int discount = Integer.parseInt(binding1.edtDiscountValue.getText().toString());
                 int quantity = Integer.parseInt(binding1.edtQuantity.getText().toString());
                 Boolean checkHotOption = binding1.chkHotOption.isChecked();
-
                 CreateOptionProduct(name, price, discount, quantity, checkHotOption);
             }
         });
@@ -313,7 +312,7 @@ public class FragmentCreateProductMyStore extends Fragment{
     }
     private boolean checkValidateOptionProduct(String name, int price, int discount, int quantity ) {
         if(TextUtils.isEmpty(name)) {
-            Toast.makeText(getContext(), "Mời nhập tên shop", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Mời nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
             return false;
         } else if(!isCamera) {
             Toast.makeText(getContext(), "Hãy chọn Image", Toast.LENGTH_SHORT).show();
