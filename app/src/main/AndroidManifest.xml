@@ -94,9 +94,11 @@
         <activity
             android:name=".view.profile_screen.OrderProductScreen"
             android:exported="true" />
+        <activity android:name=".view.my_store.FragmentCreateProductMyStore"/>
         <activity
             android:name=".view.infor_shop.InforShop"
             android:exported="true" />
+
         <activity
             android:name=".view.login.Splash"
             android:exported="true">

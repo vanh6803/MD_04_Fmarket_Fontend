@@ -1,5 +1,6 @@
 package com.example.hn_2025_online_shop.view.my_store;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductWarehouseBinding;
@@ -65,7 +69,20 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentProductWarehouseBinding.inflate(getLayoutInflater());
-        return binding.getRoot();
+        View view = binding.getRoot();
+        binding.imgCreateProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentCreateProductMyStore productMyStore = new FragmentCreateProductMyStore();
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content_frame, FragmentCreateProductMyStore.newInstance());
+                transaction.commit();
+
+            }
+        });
+        return view;
+
     }
 
     @Override
@@ -76,7 +93,7 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         adapter = new ProductAdapter(getContext(), list, this);
         binding.recycleView.setAdapter(adapter);
         callApiShowLishProductMyStore();
-        clickCreateProduct();
+
     }
 
     private void callApiShowLishProductMyStore() {
@@ -120,15 +137,6 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
             }
         });
 
-    }
-    public void clickCreateProduct(){
-        binding.imgCreateProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), FragmentCreateProductMyStore.class);
-                getActivity().startActivity(intent);
-            }
-        });
     }
 
 
