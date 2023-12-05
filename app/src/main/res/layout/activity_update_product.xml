@@ -41,15 +41,33 @@
                 android:textSize="25dp"
                 />
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView
-            android:textSize="18dp"
-            android:textColor="#013565"
-            android:layout_marginTop="10dp"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+        <LinearLayout
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:background="@color/white"
-            android:text="Update Option"/>
+            android:orientation="horizontal">
+            <TextView
+                android:textSize="18dp"
+                android:textColor="#013565"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="@color/white"
+                android:text="Update Option"/>
+            <ImageView
+                android:id="@+id/imgCreateOption"
+                android:layout_marginLeft="215dp"
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/plus"/>
+        </LinearLayout>
+
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvOptionProduct"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

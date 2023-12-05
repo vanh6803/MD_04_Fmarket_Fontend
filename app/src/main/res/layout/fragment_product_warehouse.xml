@@ -8,19 +8,32 @@
     tools:context=".view.my_store.FragmentProductWarehouse">
 
 
-    <TextView
-        android:padding="10dp"
-        android:text="KHO SẢN PHẨM"
-        android:textColor="@color/color_chudao"
-        android:textStyle="normal"
-        android:textSize="20sp"
-        android:layout_gravity="center"
-        android:gravity="center"
+    <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_marginLeft="130dp"
+            android:text="KHO SẢN PHẨM"
+            android:textColor="@color/color_chudao"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginLeft="80dp"
+            android:id="@+id/imgCreateProduct"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/plus"
+            />
+    </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
+        android:layout_marginTop="20dp"
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -36,6 +49,9 @@
         android:textColor="@color/gray99"
         android:textSize="16sp"
         />
+
+
+
 
 
 </LinearLayout>
