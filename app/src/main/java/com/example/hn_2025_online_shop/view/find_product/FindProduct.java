@@ -10,17 +10,21 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FindProductBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
+import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -41,16 +45,18 @@ import retrofit2.Response;
 public class FindProduct extends AppCompatActivity implements ObjectUtil {
     private FindProductBinding binding;
     private ProgressLoadingDialog loadingDialog;
-    private ProductByCategoryAdapter productAdapter;
-    private List<ProductByCategory> productList;
+    private ProductAdapter productAdapter;
+
+    private List<Product> productList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = FindProductBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        callApiGetListAllProducts();
         initView();
         initController();
-        callApiProductByCategory();
+
     }
 
     private void initController() {
@@ -136,49 +142,32 @@ public class FindProduct extends AppCompatActivity implements ObjectUtil {
 
     @SuppressLint("NotifyDataSetChanged")
     private  void initView(){
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        binding.recycleView.setLayoutManager(layoutManager);
         loadingDialog = new ProgressLoadingDialog(this);
         productList = new ArrayList<>();
-        productAdapter = new ProductByCategoryAdapter(this, productList, this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        binding.recycleView.setLayoutManager(linearLayoutManager);
+        productAdapter = new ProductAdapter(this, productList, this);
         binding.recycleView.setAdapter(productAdapter);
     }
 
 
-
-
-
-
-    private void callApiProductByCategory(){
-        loadingDialog.show();
-        BaseApi.API.getListProductByCategory().enqueue(new Callback<ProductByCategoryReponse>() {
+    public void callApiGetListAllProducts(){
+//        loadingDialog.show();
+        BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
             @Override
-            public void onResponse(Call<ProductByCategoryReponse> call, Response<ProductByCategoryReponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    ProductByCategoryReponse reponse = response.body();
-                    Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
-                    if(reponse.getCode() == 200) {
-                        productAdapter.setListProductType(reponse.getResult());
-                    }
-                } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-register: " + errorMessage);
-
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                if(response.isSuccessful()){
+                    ProductResponse productResponse = response.body();
+                    productAdapter.setProductList(productResponse.getResult());
+                    binding.recycleView.setAdapter(productAdapter);
+                }else {
+                    Toast.makeText(getApplicationContext(), "call list all products err", Toast.LENGTH_SHORT).show();
                 }
-                loadingDialog.dismiss();
             }
-
             @Override
-            public void onFailure(Call<ProductByCategoryReponse> call, Throwable t) {
-                loadingDialog.dismiss();
+            public void onFailure(Call<ProductResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Err", Toast.LENGTH_SHORT).show();
+//                loadingDialog.dismiss();
             }
         });
     }

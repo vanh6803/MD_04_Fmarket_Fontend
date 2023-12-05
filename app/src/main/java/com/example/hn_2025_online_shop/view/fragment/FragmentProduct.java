@@ -33,6 +33,7 @@ import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.chat_message.ChatActivity;
+import com.example.hn_2025_online_shop.view.find_product.FindProduct;
 import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
@@ -160,8 +161,15 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
 
             }
         };
-        binding.find.addTextChangedListener(textWatcher);
-        binding.recycleProduct.setAdapter(productAdapter);
+//        binding.find.addTextChangedListener(textWatcher);
+//        binding.recycleProduct.setAdapter(productAdapter);
+        binding.find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindProduct.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView() {

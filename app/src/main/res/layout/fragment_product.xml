@@ -39,7 +39,8 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"/>
 
-                    <EditText
+                    <TextView
+                        android:gravity="center"
                         android:id="@+id/find"
                         android:layout_gravity="center"
                         android:hint="Tìm kiếm..."
