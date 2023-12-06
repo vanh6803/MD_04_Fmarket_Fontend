@@ -312,6 +312,8 @@ public interface BaseApi {
 
     @GET("products/all-product")
     Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted);
+    @GET("products/topProduct")
+    Call<ProductResponse> getTopProductBestSeller();
 
 //    @GET("products/all-product-by-category")
 //    Call<ProductResponse> getTop10ProductBestSeller(@Query("categoryId") String categoryId);
