@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="14dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginBottom="330dp"
+        android:layout_marginBottom="290dp"
         android:gravity="center"
         android:text="Thống Kê Doanh Thu"
         android:textColor="#013565"
@@ -30,8 +30,8 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="380dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="400dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="450dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/custom_tt"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,12 +40,11 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <TextView
-
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:text="Tổng doanh thu"
             android:textColor="#E3013565"
@@ -59,7 +58,6 @@
             android:id="@+id/textView3"
             android:layout_width="200dp"
             android:layout_height="100dp"
-            android:layout_marginBottom="0dp"
             android:background="@drawable/custom_tvv"
             android:fontFamily="sans-serif"
             android:gravity="center"
@@ -119,6 +117,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/linearLayout7"
             android:layout_width="0dp"
             android:layout_height="40dp"
@@ -132,7 +131,7 @@
             <TextView
 
                 android:layout_marginLeft="25dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center"
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,7 +141,7 @@
 
             <TextView
                 android:layout_marginLeft="41dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center"
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -154,7 +153,7 @@
 
             <TextView
                 android:layout_marginLeft="50dp"
-                android:layout_gravity="bottom"
+                android:layout_gravity="center"
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

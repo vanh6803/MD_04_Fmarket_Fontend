@@ -206,9 +206,12 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             strDetailProduct += productDetail.getDescription() + "\n";
             strDetailProduct += "...";
             binding.tvProductDetail.setText(strDetailProduct);
+
         }else{
             Toast.makeText(this, "Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
     private void setDetailProduct() {
