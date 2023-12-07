@@ -18,7 +18,9 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductBestSellerAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentPageOutstandingBinding;
+import com.example.hn_2025_online_shop.model.OptionProductBestSeller;
 import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
@@ -37,7 +39,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
-    private List<Product> list;
+    private List<OptionProductBestSeller> list;
     private ProductBestSellerAdapter adapter;
     private FragmentPageOutstandingBinding binding;
     private ProgressLoadingDialog dialog;
@@ -74,11 +76,11 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
 
     private void callApiShowListProductBestSeller() {
         dialog.show();
-        BaseApi.API.getTopProductBestSeller().enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getTopProductBestSeller().enqueue(new Callback<ProductBestSellerResponse>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+            public void onResponse(Call<ProductBestSellerResponse> call, Response<ProductBestSellerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    ProductResponse reponse = response.body();
+                    ProductBestSellerResponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
                     if(reponse.getCode() == 200) {
                         adapter.setListProductBestSeller(reponse.getResult());
@@ -101,7 +103,7 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
             }
 
             @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
+            public void onFailure(Call<ProductBestSellerResponse> call, Throwable t) {
                 dialog.dismiss();
             }
         });
@@ -109,8 +111,8 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
 
     @Override
     public void onclickObject(Object object) {
-        Product product = (Product) object;
-        String id = product.getId();
+        OptionProductBestSeller product = (OptionProductBestSeller) object;
+        String id = product.getProductId().getId();
         Intent intent = new Intent(getActivity(), DetailProduct.class);
         intent.putExtra("id_product", id);
         getActivity().startActivity(intent);

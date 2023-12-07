@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamProductBestsellerBinding;
 
+import com.example.hn_2025_online_shop.model.OptionProductBestSeller;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
@@ -22,17 +23,17 @@ import java.util.List;
 
 public class ProductBestSellerAdapter extends RecyclerView.Adapter<ProductBestSellerAdapter.ProductViewHolder> {
     private Context context;
-    private List<Product> productList;
-    private List<Product> filteredItems;
+    private List<OptionProductBestSeller> productList;
+    private List<OptionProductBestSeller> filteredItems;
     private ObjectUtil objectUtil;
 
-    public ProductBestSellerAdapter(Context context, List<Product> productList, ObjectUtil objectUtil) {
+    public ProductBestSellerAdapter(Context context, List<OptionProductBestSeller> productList, ObjectUtil objectUtil) {
         this.productList = productList;
         this.context = context;
         this.objectUtil = objectUtil;
     }
 
-    public void setListProductBestSeller(List<Product> productList) {
+    public void setListProductBestSeller(List<OptionProductBestSeller> productList) {
         this.productList = productList;
         this.filteredItems = new ArrayList<>(productList);
         notifyDataSetChanged();
@@ -54,17 +55,18 @@ public class ProductBestSellerAdapter extends RecyclerView.Adapter<ProductBestSe
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Product product = productList.get(position);
-        holder.binding.tvName.setText(product.getName());
+        OptionProductBestSeller product = productList.get(position);
+        holder.binding.tvName.setText(product.getProductId().getName() + "-" +  product.getNameColor());
         DecimalFormat df = new DecimalFormat("###,###,###");
-        holder.binding.tvPrice.setText(df.format(product.getMinPrice()) + " đ");
+        holder.binding.tvPrice.setText(df.format(product.getPrice()) + " đ");
         Glide.with(context)
                 .load(product.getImage())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .into(holder.binding.imgProduct);
-        holder.binding.ratingBar.setRating((float) product.getAverageRate());
-        holder.binding.tvReview.setText("Đã bán " + product.getReview());
+        holder.binding.ratingBar.setRating((float) product.getProductId().getAverageRate());
+        holder.binding.tvReview.setText("Đã bán " + product.getSoldQuantity());
+
 
         holder.binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +74,7 @@ public class ProductBestSellerAdapter extends RecyclerView.Adapter<ProductBestSe
                 objectUtil.onclickObject(product);
             }
         });
+
     }
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
@@ -90,8 +93,8 @@ public class ProductBestSellerAdapter extends RecyclerView.Adapter<ProductBestSe
             productList.addAll(filteredItems);
 
         } else {
-            for (Product item : filteredItems) {
-                if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+            for (OptionProductBestSeller item : filteredItems) {
+                if (item.getProductId().getName().toLowerCase().contains(query.toLowerCase())) {
                     productList.add(item);
                 }
             }
