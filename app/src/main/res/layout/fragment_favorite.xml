@@ -1,8 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:background="@color/color_chudao"
+        android:paddingHorizontal="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="65dp">
+            <TextView
+                android:textAlignment="textStart"
+                android:layout_weight="1"
+                android:text="Sản phẩm yêu thích"
+                android:textSize="25dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/imgCart"
+                    android:src="@drawable/giohang"
+                    android:background="@drawable/custom_bg_icon"
+                    android:padding="7dp"
+                    android:scaleType="centerCrop"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <TextView
+                    android:id="@+id/tvQuantityCart"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/cumtom_bg_red"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toTopOf="@id/imgCart"
+                    app:layout_constraintEnd_toEndOf="@+id/imgCart"
+                    app:layout_constraintStart_toEndOf="@+id/imgCart"
+                    app:layout_constraintTop_toTopOf="@+id/imgCart" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/imgChat"
+                android:src="@drawable/messg"
+                android:layout_marginHorizontal="5dp"
+                android:layout_width="30dp"
+                android:padding="7dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/custom_bg_icon"
+                android:layout_height="30dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingVertical="5dp"
+        android:paddingHorizontal="10dp"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Tổng số sản phẩm: "
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textSize="14sp"
+            android:textColor="#FA0505"
+            android:textStyle="bold"
+            android:text="10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        tools:listitem="@layout/item_favorites"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+
+
+</LinearLayout>

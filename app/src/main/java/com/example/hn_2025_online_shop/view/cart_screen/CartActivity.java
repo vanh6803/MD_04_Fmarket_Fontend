@@ -1,22 +1,21 @@
 package com.example.hn_2025_online_shop.view.cart_screen;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityCartBinding;
-import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionAndQuantity;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
@@ -28,16 +27,13 @@ import com.example.hn_2025_online_shop.ultil.swipe.ItemTouchHelperListener;
 import com.example.hn_2025_online_shop.ultil.swipe.RecycleViewItemTouchHelper;
 import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
-import com.example.hn_2025_online_shop.view.success_screen.OrderSuccessActivity;
-
+import com.example.hn_2025_online_shop.view.voucher.VoucherScreen;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +43,6 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
     private ActivityCartBinding binding;
     private CartAdapter cartAdapter;
     private int totalPrice = 0;
-    private ProgressLoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +53,12 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         initView();
         initController();
         // Hàm này có sẵn ở đâu cx gọi đc
-        ApiUtil.getAllCart(this, loadingDialog, cartAdapter);
+        ApiUtil.getAllCart(this, cartAdapter);
+        if(CartUtil.listCart.size() == 0) {
+            binding.tvDrum.setVisibility(View.VISIBLE);
+        } else {
+            binding.tvDrum.setVisibility(View.GONE);
+        }
     }
 
     private void initController() {
@@ -67,6 +67,14 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             public void onClick(View v) {
                 onBackActivity();
                 updateCart();
+            }
+        });
+
+        binding.listVoucher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, VoucherScreen.class);
+                startActivity(intent);
             }
         });
 
@@ -91,7 +99,6 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         CartUtil.listCartCheck.clear();
 
         // recycleView
-        loadingDialog = new ProgressLoadingDialog(this);
         cartAdapter = new CartAdapter(this, CartUtil.listCart, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvCart.setLayoutManager(layoutManager);
@@ -104,6 +111,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         new ItemTouchHelper(simpleCallback).attachToRecyclerView(binding.rcvCart);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void setTotalPrice() {
         totalPrice = 0;
@@ -118,7 +126,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
     @Override
     public void onclickMinus(Object object, int position) {
-        CartOfList cart = (CartOfList) object;
+        OptionAndQuantity cart = (OptionAndQuantity) object;
         int quantity = cart.getQuantity();
         if(quantity > 1) {
             quantity -= 1;
@@ -130,7 +138,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
 
     @Override
     public void onclickPlus(Object object, int position) {
-        CartOfList cart = (CartOfList) object;
+        OptionAndQuantity cart = (OptionAndQuantity) object;
         int quantity = cart.getQuantity();
         quantity += 1;
         CartUtil.listCart.get(position).setQuantity(quantity);
@@ -141,29 +149,36 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder) {
         if(viewHolder instanceof CartAdapter.CartViewHolder) {
-            CartOfList cart = CartUtil.listCart.get(viewHolder.getAdapterPosition());
+            OptionAndQuantity cart = CartUtil.listCart.get(viewHolder.getAdapterPosition());
             int indexDelete = viewHolder.getAdapterPosition();
             deleteCart(cart, indexDelete);
         }
     }
 
-    private void deleteCart(CartOfList cart, int indexDelete) {
+    private void deleteCart(OptionAndQuantity cart, int indexDelete) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String cartId = cart.getId();
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.deleteCartItem(token, cartId).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
+                    assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-deleteCartItem: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200) {
                         cartAdapter.removeItem(indexDelete);
                         CartUtil.listCartCheck.remove(cart);
                         setTotalPrice();
+                        if(CartUtil.listCart.size() == 0) {
+                            binding.tvDrum.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.tvDrum.setVisibility(View.GONE);
+                        }
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -175,20 +190,21 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-deleteCartItem: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
         updateCart();
         onBackActivity();
     }
@@ -206,21 +222,23 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
         }
     }
 
-    private void updateQuantityCart(CartOfList cart) {
+    private void updateQuantityCart(OptionAndQuantity cart) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String cartId = cart.getId();
         int quantity = cart.getQuantity();
 
         BaseApi.API.updateQuantityCartItem(token, cartId, quantity).enqueue(new Callback<ServerResponse>() {
             @Override
-            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+            public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
                 if(response.isSuccessful()){ // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
+                    assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-updateQuantityCartItem: " + serverResponse.toString());
                     if(serverResponse.getCode() == 200) {
                     }
                 } else { // nhận các đầu status #200
                     try {
+                        assert response.errorBody() != null;
                         String errorBody = response.errorBody().string();
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
@@ -235,7 +253,7 @@ public class CartActivity extends AppCompatActivity implements CartInterface, It
             }
 
             @Override
-            public void onFailure(Call<ServerResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<ServerResponse> call, @NonNull Throwable t) {
                 Toast.makeText(CartActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-updateQuantityCartItem: " + t.toString());
             }

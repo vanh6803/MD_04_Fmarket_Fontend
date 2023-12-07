@@ -34,9 +34,10 @@ public class VoucherSCAdapter extends RecyclerView.Adapter<VoucherSCAdapter.Vouc
     @Override
     public void onBindViewHolder(@NonNull VoucherViewHolder holder, int position) {
         Voucher store = list.get(position);
-        holder.tvSale.setText(store.getNameVoucher());
+        holder.tvSale.setText(store.getSale());
         holder.tvprice.setText(store.getPrice());
         holder.tvDate.setText(store.getDate());
+        holder.name.setText(store.getNameVoucher());
 
     }
 
@@ -49,10 +50,11 @@ public class VoucherSCAdapter extends RecyclerView.Adapter<VoucherSCAdapter.Vouc
     }
 
     public class VoucherViewHolder extends RecyclerView.ViewHolder {
-        TextView tvSale, tvprice, tvDate;
+        TextView tvSale, tvprice, tvDate, name;
         public VoucherViewHolder(@NonNull View itemView) {
             super(itemView);
             tvprice = itemView.findViewById(R.id.price);
+            name = itemView.findViewById(R.id.name);
             tvSale = itemView.findViewById(R.id.sale);
             tvDate = itemView.findViewById(R.id.date);
         }

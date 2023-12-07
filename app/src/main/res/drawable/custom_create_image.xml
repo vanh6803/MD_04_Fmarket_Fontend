@@ -3,7 +3,6 @@
     <item>
         <shape>
             <solid android:color="@color/primary_blur"/>
-            <corners android:radius="20dp"/>
         </shape>
     </item>
 </selector>

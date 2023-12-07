@@ -39,7 +39,6 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
     private ActivityAddressBinding binding;
     private List<Info> infoList;
     private InfoAdapter infoAdapter;
-    private ProgressLoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
 
     private void urlGetAllInfo() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        loadingDialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getInfo(token).enqueue(new Callback<InfoResponse>() {
             @Override
             public void onResponse(Call<InfoResponse> call, Response<InfoResponse> response) {
@@ -78,14 +77,14 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<InfoResponse> call, Throwable t) {
                 Toast.makeText(getApplicationContext(), t.toString(), Toast.LENGTH_SHORT).show();
                 Log.d(TAG.toString, "onFailure-getInfo: " + t.toString());
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }
@@ -95,7 +94,7 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(AddressActivity.this, AddAddressActivity.class);
-                startActivity(intent);
+                mActivityResultLauncher.launch(intent);
                 overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
@@ -110,7 +109,6 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(this);
         infoList = new ArrayList<>();
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         binding.rcvInfo.setLayoutManager(layoutManager);
@@ -155,6 +153,7 @@ public class AddressActivity extends AppCompatActivity implements InfoInterface 
                 public void onActivityResult(ActivityResult result) {
                     if(result.getResultCode() == RESULT_OK) {
                         urlGetAllInfo();
+
                     }
                 }
             });

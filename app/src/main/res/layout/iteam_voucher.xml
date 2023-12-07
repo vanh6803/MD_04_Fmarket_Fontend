@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_gravity="center"
-    android:layout_height="80dp"
+    android:layout_height="90dp"
     android:background="@drawable/custom_btn_boder"
     android:orientation="horizontal"
     android:paddingRight="10dp"
@@ -62,6 +62,7 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
         <TextView
+            android:id="@+id/name"
             android:textStyle="bold"
             android:textSize="12dp"
             android:layout_width="match_parent"
@@ -126,7 +127,7 @@
         <TextView
             android:textColor="@color/white"
             android:background="@drawable/custom_btn_luu"
-            android:text="Lưu"
+            android:text="Áp dụng"
             android:textStyle="bold"
             android:textSize="17dp"
             android:gravity="center"

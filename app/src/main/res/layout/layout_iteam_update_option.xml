@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:background="@drawable/custom_ln_iteam_product_option"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/imgIteamOption"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:src="@drawable/anhdt1"
+        android:background="@drawable/custom_img_option_product"/>
+    <TextView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tvColorOption"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gold"
+        android:textColor="@drawable/custom_text_red_press"
+        />
+    <ImageView
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:src="@drawable/dau3cham"/>
+    <ImageView
+
+        android:layout_gravity="center"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:src="@drawable/deleteoption"/>
+
+
+</LinearLayout>

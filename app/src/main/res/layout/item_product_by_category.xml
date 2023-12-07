@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:id="@+id/tvXemTatCa"
             android:layout_weight="1"
             android:gravity="end"
             android:text="Xem tất cả"

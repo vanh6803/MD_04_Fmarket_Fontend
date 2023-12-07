@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity{
                             // Đăng nhập thành công thì lấy ra detail user rồi cho vào 1 biến để có thể tái sử dụng
                             ApiUtil.getDetailUser(Login.this, loadingDialog);
                             // Lấy danh sách cart
-                            ApiUtil.getAllCart(Login.this, loadingDialog, null);
+                            ApiUtil.getAllCart(Login.this, null);
                             Toast.makeText(Login.this,"Đăng nhập thành công!",Toast.LENGTH_SHORT).show();
                             screenSwitch(Login.this, MainActivity.class);
                             finishAffinity();
