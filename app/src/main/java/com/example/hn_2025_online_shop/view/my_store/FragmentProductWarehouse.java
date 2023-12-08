@@ -152,7 +152,7 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         intent.putExtra("id_product", id);
         Log.d("aaaaa", "onclickObject: "+ id);
         startActivity(intent);
-
+        getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
     }
 
     @Override

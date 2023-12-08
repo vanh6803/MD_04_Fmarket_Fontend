@@ -1,8 +1,12 @@
 package com.example.hn_2025_online_shop.view.chat_message;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -23,6 +27,8 @@ import com.example.hn_2025_online_shop.model.User;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
 import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
+import com.example.hn_2025_online_shop.ultil.MyApplication;
+import com.example.hn_2025_online_shop.ultil.NotificationUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 
@@ -33,6 +39,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -93,6 +100,9 @@ public class MessageActivity extends AppCompatActivity {
                         messageList.add(new Message(sender_id, receiver_id, message, sdf.format(new Date())));
                         messageAdapter.notifyItemRangeInserted(messageList.size(), messageList.size());
                         binding.rcvMesssage.smoothScrollToPosition(messageList.size() - 1);
+                        if(!sender_id.equals(AccountUltil.USER.getId())) {
+                            NotificationUtil.sendNotification(MessageActivity.this, message);
+                        }
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -100,6 +110,8 @@ public class MessageActivity extends AppCompatActivity {
             });
         }
     };
+
+
 
     private void attemptSend() {
         mSocket.connect();
@@ -178,15 +190,14 @@ public class MessageActivity extends AppCompatActivity {
             userReceiver = (User) bundle.getSerializable("receiver_object"); // Ép kiểu đối tượng từ Bundle
             store = (Store) bundle.getSerializable("store");
         }
-        try {
+        if(store.isIs_active()) {
             Glide.with(this)
                     .load(store.getAvatar())
                     .placeholder(R.drawable.loading)
                     .error(R.drawable.avatar1)
                     .into(binding.imgAvatar);
-
             binding.tvUserName.setText(store.getName());
-        } catch (Exception exception) {
+        } else {
             Glide.with(this)
                     .load(userReceiver.getAvatar())
                     .placeholder(R.drawable.loading)

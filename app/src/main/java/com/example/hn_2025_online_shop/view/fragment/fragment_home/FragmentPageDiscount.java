@@ -42,7 +42,6 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
     private List<Product> list;
     private ProductSaleAdapter adapter;
     private FragmentPageDiscountBinding binding;
-    private ProgressLoadingDialog dialog;
     public static FragmentPageDiscount newInstance(String param1, String param2) {
         FragmentPageDiscount fragment = new FragmentPageDiscount();;
         return fragment;
@@ -63,7 +62,6 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dialog = new ProgressLoadingDialog(getContext());
         list = new ArrayList<>();
         adapter = new ProductSaleAdapter(getContext(), list, this);
         binding.recyProSale.setAdapter(adapter);
@@ -71,7 +69,7 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
     }
 
     private void ShowListProductDiscouted() {
-        dialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getAllProductDiscouted(true).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
@@ -94,12 +92,12 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
 
@@ -113,6 +111,5 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
         intent.putExtra("id_product", id);
         getActivity().startActivity(intent);
         getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
-
     }
 }

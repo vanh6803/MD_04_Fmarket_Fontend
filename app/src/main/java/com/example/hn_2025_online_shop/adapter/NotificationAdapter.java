@@ -5,19 +5,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.hn_2025_online_shop.databinding.ItemNotificationBinding;
-import com.example.hn_2025_online_shop.model.NotificationModel;
 
+import com.bumptech.glide.Glide;
+import com.example.hn_2025_online_shop.R;
+import com.example.hn_2025_online_shop.databinding.ItemNotificationBinding;
+import com.example.hn_2025_online_shop.model.Notifi;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapter.ViewHolder> {
     private Context context;
 
-    private final List<NotificationModel> list;
+    private List<Notifi> notifiList;
 
-    public NotificationAdapter(Context context, List<NotificationModel> list) {
+    public NotificationAdapter(Context context, List<Notifi> notifiList) {
         this.context = context;
-        this.list = list;
+        this.notifiList = notifiList;
+    }
+
+    public void setNotifiList(List<Notifi> notifiList) {
+        this.notifiList = notifiList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -29,16 +39,53 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        NotificationModel model = list.get(position);
-        holder.binding.time.setText(model.getTime());
-        holder.binding.title.setText(model.getTitle());
-        holder.binding.content.setText(model.getContent());
+        Notifi notification = notifiList.get(position);
+        holder.binding.tvContent.setText(notification.getContent());
 
-        if(position%2 == 0){
-            holder.binding.item.setBackgroundColor(0xffffffff);
+        switch (notification.getType()) {
+            case "msg":
+                holder.binding.tvTitle.setText("Bạn có tin nhắn mới từ " + notification.getSender().getUsername());
+                break;
+            case "cmt":
+                holder.binding.tvTitle.setText("Bạn có comment mới từ " + notification.getSender().getUsername());
+                break;
+            case "wfc":
+                holder.binding.tvTitle.setText("Đơn hàng đang chờ xác nhận");
+                break;
+            case "wfd":
+                holder.binding.tvTitle.setText("Đơn hàng đang chờ đc giao");
+                break;
+            case "delivered":
+                holder.binding.tvTitle.setText("Giao hàng thành công");
+                break;
+            case "canceled":
+                holder.binding.tvTitle.setText("Đã hủy đơn hàng");
+                break;
+            default:holder.binding.tvTitle.setText("Bạn có thông báo mới");
+                break;
         }
 
-        if(position == list.size() -1){
+        // image
+        Glide.with(context)
+                .load(notification.getSender().getAvatar())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.avatar1)
+                .into(holder.binding.imgAvartar);
+
+        // date
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm:ss  dd-MM-yyyy");
+        Date date;
+        try {
+            date = inputFormat.parse(notification.getCreatedAt());
+        } catch (Exception e) {
+            date = new Date();
+        }
+        holder.binding.tvDate.setText(outputFormat.format(date));
+
+
+
+        if(position == notifiList.size() -1){
             holder.binding.line.setVisibility(View.GONE);
         }else {
             holder.binding.line.setVisibility(View.VISIBLE);
@@ -47,7 +94,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(notifiList != null) {
+            return notifiList.size();
+        }
+        return 0;
     }
 
     public  class ViewHolder extends  RecyclerView.ViewHolder{

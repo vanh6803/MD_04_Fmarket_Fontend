@@ -6,7 +6,6 @@
 
     <LinearLayout
         android:id="@+id/item"
-        android:background="#D0F2F6"
         android:layout_marginVertical="4dp"
         android:paddingHorizontal="10dp"
         android:paddingVertical="5dp"
@@ -14,8 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/test"
+            android:id="@+id/imgAvartar"
+            android:scaleType="fitXY"
+            android:src="@drawable/avatar1"
             android:layout_width="70dp"
             android:layout_height="70dp"/>
 
@@ -26,29 +26,33 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/tvTitle"
                 android:text="Giao kiện hàng thành công"
-                android:textStyle="italic"
                 android:textSize="16dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/content"
+                android:id="@+id/tvContent"
                 android:layout_marginTop="5dp"
                 android:text="Giao kiện hàng thành công"
-                android:textStyle="italic"
-                android:textSize="13dp"
+                android:textSize="14dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/gray99"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
 
             <TextView
-                android:id="@+id/time"
+                android:id="@+id/tvDate"
                 android:layout_marginTop="5dp"
                 android:text="11/11/2022 111"
-                android:textStyle="italic"
-                android:textSize="10dp"
+                android:textColor="@color/gray99"
+                android:textSize="11dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
         </LinearLayout>
@@ -58,7 +62,7 @@
     <View
         android:id="@+id/line"
         android:visibility="visible"
-        android:background="#D0F2F6"
+        android:background="@color/gray_ground"
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"/>
+        android:layout_height="2dp"/>
 </LinearLayout>

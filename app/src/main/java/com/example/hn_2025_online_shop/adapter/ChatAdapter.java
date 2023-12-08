@@ -2,6 +2,7 @@ package com.example.hn_2025_online_shop.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,21 +50,24 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
         PeopleMsg chat = chatList.get(position);
         holder.binding.tvMessage.setText(chat.getLatestMessage().getContent());
-        try {
+        Log.d("aaaaaa", "store" + chat.getStore());
+        Log.d("aaaaaa", "store-iamge" + chat.getStore().getAvatar());
+        if(chat.getStore().isIs_active()) {
             holder.binding.tvUsername.setText(chat.getStore().getName());
             Glide.with(context)
                     .load(chat.getStore().getAvatar())
                     .placeholder(R.drawable.loading)
                     .error(R.drawable.avatar1)
                     .into(holder.binding.imgAvatar);
-        } catch (Exception exception) {
-            holder.binding.tvUsername.setText(chat.getAccount().getAvatar());
+        } else {
+            holder.binding.tvUsername.setText(chat.getAccount().getUsername());
             Glide.with(context)
                     .load(chat.getAccount().getAvatar())
                     .placeholder(R.drawable.loading)
                     .error(R.drawable.avatar1)
                     .into(holder.binding.imgAvatar);
         }
+
         try {
             SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
