@@ -73,6 +73,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
         setContentView(binding.getRoot());
         initView();
         initController();
+
     }
 
     private void initController() {
@@ -112,6 +113,14 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
             @Override
             public void onClick(View view) {
                 showDiaLogCreateOptionProduct();
+            }
+        });
+
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
             }
         });
 
@@ -606,5 +615,11 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
     protected void onResume() {
         super.onResume();
         callApiUpdateDetailProduct();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

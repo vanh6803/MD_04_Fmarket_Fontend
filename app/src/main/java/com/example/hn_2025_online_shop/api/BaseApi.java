@@ -12,6 +12,7 @@ import com.example.hn_2025_online_shop.model.response.InfoResponse;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
 import com.example.hn_2025_online_shop.model.response.ListCommentResponse;
 import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
+import com.example.hn_2025_online_shop.model.response.ListNotifiReponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
@@ -47,7 +48,7 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
-    String LOCALHOT = "192.168.100.4"; // đc cho socket
+    String LOCALHOT = "172.20.10.3"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -315,4 +316,8 @@ public interface BaseApi {
 
 //    @GET("products/all-product-by-category")
 //    Call<ProductResponse> getTop10ProductBestSeller(@Query("categoryId") String categoryId);
+
+    @GET("notifi/get-notifi-list/{accountId}")
+    Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
+                                          @Path("accountId") String accountId);
 }

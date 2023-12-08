@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ItemProductByCategoryBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 //import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
 
 import java.util.ArrayList;
@@ -56,21 +60,17 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
 
         holder.binding.titleType.setText(productByCategory.getNameCategory());
         setDataRcvProduct(productByCategory.getProduct(), holder.binding);
-//        holder.binding.tvXemTatCa.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("productByCategory", "onClick: " + productByCategory);
-//                String categoryId = productByCategory.getId();
-//                Log.d("categoryId", "onBindViewHolder: " + categoryId);
-//                Intent intent = new Intent(context, ShowAllProductByCategoryActivity.class);
-//                intent.putExtra("categoryId", productByCategory);
-//                context.startActivity(intent);
-//
-//            }
-//        });
-
-
-
+        holder.binding.tvXemTatCa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("productByCategory", "onClick: " + productByCategory);
+                String categoryId = productByCategory.getId();
+                Log.d("categoryId", "onBindViewHolder: " + categoryId);
+                Intent intent = new Intent(context, ShowAllProductByCategoryActivity.class);
+                intent.putExtra("categoryId", productByCategory);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void setDataRcvProduct(List<Product> productList, ItemProductByCategoryBinding binding) {
