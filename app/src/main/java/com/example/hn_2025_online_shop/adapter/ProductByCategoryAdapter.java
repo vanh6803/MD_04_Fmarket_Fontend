@@ -16,8 +16,6 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
-import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
-//import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,4 +111,3 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         notifyDataSetChanged();
     }
 }
-
