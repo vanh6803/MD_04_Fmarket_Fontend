@@ -12,7 +12,9 @@ import com.example.hn_2025_online_shop.model.response.InfoResponse;
 import com.example.hn_2025_online_shop.model.response.ListChatResponse;
 import com.example.hn_2025_online_shop.model.response.ListCommentResponse;
 import com.example.hn_2025_online_shop.model.response.ListMessageResponse;
+import com.example.hn_2025_online_shop.model.response.ListNotifiReponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
+import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
@@ -314,8 +316,12 @@ public interface BaseApi {
     @GET("products/all-product")
     Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted);
     @GET("products/topProduct")
-    Call<ProductResponse> getTopProductBestSeller();
+    Call<ProductBestSellerResponse> getTopProductBestSeller();
 
 //    @GET("products/all-product-by-category")
 //    Call<ProductResponse> getTop10ProductBestSeller(@Query("categoryId") String categoryId);
+
+    @GET("notifi/get-notifi-list/{accountId}")
+    Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
+                                          @Path("accountId") String accountId);
 }

@@ -46,16 +46,19 @@ public class ShowAllProductByCategoryActivity extends AppCompatActivity implemen
         dialog = new ProgressLoadingDialog(this);
         list = new ArrayList<>();;
         binding.tvNameCategory.setText("Giá : 499k");
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
-//        list.add(new Product("1321", "Điện Thoại đểu", false, "https://gaixinhdep.net/wp-content/uploads/2023/10/anh-gai-xinh-lo-num-vu.jpg", 1, 2, 1));
         adapter = new ProductAdapter(this, list, this);
         binding.rcvAllProductByCategory.setAdapter(adapter);
         ShowListAllProductByCategory();
+        initController();
+    }
+
+    private void initController() {
+        binding.btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void ShowListAllProductByCategory() {

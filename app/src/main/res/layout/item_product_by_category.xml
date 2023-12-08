@@ -25,7 +25,7 @@
             android:layout_weight="1"
             android:gravity="end"
             android:text="Xem tất cả"
-            android:textColor="@color/color_chudao"
+            android:textColor="@drawable/custom_text_primary_press"
             android:textSize="@dimen/font_size_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

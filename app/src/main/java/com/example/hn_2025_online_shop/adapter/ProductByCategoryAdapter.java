@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.ItemProductByCategoryBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
-//import com.example.hn_2025_online_shop.view.fragment.ShowAllProductByCategoryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,12 +67,8 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
                 Intent intent = new Intent(context, ShowAllProductByCategoryActivity.class);
                 intent.putExtra("categoryId", productByCategory);
                 context.startActivity(intent);
-
             }
         });
-
-
-
     }
 
     private void setDataRcvProduct(List<Product> productList, ItemProductByCategoryBinding binding) {
@@ -114,4 +111,3 @@ public class ProductByCategoryAdapter extends RecyclerView.Adapter<ProductByCate
         notifyDataSetChanged();
     }
 }
-

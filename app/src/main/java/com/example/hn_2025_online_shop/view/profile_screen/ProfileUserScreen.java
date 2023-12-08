@@ -1,5 +1,9 @@
 package com.example.hn_2025_online_shop.view.profile_screen;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +27,14 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LayoutProfileUserBinding;
+import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.buy_product.AddAddressActivity;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import org.json.JSONException;
@@ -56,15 +63,18 @@ public class ProfileUserScreen extends AppCompatActivity {
         setContentView(binding.getRoot());
         initData();
         initController();
-
     }
+
+
 
     private void initController() {
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(ProfileUserScreen.this, MainActivity.class);
+                setResult(RESULT_OK, intent);
                 finish();
-                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);;
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
             }
         });
 
@@ -293,7 +303,9 @@ public class ProfileUserScreen extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(ProfileUserScreen.this, MainActivity.class);
+        setResult(RESULT_OK, intent);
+        finish();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }
