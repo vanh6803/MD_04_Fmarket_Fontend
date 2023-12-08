@@ -185,7 +185,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Highrest Revenue"
+            android:text="Top 5 doanh thu cao nhất"
             android:textColor="#E3013565"
             android:textSize="23dp"
             android:layout_marginTop="10dp"
