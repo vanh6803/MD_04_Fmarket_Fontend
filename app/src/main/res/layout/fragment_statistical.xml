@@ -24,7 +24,8 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -183,7 +184,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Highrest Revenue"
+            android:text="Top 5 doanh thu cao nhất"
             android:textColor="#E3013565"
             android:textSize="23dp"
             android:layout_marginTop="10dp"
