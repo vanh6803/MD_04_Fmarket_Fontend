@@ -292,7 +292,7 @@ public interface BaseApi {
                                            @Part MultipartBody.Part image);
 
 
-    @GET("comment/get-comments-by-product/{productId}")
+    @GET("review/{productId}")
     Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
                                              @Path("productId") String productId);
 
