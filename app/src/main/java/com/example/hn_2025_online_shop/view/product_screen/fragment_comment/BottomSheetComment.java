@@ -2,42 +2,27 @@ package com.example.hn_2025_online_shop.view.product_screen.fragment_comment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.os.Binder;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.CommentAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.BottomSheetCommentBinding;
 import com.example.hn_2025_online_shop.model.Comment;
-import com.example.hn_2025_online_shop.model.CommentAccount;
-import com.example.hn_2025_online_shop.model.Message;
 import com.example.hn_2025_online_shop.model.ProductDetail;
 import com.example.hn_2025_online_shop.model.User;
 import com.example.hn_2025_online_shop.model.response.ListCommentResponse;
-import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.login.Register;
-import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,7 +44,7 @@ import retrofit2.Response;
 public class BottomSheetComment extends BottomSheetDialogFragment {
     private BottomSheetCommentBinding binding;
     private ProductDetail productDetail;
-    private List<CommentAccount> commentList;
+    private List<Comment> commentList;
     private CommentAdapter commentAdapter;
     SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 
@@ -104,7 +89,7 @@ public class BottomSheetComment extends BottomSheetDialogFragment {
 
     private void initSocket() {
         mSocket.connect();
-        mSocket.on("new_comment", onNewComment);
+        mSocket.on("new_cmt", onNewComment);
         binding.btnSend.setOnClickListener(v -> {
             attemptSend();
         });
@@ -122,13 +107,16 @@ public class BottomSheetComment extends BottomSheetDialogFragment {
                     try {
                         JSONObject data = (JSONObject) args[0];
                         String content = data.getString("content");
+                        int rate = data.getInt("rate");
                         Log.d(TAG.toString, "run: " + content);
+                        String userId = AccountUltil.USER.getId();
                         String username = AccountUltil.USER.getUsername();
                         String avatar = AccountUltil.USER.getAvatar();
                         String datetime = sdf.format(new Date());
-                        Comment comment = new Comment(content, datetime);
+
                         User user = new User(avatar, username);
-                        commentList.add(new CommentAccount(comment, user));
+                        Comment comment = new Comment(userId, content, rate, datetime);
+                        commentList.add(comment);
                         commentAdapter.setCommentList(commentList);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
@@ -144,10 +132,11 @@ public class BottomSheetComment extends BottomSheetDialogFragment {
 
         JSONObject data = new JSONObject();
         try {
-            data.put("account_id", AccountUltil.USER.getId());
+            data.put("user_id", AccountUltil.USER.getId());
             data.put("product_id", productDetail.getId());
             data.put("content", comment);
             data.put("image", "link image");
+            data.put("rate", 5);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
@@ -157,7 +146,7 @@ public class BottomSheetComment extends BottomSheetDialogFragment {
         }
 
         binding.edComment.setText("");
-        mSocket.emit("new_comment", data);
+        mSocket.emit("new_cmt", data);
     }
 
     private void getListComment() {
@@ -169,7 +158,7 @@ public class BottomSheetComment extends BottomSheetDialogFragment {
                     ListCommentResponse listCommentResponse = response.body();
                     Log.d(TAG.toString, "onResponse-getListComment: " + listCommentResponse.toString());
                     if(listCommentResponse.getCode() == 200) {
-                        commentList = listCommentResponse.getResult();
+                        commentList = listCommentResponse.getData();
                         commentAdapter.setCommentList(commentList);
                     }
                 } else { // nhận các đầu status #200

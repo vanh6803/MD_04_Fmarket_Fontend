@@ -89,6 +89,7 @@
             android:exported="true" />
         <activity
             android:name=".view.product_screen.DetailProduct"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true" />
         <activity
             android:name=".view.login.RegisterMemberSeller"

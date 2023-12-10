@@ -42,7 +42,6 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
     private List<OptionProductBestSeller> list;
     private ProductBestSellerAdapter adapter;
     private FragmentPageOutstandingBinding binding;
-    private ProgressLoadingDialog dialog;
 
     public FragmentPageOutstanding() {
     }
@@ -67,7 +66,6 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dialog = new ProgressLoadingDialog(getContext());
         list = new ArrayList<>();
         adapter = new ProductBestSellerAdapter(getContext(), list, this);
         binding.recyProBestSeller.setAdapter(adapter);
@@ -75,7 +73,7 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
     }
 
     private void callApiShowListProductBestSeller() {
-        dialog.show();
+        binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getTopProductBestSeller().enqueue(new Callback<ProductBestSellerResponse>() {
             @Override
             public void onResponse(Call<ProductBestSellerResponse> call, Response<ProductBestSellerResponse> response) {
@@ -99,12 +97,12 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductBestSellerResponse> call, Throwable t) {
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }
