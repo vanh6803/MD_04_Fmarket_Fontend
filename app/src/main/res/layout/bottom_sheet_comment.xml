@@ -39,12 +39,12 @@
                         tools:itemCount="1"
                         />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="15dp"
-                        android:gravity="center"
-                        android:text="View more commets" />
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginVertical="15dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:text="View more commets" />-->
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>
 

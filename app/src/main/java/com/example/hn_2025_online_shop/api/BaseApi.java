@@ -50,6 +50,7 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
+    // 192.168.10.119
 //    192.168.100.4
     //192.168.42.103
     String LOCALHOT = "192.168.10.119"; // đc cho socket
@@ -121,7 +122,8 @@ public interface BaseApi {
                                                     @Part("name") RequestBody name,
                                                     @Part("address") RequestBody address);
     @GET("products/all-product-by-store/{storeId}")
-    Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId);
+    Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId,
+                                              @Query("page") int page);
 
     @Multipart
     @PUT("user/upload-avatar/{idUser}")
@@ -298,6 +300,15 @@ public interface BaseApi {
     @GET("review/{productId}")
     Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
                                              @Path("productId") String productId);
+
+    @FormUrlEncoded
+    @POST("review/create-review/{productId}")
+    Call<ServerResponse> createComment(@Header("Authorization") String authorization,
+                                       @Path("productId") String productId,
+                                       @Field("product_id") String product_id,
+                                       @Field("user_id") String user_id,
+                                       @Field("content") String content,
+                                       @Field("rate") int rate);
 
     @Multipart
     @PUT("store/edit-avatar")
