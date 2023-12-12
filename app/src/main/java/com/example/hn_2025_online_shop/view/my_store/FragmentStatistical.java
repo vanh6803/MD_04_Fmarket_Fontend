@@ -1,5 +1,7 @@
 package com.example.hn_2025_online_shop.view.my_store;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -97,11 +99,15 @@ public class FragmentStatistical extends Fragment  {
     }
 
     private void revenueByMonth() {
+        SharedPreferences sharedPreferences = getContext()
+                .getSharedPreferences("storeId", Context.MODE_PRIVATE);
+        String storeId = sharedPreferences.getString("storeId",null);
+
         binding.spinerMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.show();
-                BaseApi.API.revenueByMonth(StoreUltil.store.getId(),i +1).enqueue(new Callback<RevenueByMonthResponse>() {
+                BaseApi.API.revenueByMonth(storeId,i +1).enqueue(new Callback<RevenueByMonthResponse>() {
                     @Override
                     public void onResponse(Call<RevenueByMonthResponse> call, Response<RevenueByMonthResponse> response) {
                         if(response.isSuccessful()){

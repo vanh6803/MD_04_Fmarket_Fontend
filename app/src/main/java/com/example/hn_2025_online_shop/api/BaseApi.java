@@ -327,6 +327,6 @@ public interface BaseApi {
     Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
                                           @Path("accountId") String accountId);
     @GET("statistical/get-revenue-by-month")
-    Call<RevenueByMonthResponse> revenueByMonth(@Path("store_id") String store_id,
-                                                @Path("month") int month);
+    Call<RevenueByMonthResponse> revenueByMonth(@Query("store_id") String store_id,
+                                                @Query("month") int month);
 }
