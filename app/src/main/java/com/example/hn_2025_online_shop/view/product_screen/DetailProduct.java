@@ -45,7 +45,6 @@ import com.example.hn_2025_online_shop.view.buy_product.PayActivity;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
 import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.example.hn_2025_online_shop.view.infor_shop.InforShop;
-import com.example.hn_2025_online_shop.view.product_screen.fragment_comment.BottomSheetComment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONException;
@@ -320,8 +319,11 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         });
 
         binding.btnDetailComment.setOnClickListener(view -> {
-            BottomSheetComment sheetDialog = BottomSheetComment.newInstance(productDetail);
-            sheetDialog.show(getSupportFragmentManager(), sheetDialog.getTag());
+            Intent intent = new Intent(this, CommentActivity.class);
+            intent.putExtra("id_product", productDetail.getId());
+            intent.putExtra("name", productDetail.getName());
+            startActivity(intent);
+            overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
         });
 
         binding.btnShowDetailProduct.setOnClickListener(new View.OnClickListener() {

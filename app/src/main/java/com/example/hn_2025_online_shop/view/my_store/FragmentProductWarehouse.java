@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.example.hn_2025_online_shop.databinding.FragmentProductWarehouseBindi
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.ProductPaginationScrollListener;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -42,10 +44,14 @@ import retrofit2.Response;
 
 
 public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
-    private List<Product> list;
+    private List<Product> productList;
     private ProductAdapter adapter;
     private FragmentProductWarehouseBinding binding;
     private ProgressLoadingDialog dialog;
+    private int currentPage = 1;
+    private boolean isLoading;
+    private boolean isLastPage;
+    private GridLayoutManager gridLayoutManager;
     public FragmentProductWarehouse() {
 
     }
@@ -70,6 +76,20 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         // Inflate the layout for this fragment
         binding = FragmentProductWarehouseBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
+
+        return view;
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView();
+        initController();
+    }
+
+
+    private void initController() {
         binding.imgCreateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,38 +101,65 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
 
             }
         });
-        return view;
 
+        binding.recycleView.addOnScrollListener(new ProductPaginationScrollListener(gridLayoutManager) {
+            @Override
+            public void loadMoreItems() {
+                isLoading = true;
+                currentPage++;
+                loadNextPage(currentPage);
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+        });
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    private void initView() {
         dialog = new ProgressLoadingDialog(getContext());
-        list = new ArrayList<>();
-        adapter = new ProductAdapter(getContext(), list, this);
+        productList = new ArrayList<>();
+        gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        binding.recycleView.setLayoutManager(gridLayoutManager);
+        adapter = new ProductAdapter(getContext(), productList, this);
         binding.recycleView.setAdapter(adapter);
-        callApiShowLishProductMyStore();
-
+        callApiShowLishProductMyStore(currentPage);
     }
 
-    private void callApiShowLishProductMyStore() {
+    private void loadNextPage(int currentPage) {
+        callApiShowLishProductMyStore(currentPage);
+    }
+
+
+    private void callApiShowLishProductMyStore(int currentP) {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("storeId", Context.MODE_PRIVATE);
         String  storeId = sharedPreferences.getString("storeId", "storeId" );
         Log.d("storeId", "callApiShowLishProductMyStore: " + storeId);
         dialog.show();
         Log.d(TAG.toString, "callApiShowLishProductMyStore: "+ StoreUltil.store);
-        BaseApi.API.getDataProductStore(storeId).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getDataProductStore(storeId, currentP).enqueue(new Callback<ProductResponse>() {
 
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){
                     ProductResponse response1 = response.body();
                     if (response1.getCode() == 200){
-                        adapter.setProductList(response1.getResult());
+                        List<Product> listProductReponse = response1.getResult();
+                        productList.addAll(listProductReponse);
+                        adapter.setProductList(productList);
                         binding.recycleView.setAdapter(adapter);
-                        Log.d("cccc", "onResponse: " + response1.getResult());
-                        Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
+                        isLoading = false;
+                        // Kiểm tra nếu hết dữ liệu mà nhỏ hơn 10 thì tức là hết trang
+                        // mỗi page có 10 data
+                        if (listProductReponse.size() < 10) {
+                            isLastPage = true;
+                        }
                     }
                 } else {
                     try {
@@ -158,6 +205,5 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
     @Override
     public void onResume() {
         super.onResume();
-        callApiShowLishProductMyStore();
     }
 }
