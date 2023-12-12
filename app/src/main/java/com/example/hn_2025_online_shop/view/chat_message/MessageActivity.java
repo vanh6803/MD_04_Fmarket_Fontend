@@ -139,6 +139,7 @@ public class MessageActivity extends AppCompatActivity {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String userId = AccountUltil.USER.getId();
         binding.progressBar.setVisibility(View.VISIBLE);
+
         BaseApi.API.getListMessage(token, userId, userReceiver.getId()).enqueue(new Callback<ListMessageResponse>() {
             @Override
             public void onResponse(Call<ListMessageResponse> call, Response<ListMessageResponse> response) {

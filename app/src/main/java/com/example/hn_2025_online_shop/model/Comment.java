@@ -8,9 +8,9 @@ public class Comment {
     @SerializedName("_id")
     private String id;
     @SerializedName("product_id")
-    private String productId;
+    private Product product;
     @SerializedName("user_id")
-    private String userId;
+    private User user;
     private String content;
     private List<String> image;
     private int rate;
@@ -20,8 +20,8 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String userId, String content, int rate, String updatedAt) {
-        this.userId = userId;
+    public Comment(User user, String content, int rate, String updatedAt) {
+        this.user = user;
         this.content = content;
         this.rate = rate;
         this.updatedAt = updatedAt;
@@ -35,20 +35,13 @@ public class Comment {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
+
+    public Comment(Product product) {
+        this.product = product;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public Comment(User user) {
+        this.user = user;
     }
 
     public String getContent() {
@@ -89,5 +82,13 @@ public class Comment {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

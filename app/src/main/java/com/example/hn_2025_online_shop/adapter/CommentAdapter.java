@@ -51,12 +51,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             return;
         }
         holder.binding.tvComment.setText(comment.getContent());
-        holder.binding.tvUsername.setText(comment.getUserId());
-//        Glide.with(context)
-//                .load(comment.getAccount().getAvatar())
-//                .placeholder(R.drawable.loading)
-//                .error(R.drawable.avatar1)
-//                .into(holder.binding.imgAvatar);
+        holder.binding.tvUsername.setText(comment.getUser().getUsername());
+        Glide.with(context)
+                .load(comment.getUser().getAvatar())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.avatar1)
+                .into(holder.binding.imgAvatar);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
         Date date;
