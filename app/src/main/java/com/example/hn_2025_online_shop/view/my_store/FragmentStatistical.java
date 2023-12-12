@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -19,8 +21,15 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentStatisticalBinding;
 import com.example.hn_2025_online_shop.model.ProductRevenue;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.model.response.RevenueByMonthResponse;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.ultil.StoreUltil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +43,7 @@ public class FragmentStatistical extends Fragment  {
     private List<String> monthList = new ArrayList<>();
     private List<ProductRevenue> list;
     private ProductRevenueAdapter adapter;
+    private ProgressLoadingDialog dialog;
 
     // TODO: Rename parameter arguments, choose names that match
 
@@ -79,9 +89,56 @@ public class FragmentStatistical extends Fragment  {
         adapter = new ProductRevenueAdapter(getContext(), list);
         binding.rcvProductRevenue.setAdapter(adapter);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.layout_item_spinner, monthList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinerMonth.setAdapter(adapter);
+        ArrayAdapter<String> adapterMonth = new ArrayAdapter<>(getContext(), R.layout.support_simple_spinner_dropdown_item, monthList);
+        adapterMonth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinerMonth.setAdapter(adapterMonth);
+        dialog = new ProgressLoadingDialog(getContext());
+        revenueByMonth();
+    }
+
+    private void revenueByMonth() {
+        binding.spinerMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                dialog.show();
+                BaseApi.API.revenueByMonth(StoreUltil.store.getId(),i +1).enqueue(new Callback<RevenueByMonthResponse>() {
+                    @Override
+                    public void onResponse(Call<RevenueByMonthResponse> call, Response<RevenueByMonthResponse> response) {
+                        if(response.isSuccessful()){
+                            RevenueByMonthResponse response1 = response.body();
+                            if (response1.getCode() == 200){
+                                binding.tvRevenue.setText(""+response1.getData());
+                                Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            try {
+                                String errorBody = response.errorBody().string();
+                                // Parse and display the error message
+                                JSONObject errorJson = new JSONObject(errorBody);
+                                String errorMessage = errorJson.getString("message");
+                                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                            }catch (IOException e){
+                                e.printStackTrace();
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<RevenueByMonthResponse> call, Throwable t) {
+                        Toast.makeText(getContext(), "Không Call đươc API", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
 //    public void doanhThuAll(){

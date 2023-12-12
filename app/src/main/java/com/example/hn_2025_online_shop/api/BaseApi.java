@@ -16,6 +16,7 @@ import com.example.hn_2025_online_shop.model.response.ListNotifiReponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
+import com.example.hn_2025_online_shop.model.response.RevenueByMonthResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -50,7 +51,8 @@ public interface BaseApi {
     // 172.20.10.3
     // 192.168.0.106
 //    192.168.100.4
-    String LOCALHOT = "192.168.1.28"; // đc cho socket
+    //192.168.42.103
+    String LOCALHOT = "192.168.42.103"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -324,4 +326,7 @@ public interface BaseApi {
     @GET("notifi/get-notifi-list/{accountId}")
     Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
                                           @Path("accountId") String accountId);
+    @GET("statistical/get-revenue-by-month")
+    Call<RevenueByMonthResponse> revenueByMonth(@Path("store_id") String store_id,
+                                                @Path("month") int month);
 }

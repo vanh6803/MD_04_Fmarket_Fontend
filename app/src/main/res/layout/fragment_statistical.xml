@@ -50,13 +50,13 @@
             android:text="Tổng doanh thu"
             android:textColor="#E3013565"
             android:textSize="21dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintBottom_toTopOf="@+id/tvRevenue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tvRevenue"
             android:layout_width="200dp"
             android:layout_height="100dp"
             android:background="@drawable/custom_tvv"
@@ -105,7 +105,7 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/tvRevenue"
             tools:ignore="MissingConstraints">
 
             <TextView
