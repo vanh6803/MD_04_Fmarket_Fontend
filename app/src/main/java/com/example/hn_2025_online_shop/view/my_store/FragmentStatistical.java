@@ -9,18 +9,29 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductRevenueAdapter;
+import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentStatisticalBinding;
 import com.example.hn_2025_online_shop.model.ProductRevenue;
+import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class FragmentStatistical extends Fragment {
+
+public class FragmentStatistical extends Fragment  {
     private FragmentStatisticalBinding binding;
+    private List<String> monthList = new ArrayList<>();
     private List<ProductRevenue> list;
     private ProductRevenueAdapter adapter;
 
@@ -41,7 +52,9 @@ public class FragmentStatistical extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        for(int i=1;i<=12;i++){
+            monthList.add("Tháng "+ i);
+        }
     }
 
     @Override
@@ -65,5 +78,29 @@ public class FragmentStatistical extends Fragment {
         list.add(new ProductRevenue("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNztYv9VFuWG3Ze_w70YuRtfr0NFBl4gceGA&usqp=CAU", "Macbook Air 15-inch", 400000));
         adapter = new ProductRevenueAdapter(getContext(), list);
         binding.rcvProductRevenue.setAdapter(adapter);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(), R.layout.layout_item_spinner, monthList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.spinerMonth.setAdapter(adapter);
     }
+
+//    public void doanhThuAll(){
+//        BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
+//            @Override
+//            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+//                if(response.isSuccessful()){
+//                    ProductResponse productResponse = response.body();
+//                    productAdapter.setProductList(productResponse.getResult());
+//                    binding.recyStore.setAdapter(productAdapter);
+//                }else {
+//                    Toast.makeText(getActivity(), "Call API  Products Error", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ProductResponse> call, Throwable t) {
+//                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
 }
