@@ -16,6 +16,7 @@ import com.example.hn_2025_online_shop.model.response.ListNotifiReponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
+import com.example.hn_2025_online_shop.model.response.RevenueByMonthResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -51,6 +52,7 @@ public interface BaseApi {
     // 192.168.0.106
     // 192.168.10.119
 //    192.168.100.4
+    //192.168.42.103
     String LOCALHOT = "192.168.10.119"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
@@ -335,4 +337,7 @@ public interface BaseApi {
     @GET("notifi/get-notifi-list/{accountId}")
     Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
                                           @Path("accountId") String accountId);
+    @GET("statistical/get-revenue-by-month")
+    Call<RevenueByMonthResponse> revenueByMonth(@Query("store_id") String store_id,
+                                                @Query("month") int month);
 }
