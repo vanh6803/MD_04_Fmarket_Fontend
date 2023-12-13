@@ -63,7 +63,11 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
                 .error(R.drawable.error)
                 .into(holder.binding.imgProduct);
         holder.binding.ratingBar.setRating((float) product.getAverageRate());
-        holder.binding.tvReview.setText("Đã bán " + product.getReview());
+        try {
+            holder.binding.tvReview.setText("Đã bán " + product.getSoldQuantity());
+        } catch (Exception exception) {
+            holder.binding.tvReview.setText("Đã bán " + 0);
+        }
 
         holder.binding.item.setOnClickListener(new View.OnClickListener() {
             @Override

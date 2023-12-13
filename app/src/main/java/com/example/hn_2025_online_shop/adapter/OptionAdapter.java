@@ -10,20 +10,32 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamOptionProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.OptionUtil;
 
 import java.util.List;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionViewHolder>{
     private final Context context;
     private List<OptionProduct> list;
-    private final ObjectUtil objectUtil;
+    private OptionUtil optionUtil;
+    private ObjectUtil objectUtil;
 
 
-    public OptionAdapter(Context context, List<OptionProduct> list, ObjectUtil objectUtil) {
+    public OptionAdapter(Context context, List<OptionProduct> list) {
         this.context = context;
         this.list = list;
-        this.objectUtil = objectUtil;
     }
+
+    public void setOptionUtil(OptionUtil optionUtil) {
+        this.optionUtil = optionUtil;
+        notifyDataSetChanged();
+    }
+
+    public void setObjectUtil(ObjectUtil objectUtil) {
+        this.objectUtil = objectUtil;
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     public void setDataListOptionProduct(List<OptionProduct> list){
         this.list=list;
@@ -39,26 +51,32 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
 
     @Override
     public void onBindViewHolder(@NonNull OptionViewHolder holder, int position) {
-          OptionProduct optionProduct = list.get(position);
-          holder.binding.tvColorOption.setText(optionProduct.getNameColor());
-          holder.binding.tvHetHang1.setVisibility(View.GONE);
-          holder.binding.tvHetHang2.setVisibility(View.GONE);
-          Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
-          holder.itemView.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  if(optionProduct.getQuantity() != 0){
-                      objectUtil.onclickObject(optionProduct);
-                  }else {
-                      holder.binding.tvHetHang1.setVisibility(View.VISIBLE);
-                      holder.binding.tvHetHang2.setVisibility(View.VISIBLE);
-                  }
+        OptionProduct optionProduct = list.get(position);
+        holder.binding.tvColorOption.setText(optionProduct.getNameColor());
+//        holder.binding.tvHetHang1.setVisibility(View.GONE);
+//        holder.binding.tvHetHang2.setVisibility(View.GONE);
+        Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
 
-              }
-          });
+        if(objectUtil != null) {
+            holder.binding.btnDelete.setVisibility(View.GONE);
+        }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(optionUtil != null) {
+                    optionUtil.onclickOption(optionProduct);
+                }
 
+                if(objectUtil != null) {
+                    objectUtil.onclickObject(optionProduct);
+                }
+            }
+        });
 
+        holder.binding.btnDelete.setOnClickListener(view -> {
+            optionUtil.deleteOption(optionProduct);
+        });
     }
 
     @Override
@@ -74,7 +92,6 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
         public OptionViewHolder(LayoutIteamOptionProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-
         }
     }
 }

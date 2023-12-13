@@ -5,8 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,14 +27,14 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.ActivityUpdateProductBinding;
 import com.example.hn_2025_online_shop.databinding.DialogCreateOptionProductBinding;
 import com.example.hn_2025_online_shop.databinding.DialogUpdateOptionProductBinding;
+import com.example.hn_2025_online_shop.databinding.LayoutDialogDeleteOptionBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.model.ProductDetail;
 import com.example.hn_2025_online_shop.model.ProductType;
 import com.example.hn_2025_online_shop.model.response.DetailProductResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
-import com.example.hn_2025_online_shop.ultil.ObjectUtil;
-import com.example.hn_2025_online_shop.ultil.OptionUltil;
+import com.example.hn_2025_online_shop.ultil.OptionUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.github.dhaval2404.imagepicker.ImagePicker;
@@ -52,7 +55,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateProductActivity extends AppCompatActivity implements ObjectUtil {
+public class UpdateProductActivity extends AppCompatActivity implements OptionUtil {
     private ActivityUpdateProductBinding binding;
     private ProgressLoadingDialog dialog;
     public static String optionId;
@@ -184,6 +187,7 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
                         Log.d(TAG.toString, "onResponse-CreateOptionProduct: " + serverResponse.toString());
                         if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                             Toast.makeText(getApplicationContext(), "Create Option Product Successfully", Toast.LENGTH_SHORT).show();
+                            callApiUpdateDetailProduct();
                         }
                     } else { // nhận các đầu status #200
                         try {
@@ -279,12 +283,10 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
         listOption = new ArrayList<>();
-        optionAdapter = new OptionAdapter(this, listOption, this);
+        optionAdapter = new OptionAdapter(this, listOption);
+        optionAdapter.setOptionUtil(this);
         callApiUpdateDetailProduct();
     }
-
-
-
 
 
     private void callApiUpdateDetailProduct() {
@@ -425,16 +427,6 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
         }
 
     }
-
-
-    @Override
-    public void onclickObject(Object object) {
-        OptionProduct optionProduct= (OptionProduct) object;
-        optionId = optionProduct.getId();
-        Log.d("optionId", "onclickObject: " + optionId);
-        showDiaLogUpdateOption(optionProduct);
-    }
-
 
     private void showDiaLogUpdateOption(OptionProduct optionProduct) {
         BottomSheetDialog dialog1 = new BottomSheetDialog(UpdateProductActivity.this);
@@ -621,5 +613,83 @@ public class UpdateProductActivity extends AppCompatActivity implements ObjectUt
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
+    }
+
+    @Override
+    public void onclickOption(OptionProduct optionProduct) {
+        optionId = optionProduct.getId();
+        Log.d("optionId", "onclickObject: " + optionId);
+        showDiaLogUpdateOption(optionProduct);
+    }
+
+    @Override
+    public void deleteOption(OptionProduct optionProduct) {
+        LayoutDialogDeleteOptionBinding bindingDelete = LayoutDialogDeleteOptionBinding.inflate(getLayoutInflater());
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(bindingDelete.getRoot());
+        Window window = dialog.getWindow();
+        assert window != null;
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        Glide.with(this)
+                .load(optionProduct.getImage())
+                .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
+                .into(bindingDelete.imgOptionProduct);
+        bindingDelete.btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        bindingDelete.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteOptionProduct(optionProduct);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+    private void deleteOptionProduct(OptionProduct optionProduct) {
+        Toast.makeText(this, "You don't option", Toast.LENGTH_SHORT).show();
+//        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+//        BaseApi.API.deleteOption(token, optionProduct.getId()).enqueue(new Callback<ServerResponse>() {
+//            @Override
+//            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
+//                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+//                    ServerResponse serverResponse = response.body();
+//                    assert serverResponse != null;
+//                    Log.d(TAG.toString, "onResponse-deleteOption: " + serverResponse.toString());
+//                    if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+//                        Toast.makeText(UpdateProductActivity.this, serverResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                } else { // nhận các đầu status #200
+//                    try {
+//                        assert response.errorBody() != null;
+//                        String errorBody = response.errorBody().string();
+//                        JSONObject errorJson = new JSONObject(errorBody);
+//                        String errorMessage = errorJson.getString("message");
+//                        Log.d(TAG.toString, "onResponse-deleteOption: " + errorMessage);
+//                        Toast.makeText(UpdateProductActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+//                    }catch (IOException e){
+//                        e.printStackTrace();
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//                dialog.dismiss();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ServerResponse> call, Throwable t) {
+//                Toast.makeText(UpdateProductActivity.this, t.toString(), Toast.LENGTH_SHORT).show();
+//                Log.d(TAG.toString, "onFailure-deleteOption: " + t.toString());
+//                dialog.dismiss();
+//            }
+//        });
     }
 }

@@ -2,9 +2,11 @@ package com.example.hn_2025_online_shop.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -76,9 +78,15 @@ public class OrderStoreAdapter extends RecyclerView.Adapter<OrderStoreAdapter.Or
             holder.binding.btnConfirm.setText("Giao hàng");
         }else if(status == 3) {
             holder.binding.btnConfirm.setVisibility(View.GONE);
+//            holder.binding.btnConfirm.setOnClickListener(view -> {
+//                Toast.makeText(context, "Đăng phát triển", Toast.LENGTH_SHORT).show();
+//            });
         } else if(status == 4) {
             holder.binding.btnConfirm.setVisibility(View.GONE);
             holder.binding.tvStatus.setTextColor(Color.GRAY);
+//            holder.binding.btnConfirm.setOnClickListener(view -> {
+//                Toast.makeText(context, "Đăng phát triển", Toast.LENGTH_SHORT).show();
+//            });
         }
 
         holder.binding.btnConfirm.setOnClickListener(new View.OnClickListener() {

@@ -9,6 +9,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -87,7 +89,17 @@ public class FragmentCreateProductMyStore extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCreateProductMyStoreBinding.inflate(getLayoutInflater());
-        return binding.getRoot();
+        View view = binding.getRoot();
+        binding.btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.content_frame, FragmentProductWarehouse.newInstance());
+                transaction.commit();
+            }
+        });
+        return view;
     }
 
     @Override

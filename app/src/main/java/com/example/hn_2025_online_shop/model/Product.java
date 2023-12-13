@@ -13,9 +13,12 @@ public class Product implements Serializable {
    private int minPrice;
    private double averageRate;
    private int review;
+   private int soldQuantity;
 
    public Product() {
    }
+
+
 
    public Product(String id, String name, boolean discounted, String image, int minPrice, double averageRate, int review) {
       this.id = id;
@@ -94,5 +97,13 @@ public class Product implements Serializable {
 
    public void setReview(int review) {
       this.review = review;
+   }
+
+   public int getSoldQuantity() {
+      return soldQuantity;
+   }
+
+   public void setSoldQuantity(int soldQuantity) {
+      this.soldQuantity = soldQuantity;
    }
 }
