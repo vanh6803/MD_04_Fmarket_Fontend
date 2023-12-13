@@ -16,6 +16,7 @@ import com.example.hn_2025_online_shop.model.response.ListNotifiReponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
+import com.example.hn_2025_online_shop.model.response.RevenueByMonthResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -49,8 +50,10 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
+    // 192.168.10.119
 //    192.168.100.4
-    String LOCALHOT = "192.168.1.28"; // đc cho socket
+    //192.168.42.103
+    String LOCALHOT = "192.168.10.119"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -119,7 +122,8 @@ public interface BaseApi {
                                                     @Part("name") RequestBody name,
                                                     @Part("address") RequestBody address);
     @GET("products/all-product-by-store/{storeId}")
-    Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId);
+    Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId,
+                                              @Query("page") int page);
 
     @Multipart
     @PUT("user/upload-avatar/{idUser}")
@@ -297,6 +301,15 @@ public interface BaseApi {
     Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
                                              @Path("productId") String productId);
 
+    @FormUrlEncoded
+    @POST("review/create-review/{productId}")
+    Call<ServerResponse> createComment(@Header("Authorization") String authorization,
+                                       @Path("productId") String productId,
+                                       @Field("product_id") String product_id,
+                                       @Field("user_id") String user_id,
+                                       @Field("content") String content,
+                                       @Field("rate") int rate);
+
     @Multipart
     @PUT("store/edit-avatar")
     Call<ServerResponse> updateAvartarStore(@Header("Authorization") String authorization,
@@ -324,4 +337,7 @@ public interface BaseApi {
     @GET("notifi/get-notifi-list/{accountId}")
     Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
                                           @Path("accountId") String accountId);
+    @GET("statistical/get-revenue-by-month")
+    Call<RevenueByMonthResponse> revenueByMonth(@Query("store_id") String store_id,
+                                                @Query("month") int month);
 }

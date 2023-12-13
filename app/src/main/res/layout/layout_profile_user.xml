@@ -193,34 +193,6 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Số điện thoại"
-                    android:layout_marginTop="35dp"
-                    android:textSize="@dimen/font_size_text_title_medium"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary"
-                    />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:inputType="number"
-                        android:enabled="false"
-                        android:id="@+id/sdt"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:hint="Nhập số điện thoại"
-                        android:padding="20dp"
-                        android:background="@drawable/custom_bg_edt_user"/>
-
-                </LinearLayout>
-
                 <Button
                     android:enabled="false"
                     android:id="@+id/btnSave"

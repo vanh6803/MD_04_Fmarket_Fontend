@@ -95,7 +95,6 @@ public class ProfileUserScreen extends AppCompatActivity {
                 binding.edtUserName.setEnabled(true);
                 binding.edtBirthday.setEnabled(true);
                 binding.linearCalander.setClickable(true);
-                binding.sdt.setEnabled(true);
                 binding.btnSave.setEnabled(true);
             }
         });
@@ -112,12 +111,10 @@ public class ProfileUserScreen extends AppCompatActivity {
             public void onClick(View view) {
                 String username = binding.edtUserName.getText().toString().trim();
                 String birthday = binding.edtBirthday.getText().toString().trim();
-                String phone = binding.sdt.getText().toString().trim();
                 binding.edtUserName.setEnabled(false);
                 binding.edtBirthday.setEnabled(false);
                 binding.linearCalander.setClickable(false);
-                binding.sdt.setEnabled(false);
-                apiEditProfile(username, birthday, phone);
+                apiEditProfile(username, birthday);
             }
         });
     }
@@ -219,11 +216,11 @@ public class ProfileUserScreen extends AppCompatActivity {
         });
     }
 
-    private void apiEditProfile(String username, String birthday, String phone) {
+    private void apiEditProfile(String username, String birthday) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String idUser = AccountUltil.USER.getId();
 
-        if(validateValue(username, birthday, phone)) {
+        if(validateValue(username, birthday)) {
             loadingDialog.show();
             BaseApi.API.editProfile(token, idUser, username, birthday).enqueue(new Callback<ServerResponse>() {
                 @Override
@@ -266,13 +263,8 @@ public class ProfileUserScreen extends AppCompatActivity {
 
     }
 
-    private boolean validateValue(String username, String birthday, String phone) {
+    private boolean validateValue(String username, String birthday) {
         if(TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if(TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -292,7 +284,6 @@ public class ProfileUserScreen extends AppCompatActivity {
         loadingDialog = new ProgressLoadingDialog(this);
         binding.edtUserName.setText(AccountUltil.USER.getUsername());
         binding.edtBirthday.setText(AccountUltil.USER.getBirthday());
-        binding.sdt.setText(AccountUltil.USER.getPhone());
         binding.email.setText(AccountUltil.USER.getEmail());
         Glide.with(this)
                 .load(AccountUltil.USER.getAvatar())
