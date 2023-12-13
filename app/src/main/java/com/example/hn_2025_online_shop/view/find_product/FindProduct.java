@@ -153,7 +153,7 @@ public class FindProduct extends AppCompatActivity implements ObjectUtil {
 
     public void callApiGetListAllProducts(){
 //        loadingDialog.show();
-        BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getListAllProduct(true).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){

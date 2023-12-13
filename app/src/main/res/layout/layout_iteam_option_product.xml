@@ -6,6 +6,7 @@
     android:layout_marginRight="15dp"
     android:layout_marginBottom="10dp"
     android:orientation="horizontal"
+
     >
     <ImageView
         android:layout_marginLeft="10dp"
@@ -23,8 +24,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gold"
-        android:textColor="@drawable/custom_text_red_press"
-        />
+        android:textColor="@drawable/custom_text_red_press"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="15dp"
+             android:layout_marginLeft="20dp"
+            android:id="@+id/tvHetHang1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hết"
+            android:textColor="@color/red"/>
+        <TextView
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/tvHetHang2"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hàng"
+            android:gravity="center"
+            android:textColor="@color/red"/>
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

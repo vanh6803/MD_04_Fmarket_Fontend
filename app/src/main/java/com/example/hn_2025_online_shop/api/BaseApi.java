@@ -49,7 +49,10 @@ public interface BaseApi {
     // 10.0.3.2
     // 172.20.10.3
     // 192.168.0.106
-    String LOCALHOT = "192.168.100.4"; // đc cho socket
+    String LOCALHOT = "10.0.2.2"; // đc cho socket
+//    192.168.100.4
+//    String LOCALHOT = "192.168.1.28"; // đc cho socket
+
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -91,7 +94,7 @@ public interface BaseApi {
 
 
     @GET("products/all-product")
-    Call<ProductResponse> getListAllProduct();
+    Call<ProductResponse> getListAllProduct(@Query("isActive") boolean isActive);
 
 
 
@@ -292,7 +295,7 @@ public interface BaseApi {
                                            @Part MultipartBody.Part image);
 
 
-    @GET("comment/get-comments-by-product/{productId}")
+    @GET("review/{productId}")
     Call<ListCommentResponse> getListComment(@Header("Authorization") String authorization,
                                              @Path("productId") String productId);
 

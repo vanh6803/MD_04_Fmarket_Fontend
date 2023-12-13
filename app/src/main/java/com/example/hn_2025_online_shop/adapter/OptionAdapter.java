@@ -41,14 +41,24 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
     public void onBindViewHolder(@NonNull OptionViewHolder holder, int position) {
           OptionProduct optionProduct = list.get(position);
           holder.binding.tvColorOption.setText(optionProduct.getNameColor());
+          holder.binding.tvHetHang1.setVisibility(View.GONE);
+          holder.binding.tvHetHang2.setVisibility(View.GONE);
           Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
-
           holder.itemView.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                  objectUtil.onclickObject(optionProduct);
+                  if(optionProduct.getQuantity() != 0){
+                      objectUtil.onclickObject(optionProduct);
+                  }else {
+                      holder.binding.tvHetHang1.setVisibility(View.VISIBLE);
+                      holder.binding.tvHetHang2.setVisibility(View.VISIBLE);
+                  }
+
               }
           });
+
+
+
     }
 
     @Override
@@ -64,6 +74,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
         public OptionViewHolder(LayoutIteamOptionProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
         }
     }
 }

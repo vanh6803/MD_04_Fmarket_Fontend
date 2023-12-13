@@ -1,9 +1,7 @@
 package com.example.hn_2025_online_shop.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,29 +10,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutItemCommentBinding;
-import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.Comment;
-import com.example.hn_2025_online_shop.model.CommentAccount;
-import com.example.hn_2025_online_shop.model.Product;
-import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
     private Context context;
-    private List<CommentAccount> commentList;
+    private List<Comment> commentList;
 
-    public CommentAdapter(Context context, List<CommentAccount> commentList) {
+    public CommentAdapter(Context context, List<Comment> commentList) {
         this.commentList = commentList;
         this.context = context;
     }
 
-    public void setCommentList(List<CommentAccount> commentList) {
+    public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
         notifyDataSetChanged();
     }
@@ -55,22 +46,22 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
     @Override
     public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
-        CommentAccount comment = commentList.get(position);
+        Comment comment = commentList.get(position);
         if(comment == null) {
             return;
         }
-        holder.binding.tvComment.setText(comment.getComment().getContent());
-        holder.binding.tvUsername.setText(comment.getAccount().getUsername());
-        Glide.with(context)
-                .load(comment.getAccount().getAvatar())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.avatar1)
-                .into(holder.binding.imgAvatar);
+        holder.binding.tvComment.setText(comment.getContent());
+        holder.binding.tvUsername.setText(comment.getUserId());
+//        Glide.with(context)
+//                .load(comment.getAccount().getAvatar())
+//                .placeholder(R.drawable.loading)
+//                .error(R.drawable.avatar1)
+//                .into(holder.binding.imgAvatar);
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a");
         Date date;
         try {
-             date = inputFormat.parse(comment.getComment().getUpdatedAt());
+             date = inputFormat.parse(comment.getUpdatedAt());
         } catch (Exception e) {
             date = new Date();
         }

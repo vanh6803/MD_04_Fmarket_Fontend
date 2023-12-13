@@ -16,14 +16,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.adapter.CartAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LoginBinding;
-import com.example.hn_2025_online_shop.model.response.DetailUserReponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
-import com.example.hn_2025_online_shop.ultil.JWTUtils;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.ultil.Validator;

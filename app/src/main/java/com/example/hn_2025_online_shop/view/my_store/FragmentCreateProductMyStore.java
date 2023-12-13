@@ -156,71 +156,74 @@ public class FragmentCreateProductMyStore extends Fragment{
         });
     }
 
-    public void createProductMyStore(){
-        String token = AccountUltil.BEARER + AccountUltil.TOKEN;
-        String name = binding.edtNameProduct.getText().toString();
-        String description = binding.edtMota.getText().toString();
-        String tinhTrang = binding.edtTinhTrang.getText().toString();
-        String screen = binding.edtSC.getText().toString();
-        String camera = binding.edtCamera.getText().toString();
-        String chipset = binding.edtChipset.getText().toString();
-        String cpu = binding.edtCpu.getText().toString();
-        String gpu = binding.edtGpu.getText().toString();
 
-        String inputRam = binding.edtRam.getText().toString();
-        String inputRom = binding.edtRom.getText().toString();
+    public void createProductMyStore(String name, String description, String tinhTrang, String screen,
+                                     String camera, String chipset,String cpu, String gpu, int ram, int rom,
+                                     String operatingSystem, String battery,
+                                     int weight,String connection, String specialFeature, String manufacture,
+                                     String other){
+        if(checkValidateCreateProduct(name, description, tinhTrang, screen, camera, chipset, cpu, gpu, ram, rom,
+                operatingSystem, battery, weight,
+                connection, specialFeature, manufacture, other)){
+            String token = AccountUltil.BEARER + AccountUltil.TOKEN;
+            dialog.show();
+            BaseApi.API.createProductMyStore(
+                    token, categoryId, name, description,
+                    tinhTrang, screen, camera,
+                    chipset, cpu, gpu,ram, rom, operatingSystem,
+                    battery,weight, connection, specialFeature, manufacture,
+                    other).enqueue(new Callback<CreateProductResponse>() {
+                @Override
+                public void onResponse(Call<CreateProductResponse> call, Response<CreateProductResponse> response) {
+                    if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                        CreateProductResponse productResponse = response.body();
+                        Log.d(TAG.toString, "onResponse-createProduct: " + productResponse.toString());
+                        if(productResponse.getCode() == 200 || productResponse.getCode() == 201) {
+                            Toast.makeText(getContext(), "Create Product Is Successfully!", Toast.LENGTH_SHORT).show();
+                            productId = productResponse.getResult().getId();
+                            showDiaLogCreateOptionProduct();
+                        }
 
-        int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
-        int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
-
-        String operatingSystem = binding.edtHeDieuHanh.getText().toString();
-        String battery = binding.edtBatrery.getText().toString();
-        String inputWeight = binding.edtWeight.getText().toString();
-        int weight = inputWeight.isEmpty() ? 0: Integer.parseInt(inputWeight);
-        String connection = binding.edtConnection.getText().toString();
-        String specialFeature = binding.edtSpecialFeature.getText().toString();
-        String manufacturer = binding.edtManufacturer.getText().toString();
-        String other = binding.edtOther.getText().toString();
-        dialog.show();
-        BaseApi.API.createProductMyStore(
-                token, categoryId, name, description,
-                tinhTrang, screen, camera,
-                chipset, cpu, gpu,ram, rom, operatingSystem,
-                battery, weight, connection, specialFeature,
-                manufacturer, other).enqueue(new Callback<CreateProductResponse>() {
-            @Override
-            public void onResponse(Call<CreateProductResponse> call, Response<CreateProductResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
-                    CreateProductResponse productResponse = response.body();
-                    Log.d(TAG.toString, "onResponse-createProduct: " + productResponse.toString());
-                    if(productResponse.getCode() == 200 || productResponse.getCode() == 201) {
-                        Toast.makeText(getContext(), "Create Product Is Successfully!", Toast.LENGTH_SHORT).show();
-                        productId = productResponse.getResult().getId();
-                        showDiaLogCreateOptionProduct();
+                    } else { // nhận các đầu status #200
+                        try {
+                            String errorBody = response.errorBody().string();
+                            JSONObject errorJson = new JSONObject(errorBody);
+                            String errorMessage = errorJson.getString("message");
+                            Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
+                            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }catch (IOException e){
+                            e.printStackTrace();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
-
-                } else { // nhận các đầu status #200
-                    try {
-                        String errorBody = response.errorBody().string();
-                        JSONObject errorJson = new JSONObject(errorBody);
-                        String errorMessage = errorJson.getString("message");
-                        Log.d(TAG.toString, "onResponse-createProduct: " + errorMessage);
-                        Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        throw new RuntimeException(e);
-                    }
+                    dialog.dismiss();
                 }
-                dialog.dismiss();
-            }
 
-            @Override
-            public void onFailure(Call<CreateProductResponse> call, Throwable t) {
-                Toast.makeText(getContext(), "Call api Error", Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Call<CreateProductResponse> call, Throwable t) {
+                    Toast.makeText(getContext(), "Call api Error", Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
+        }
+    }
+    private boolean checkValidateCreateProduct(String name, String description, String tinhTrang, String screen,
+                                               String camera, String chipset,String cpu, String gpu, int ram, int rom, String operatingSystem, String battery,
+                                               int weight,String connection, String specialFeature, String manufacture,
+                                               String other){
+        if(TextUtils.isEmpty(name)) {
+            Toast.makeText(getContext(), "Mời nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (TextUtils.isEmpty(tinhTrang)) {
+            Toast.makeText(getContext(), "Mời nhập mới sản phẩm", Toast.LENGTH_SHORT).show();
+            return false;
+
+        }else if (TextUtils.isEmpty(description)) {
+            Toast.makeText(getContext(), "Mời nhập mô tả sản phẩm", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
     private void showDiaLogCreateOptionProduct() {
@@ -326,6 +329,7 @@ public class FragmentCreateProductMyStore extends Fragment{
         }
         return true;
     }
+
 
 
 
@@ -503,16 +507,34 @@ public class FragmentCreateProductMyStore extends Fragment{
 
             @Override
             public void onClick(View view) {
-                createProductMyStore();
-
+                String name = binding.edtNameProduct.getText().toString();
+                String description = binding.edtMota.getText().toString();
+                String tinhTrang = binding.edtTinhTrang.getText().toString();
+                String screen = binding.edtSC.getText().toString();
+                String camera = binding.edtCamera.getText().toString();
+                String chipset = binding.edtChipset.getText().toString();
+                String cpu = binding.edtCpu.getText().toString();
+                String gpu = binding.edtGpu.getText().toString();
+                String inputRam = binding.edtRam.getText().toString();
+                String inputRom = binding.edtRom.getText().toString();
+                int ram = inputRam.isEmpty() ?0 :Integer.parseInt(inputRam)  ;
+                int rom = inputRom.isEmpty() ?0: Integer.parseInt(inputRom);
+                String operatingSystem = binding.edtHeDieuHanh.getText().toString();
+                String battery = binding.edtBatrery.getText().toString();
+                String inputWeight = binding.edtWeight.getText().toString();
+                int weight = inputWeight.isEmpty() ? 0: Integer.parseInt(inputWeight);
+                String connection = binding.edtConnection.getText().toString();
+                String specialFeature = binding.edtSpecialFeature.getText().toString();
+                String manufacturer = binding.edtManufacturer.getText().toString();
+                String other = binding.edtOther.getText().toString();
+                createProductMyStore(name, description, tinhTrang, screen, camera, chipset,cpu,gpu, ram, rom, operatingSystem, battery,
+                        weight, connection, specialFeature, manufacturer, other);
             }
         });
     }
 
     private void initView() {
         dialog = new ProgressLoadingDialog(getContext());
-
-
     }
 
 
