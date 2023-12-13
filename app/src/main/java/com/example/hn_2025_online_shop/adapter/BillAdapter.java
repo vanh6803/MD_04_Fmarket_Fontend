@@ -46,7 +46,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         if(position%2 == 0){
             holder.binding.item.setBackgroundColor(0xffffffff);
         }else {
-            holder.binding.item.setBackgroundColor(0xff0CC0DF);
+            holder.binding.item.setBackgroundColor(0xffE0FFFF);
         }
 
     }
