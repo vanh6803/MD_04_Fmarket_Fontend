@@ -17,7 +17,7 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import java.util.ArrayList;
 
-public class FragmentRevenue extends Fragment {
+public class  FragmentRevenue extends Fragment {
     private FragmentRevenueBinding binding;
 
     public FragmentRevenue() {
