@@ -29,23 +29,27 @@
                   android:layout_width="match_parent"
                   android:layout_height="200dp"/>
           </androidx.cardview.widget.CardView>
-
-          <GridView
-              android:id="@+id/gridStore"
+          <View
               android:layout_width="match_parent"
-              android:layout_height="270dp"
-              android:paddingHorizontal="10dp"
-              android:numColumns="1"
-              android:overScrollMode="always"
-              android:verticalSpacing="10dp">
-          </GridView>
+              android:layout_height="2dp"
+              android:background="@color/gray"/>
+
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/rcvVoucher"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+              app:spanCount="2"
+              tools:listitem="@layout/iteam_voucher"/>
 
           <View
-              android:background="@color/color_edittext"
+              android:layout_marginTop="10dp"
+              android:background="@color/gray"
               android:layout_width="match_parent"
-              android:layout_height="8dp"/>
+              android:layout_height="2dp"/>
 
           <LinearLayout
+              android:layout_marginTop="10dp"
               android:paddingHorizontal="10dp"
               android:orientation="horizontal"
               android:layout_width="match_parent"

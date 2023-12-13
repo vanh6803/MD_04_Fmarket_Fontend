@@ -399,7 +399,7 @@ public class FragmentCreateProductMyStore extends Fragment{
             binding.tvRom.setVisibility(View.GONE);
             binding.edtHeDieuHanh.setVisibility(View.GONE);
             binding.tvHeDieuHanh.setVisibility(View.GONE);
-        } else if (name.equals("Bàn phím cơ")) {
+        } else if (name.equals("Bàn phím")) {
             binding.edtSC.setVisibility(View.GONE);
             binding.tvSc.setVisibility(View.GONE);
             binding.edtCamera.setVisibility(View.GONE);
@@ -497,6 +497,23 @@ public class FragmentCreateProductMyStore extends Fragment{
             binding.tvRam.setVisibility(View.VISIBLE);
             binding.edtRom.setVisibility(View.VISIBLE);
             binding.tvRom.setVisibility(View.VISIBLE);
+            binding.edtHeDieuHanh.setVisibility(View.VISIBLE);
+            binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
+        }else if (name.equals("Màn Hình")){
+            binding.edtSC.setVisibility(View.VISIBLE);
+            binding.tvSc.setVisibility(View.VISIBLE);
+            binding.edtCamera.setVisibility(View.GONE);
+            binding.tvCamera.setVisibility(View.GONE);
+            binding.edtChipset.setVisibility(View.GONE);
+            binding.tvChipset.setVisibility(View.GONE);
+            binding.edtCpu.setVisibility(View.GONE);
+            binding.tvCpu.setVisibility(View.GONE);
+            binding.edtGpu.setVisibility(View.GONE);
+            binding.tvGpu.setVisibility(View.GONE);
+            binding.edtRam.setVisibility(View.GONE);
+            binding.tvRam.setVisibility(View.GONE);
+            binding.edtRom.setVisibility(View.GONE);
+            binding.tvRom.setVisibility(View.GONE);
             binding.edtHeDieuHanh.setVisibility(View.VISIBLE);
             binding.tvHeDieuHanh.setVisibility(View.VISIBLE);
         }
