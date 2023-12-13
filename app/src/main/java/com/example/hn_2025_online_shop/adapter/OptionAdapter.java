@@ -10,20 +10,32 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamOptionProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.OptionUtil;
 
 import java.util.List;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionViewHolder>{
     private final Context context;
     private List<OptionProduct> list;
-    private final ObjectUtil objectUtil;
+    private OptionUtil optionUtil;
+    private ObjectUtil objectUtil;
 
 
-    public OptionAdapter(Context context, List<OptionProduct> list, ObjectUtil objectUtil) {
+    public OptionAdapter(Context context, List<OptionProduct> list) {
         this.context = context;
         this.list = list;
-        this.objectUtil = objectUtil;
     }
+
+    public void setOptionUtil(OptionUtil optionUtil) {
+        this.optionUtil = optionUtil;
+        notifyDataSetChanged();
+    }
+
+    public void setObjectUtil(ObjectUtil objectUtil) {
+        this.objectUtil = objectUtil;
+        notifyDataSetChanged();
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     public void setDataListOptionProduct(List<OptionProduct> list){
         this.list=list;
@@ -43,11 +55,25 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
           holder.binding.tvColorOption.setText(optionProduct.getNameColor());
           Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
 
+        if(objectUtil != null) {
+            holder.binding.btnDelete.setVisibility(View.GONE);
+        }
+
           holder.itemView.setOnClickListener(new View.OnClickListener() {
               @Override
               public void onClick(View view) {
-                  objectUtil.onclickObject(optionProduct);
+                  if(optionUtil != null) {
+                      optionUtil.onclickOption(optionProduct);
+                  }
+
+                  if(objectUtil != null) {
+                      objectUtil.onclickObject(optionProduct);
+                  }
               }
+          });
+
+          holder.binding.btnDelete.setOnClickListener(view -> {
+                optionUtil.deleteOption(optionProduct);
           });
     }
 

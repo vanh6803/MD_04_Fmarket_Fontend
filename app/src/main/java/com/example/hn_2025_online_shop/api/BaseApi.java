@@ -52,8 +52,7 @@ public interface BaseApi {
     // 192.168.0.106
     // 192.168.10.119
 //    192.168.100.4
-    //192.168.42.103
-    String LOCALHOT = "192.168.10.119"; // đc cho socket
+    String LOCALHOT = "172.20.10.3"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -124,6 +123,13 @@ public interface BaseApi {
     @GET("products/all-product-by-store/{storeId}")
     Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId,
                                               @Query("page") int page);
+
+
+
+
+    @DELETE("products/delete-option/{optionId}")
+    Call<ServerResponse> deleteOption(@Header("Authorization") String authorization,
+                                       @Path("optionId") String optionId);
 
     @Multipart
     @PUT("user/upload-avatar/{idUser}")

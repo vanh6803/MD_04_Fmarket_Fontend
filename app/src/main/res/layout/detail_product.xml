@@ -416,16 +416,16 @@
             app:backgroundTint="@null"
             android:textColor="@color/primary"/>
 
-        <Button
-            android:id="@+id/btnBuyDetail"
-            android:layout_marginHorizontal="20dp"
-            android:layout_weight="0.5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mua ngay"
-            android:background="@drawable/custom_btn_yes"
-            app:backgroundTint="@null"
-            android:textColor="@color/white"/>
+<!--        <Button-->
+<!--            android:id="@+id/btnBuyDetail"-->
+<!--            android:layout_marginHorizontal="20dp"-->
+<!--            android:layout_weight="0.5"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Mua ngay"-->
+<!--            android:background="@drawable/custom_btn_yes"-->
+<!--            app:backgroundTint="@null"-->
+<!--            android:textColor="@color/white"/>-->
     </LinearLayout>
 
     <ImageView
