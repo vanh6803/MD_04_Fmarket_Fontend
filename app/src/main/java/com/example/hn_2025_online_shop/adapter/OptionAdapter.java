@@ -51,30 +51,32 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
 
     @Override
     public void onBindViewHolder(@NonNull OptionViewHolder holder, int position) {
-          OptionProduct optionProduct = list.get(position);
-          holder.binding.tvColorOption.setText(optionProduct.getNameColor());
-          Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
+        OptionProduct optionProduct = list.get(position);
+        holder.binding.tvColorOption.setText(optionProduct.getNameColor());
+//        holder.binding.tvHetHang1.setVisibility(View.GONE);
+//        holder.binding.tvHetHang2.setVisibility(View.GONE);
+        Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
 
         if(objectUtil != null) {
             holder.binding.btnDelete.setVisibility(View.GONE);
         }
 
-          holder.itemView.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  if(optionUtil != null) {
-                      optionUtil.onclickOption(optionProduct);
-                  }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(optionUtil != null) {
+                    optionUtil.onclickOption(optionProduct);
+                }
 
-                  if(objectUtil != null) {
-                      objectUtil.onclickObject(optionProduct);
-                  }
-              }
-          });
+                if(objectUtil != null) {
+                    objectUtil.onclickObject(optionProduct);
+                }
+            }
+        });
 
-          holder.binding.btnDelete.setOnClickListener(view -> {
-                optionUtil.deleteOption(optionProduct);
-          });
+        holder.binding.btnDelete.setOnClickListener(view -> {
+            optionUtil.deleteOption(optionProduct);
+        });
     }
 
     @Override

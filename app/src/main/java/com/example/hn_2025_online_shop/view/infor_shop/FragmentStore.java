@@ -91,7 +91,7 @@ public class FragmentStore extends Fragment implements ObjectUtil {
     }
     public void callApiGetListAllProducts(){
         binding.progressBar.setVisibility(View.VISIBLE);
-        BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getListAllProduct(true).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){

@@ -40,7 +40,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         Bill bill = list.get(position);
         holder.binding.stt.setText(String.valueOf(position + 1));
         holder.binding.code.setText(bill.getCode());
-        holder.binding.content.setText(bill.getNameBill());
+        holder.binding.content.setText(bill.getNameBill().substring(0,20)+"...");
         holder.binding.date.setText(bill.getDateTime());
         holder.binding.price.setText(String.valueOf(bill.getPrice()));
         if(position%2 == 0){
