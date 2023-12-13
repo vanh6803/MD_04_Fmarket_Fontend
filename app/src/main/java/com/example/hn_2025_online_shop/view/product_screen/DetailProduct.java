@@ -302,12 +302,12 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             }
         });
 
-        binding.btnBuyDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showBottomSheetDialog(true);
-            }
-        });
+//        binding.btnBuyDetail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showBottomSheetDialog(true);
+//            }
+//        });
 
         binding.imgCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -370,7 +370,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         setDataBottomSheetDialog(isCheck, bindingOption); // Set data cho bottom sheet
         optionProductList = new ArrayList<>();
-        optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList, this);
+        optionAdapter = new OptionAdapter(DetailProduct.this, optionProductList);
+        optionAdapter.setObjectUtil(this);
         optionAdapter.setDataListOptionProduct(productDetail.getOption());
         bindingOption.rcvOptionProduct.setAdapter(optionAdapter);
         dialog1.show();
