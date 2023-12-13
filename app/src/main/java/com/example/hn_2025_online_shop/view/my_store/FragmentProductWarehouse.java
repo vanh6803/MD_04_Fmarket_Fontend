@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
+import com.example.hn_2025_online_shop.databinding.FragmentCreateProductMyStoreBinding;
 import com.example.hn_2025_online_shop.databinding.FragmentProductWarehouseBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
@@ -76,7 +78,6 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         // Inflate the layout for this fragment
         binding = FragmentProductWarehouseBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-
         return view;
 
     }
@@ -96,6 +97,7 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
                 FragmentCreateProductMyStore productMyStore = new FragmentCreateProductMyStore();
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.addToBackStack("FragmentA");
                 transaction.replace(R.id.content_frame, FragmentCreateProductMyStore.newInstance());
                 transaction.commit();
 

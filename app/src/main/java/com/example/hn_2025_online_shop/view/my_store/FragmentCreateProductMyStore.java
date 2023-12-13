@@ -93,10 +93,8 @@ public class FragmentCreateProductMyStore extends Fragment{
         binding.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentManager fragmentManager = getParentFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
-                transaction.replace(R.id.content_frame, FragmentProductWarehouse.newInstance());
-                transaction.commit();
+                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                fragmentManager.popBackStackImmediate("FragmentA",0 );
             }
         });
         return view;

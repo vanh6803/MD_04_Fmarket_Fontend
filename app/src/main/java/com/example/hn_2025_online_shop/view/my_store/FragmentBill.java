@@ -54,7 +54,7 @@ public class FragmentBill extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         list = new ArrayList<>();
         for (int i = 0; i< 10; i++){
-            list.add(new Bill("#06317231","Điện thoại Iphone 15 Promax (2023) , phiên bản giới hạn",123123123 , "1"+ i+ "/12/2023"));
+            list.add(new Bill("#06317231","Điện thoại Iphone 15 Promax (2023)",123123123 , "1"+ i+ "/12/2023"));
         }
         adapter = new BillAdapter(list, getContext());
         binding.recycleView.setAdapter(adapter);
