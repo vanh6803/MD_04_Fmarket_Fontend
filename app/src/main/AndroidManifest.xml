@@ -28,9 +28,9 @@
             android:name=".view.fragment.ShowAllProductByCategoryActivity"
             android:exported="false" />
         <activity android:name=".view.my_store.UpdateProductActivity" />
-        <activity
-            android:name=".view.product_screen.fragment_comment.BottomSheetComment"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".view.product_screen.fragment_comment.BottomSheetComment"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".view.chat_message.MessageActivity"
             android:exported="false" />
@@ -103,6 +103,9 @@
         <activity android:name=".view.my_store.FragmentCreateProductMyStore" />
         <activity
             android:name=".view.infor_shop.InforShop"
+            android:exported="true" />
+        <activity
+            android:name=".view.my_store.Bill.DetailBill"
             android:exported="true" />
         <activity
             android:name=".view.login.Splash"

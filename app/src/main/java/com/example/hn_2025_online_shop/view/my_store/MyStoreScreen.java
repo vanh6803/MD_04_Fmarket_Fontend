@@ -6,7 +6,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutHeaderNavBinding;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.view.my_store.Bill.FragmentBill;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
