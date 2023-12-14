@@ -137,17 +137,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
         app:layout_constraintVertical_bias="0.0">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top 5 doanh thu cao nhất"
-            android:textColor="#E3013565"
-            android:textSize="23dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="35dp"/>
+            android:text="Danh sách số lượng đã bán"
+            android:textColor="#E3013565"
+            android:layout_gravity="center"
+            android:textSize="23dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:maxLines="2"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ảnh"/>
+            <TextView
+                android:maxLines="2"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_marginLeft="12dp"
+                android:layout_gravity="center"
+                android:layout_width="220dp"
+                android:layout_height="80dp"
+                android:text="Tên sản phẩm"/>
+            <TextView
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Số lượng"
+                />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvProductRevenue"
-            android:layout_marginTop="10dp"
             tools:listitem="@layout/layout_iteam_thongke"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
