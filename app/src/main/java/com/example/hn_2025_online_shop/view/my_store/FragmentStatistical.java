@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,13 +44,13 @@ public class FragmentStatistical extends Fragment  {
     private List<ProductWithSoldQuantity> list;
     private ProductRevenueAdapter adapter;
     private ProgressLoadingDialog dialog;
+    private DecimalFormat format;
 
     // TODO: Rename parameter arguments, choose names that match
 
     public FragmentStatistical() {
         // Required empty public constructor
     }
-
 
     // TODO: Rename and change types and number of parameters
     public static FragmentStatistical newInstance() {
@@ -77,6 +78,7 @@ public class FragmentStatistical extends Fragment  {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        format = new DecimalFormat("###,###,###,### VNĐ");
         list = new ArrayList<>();
         adapter = new ProductRevenueAdapter(getContext(), list);
         binding.rcvProductRevenue.setAdapter(adapter);
@@ -129,7 +131,7 @@ public class FragmentStatistical extends Fragment  {
                         if(response.isSuccessful()){
                             RevenueByMonthResponse response1 = response.body();
                             if (response1.getCode() == 200){
-                                binding.tvRevenue.setText(""+response1.getData());
+                                binding.tvRevenue.setText(format.format(response1.getData()));
                                 Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
