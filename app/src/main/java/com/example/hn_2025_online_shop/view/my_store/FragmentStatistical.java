@@ -99,8 +99,7 @@ public class FragmentStatistical extends Fragment  {
     }
 
     private void revenueByMonth() {
-        SharedPreferences sharedPreferences = getContext()
-                .getSharedPreferences("storeId", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("storeId", Context.MODE_PRIVATE);
         String storeId = sharedPreferences.getString("storeId",null);
 
         binding.spinerMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

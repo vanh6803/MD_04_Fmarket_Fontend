@@ -222,22 +222,127 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             binding.btnShowDetailProduct.setText("Xem thêm");
             isShowDetail = false;
         } else {
-            strDetailProduct = "";
-            strDetailProduct += productDetail.getDescription() + "\n" + "\n";
-            strDetailProduct += "Screen: "+productDetail.getScreen() + "\n" + "\n";
-            strDetailProduct += "Camera: " + productDetail.getCamera() + "\n" + "\n";
-            strDetailProduct += "Chipset: " + productDetail.getChipset() + "\n" + "\n";
-            strDetailProduct += "Cpu: "+productDetail.getCpu() + "\n" + "\n";
-            strDetailProduct += "Gpu: "+productDetail.getGpu() + "\n" + "\n";
-            strDetailProduct += "Ram: "+productDetail.getRam() +"GB" + "\n" + "\n";
-            strDetailProduct += "Rom: "+productDetail.getRom()+"GB" + "\n" + "\n";
-            strDetailProduct += "OperatingSystem: "+productDetail.getOperatingSystem()+ "\n" + "\n";
-            strDetailProduct += "Battery: " + productDetail.getBattery() + "\n" + "\n";
-            strDetailProduct += "Weight: " + productDetail.getWeight() + "\n" + "\n";
-            strDetailProduct += "Connection: "+productDetail.getConnection() + "\n" + "\n";
-            strDetailProduct += "SpecialFeature: "+ productDetail.getSpecialFeature() + "\n" + "\n";
-            strDetailProduct += "Manufacturer: "+productDetail.getManufacturer() + "\n" + "\n";
-            strDetailProduct += "Other: "+productDetail.getOther() + "\n" + "\n";
+//            strDetailProduct = "";
+//            strDetailProduct += productDetail.getDescription() + "\n" + "\n";
+//            strDetailProduct += "Screen: "+productDetail.getScreen() + "\n" + "\n";
+//            strDetailProduct += "Camera: " + productDetail.getCamera() + "\n" + "\n";
+//            strDetailProduct += "Chipset: " + productDetail.getChipset() + "\n" + "\n";
+//            strDetailProduct += "Cpu: "+productDetail.getCpu() + "\n" + "\n";
+//            strDetailProduct += "Gpu: "+productDetail.getGpu() + "\n" + "\n";
+//            strDetailProduct += "Ram: "+productDetail.getRam() +"GB" + "\n" + "\n";
+//            strDetailProduct += "Rom: "+productDetail.getRom()+"GB" + "\n" + "\n";
+//            strDetailProduct += "OperatingSystem: "+productDetail.getOperatingSystem()+ "\n" + "\n";
+//            strDetailProduct += "Battery: " + productDetail.getBattery() + "\n" + "\n";
+//            strDetailProduct += "Weight: " + productDetail.getWeight() + "\n" + "\n";
+//            strDetailProduct += "Connection: "+productDetail.getConnection() + "\n" + "\n";
+//            strDetailProduct += "SpecialFeature: "+ productDetail.getSpecialFeature() + "\n" + "\n";
+//            strDetailProduct += "Manufacturer: "+productDetail.getManufacturer() + "\n" + "\n";
+//            strDetailProduct += "Other: "+productDetail.getOther() + "\n" + "\n";
+            if(productDetail.getDescription() != null){
+                strDetailProduct += productDetail.getDescription() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getScreen() != null){
+                strDetailProduct += "Screen: "+productDetail.getScreen() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+            }
+            if(productDetail.getCamera() != null){
+                strDetailProduct += "Camera: " + productDetail.getCamera() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getChipset() != null){
+                strDetailProduct += "Chipset: " + productDetail.getChipset() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+
+            if(productDetail.getCpu() != null){
+                strDetailProduct += "Cpu: "+productDetail.getCpu() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getGpu() != null){
+                strDetailProduct += "Gpu: "+productDetail.getGpu() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getRam() != 0){
+                strDetailProduct += "Ram: "+productDetail.getRam() +"GB" + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getRom() != 0){
+                strDetailProduct += "Rom: "+productDetail.getRom()+"GB" + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getOperatingSystem() != null){
+                strDetailProduct += "OperatingSystem: "+productDetail.getOperatingSystem()+ "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getBattery() != null){
+                strDetailProduct += "Battery: " + productDetail.getBattery() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getWeight() != 0){
+                strDetailProduct += "Weight: " + productDetail.getWeight() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getConnection() != null){
+                strDetailProduct += "Connection: "+productDetail.getConnection() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getSpecialFeature() != null){
+                strDetailProduct += "SpecialFeature: "+ productDetail.getSpecialFeature() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getManufacturer() != null){
+                strDetailProduct += "Manufacturer: "+productDetail.getManufacturer() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
+            if(productDetail.getOther() != null){
+                strDetailProduct += "Other: "+productDetail.getOther() + "\n" + "\n";
+                isShowDetail = false;
+            }else {
+                strDetailProduct = "";
+                isShowDetail = true;
+            }
             binding.tvProductDetail.setText(strDetailProduct);
             binding.btnShowDetailProduct.setText("Thu gọn");
             isShowDetail = true;

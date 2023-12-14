@@ -343,7 +343,7 @@ public class UpdateProductActivity extends AppCompatActivity implements OptionUt
             if(detailProductResponse.getResult().getStatus()!= null){
                 binding.edtTinhTrang.setText(detailProductResponse.getResult().getStatus());
             }else {
-                binding.edtTinhTrang.setText("No data");
+                binding.edtTinhTrang.setText("mới");
             }
             if(detailProductResponse.getResult().getDescription()!= null){
                 binding.edtMota.setText(detailProductResponse.getResult().getDescription());
@@ -353,27 +353,32 @@ public class UpdateProductActivity extends AppCompatActivity implements OptionUt
             if(detailProductResponse.getResult().getScreen()!= null){
                 binding.edtSc.setText(detailProductResponse.getResult().getScreen());
             }else {
-                binding.edtSc.setText("No data");
+                binding.lnSc.setVisibility(View.GONE);
+                binding.edtSc.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getCamera()!= null){
                 binding.edtCamera.setText(detailProductResponse.getResult().getCamera());
             }else {
-                binding.edtCamera.setText("No data");
+                binding.edtCamera.setVisibility(View.GONE);
+                binding.lnCamera.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getChipset()!= null){
                 binding.edtChipset.setText(detailProductResponse.getResult().getChipset());
             }else {
-                binding.edtChipset.setText("No data");
+                binding.edtChipset.setVisibility(View.GONE);
+                binding.lnChipset.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getCpu()!= null){
                 binding.edtCpu.setText(detailProductResponse.getResult().getCpu());
             }else {
-                binding.edtCpu.setText("No data");
+                binding.edtCpu.setVisibility(View.GONE);
+                binding.lnCpu.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getGpu()!= null){
                 binding.edtGpu.setText(detailProductResponse.getResult().getCpu());
             }else {
-                binding.edtGpu.setText("No data");
+                binding.edtGpu.setVisibility(View.GONE);
+                binding.lnGpu.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getRam() != 0){
                 binding.edtRam.setText(detailProductResponse.getResult().getRam() + "");
@@ -390,38 +395,42 @@ public class UpdateProductActivity extends AppCompatActivity implements OptionUt
             if(detailProductResponse.getResult().getOperatingSystem()!= null){
                 binding.edtHeDieuHanh.setText(detailProductResponse.getResult().getOperatingSystem());
             }else {
-                binding.edtHeDieuHanh.setText("No data");
+                binding.edtHeDieuHanh.setVisibility(View.GONE);
+                binding.lnHeDieuHanh.setVisibility(View.GONE);
             }
             
             if(detailProductResponse.getResult().getBattery()!= null){
                 binding.edtBatrery.setText(detailProductResponse.getResult().getBattery());
             }else{
-                binding.edtBatrery.setText("No data");
+                binding.edtBatrery.setVisibility(View.GONE);
+                binding.lnBattery.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getWeight() != 0){
                 binding.edtWeight.setText(detailProductResponse.getResult().getWeight() + "");
             }else {
-                binding.edtWeight.setText("No data");
+                binding.edtWeight.setVisibility(View.GONE);
+                binding.lnWeight.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getConnection()!= null){
                 binding.edtConnection.setText(detailProductResponse.getResult().getConnection());
             }else {
-                binding.edtConnection.setText("No data");
+                binding.edtConnection.setVisibility(View.GONE);
+                binding.lnConnection.setVisibility(View.GONE);
             }
             if(detailProductResponse.getResult().getSpecialFeature()!= null){
                 binding.edtSpecialFeature.setText(detailProductResponse.getResult().getSpecialFeature());
             }else{
-                binding.edtSpecialFeature.setText("No data");
+                binding.edtSpecialFeature.setText("Mời nhập");
             }
             if(detailProductResponse.getResult().getManufacturer()!= null){
                 binding.edtManufacturer.setText(detailProductResponse.getResult().getManufacturer());
             }else {
-                binding.edtManufacturer.setText("No data");
+                binding.edtManufacturer.setText("");
             }
             if(detailProductResponse.getResult().getOther()!= null){
                 binding.edtOther.setText(detailProductResponse.getResult().getOther());
             }else {
-                binding.edtOther.setText("No data");
+                binding.edtOther.setText("");
             }
             
         }
