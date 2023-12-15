@@ -81,6 +81,7 @@ public class DetailBill extends AppCompatActivity  {
                            Picasso.get().load(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getImage()).into(binding.img);
                            binding.tensp.setText(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getProduct().getName());
                            binding.mahoadon.setText(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getId());
+                           binding.tenshop.setText(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getProduct().getStore_id().getName());
                            binding.time.setText(convertDateFormat(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getCreatedAt()));
                        }
                     }
