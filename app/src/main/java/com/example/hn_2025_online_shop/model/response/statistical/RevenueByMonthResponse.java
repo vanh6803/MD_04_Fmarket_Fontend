@@ -1,9 +1,9 @@
-package com.example.hn_2025_online_shop.model.response;
+package com.example.hn_2025_online_shop.model.response.statistical;
 
 public class RevenueByMonthResponse {
     private int code;
     String message;
-    int data;
+    private int data;
 
     public RevenueByMonthResponse() {
     }

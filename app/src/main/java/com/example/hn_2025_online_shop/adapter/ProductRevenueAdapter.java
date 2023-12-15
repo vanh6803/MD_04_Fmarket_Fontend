@@ -13,20 +13,22 @@ import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamThongkeBinding;
 import com.example.hn_2025_online_shop.databinding.LayoutItemProductSaleBinding;
 import com.example.hn_2025_online_shop.model.Product;
+import com.example.hn_2025_online_shop.model.ProductDetailsSoldQuantity;
 import com.example.hn_2025_online_shop.model.ProductRevenue;
+import com.example.hn_2025_online_shop.model.ProductWithSoldQuantity;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
 public class ProductRevenueAdapter extends RecyclerView.Adapter<ProductRevenueAdapter.ProductRevenueViewHolder> {
     private Context context;
-    private List<ProductRevenue> list;
+    private List<ProductWithSoldQuantity> list;
 
-    public ProductRevenueAdapter(Context context, List<ProductRevenue> list) {
+    public ProductRevenueAdapter(Context context, List<ProductWithSoldQuantity> list) {
         this.context = context;
         this.list = list;
     }
-    public void setListProductRevenue(List<ProductRevenue> list) {
+    public void setListProductRevenue(List<ProductWithSoldQuantity> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -40,15 +42,10 @@ public class ProductRevenueAdapter extends RecyclerView.Adapter<ProductRevenueAd
 
     @Override
     public void onBindViewHolder(@NonNull ProductRevenueViewHolder holder, int position) {
-        ProductRevenue product = list.get(position);
-        Glide.with(context)
-                .load(product.getImage())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .into(holder.binding.imgProduct);
-        holder.binding.tvNameProduct.setText(product.getNameProduct());
-        DecimalFormat df = new DecimalFormat("###,###,###");
-        holder.binding.tvDoanhThu.setText(df.format(product.getRevenue()) + " đ");
+        ProductWithSoldQuantity product = list.get(position);
+        Glide.with(context).load(product.getProductDetails().getImage()).error(R.drawable.error).into(holder.binding.imgProduct);
+        holder.binding.tvNameProduct.setText(product.getProductDetails().getName());
+        holder.binding.tvDoanhThu.setText(product.getTotalSoldQuantity()+"");
     }
 
     @Override

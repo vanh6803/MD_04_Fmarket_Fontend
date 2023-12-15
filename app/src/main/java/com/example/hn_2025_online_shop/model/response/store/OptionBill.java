@@ -1,12 +1,13 @@
-package com.example.hn_2025_online_shop.model;
+package com.example.hn_2025_online_shop.model.response.store;
 
+import com.example.hn_2025_online_shop.model.Product;
 import com.google.gson.annotations.SerializedName;
 
-public class OptionOfListCart {
+public class OptionBill {
     @SerializedName("_id")
     private String id;
     @SerializedName("product_id")
-    private Product product;
+    private ProductId product;
     @SerializedName("name_color")
     private String nameColor;
     @SerializedName("color_code")
@@ -40,10 +41,10 @@ public class OptionOfListCart {
 
     private String updatedAt;
 
-    public OptionOfListCart() {
+    public OptionBill() {
     }
 
-    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int price, int discount_value, int quantity, int soldQuantity,
+    public OptionBill(String id, ProductId product, String nameColor, String colorCode, String image, int price, int discount_value, int quantity, int soldQuantity,
                             boolean hot_option, String createdAt, String updatedAt) {
         this.id = id;
         this.product = product;
@@ -83,11 +84,11 @@ public class OptionOfListCart {
         this.id = id;
     }
 
-    public Product getProduct() {
+    public ProductId getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(ProductId product) {
         this.product = product;
     }
 

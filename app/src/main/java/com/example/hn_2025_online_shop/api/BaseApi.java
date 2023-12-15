@@ -1,6 +1,5 @@
 package com.example.hn_2025_online_shop.api;
 
-import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
@@ -16,13 +15,17 @@ import com.example.hn_2025_online_shop.model.response.ListNotifiReponse;
 import com.example.hn_2025_online_shop.model.response.OrderResponse;
 import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
-import com.example.hn_2025_online_shop.model.response.RevenueByMonthResponse;
+//import com.example.hn_2025_online_shop.model.response.RevenueByMonthResponse;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
+import com.example.hn_2025_online_shop.model.response.statistical.RevenueByMonthResponse;
+import com.example.hn_2025_online_shop.model.response.statistical.SoldQuantityProductResponse;
+import com.example.hn_2025_online_shop.model.response.store.DetailBills;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
+import com.example.hn_2025_online_shop.model.response.store.ResponseBill;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -52,11 +55,10 @@ public interface BaseApi {
     // 192.168.0.106
 //    String LOCALHOT = "103.166.183.57"; // đc cho socket
 //    192.168.100.4
-    String LOCALHOT = "192.168.100.4"; // đc cho socket
+    String LOCALHOT = "172.26.160.1"; // đc cho socket
 //    String LOCALHOT = "172.20.10.3"; // đc cho socket
-
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://" + LOCALHOT +":3000/api/")
+        .baseUrl("http://" + "10.0.2.2" + ":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -345,7 +347,22 @@ public interface BaseApi {
     @GET("notifi/get-notifi-list/{accountId}")
     Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
                                           @Path("accountId") String accountId);
+
     @GET("statistical/get-revenue-by-month")
     Call<RevenueByMonthResponse> revenueByMonth(@Query("store_id") String store_id,
                                                 @Query("month") int month);
+
+    @GET("statistical/get-revenue-all-time")
+    Call<RevenueByMonthResponse> revenueAll(@Query("store_id") String store_id);
+
+    @GET("order/collect-order")
+    Call<ResponseBill> getListBill(@Header("Authorization") String authorization);
+
+
+    @GET("order/detail-order/{orderId}")
+    Call<DetailBills> getDetailBill(@Header("Authorization") String authorization, @Path("orderId") String orderId);
+
+    @GET("statistical/get-sold-quantity-by-productandstore")
+    Call<SoldQuantityProductResponse> soldQuantityProduct(@Query("store_id") String store_id);
+
 }

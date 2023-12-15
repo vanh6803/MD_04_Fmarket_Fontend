@@ -6,7 +6,6 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.databinding.LayoutHeaderNavBinding;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
+import com.example.hn_2025_online_shop.view.my_store.Bill.FragmentBill;
 import com.example.hn_2025_online_shop.view.my_store.OrderStore.FragmentOrder;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
@@ -111,12 +111,12 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
             }
 
         }
-        else if(id == R.id.taovoucher){
-            if(mcurrentFrg != Fragment_taoVoucher){
-                replaceFragment(new CreateVoucherFragment());
-                mcurrentFrg = Fragment_taoVoucher;
-            }
-        }
+//        else if(id == R.id.taovoucher){
+//            if(mcurrentFrg != Fragment_taoVoucher){
+//                replaceFragment(new CreateVoucherFragment());
+//                mcurrentFrg = Fragment_taoVoucher;
+//            }
+//        }
         else if(id == R.id.inforStore){
             if(mcurrentFrg != Fragment_UpdateInforStore){
                 replaceFragment(new UpdateInforStoreFragment());
@@ -132,13 +132,13 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
 
         }
-        else if(id == R.id.xuatkho){
-            if(mcurrentFrg != Fragment_xuatkho){
-                replaceFragment(new FragmentWarehouse());
-                mcurrentFrg = Fragment_xuatkho;
-            }
-
-        }
+//        else if(id == R.id.xuatkho){
+//            if(mcurrentFrg != Fragment_xuatkho){
+//                replaceFragment(new FragmentWarehouse());
+//                mcurrentFrg = Fragment_xuatkho;
+//            }
+//
+//        }
         else if(id == R.id.hoadon){
             if(mcurrentFrg != Fragment_HoaDon){
                 replaceFragment(new FragmentBill());
