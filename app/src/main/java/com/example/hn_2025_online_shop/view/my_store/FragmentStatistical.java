@@ -32,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,7 +113,8 @@ public class FragmentStatistical extends Fragment  {
                         if(response.isSuccessful()){
                             RevenueByMonthResponse response1 = response.body();
                             if (response1.getCode() == 200){
-                                binding.tvRevenue.setText(""+response1.getData());
+                                DecimalFormat df = new DecimalFormat("###,###,###");
+                                binding.tvRevenue.setText(df.format(response1.getData()) + " đ");
                                 Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
