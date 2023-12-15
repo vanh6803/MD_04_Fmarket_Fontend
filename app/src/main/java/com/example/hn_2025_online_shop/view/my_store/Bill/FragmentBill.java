@@ -45,6 +45,7 @@ public class FragmentBill extends Fragment implements ObjectUtil {
 
     BillAdapter adapter;
     private  List<Result> billList;
+    private  String id;
 
 
 
@@ -84,7 +85,11 @@ public class FragmentBill extends Fragment implements ObjectUtil {
 
     @Override
     public void onclickObject(Object object) {
+        for(int i = 0; i< billList.size(); i++){
+            id = billList.get(i).getIdPro();
+        }
         Intent intent = new Intent(getContext(), DetailBill.class);
+        intent.putExtra("id", id);
         startActivity(intent);
     }
 
@@ -100,7 +105,6 @@ public class FragmentBill extends Fragment implements ObjectUtil {
                     if(orderResponse.getCode() == 200 || orderResponse.getCode() == 201) {
                         billList = orderResponse.getResult();
                         adapter.setListBill(billList);
-
                     }
                 } else { // nhận các đầu status #200
                     try {

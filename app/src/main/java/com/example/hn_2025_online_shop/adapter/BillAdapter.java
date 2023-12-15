@@ -2,6 +2,7 @@ package com.example.hn_2025_online_shop.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.response.store.ProductOder;
 import com.example.hn_2025_online_shop.model.response.store.Result;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.view.my_store.Bill.DetailBill;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,9 +56,14 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         holder.binding.code.setText("#"+bill.getIdPro());
       for (int i = 0; i< bill.getProductsOrder().size(); i++){
           holder.binding.date.setText(convertDateFormat(bill.getProductsOrder().get(i).getOption_id().getCreatedAt()));
-//          holder.binding.content.setText(
-//                bill.getProductsOrder().get(i).getOption_id().getProduct().getName().toString().substring(0,20) +
-//                "màu" +bill.getProductsOrder().get(i).getOption_id().getNameColor() +"...");
+         if( bill.getProductsOrder().get(i).getOption_id().getProduct()!= null){
+             holder.binding.content.setText(
+                     bill.getProductsOrder().get(i).getOption_id().getProduct().getName() +
+                             "màu" +bill.getProductsOrder().get(i).getOption_id().getNameColor() +"...");
+         } else{
+             holder.binding.content.setText("");
+         }
+
       }
         holder.binding.price.setText(String.valueOf(bill.getTotal_price()));
         if(position%2 == 0){
@@ -68,7 +75,10 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         holder.binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                objectUtil.onclickObject(bill);
+//                objectUtil.onclickObject(bill);
+                Intent intent = new Intent(context, DetailBill.class);
+                intent.putExtra("id", bill.getIdPro());
+               context.startActivity(intent);
             }
         });
 
