@@ -38,6 +38,10 @@
             android:id="@+id/doanhthu"
             android:title="Doanh thu"
             android:icon="@drawable/doanhthu"/>
+        <item
+            android:id="@+id/quayve"
+            android:title="Quay về"
+            android:icon="@drawable/backs"/>
     </group>
 
 </menu>

@@ -151,6 +151,8 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
                 replaceFragment(new FragmentStatistical());
                 mcurrentFrg = Fragment_baoCaoDoanhThu;
             }
+        }else if(id == R.id.quayve){
+            finish();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
