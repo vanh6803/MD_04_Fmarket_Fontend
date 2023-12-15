@@ -90,13 +90,6 @@ public class FragmentCreateProductMyStore extends Fragment{
         // Inflate the layout for this fragment
         binding = FragmentCreateProductMyStoreBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        binding.btnHuy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                fragmentManager.popBackStackImmediate("FragmentA",0 );
-            }
-        });
         return view;
     }
 
@@ -524,8 +517,11 @@ public class FragmentCreateProductMyStore extends Fragment{
         binding.btnHuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), UpdateAddressActivity.class);
-                startActivity(intent);
+                FragmentManager fragmentManager = getParentFragmentManager();
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.addToBackStack("FragmentA");
+                transaction.replace(R.id.content_frame, FragmentProductWarehouse.newInstance());
+                transaction.commit();
             }
         });
 
