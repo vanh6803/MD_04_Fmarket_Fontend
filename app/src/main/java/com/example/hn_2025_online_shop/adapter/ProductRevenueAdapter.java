@@ -43,11 +43,7 @@ public class ProductRevenueAdapter extends RecyclerView.Adapter<ProductRevenueAd
     @Override
     public void onBindViewHolder(@NonNull ProductRevenueViewHolder holder, int position) {
         ProductWithSoldQuantity product = list.get(position);
-        Glide.with(context)
-                .load(product.getProductDetails().getImage())
-                .placeholder(R.drawable.loading)
-                .error(R.drawable.error)
-                .into(holder.binding.imgProduct);
+        Glide.with(context).load(product.getProductDetails().getImage()).error(R.drawable.error).into(holder.binding.imgProduct);
         holder.binding.tvNameProduct.setText(product.getProductDetails().getName());
         holder.binding.tvDoanhThu.setText(product.getTotalSoldQuantity()+"");
     }
