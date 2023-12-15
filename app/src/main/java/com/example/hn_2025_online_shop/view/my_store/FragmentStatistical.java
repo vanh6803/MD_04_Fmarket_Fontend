@@ -62,6 +62,7 @@ public class FragmentStatistical extends Fragment  {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        monthList.add("Tất cả doanh thu");
         for(int i=1;i<=12;i++){
             monthList.add("Tháng "+ i);
         }
@@ -125,37 +126,68 @@ public class FragmentStatistical extends Fragment  {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 dialog.show();
-                BaseApi.API.revenueByMonth(storeId,i +1).enqueue(new Callback<RevenueByMonthResponse>() {
-                    @Override
-                    public void onResponse(Call<RevenueByMonthResponse> call, Response<RevenueByMonthResponse> response) {
-                        if(response.isSuccessful()){
-                            RevenueByMonthResponse response1 = response.body();
-                            if (response1.getCode() == 200){
-                                binding.tvRevenue.setText(format.format(response1.getData()));
-                                Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
+                if (i == 0) {
+                    BaseApi.API.revenueAll(storeId).enqueue(new Callback<RevenueByMonthResponse>() {
+                        @Override
+                        public void onResponse(Call<RevenueByMonthResponse> call, Response<RevenueByMonthResponse> response) {
+                            if (response.isSuccessful()) {
+                                RevenueByMonthResponse response1 = response.body();
+                                if (response1.getCode() == 200) {
+                                    binding.tvRevenue.setText(format.format(response1.getData()));
+                                }
+                            } else {
+                                try {
+                                    String errorBody = response.errorBody().string();
+                                    // Parse and display the error message
+                                    JSONObject errorJson = new JSONObject(errorBody);
+                                    String errorMessage = errorJson.getString("message");
+                                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
                             }
-                        } else {
-                            try {
-                                String errorBody = response.errorBody().string();
-                                // Parse and display the error message
-                                JSONObject errorJson = new JSONObject(errorBody);
-                                String errorMessage = errorJson.getString("message");
-                                Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                            }catch (IOException e){
-                                e.printStackTrace();
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
-                            }
+                            dialog.dismiss();
                         }
-                        dialog.dismiss();
-                    }
 
-                    @Override
-                    public void onFailure(Call<RevenueByMonthResponse> call, Throwable t) {
-                        Toast.makeText(getContext(), "Không kết nối được vơi server", Toast.LENGTH_SHORT).show();
-                        dialog.dismiss();
-                    }
-                });
+                        @Override
+                        public void onFailure(Call<RevenueByMonthResponse> call, Throwable t) {
+
+                        }
+                    });
+                } else {
+                    BaseApi.API.revenueByMonth(storeId, i).enqueue(new Callback<RevenueByMonthResponse>() {
+                        @Override
+                        public void onResponse(Call<RevenueByMonthResponse> call, Response<RevenueByMonthResponse> response) {
+                            if (response.isSuccessful()) {
+                                RevenueByMonthResponse response1 = response.body();
+                                if (response1.getCode() == 200) {
+                                    binding.tvRevenue.setText(format.format(response1.getData()));
+                                }
+                            } else {
+                                try {
+                                    String errorBody = response.errorBody().string();
+                                    // Parse and display the error message
+                                    JSONObject errorJson = new JSONObject(errorBody);
+                                    String errorMessage = errorJson.getString("message");
+                                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                            dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onFailure(Call<RevenueByMonthResponse> call, Throwable t) {
+                            Toast.makeText(getContext(), "Không kết nối được vơi server", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+                }
             }
 
             @Override
