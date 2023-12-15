@@ -101,9 +101,7 @@ public class FragmentStatistical extends Fragment  {
                 if (response.isSuccessful()){
                     SoldQuantityProductResponse responseModel = response.body();
                     if (responseModel.getCode() == 200){
-                        list = responseModel.getData();
-                        adapter = new ProductRevenueAdapter(getContext(),list);
-                        adapter.setListProductRevenue(list);
+                        adapter.setListProductRevenue(responseModel.getData());
                         binding.rcvProductRevenue.setAdapter(adapter);
                         dialog.dismiss();
                     }
@@ -119,6 +117,7 @@ public class FragmentStatistical extends Fragment  {
     }
 
     private void revenueByMonth() {
+
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("storeId", Context.MODE_PRIVATE);
         String storeId = sharedPreferences.getString("storeId",null);
 
@@ -153,6 +152,7 @@ public class FragmentStatistical extends Fragment  {
 
                         @Override
                         public void onFailure(Call<RevenueByMonthResponse> call, Throwable t) {
+                            dialog.dismiss();
 
                         }
                     });
