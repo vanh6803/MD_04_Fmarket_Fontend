@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class OptionAndQuantity {
     @SerializedName("_id")
     private String id;
-    @SerializedName("option")
+    @SerializedName("option_id")
     private OptionOfListCart optionProduct;
     private int quantity;
 

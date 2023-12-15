@@ -110,7 +110,7 @@ public interface BaseApi {
 
     @GET("products/detail-product/{idProduct}")
     Call<DetailProductResponse> getDetailProduct(@Path("idProduct") String idProduct);
-    @GET("products//similar-product/{idProduct}")
+    @GET("products/similar-product/{idProduct}")
     Call<ProductResponse> getDataSimilarlProduct(@Path("idProduct") String idProduct);
 
 
