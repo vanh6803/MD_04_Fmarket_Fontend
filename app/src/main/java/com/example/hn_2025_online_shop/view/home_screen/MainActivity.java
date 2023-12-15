@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     private void onClickBottomNav() {
         binding.bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.homepage));
         binding.bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.product_24));
-        binding.bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.yeuthich));
-        binding.bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.thongbao));
-        binding.bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.profile));
+//        binding.bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.yeuthich));
+        binding.bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.thongbao));
+        binding.bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.profile));
         binding.bottomNavigation.show(1, true);
         loadFragment(FragmentHome.newInstance());
 
@@ -67,12 +67,9 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(FragmentProduct.newInstance());
                         break;
                     case 3:
-                        loadFragment(FragmentFavorite.newInstance());
-                        break;
-                    case 4:
                         loadFragment(FragmentNotification.newInstance());
                         break;
-                    case 5:
+                    case 4:
                         loadFragment(FragmentProfile.newInstance());
                         break;
                 }

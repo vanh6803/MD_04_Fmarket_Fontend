@@ -19,10 +19,32 @@ public class OptionOfListCart {
     private int soldQuantity;
     private boolean hot_option;
 
+
+    private String createdAt;
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    private String updatedAt;
+
     public OptionOfListCart() {
     }
 
-    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int price, int discount_value, int quantity, int soldQuantity, boolean hot_option) {
+    public OptionOfListCart(String id, Product product, String nameColor, String colorCode, String image, int price, int discount_value, int quantity, int soldQuantity,
+                            boolean hot_option, String createdAt, String updatedAt) {
         this.id = id;
         this.product = product;
         this.nameColor = nameColor;
@@ -33,6 +55,8 @@ public class OptionOfListCart {
         this.quantity = quantity;
         this.soldQuantity = soldQuantity;
         this.hot_option = hot_option;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     @Override
