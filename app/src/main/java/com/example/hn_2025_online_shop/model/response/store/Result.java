@@ -1,27 +1,28 @@
 package com.example.hn_2025_online_shop.model.response.store;
 
+import com.example.hn_2025_online_shop.model.User;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Bill {
+public class Result implements Serializable {
     @SerializedName("_id")
-    private String id;
-    @SerializedName("user_id")
-    private  String userId;
+    private  String idPro;
+     User user_id;
+    List<ProductOder> productsOrder;
 
-    private List<ProductOrder> productOrderList;
-    private  double total_price;
-    private  String status;
-    private  String info_id;
-    private  String createdAt;
-    private  String updatedAt;
-    private  int __v;
+    private double total_price;
+    private String status;
+    private String info_id;
+    private String createdAt;
+    private String updatedAt;
+    private String __v;
 
-    public Bill(String id, String userId, List<ProductOrder> productOrderList, double total_price, String status, String info_id, String createdAt, String updatedAt, int __v) {
-        this.id = id;
-        this.userId = userId;
-        this.productOrderList = productOrderList;
+    public Result(String idPro, User user_id, List<ProductOder> productsOrder, double total_price, String status, String info_id, String createdAt, String updatedAt, String __v) {
+        this.idPro = idPro;
+        this.user_id = user_id;
+        this.productsOrder = productsOrder;
         this.total_price = total_price;
         this.status = status;
         this.info_id = info_id;
@@ -30,28 +31,28 @@ public class Bill {
         this.__v = __v;
     }
 
-    public String getId() {
-        return id;
+    public String getIdPro() {
+        return idPro;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdPro(String idPro) {
+        this.idPro = idPro;
     }
 
-    public String getUserId() {
-        return userId;
+    public User getUser_id() {
+        return user_id;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
     }
 
-    public List<ProductOrder> getProductOrderList() {
-        return productOrderList;
+    public List<ProductOder> getProductsOrder() {
+        return productsOrder;
     }
 
-    public void setProductOrderList(List<ProductOrder> productOrderList) {
-        this.productOrderList = productOrderList;
+    public void setProductsOrder(List<ProductOder> productsOrder) {
+        this.productsOrder = productsOrder;
     }
 
     public double getTotal_price() {
@@ -94,11 +95,11 @@ public class Bill {
         this.updatedAt = updatedAt;
     }
 
-    public int get__v() {
+    public String get__v() {
         return __v;
     }
 
-    public void set__v(int __v) {
+    public void set__v(String __v) {
         this.__v = __v;
     }
 }

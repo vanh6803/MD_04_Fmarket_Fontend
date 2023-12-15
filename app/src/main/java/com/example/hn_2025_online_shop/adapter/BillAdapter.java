@@ -11,23 +11,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.hn_2025_online_shop.databinding.ItemBillBinding;
 import com.example.hn_2025_online_shop.model.Order;
-import com.example.hn_2025_online_shop.model.response.store.ProductOrder;
+import com.example.hn_2025_online_shop.model.response.store.ProductOder;
+import com.example.hn_2025_online_shop.model.response.store.Result;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
 
-    private List<Order> list;
+    private List<Result> list;
     private Context context;
     private ObjectUtil objectUtil;
 
 
 
-    public BillAdapter(List<Order> list, Context context, ObjectUtil objectUtil) {
+    public BillAdapter(List<Result> list, Context context, ObjectUtil objectUtil) {
         this.list = list;
         this.context = context;
         this.objectUtil = objectUtil;
+    }
+
+    public void setListBill(List<Result> resultList) {
+        this.list = resultList;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -40,13 +49,16 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     @SuppressLint({"ResourceAsColor", "SetTextI18n"})
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Order bill = list.get(position);
+        Result bill = list.get(position);
         holder.binding.stt.setText(String.valueOf(position + 1));
-        holder.binding.code.setText("#"+bill.getUser().getId());
-        holder.binding.content.setText(bill.getProductsOrder().get(position).getOptionProduct().getProduct().getName().toString().substring(0,20) +
-                "màu" +bill.getProductsOrder().get(position).getOptionProduct().getNameColor() +"...");
-//        holder.binding.date.setText(bill.getProductsOrder().get(position).getOptionProduct().getId());
-        holder.binding.price.setText(String.valueOf(bill.getTotalPrice()));
+        holder.binding.code.setText("#"+bill.getIdPro());
+      for (int i = 0; i< bill.getProductsOrder().size(); i++){
+          holder.binding.date.setText(convertDateFormat(bill.getProductsOrder().get(i).getOption_id().getCreatedAt()));
+//          holder.binding.content.setText(
+//                bill.getProductsOrder().get(i).getOption_id().getProduct().getName().toString().substring(0,20) +
+//                "màu" +bill.getProductsOrder().get(i).getOption_id().getNameColor() +"...");
+      }
+        holder.binding.price.setText(String.valueOf(bill.getTotal_price()));
         if(position%2 == 0){
             holder.binding.item.setBackgroundColor(0xffffffff);
         }else {
@@ -74,5 +86,21 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
             super(binding.getRoot());
             this.binding = binding;
         }
+    }
+
+    private String convertDateFormat(String inputDate) {
+        String outputDate = "";
+
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            Date date = inputFormat.parse(inputDate);
+            outputDate = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return outputDate;
     }
 }

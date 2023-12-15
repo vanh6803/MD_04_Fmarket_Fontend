@@ -30,26 +30,39 @@
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"/>
+        <View
+            android:layout_marginHorizontal="4dp"
+            android:background="@color/grey_font"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"/>
 
         <TextView
-            android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="Số hóa đơn"
+            android:text="Mã hóa đơn"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_marginHorizontal="4dp"
+            android:background="@color/grey_font"
+            android:layout_width="1dp"
             android:layout_height="match_parent"/>
         <TextView
-            android:layout_weight="1"
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Tên đơn hàng"
             android:textSize="14sp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_marginHorizontal="4dp"
+            android:background="@color/grey_font"
+            android:layout_width="1dp"
             android:layout_height="match_parent"/>
         <TextView
             android:layout_weight="1"

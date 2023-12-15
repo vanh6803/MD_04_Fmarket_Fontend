@@ -111,12 +111,12 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
             }
 
         }
-        else if(id == R.id.taovoucher){
-            if(mcurrentFrg != Fragment_taoVoucher){
-                replaceFragment(new CreateVoucherFragment());
-                mcurrentFrg = Fragment_taoVoucher;
-            }
-        }
+//        else if(id == R.id.taovoucher){
+//            if(mcurrentFrg != Fragment_taoVoucher){
+//                replaceFragment(new CreateVoucherFragment());
+//                mcurrentFrg = Fragment_taoVoucher;
+//            }
+//        }
         else if(id == R.id.inforStore){
             if(mcurrentFrg != Fragment_UpdateInforStore){
                 replaceFragment(new UpdateInforStoreFragment());
@@ -132,13 +132,13 @@ public class MyStoreScreen extends AppCompatActivity implements NavigationView.O
 
 
         }
-        else if(id == R.id.xuatkho){
-            if(mcurrentFrg != Fragment_xuatkho){
-                replaceFragment(new FragmentWarehouse());
-                mcurrentFrg = Fragment_xuatkho;
-            }
-
-        }
+//        else if(id == R.id.xuatkho){
+//            if(mcurrentFrg != Fragment_xuatkho){
+//                replaceFragment(new FragmentWarehouse());
+//                mcurrentFrg = Fragment_xuatkho;
+//            }
+//
+//        }
         else if(id == R.id.hoadon){
             if(mcurrentFrg != Fragment_HoaDon){
                 replaceFragment(new FragmentBill());

@@ -14,10 +14,10 @@
             android:id="@+id/dondathang"
             android:title="Đơn đặt hàng"
             android:icon="@drawable/dondathang"/>
-        <item
-            android:id="@+id/taovoucher"
-            android:title="Tạo voucher"
-            android:icon="@drawable/tao"/>
+<!--        <item-->
+<!--            android:id="@+id/taovoucher"-->
+<!--            android:title="Tạo voucher"-->
+<!--            android:icon="@drawable/tao"/>-->
         <item
             android:id="@+id/inforStore"
             android:title="Infor Store"
@@ -26,10 +26,10 @@
             android:id="@+id/dangsanpham"
             android:title="Đăng sản phẩm"
             android:icon="@drawable/dangsanpham"/>
-        <item
-            android:id="@+id/xuatkho"
-            android:title="Xuất kho"
-            android:icon="@drawable/xuatkho"/>
+<!--        <item-->
+<!--            android:id="@+id/xuatkho"-->
+<!--            android:title="Xuất kho"-->
+<!--            android:icon="@drawable/xuatkho"/>-->
         <item
             android:id="@+id/hoadon"
             android:title="Hóa đơn"

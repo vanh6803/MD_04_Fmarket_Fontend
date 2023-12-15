@@ -1,6 +1,5 @@
 package com.example.hn_2025_online_shop.api;
 
-import com.example.hn_2025_online_shop.model.Order;
 import com.example.hn_2025_online_shop.model.body.PurchaseBody;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.CartReponse;
@@ -22,8 +21,8 @@ import com.example.hn_2025_online_shop.model.response.LoginResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
 import com.example.hn_2025_online_shop.model.response.ProductTypeResponse;
 import com.example.hn_2025_online_shop.model.response.StoreIdResponse;
-import com.example.hn_2025_online_shop.model.response.store.Bill;
 import com.example.hn_2025_online_shop.model.response.store.InfoStore;
+import com.example.hn_2025_online_shop.model.response.store.ResponseBill;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -56,7 +55,7 @@ public interface BaseApi {
     String LOCALHOT = "192.168.100.4"; // đc cho socket
 //    String LOCALHOT = "172.20.10.3"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://" + LOCALHOT +":3000/api/")
+            .baseUrl("http://" + "10.0.2.2" +":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -351,7 +350,10 @@ public interface BaseApi {
 
 
 
-    @GET("order/collect-order/{storeId}")
-    Call<OrderResponse> getListBill(@Header("Authorization") String authorization,
-                           @Path("storeId") String storeId);
+    @GET("order/collect-order")
+    Call<ResponseBill> getListBill(@Header("Authorization") String authorization);
+
+
+    @GET("order/detail-order/{orderId}")
+    Call<ResponseBill> getDetailBill(@Header("Authorization") String authorization, @Path("orderId") String orderId);
 }
