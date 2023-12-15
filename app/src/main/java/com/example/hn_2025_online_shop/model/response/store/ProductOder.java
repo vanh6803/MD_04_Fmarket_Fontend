@@ -6,22 +6,22 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 
 public class ProductOder implements Serializable {
-    OptionOfListCart option_id;
+    OptionBill option_id;
     private  int quantity;
     @SerializedName("_id")
     private String id_option;
 
-    public ProductOder(OptionOfListCart option_id, int quantity, String id_option) {
+    public ProductOder(OptionBill option_id, int quantity, String id_option) {
         this.option_id = option_id;
         this.quantity = quantity;
         this.id_option = id_option;
     }
 
-    public OptionOfListCart getOption_id() {
+    public OptionBill getOption_id() {
         return option_id;
     }
 
-    public void setOption_id(OptionOfListCart option_id) {
+    public void setOption_id(OptionBill option_id) {
         this.option_id = option_id;
     }
 
