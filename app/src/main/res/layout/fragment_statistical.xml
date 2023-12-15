@@ -44,20 +44,20 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginTop="30dp"
             android:text="Tổng doanh thu"
             android:textColor="#E3013565"
             android:textSize="21dp"
             app:layout_constraintBottom_toTopOf="@+id/tvRevenue"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/tvRevenue"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="100dp"
             android:background="@drawable/custom_tvv"
             android:fontFamily="sans-serif"
@@ -88,7 +88,6 @@
                 android:layout_width="200dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
                 android:background="@drawable/custom_tvv"
                 android:gravity="center"
                 android:text="1/01/2023"
@@ -100,24 +99,13 @@
             android:layout_marginTop="10dp"
             android:id="@+id/linearLayout7"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRevenue"
             tools:ignore="MissingConstraints">
-
-            <TextView
-                android:layout_marginLeft="50dp"
-                android:layout_gravity="center"
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="theo tháng"
-                android:textColor="#E3013565"
-                android:textSize="18dp" />
-
         </LinearLayout>
 
 

@@ -58,7 +58,7 @@ public interface BaseApi {
     String LOCALHOT = "172.26.160.1"; // đc cho socket
 //    String LOCALHOT = "172.20.10.3"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://" + "10.0.2.2" +":3000/api/")
+        .baseUrl("http://" + "10.0.2.2" + ":3030/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
@@ -347,11 +347,13 @@ public interface BaseApi {
     @GET("notifi/get-notifi-list/{accountId}")
     Call<ListNotifiReponse> getNotifiList(@Header("Authorization") String authorization,
                                           @Path("accountId") String accountId);
+
     @GET("statistical/get-revenue-by-month")
     Call<RevenueByMonthResponse> revenueByMonth(@Query("store_id") String store_id,
                                                 @Query("month") int month);
 
-
+    @GET("statistical/get-revenue-all-time")
+    Call<RevenueByMonthResponse> revenueAll(@Query("store_id") String store_id);
 
     @GET("order/collect-order")
     Call<ResponseBill> getListBill(@Header("Authorization") String authorization);
