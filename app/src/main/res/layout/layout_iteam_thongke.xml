@@ -4,10 +4,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:orientation="horizontal"
+    android:padding="10dp"
     android:layout_height="100dp">
     <ImageView
         android:id="@+id/imgProduct"
-        android:layout_marginLeft="10dp"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_gravity="center"
@@ -21,20 +21,17 @@
         android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center"
-        android:layout_width="150dp"
+        android:layout_width="220dp"
         android:layout_height="80dp"
         android:text="Iphone 12 ProMax 128gb Chính Hãng VNA"/>
     <TextView
         android:id="@+id/tvDoanhThu"
         android:textSize="15dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1.900.000.000đ"
         android:textColor="@color/red"/>
-
-
-
 </LinearLayout>
