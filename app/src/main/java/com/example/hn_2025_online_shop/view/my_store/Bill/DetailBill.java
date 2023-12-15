@@ -23,7 +23,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -71,12 +74,14 @@ public class DetailBill extends AppCompatActivity  {
                         binding.tenkhachang.setText(orderResponse.getResult().getInfo_id().getName());
                         binding.makh.setText(orderResponse.getResult().getUser_id().getId());
                         binding.diachi.setText(orderResponse.getResult().getInfo_id().getAddress());
+
                         binding.price.setText(String.valueOf(orderResponse.getResult().getTotal_price()) +"đ");
 
                        for(int i = 0; i< orderResponse.getResult().getProductsOrder().size(); i++){
                            Picasso.get().load(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getImage()).into(binding.img);
                            binding.tensp.setText(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getProduct().getName());
                            binding.mahoadon.setText(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getId());
+                           binding.time.setText(convertDateFormat(orderResponse.getResult().getProductsOrder().get(i).getOption_id().getCreatedAt()));
                        }
                     }
                 } else { // nhận các đầu status #200
@@ -103,5 +108,19 @@ public class DetailBill extends AppCompatActivity  {
         });
     }
 
+    private String convertDateFormat(String inputDate) {
+        String outputDate = "";
 
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            Date date = inputFormat.parse(inputDate);
+            outputDate = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return outputDate;
+    }
 }
