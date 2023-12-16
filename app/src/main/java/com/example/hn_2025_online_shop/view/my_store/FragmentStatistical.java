@@ -107,7 +107,6 @@ public class FragmentStatistical extends Fragment  {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<SoldQuantityProductResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Không kết nối được server", Toast.LENGTH_SHORT).show();
