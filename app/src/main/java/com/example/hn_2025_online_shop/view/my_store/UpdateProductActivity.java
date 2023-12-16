@@ -550,13 +550,13 @@ public class UpdateProductActivity extends AppCompatActivity implements OptionUt
             Uri uri = data.getData();
             File file = new File(getPath(uri));
             RequestBody requestBody = RequestBody.create(MediaType.parse("*/*"), file);
-            if(isCheckImage == 1) {
+            if(isCheckImage == 1) { // update option product
                 isCamera = true;
                 binding1.imgAvartar.setImageURI(uri);
                 fileImgAvatar = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
                 updateImageOption(fileImgAvatar);
-            } else if (isCheckImage == 2) {
-                isImgProduct= true;
+            } else if (isCheckImage == 2) { // create option product
+                isImgProduct = true;
                 binding2.imgAvartar.setImageURI(uri);
                 fileImgProduct = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
             }
