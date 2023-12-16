@@ -63,7 +63,7 @@ public class MessageActivity extends AppCompatActivity {
     private Socket mSocket;
     {
         try {
-            mSocket = IO.socket("http://" + BaseApi.LOCALHOT +":3000");
+            mSocket = IO.socket("http://" + BaseApi.LOCALHOT + ":3030");
         } catch (URISyntaxException e) {}
     }
 

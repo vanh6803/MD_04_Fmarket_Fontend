@@ -1,16 +1,26 @@
 package com.example.hn_2025_online_shop.model.response.statistical;
 
+import java.math.BigInteger;
+
 public class RevenueByMonthResponse {
     private int code;
-    String message;
-    private int data;
+    private String message;
+    private BigInteger data;
 
     public RevenueByMonthResponse() {
     }
 
-    public RevenueByMonthResponse(int code, String message, int data) {
+    public RevenueByMonthResponse(int code, String message, BigInteger data) {
         this.code = code;
         this.message = message;
+        this.data = data;
+    }
+
+    public BigInteger getData() {
+        return data;
+    }
+
+    public void setData(BigInteger data) {
         this.data = data;
     }
 
@@ -30,11 +40,4 @@ public class RevenueByMonthResponse {
         this.message = message;
     }
 
-    public int getData() {
-        return data;
-    }
-
-    public void setData(int data) {
-        this.data = data;
-    }
 }
