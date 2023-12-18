@@ -257,9 +257,12 @@ public class FragmentCreateProductMyStore extends Fragment{
             @Override
             public void onClick(View view) {
                 String name = binding1.edtNameColor.getText().toString();
-                int price = Integer.parseInt(binding1.edtPrice.getText().toString());
-                int discount = Integer.parseInt(binding1.edtDiscountValue.getText().toString());
-                int quantity = Integer.parseInt(binding1.edtQuantity.getText().toString());
+                String inputprice = binding1.edtPrice.getText().toString();
+                String inputdiscount = binding1.edtDiscountValue.getText().toString();
+                String inputquantity = binding1.edtQuantity.getText().toString();
+                int price = inputprice.isEmpty() ?0 :Integer.parseInt(inputprice)  ;
+                int discount = inputdiscount.isEmpty() ?0: Integer.parseInt(inputdiscount);
+                int quantity = inputquantity.isEmpty() ?0: Integer.parseInt(inputquantity);
                 Boolean checkHotOption = binding1.chkHotOption.isChecked();
                 CreateOptionProduct(name, price, discount, quantity, checkHotOption);
             }
@@ -318,7 +321,7 @@ public class FragmentCreateProductMyStore extends Fragment{
     }
     private boolean checkValidateOptionProduct(String name, int price, int discount, int quantity ) {
         if(TextUtils.isEmpty(name)) {
-            Toast.makeText(getContext(), "Mời nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Mời nhập màu sản phẩm", Toast.LENGTH_SHORT).show();
             return false;
         } else if(!isCamera) {
             Toast.makeText(getContext(), "Hãy chọn Image", Toast.LENGTH_SHORT).show();

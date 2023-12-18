@@ -156,14 +156,16 @@ public class UpdateProductActivity extends AppCompatActivity implements OptionUt
             @Override
             public void onClick(View view) {
                 String name = binding2.edtNameColor.getText().toString();
-                int price = Integer.parseInt(binding2.edtPrice.getText().toString());
-                int discount = Integer.parseInt(binding2.edtDiscountValue.getText().toString());
-                int quantity = Integer.parseInt(binding2.edtQuantity.getText().toString());
+                String inputprice = binding2.edtPrice.getText().toString();
+                String inputdiscount = binding2.edtDiscountValue.getText().toString();
+                String inputquantity = binding2.edtQuantity.getText().toString();
+                int price = inputprice.isEmpty() ?0 :Integer.parseInt(inputprice)  ;
+                int discount = inputdiscount.isEmpty() ?0: Integer.parseInt(inputdiscount);
+                int quantity = inputquantity.isEmpty() ?0: Integer.parseInt(inputquantity);
                 Boolean checkHotOption = binding2.chkHotOption.isChecked();
                 CreateOptionProduct(name, price, discount, quantity, checkHotOption);
             }
         });
-
         dialog2.show();
     }
 
@@ -219,7 +221,7 @@ public class UpdateProductActivity extends AppCompatActivity implements OptionUt
     }
     private boolean checkValidateOptionProduct(String name, int price, int discount, int quantity ) {
         if(TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Mời nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Mời nhập màu sản phẩm", Toast.LENGTH_SHORT).show();
             return false;
         } else if(!isImgProduct) {
             Toast.makeText(this, "Hãy chọn Image", Toast.LENGTH_SHORT).show();

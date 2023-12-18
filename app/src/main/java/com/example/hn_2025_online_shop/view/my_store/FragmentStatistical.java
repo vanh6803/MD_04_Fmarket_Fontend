@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -183,7 +184,8 @@ public class FragmentStatistical extends Fragment  {
 
                         @Override
                         public void onFailure(Call<RevenueByMonthResponse> call, Throwable t) {
-                            Toast.makeText(getContext(), "Không kết nối được vơi server", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                            Log.d("binh-er", "onFailure: " + t.getMessage());
                             dialog.dismiss();
                         }
                     });
