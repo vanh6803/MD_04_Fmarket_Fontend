@@ -24,6 +24,7 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.Voucher;
 
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
@@ -89,14 +90,14 @@ public class FragmentStore extends Fragment implements ObjectUtil {
     }
     public void callApiGetListAllProducts(){
         binding.progressBar.setVisibility(View.VISIBLE);
-        BaseApi.API.getListAllProduct(true).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getListAllProduct(true, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ProductResponse productResponse = response.body();
                     productAdapter.setProductList(productResponse.getResult());
                     binding.recyStore.setAdapter(productAdapter);
-                }else {
+                } else {
                     Toast.makeText(getActivity(), "Call API  Products Error", Toast.LENGTH_SHORT).show();
                 }
                 binding.progressBar.setVisibility(View.GONE);

@@ -57,6 +57,10 @@ public interface BaseApi {
 //    192.168.100.4
 //    String LOCALHOT = "103.166.183.57"; // đc host
         String LOCALHOT = "192.168.100.4"; // đc cho socket
+
+//    String LOCALHOT = "103.166.183.57"; // đc cho socket
+    //    String LOCALHOT = "172.20.10.3"; // đc cho socket
+
     BaseApi API = new Retrofit.Builder()
             .baseUrl("http://" + LOCALHOT + ":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
@@ -98,12 +102,11 @@ public interface BaseApi {
 
 
     @GET("products/all-product")
-    Call<ProductResponse> getListAllProduct(@Query("isActive") boolean isActive);
-
-
+    Call<ProductResponse> getListAllProduct(@Query("isActive") boolean isActive,
+                                            @Query("token") String token);
 
     @GET("products/all-product-by-category")
-    Call<ProductByCategoryReponse> getListProductByCategory();
+    Call<ProductByCategoryReponse> getListProductByCategory(@Query("token") String token);
 
     @GET("category/get-list")
     Call<ProductTypeResponse> getListTypeProduct();
@@ -324,23 +327,27 @@ public interface BaseApi {
     @Multipart
     @PUT("store/edit-avatar")
     Call<ServerResponse> updateAvartarStore(@Header("Authorization") String authorization,
-                                           @Part MultipartBody.Part avatar);
+                                            @Part MultipartBody.Part avatar);
+
     @Multipart
     @PUT("store/edit-banner")
     Call<ServerResponse> updateBannerStore(@Header("Authorization") String authorization,
                                            @Part MultipartBody.Part banner);
+
     @FormUrlEncoded
     @PUT("store/update")
     Call<ServerResponse> updateStore(@Header("Authorization") String authorization,
-                                      @Field("name") String name,
-                                      @Field("address") String address);
-    @GET("products/all-product-by-category")
-    Call<ProductResponse> getAllProductByCategory(@Query("category") String category);
+                                     @Field("name") String name,
+                                     @Field("address") String address);
+//    @GET("products/all-product-by-category")
+//    Call<ProductResponse> getAllProductByCategory(@Query("category") String category);
 
     @GET("products/all-product")
-    Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted);
-    @GET("products/topProduct")
-    Call<ProductBestSellerResponse> getTopProductBestSeller();
+    Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted,
+                                                 @Query("token") String token);
+
+    @GET("products/top-product")
+    Call<ProductBestSellerResponse> getTopProductBestSeller(@Query("accountId") String accountId);
 
 //    @GET("products/all-product-by-category")
 //    Call<ProductResponse> getTop10ProductBestSeller(@Query("categoryId") String categoryId);
