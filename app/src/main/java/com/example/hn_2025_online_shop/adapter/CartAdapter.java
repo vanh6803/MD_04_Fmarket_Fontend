@@ -52,7 +52,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         if(cart == null) {
             return;
         }
-        holder.tvName.setText(cart.getOptionProduct().getProduct().getName());
+       holder.tvName.setText(cart.getOptionProduct().getProduct().getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
         holder.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + "đ");
         holder.tvQuantity.setText(cart.getQuantity() + "");
