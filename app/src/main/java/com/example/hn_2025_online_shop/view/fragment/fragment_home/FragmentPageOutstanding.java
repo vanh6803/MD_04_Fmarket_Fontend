@@ -79,6 +79,7 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
         BaseApi.API.getTopProductBestSeller(AccountUltil.USER.getId()).enqueue(new Callback<ProductBestSellerResponse>() {
             @Override
             public void onResponse(Call<ProductBestSellerResponse> call, Response<ProductBestSellerResponse> response) {
+                Log.d("getTopProductBestSeller: ", response+"");
                 if (response.isSuccessful()) { // chỉ nhận đầu status 200
                     ProductBestSellerResponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
