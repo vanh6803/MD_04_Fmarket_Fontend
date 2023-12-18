@@ -54,6 +54,7 @@ public class ChatActivity extends AppCompatActivity implements ObjectUtil {
     private void getListPeopleChat() {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String idUser = AccountUltil.USER.getId();
+        Log.d("ChatActivity_uid",  AccountUltil.USER.getId());
         binding.progressBar.setVisibility(View.VISIBLE);
         BaseApi.API.getListPeopleChat(token, idUser).enqueue(new Callback<ListChatResponse>() {
             @Override

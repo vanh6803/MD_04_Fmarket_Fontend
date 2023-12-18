@@ -75,6 +75,7 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
 
     private void callApiShowListProductBestSeller() {
         binding.progressBar.setVisibility(View.VISIBLE);
+        Log.d("user_id", AccountUltil.USER.getId());
         BaseApi.API.getTopProductBestSeller(AccountUltil.USER.getId()).enqueue(new Callback<ProductBestSellerResponse>() {
             @Override
             public void onResponse(Call<ProductBestSellerResponse> call, Response<ProductBestSellerResponse> response) {

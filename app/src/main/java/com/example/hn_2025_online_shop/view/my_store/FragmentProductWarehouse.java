@@ -27,6 +27,7 @@ import com.example.hn_2025_online_shop.databinding.FragmentCreateProductMyStoreB
 import com.example.hn_2025_online_shop.databinding.FragmentProductWarehouseBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProductPaginationScrollListener;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
@@ -145,7 +146,7 @@ public class FragmentProductWarehouse extends Fragment implements ObjectUtil {
         Log.d("storeId", "callApiShowLishProductMyStore: " + storeId);
         dialog.show();
         Log.d(TAG.toString, "callApiShowLishProductMyStore: "+ StoreUltil.store);
-        BaseApi.API.getDataProductStore(storeId, currentP).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getDataProductStore(storeId, currentP, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
 
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {

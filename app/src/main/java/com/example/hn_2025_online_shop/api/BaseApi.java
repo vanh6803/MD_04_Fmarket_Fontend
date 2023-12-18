@@ -55,10 +55,12 @@ public interface BaseApi {
     // 192.168.0.106
 //    String LOCALHOT = "103.166.183.57"; // đc cho socket
 //    192.168.100.4
-//    String LOCALHOT = "103.166.183.57"; // đc host
-        String LOCALHOT = "192.168.100.4"; // đc cho socket
 
+    String LOCALHOT = "103.166.183.57"; // đc host
+//        String LOCALHOT = "192.168.100.4"; // đc cho socket
 //    String LOCALHOT = "103.166.183.57"; // đc cho socket
+//    String LOCALHOT = "192.168.1.144"; // đc cho socket
+
     //    String LOCALHOT = "172.20.10.3"; // đc cho socket
 
     BaseApi API = new Retrofit.Builder()
@@ -70,6 +72,9 @@ public interface BaseApi {
     @FormUrlEncoded
     @POST("login")
     Call<LoginResponse> login(@Field("email") String email, @Field("password") String password);
+    @FormUrlEncoded
+    @POST("login-with-google")
+    Call<LoginResponse> loginGoogle(@Field("idToken") String tokenGG);
 
     @FormUrlEncoded
     @POST("register")
@@ -102,8 +107,9 @@ public interface BaseApi {
 
 
     @GET("products/all-product")
-    Call<ProductResponse> getListAllProduct(@Query("isActive") boolean isActive,
-                                            @Query("token") String token);
+    Call<ProductResponse> getListAllProduct(@Query("isActive") boolean isActive, @Query("token") String token);
+
+
 
     @GET("products/all-product-by-category")
     Call<ProductByCategoryReponse> getListProductByCategory(@Query("token") String token);
@@ -130,7 +136,7 @@ public interface BaseApi {
                                                     @Part("address") RequestBody address);
     @GET("products/all-product-by-store/{storeId}")
     Call<ProductResponse> getDataProductStore(@Path("storeId") String storeId,
-                                              @Query("page") int page);
+                                              @Query("page") int page,@Query("token") String token);
 
 
 
@@ -327,27 +333,23 @@ public interface BaseApi {
     @Multipart
     @PUT("store/edit-avatar")
     Call<ServerResponse> updateAvartarStore(@Header("Authorization") String authorization,
-                                            @Part MultipartBody.Part avatar);
-
+                                           @Part MultipartBody.Part avatar);
     @Multipart
     @PUT("store/edit-banner")
     Call<ServerResponse> updateBannerStore(@Header("Authorization") String authorization,
                                            @Part MultipartBody.Part banner);
-
     @FormUrlEncoded
     @PUT("store/update")
     Call<ServerResponse> updateStore(@Header("Authorization") String authorization,
-                                     @Field("name") String name,
-                                     @Field("address") String address);
-//    @GET("products/all-product-by-category")
-//    Call<ProductResponse> getAllProductByCategory(@Query("category") String category);
+                                      @Field("name") String name,
+                                      @Field("address") String address);
+    @GET("products/all-product-by-category")
+    Call<ProductResponse> getAllProductByCategory(@Query("category") String category);
 
     @GET("products/all-product")
-    Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted,
-                                                 @Query("token") String token);
-
+    Call<ProductResponse> getAllProductDiscouted(@Query("discounted") boolean discounted,@Query("token") String token);
     @GET("products/top-product")
-    Call<ProductBestSellerResponse> getTopProductBestSeller(@Query("accountId") String accountId);
+    Call<ProductBestSellerResponse> getTopProductBestSeller(@Query("accountId") String uid);
 
 //    @GET("products/all-product-by-category")
 //    Call<ProductResponse> getTop10ProductBestSeller(@Query("categoryId") String categoryId);

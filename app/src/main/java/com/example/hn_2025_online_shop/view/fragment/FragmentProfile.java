@@ -2,7 +2,9 @@ package com.example.hn_2025_online_shop.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -42,6 +44,10 @@ import com.example.hn_2025_online_shop.view.my_store.MyStoreScreen;
 import com.example.hn_2025_online_shop.view.login.ResetPassWord;
 import com.example.hn_2025_online_shop.view.profile_screen.OrderProductScreen;
 import com.example.hn_2025_online_shop.view.profile_screen.ProfileUserScreen;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
@@ -52,6 +58,8 @@ import retrofit2.Response;
 public class FragmentProfile extends Fragment {
     private FragmentProfileBinding binding;
     private ProgressLoadingDialog loadingDialog;
+    private SharedPreferences sharedPreferences;
+    private GoogleSignInClient mGoogleSignInClient;
     public static FragmentProfile newInstance() {
         FragmentProfile fragment = new FragmentProfile();
         return fragment;
@@ -75,9 +83,20 @@ public class FragmentProfile extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        mGoogleSignInClient = createGoogleSignInClient();
         initView();
         initController();
         setData();
+    }
+
+    private GoogleSignInClient createGoogleSignInClient() {
+        // Initialize GoogleSignInOptions with the appropriate configuration
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                // Add any additional options as needed
+                .build();
+
+        // Initialize the GoogleSignInClient
+        return GoogleSignIn.getClient(requireContext(), gso);
     }
 
     private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
@@ -214,6 +233,9 @@ public class FragmentProfile extends Fragment {
         });
     }
     private void logOut() {
+         sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
+        String tokenGG = sharedPreferences.getString("TOKENGG",null);
+
         binding.btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,6 +257,9 @@ public class FragmentProfile extends Fragment {
                     @Override
                     public void onClick(View v) {
                         logoutAccount();
+                        if(tokenGG != null){
+                            mGoogleSignInClient.signOut();
+                        }
                         dialog.dismiss();
                     }
                 });
