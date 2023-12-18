@@ -22,6 +22,7 @@ import com.example.hn_2025_online_shop.model.OptionProductBestSeller;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductBestSellerResponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -74,13 +75,13 @@ public class FragmentPageOutstanding extends Fragment implements ObjectUtil {
 
     private void callApiShowListProductBestSeller() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        BaseApi.API.getTopProductBestSeller().enqueue(new Callback<ProductBestSellerResponse>() {
+        BaseApi.API.getTopProductBestSeller(AccountUltil.USER.getId()).enqueue(new Callback<ProductBestSellerResponse>() {
             @Override
             public void onResponse(Call<ProductBestSellerResponse> call, Response<ProductBestSellerResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                if (response.isSuccessful()) { // chỉ nhận đầu status 200
                     ProductBestSellerResponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
-                    if(reponse.getCode() == 200) {
+                    if (reponse.getCode() == 200) {
                         adapter.setListProductBestSeller(reponse.getResult());
                         binding.recyProBestSeller.setAdapter(adapter);
                     }

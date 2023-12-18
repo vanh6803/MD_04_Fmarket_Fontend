@@ -25,6 +25,7 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -153,14 +154,14 @@ public class FindProduct extends AppCompatActivity implements ObjectUtil {
 
     public void callApiGetListAllProducts(){
 //        loadingDialog.show();
-        BaseApi.API.getListAllProduct(true).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getListAllProduct(true, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ProductResponse productResponse = response.body();
                     productAdapter.setProductList(productResponse.getResult());
                     binding.recycleView.setAdapter(productAdapter);
-                }else {
+                } else {
                     Toast.makeText(getApplicationContext(), "call list all products err", Toast.LENGTH_SHORT).show();
                 }
             }

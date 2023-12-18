@@ -21,6 +21,7 @@ import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -70,13 +71,13 @@ public class FragmentPageDiscount extends Fragment implements ObjectUtil {
 
     private void ShowListProductDiscouted() {
         binding.progressBar.setVisibility(View.VISIBLE);
-        BaseApi.API.getAllProductDiscouted(true).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getAllProductDiscouted(true, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                if (response.isSuccessful()) { // chỉ nhận đầu status 200
                     ProductResponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
-                    if(reponse.getCode() == 200) {
+                    if (reponse.getCode() == 200) {
                         adapter.setListProductSale(reponse.getResult());
                     }
                 } else { // nhận các đầu status #200

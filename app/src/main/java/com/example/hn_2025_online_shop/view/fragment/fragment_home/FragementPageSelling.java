@@ -21,6 +21,7 @@ import com.example.hn_2025_online_shop.databinding.FragmentFragementPageSellingB
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
@@ -87,15 +88,15 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
 
     private void callApiProductByCategory(){
         binding.progressBar.setVisibility(View.VISIBLE);
-        BaseApi.API.getListProductByCategory().enqueue(new Callback<ProductByCategoryReponse>() {
+        BaseApi.API.getListProductByCategory(AccountUltil.TOKEN).enqueue(new Callback<ProductByCategoryReponse>() {
             @Override
             public void onResponse(Call<ProductByCategoryReponse> call, Response<ProductByCategoryReponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                if (response.isSuccessful()) { // chỉ nhận đầu status 200
                     ProductByCategoryReponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
-                    if(reponse.getCode() == 200) {
-                        for (ProductByCategory productByCategory: reponse.getResult()) {
-                            if(productByCategory.getProduct().size() > 0) {
+                    if (reponse.getCode() == 200) {
+                        for (ProductByCategory productByCategory : reponse.getResult()) {
+                            if (productByCategory.getProduct().size() > 0) {
                                 productList.add(productByCategory);
                             }
                         }
