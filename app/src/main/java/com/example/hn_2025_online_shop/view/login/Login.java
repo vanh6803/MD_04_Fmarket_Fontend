@@ -185,32 +185,26 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("google1", "1");
         if (requestCode == RC_SIGN_IN) {
             // The Task returned from this call is always completed, no need to attach
             // a listener.
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
-            Log.d("google1", "2");
         }
     }
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            Log.d("google1", "3");
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Log.d("google1", "handleSignInResult: " + account);
 
             // Lấy token của người dùng
             String idToken = account.getIdToken();
             String email = account.getEmail();
 
-            Log.d("google1", "email: " + email);
 
             // Kiểm tra xem token có null không
             if (idToken != null) {
                 // Điều hướng người dùng đến màn hình chính (MainActivity) và chuyển token qua
-                Log.d("google1", "idToken: " + idToken);
 
 
                 BaseApi.API.loginGoogle(idToken).enqueue(new Callback<LoginResponse>() {

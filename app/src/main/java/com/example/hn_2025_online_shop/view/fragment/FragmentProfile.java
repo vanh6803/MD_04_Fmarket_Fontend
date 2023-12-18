@@ -235,7 +235,6 @@ public class FragmentProfile extends Fragment {
     private void logOut() {
          sharedPreferences = getActivity().getSharedPreferences("USER_FILE", Context.MODE_PRIVATE);
         String tokenGG = sharedPreferences.getString("TOKENGG",null);
-        Log.d("token_google_logout", tokenGG);
 
         binding.btnSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
