@@ -55,10 +55,10 @@ public interface BaseApi {
     // 192.168.0.106
 //    String LOCALHOT = "103.166.183.57"; // đc cho socket
 //    192.168.100.4
-    String LOCALHOT = "172.26.160.1"; // đc cho socket
-    //    String LOCALHOT = "172.20.10.3"; // đc cho socket
+//    String LOCALHOT = "103.166.183.57"; // đc host
+        String LOCALHOT = "192.168.100.4"; // đc cho socket
     BaseApi API = new Retrofit.Builder()
-            .baseUrl("http://" + "10.0.2.2" + ":3030/api/")
+            .baseUrl("http://" + LOCALHOT + ":3000/api/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(BaseApi.class);
