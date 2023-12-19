@@ -132,18 +132,18 @@
                 </LinearLayout>
 
 
-                <TextView
-                    android:paddingLeft="20dp"
-                    android:id="@+id/textsale"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="8dp"
-                    android:gravity="start"
-                    android:text="450.000 đ"
-                    android:textColor="@color/gray69"
-                    android:textSize="@dimen/font_size_text"
-                    android:textStyle="bold" />
+<!--                <TextView-->
+<!--                    android:paddingLeft="20dp"-->
+<!--                    android:id="@+id/textsale"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginHorizontal="8dp"-->
+<!--                    android:gravity="start"-->
+<!--                    android:text="450.000 đ"-->
+<!--                    android:textColor="@color/gray69"-->
+<!--                    android:textSize="@dimen/font_size_text"-->
+<!--                    android:textStyle="bold" />-->
 
                 <TextView
                     android:paddingLeft="20dp"

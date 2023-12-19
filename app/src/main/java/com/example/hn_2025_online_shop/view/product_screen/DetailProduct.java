@@ -455,7 +455,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
-        binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//        binding.textsale.setPaintFlags(binding.textsale.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         productList = new ArrayList<>();
         productAdapter = new ProductAdapter(this, productList, this);
     }

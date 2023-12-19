@@ -68,7 +68,6 @@ public class ProductSaleAdapter extends RecyclerView.Adapter<ProductSaleAdapter.
         } catch (Exception exception) {
             holder.binding.tvReview.setText("Đã bán " + 0);
         }
-
         holder.binding.item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
