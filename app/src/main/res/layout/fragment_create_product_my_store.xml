@@ -121,7 +121,7 @@
             <TextView
                 android:id="@+id/tvSc"
                 android:gravity="center_vertical"
-                android:text="Screen"
+                android:text="Màn hình"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
             <EditText
                 android:id="@+id/edtSC"
                 android:gravity="center_vertical"
-                android:hint="Nhập screen"
+                android:hint="Nhập thông tin màn hình"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
             <TextView
                 android:id="@+id/tvCamera"
                 android:gravity="center_vertical"
-                android:text="Camera"
+                android:text="Máy ảnh"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
             <EditText
                 android:id="@+id/edtCamera"
                 android:gravity="center_vertical"
-                android:hint="Nhập camera"
+                android:hint="Nhập thông tin máy ảnh"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,7 +181,7 @@
             <EditText
                 android:id="@+id/edtChipset"
                 android:gravity="center_vertical"
-                android:hint="Nhập chipset"
+                android:hint="Nhập thông tin chipset"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
             <EditText
                 android:id="@+id/edtCpu"
                 android:gravity="center_vertical"
-                android:hint="Nhập cpu"
+                android:hint="Nhập thông tin cpu"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
             <EditText
                 android:id="@+id/edtGpu"
                 android:gravity="center_vertical"
-                android:hint="Nhập gpu"
+                android:hint="Nhập thông tin gpu"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
             <EditText
                 android:id="@+id/edtRam"
                 android:gravity="center_vertical"
-                android:hint="Nhập ram"
+                android:hint="Nhập thông số ram"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
             <EditText
                 android:id="@+id/edtRom"
                 android:gravity="center_vertical"
-                android:hint="Nhập rom"
+                android:hint="Nhập thông số rom"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
             <TextView
                 android:id="@+id/tvBattery"
                 android:gravity="center_vertical"
-                android:text="Battery"
+                android:text="Pin"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -323,7 +323,7 @@
             <EditText
                 android:id="@+id/edtBatrery"
                 android:gravity="center_vertical"
-                android:hint="Nhập battery"
+                android:hint="Nhập thông số pin"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -333,7 +333,7 @@
             <TextView
                 android:id="@+id/tvWeight"
                 android:gravity="center_vertical"
-                android:text="Weight"
+                android:text="Trọng lượng"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -346,7 +346,7 @@
             <EditText
                 android:id="@+id/edtWeight"
                 android:gravity="center_vertical"
-                android:hint="Nhập weight"
+                android:hint="Nhập thông số trọng lượng"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -358,7 +358,7 @@
             <TextView
                 android:id="@+id/tvConnection"
                 android:gravity="center_vertical"
-                android:text="Connection"
+                android:text="Kết nối"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -371,7 +371,7 @@
             <EditText
                 android:id="@+id/edtConnection"
                 android:gravity="center_vertical"
-                android:hint="Nhập connection"
+                android:hint="Nhập thông tin kết nối"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -381,7 +381,7 @@
             <TextView
                 android:id="@+id/tvSpecialFeature"
                 android:gravity="center_vertical"
-                android:text="SpecialFeature"
+                android:text="Tính năng đặc biệt"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -394,7 +394,7 @@
             <EditText
                 android:id="@+id/edtSpecialFeature"
                 android:gravity="center_vertical"
-                android:hint="Nhập special feature"
+                android:hint="Nhập thông tin tính năng đặc biệt"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -404,7 +404,7 @@
             <TextView
                 android:id="@+id/tvManufacturer"
                 android:gravity="center_vertical"
-                android:text="Manufacturer"
+                android:text="nhà sản xuất"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -417,7 +417,7 @@
             <EditText
                 android:id="@+id/edtManufacturer"
                 android:gravity="center_vertical"
-                android:hint="Nhập manufacturer"
+                android:hint="Nhập nhà sản xuất"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -426,7 +426,7 @@
 
             <TextView
                 android:gravity="center_vertical"
-                android:text="Other"
+                android:text="Khác"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -439,7 +439,7 @@
             <EditText
                 android:id="@+id/edtOther"
                 android:gravity="center_vertical"
-                android:hint="Nhập other"
+                android:hint="Nhập thông tin khác"
                 android:background="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
