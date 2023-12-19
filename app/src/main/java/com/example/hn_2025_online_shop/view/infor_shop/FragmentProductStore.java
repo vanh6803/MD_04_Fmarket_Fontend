@@ -25,6 +25,7 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductStoreBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProductPaginationScrollListener;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
@@ -118,7 +119,7 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
 
     public void setDataProductStore(int currentP){
         binding.progressBar.setVisibility(View.VISIBLE);
-        BaseApi.API.getDataProductStore(StoreUltil.store.getId(), currentP).enqueue(new Callback<ProductResponse>() {
+        BaseApi.API.getDataProductStore(StoreUltil.store.getId(), currentP, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){
