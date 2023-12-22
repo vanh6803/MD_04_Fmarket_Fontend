@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/constraint"
+    android:background="@color/gray_ground"
     android:orientation="vertical"
     tools:context=".view.my_store.FragmentCreateProductMyStore">
-    <!-- TODO: Update blank fragment layout -->
+
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,737 +22,471 @@
             android:id="@+id/ln"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Create Product"
+                android:textStyle="italic"
+                android:gravity="center"
+                android:background="@color/white"
+                android:textFontWeight="@integer/material_motion_duration_medium_2"
                 android:textColor="@color/color_chudao"
+                android:padding="20dp"
                 android:textSize="25dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Tên sản phẩm"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtNameProduct"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Tên sản phẩm"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Số lượng"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtSoLuong"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Số lượng"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Giảm Giá"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinnerDiscount"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/custom_edittext" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Tình Trạng"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/spinnerTinhTrang"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/custom_edittext" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
                 android:text="Loại sản phẩm"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textColor="@color/gray99"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="12dp"
+                android:textSize="14dp"/>
 
             <Spinner
                 android:id="@+id/spinnerCategory"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/custom_edittext" />
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Is Active"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+                android:background="@android:color/transparent" />
 
-            <Spinner
-                android:id="@+id/spinnerIsActive"
+            <TextView
+                android:gravity="center_vertical"
+                android:text="Tên sản phẩm"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:background="@drawable/custom_edittext" />
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
+
+            <EditText
+                android:id="@+id/edtNameProduct"
+                android:gravity="center_vertical"
+                android:hint="Nhập tên sản phẩm"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:text="Tình Trạng"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
                 android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
+
+            <EditText
+                android:id="@+id/edtTinhTrang"
+                android:gravity="center_vertical"
+                android:hint="Nhập mới hoặc cũ"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:gravity="center_vertical"
                 android:text="Mô tả"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtMota"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Description"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
+            <EditText
+                android:id="@+id/edtMota"
+                android:gravity="center_vertical"
+                android:hint="Nhập mô tả"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
+
             <TextView
                 android:id="@+id/tvSc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Screen"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnSc"
+                android:gravity="center_vertical"
+                android:text="Màn hình"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtSC"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Screen"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtSC"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin màn hình"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvCamera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Camera"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnCamera"
+                android:gravity="center_vertical"
+                android:text="Máy ảnh"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtCamera"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Camera"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtCamera"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin máy ảnh"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:id="@+id/tvChipset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Chipset"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnChipset"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtChipset"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Chipset"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtChipset"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin chipset"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:id="@+id/tvCpu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Cpu"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnCpu"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtCpu"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Cpu"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtCpu"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin cpu"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:id="@+id/tvGpu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Gpu"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnGpu"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Gpu"
-                            android:id="@+id/edtGpu"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtGpu"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin gpu"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tvRam"
+                android:gravity="center_vertical"
+                android:text="Ram"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
+
+            <EditText
+                android:id="@+id/edtRam"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông số ram"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/tvRom"
+                android:gravity="center_vertical"
+                android:text="Rom"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
+
+            <EditText
+                android:id="@+id/edtRom"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông số rom"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:inputType="number"
+                android:textSize="18dp"/>
+
+
             <TextView
                 android:id="@+id/tvHeDieuHanh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
                 android:text="Hệ Điều Hành"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnHeDieuHanh"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Hệ Điều Hành"
-                            android:id="@+id/edtHeDieuHanh"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtHeDieuHanh"
+                android:gravity="center_vertical"
+                android:hint="Nhập hệ điều hành"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvBattery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Battery"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnBattery"
+                android:gravity="center_vertical"
+                android:text="Pin"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:id="@+id/edtBatrery"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Battery"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtBatrery"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông số pin"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:id="@+id/tvWeight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Weight"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnWeight"
+                android:gravity="center_vertical"
+                android:text="Trọng lượng"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:id="@+id/edtWeight"
-                            android:background="@color/transparent"
-                            android:hint="Weight"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtWeight"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông số trọng lượng"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
+
             <TextView
                 android:id="@+id/tvConnection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Connection"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnConnection"
+                android:gravity="center_vertical"
+                android:text="Kết nối"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edtConnection"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Connection"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtConnection"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin kết nối"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:id="@+id/tvSpecialFeature"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="SpecialFeature"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnSpecialFeature"
+                android:gravity="center_vertical"
+                android:text="Tính năng đặc biệt"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:id="@+id/edtSpecialFeature"
-                            android:background="@color/transparent"
-                            android:hint="SpecialFeature"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtSpecialFeature"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin tính năng đặc biệt"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
                 android:id="@+id/tvManufacturer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Manufacturer"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
-                android:id="@+id/lnManufacturer"
+                android:gravity="center_vertical"
+                android:text="nhà sản xuất"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/edtManufacturer"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Manufacturer"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
+            <EditText
+                android:id="@+id/edtManufacturer"
+                android:gravity="center_vertical"
+                android:hint="Nhập nhà sản xuất"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:textSize="18dp"/>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
-            </LinearLayout>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Other"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <LinearLayout
+                android:gravity="center_vertical"
+                android:text="Khác"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/custom_edittext"
-                android:orientation="horizontal">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        app:passwordToggleEnabled="false">
+                android:background="@color/white"
+                android:paddingHorizontal="12dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="14dp"/>
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@color/transparent"
-                            android:hint="Other"
-                            android:id="@+id/edtOther"
-                            android:padding="10dp"
-                            android:textSize="16sp" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:height="6dp" />
-                </LinearLayout>
+            <EditText
+                android:id="@+id/edtOther"
+                android:gravity="center_vertical"
+                android:hint="Nhập thông tin khác"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginBottom="10dp"
+                android:textSize="18dp"/>
             </LinearLayout>
-        </LinearLayout>
-
     </ScrollView>
 
-    <TextView
-        app:layout_constraintTop_toTopOf="@+id/ln"
-        android:id="@+id/btnHuy"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginEnd="73dp"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/custom_btn_muaangay"
-        android:gravity="center"
-        android:text="Hủy"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/constraint"
-        app:layout_constraintEnd_toStartOf="@+id/btnLuu"
-        app:layout_constraintStart_toStartOf="@+id/constraint"
-        tools:ignore="NotSibling" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@id/constraint"
+        >
+        <TextView
+            android:id="@+id/btnHuy"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_bg_red_cancle"
+            android:gravity="center"
+            android:text="Hủy"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint"
+            app:layout_constraintEnd_toStartOf="@+id/btnLuu"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="@+id/constraint"
+            app:layout_constraintTop_toTopOf="@+id/ln"
+            tools:ignore="NotSibling" />
 
-    <TextView
-
-        android:layout_marginRight="20dp"
-        android:id="@+id/btnLuu"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="0dp"
-        android:background="@drawable/custom_btn_muaangay"
-        android:gravity="center"
-        android:text="Lưu"
-        android:textColor="@color/white"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/constraint"
-        app:layout_constraintEnd_toEndOf="@+id/constraint"
-        app:layout_constraintStart_toEndOf="@+id/btnHuy" />
+        <TextView
+            android:id="@+id/btnLuu"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_button_rectangular"
+            android:gravity="center"
+            android:text="Lưu"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/constraint"
+            app:layout_constraintEnd_toEndOf="@+id/constraint"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/btnHuy" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

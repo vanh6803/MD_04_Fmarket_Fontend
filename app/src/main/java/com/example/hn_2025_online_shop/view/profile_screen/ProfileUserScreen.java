@@ -1,5 +1,9 @@
 package com.example.hn_2025_online_shop.view.profile_screen;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,11 +27,14 @@ import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.LayoutProfileUserBinding;
+import com.example.hn_2025_online_shop.model.Info;
 import com.example.hn_2025_online_shop.model.response.ServerResponse;
 import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ApiUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
+import com.example.hn_2025_online_shop.view.buy_product.AddAddressActivity;
+import com.example.hn_2025_online_shop.view.home_screen.MainActivity;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 
 import org.json.JSONException;
@@ -56,15 +63,18 @@ public class ProfileUserScreen extends AppCompatActivity {
         setContentView(binding.getRoot());
         initData();
         initController();
-
     }
+
+
 
     private void initController() {
         binding.imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(ProfileUserScreen.this, MainActivity.class);
+                setResult(RESULT_OK, intent);
                 finish();
-                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);;
+                overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
             }
         });
 
@@ -85,7 +95,6 @@ public class ProfileUserScreen extends AppCompatActivity {
                 binding.edtUserName.setEnabled(true);
                 binding.edtBirthday.setEnabled(true);
                 binding.linearCalander.setClickable(true);
-                binding.sdt.setEnabled(true);
                 binding.btnSave.setEnabled(true);
             }
         });
@@ -102,12 +111,10 @@ public class ProfileUserScreen extends AppCompatActivity {
             public void onClick(View view) {
                 String username = binding.edtUserName.getText().toString().trim();
                 String birthday = binding.edtBirthday.getText().toString().trim();
-                String phone = binding.sdt.getText().toString().trim();
                 binding.edtUserName.setEnabled(false);
                 binding.edtBirthday.setEnabled(false);
                 binding.linearCalander.setClickable(false);
-                binding.sdt.setEnabled(false);
-                apiEditProfile(username, birthday, phone);
+                apiEditProfile(username, birthday);
             }
         });
     }
@@ -149,6 +156,8 @@ public class ProfileUserScreen extends AppCompatActivity {
             Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     private String getPath(Uri uri){
         String result;
@@ -207,11 +216,11 @@ public class ProfileUserScreen extends AppCompatActivity {
         });
     }
 
-    private void apiEditProfile(String username, String birthday, String phone) {
+    private void apiEditProfile(String username, String birthday) {
         String token = AccountUltil.BEARER + AccountUltil.TOKEN;
         String idUser = AccountUltil.USER.getId();
 
-        if(validateValue(username, birthday, phone)) {
+        if(validateValue(username, birthday)) {
             loadingDialog.show();
             BaseApi.API.editProfile(token, idUser, username, birthday).enqueue(new Callback<ServerResponse>() {
                 @Override
@@ -227,6 +236,7 @@ public class ProfileUserScreen extends AppCompatActivity {
                         }
                     } else { // nhận các đầu status #200
                         try {
+
                             assert response.errorBody() != null;
                             String errorBody = response.errorBody().string();
                             JSONObject errorJson = new JSONObject(errorBody);
@@ -253,12 +263,8 @@ public class ProfileUserScreen extends AppCompatActivity {
 
     }
 
-    private boolean validateValue(String username, String birthday, String phone) {
+    private boolean validateValue(String username, String birthday) {
         if(TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        if(TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
             return false;
         }
@@ -269,7 +275,6 @@ public class ProfileUserScreen extends AppCompatActivity {
             Toast.makeText(this, "Nhập đúng định dạng ngày tháng dd/MM/yyyy", Toast.LENGTH_SHORT).show();
             return false;
         }
-
         return true;
     }
 
@@ -279,19 +284,19 @@ public class ProfileUserScreen extends AppCompatActivity {
         loadingDialog = new ProgressLoadingDialog(this);
         binding.edtUserName.setText(AccountUltil.USER.getUsername());
         binding.edtBirthday.setText(AccountUltil.USER.getBirthday());
-        binding.sdt.setText(AccountUltil.USER.getPhone());
         binding.email.setText(AccountUltil.USER.getEmail());
         Glide.with(this)
                 .load(AccountUltil.USER.getAvatar())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.avatar1)
                 .into(binding.imgAvartar);
-
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        Intent intent = new Intent(ProfileUserScreen.this, MainActivity.class);
+        setResult(RESULT_OK, intent);
+        finish();
         overridePendingTransition(R.anim.slidle_in_right, R.anim.slidle_out_right);
     }
 }

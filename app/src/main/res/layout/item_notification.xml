@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/item"
+        android:layout_marginVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imgAvartar"
+            android:scaleType="fitXY"
+            android:src="@drawable/avatar1"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
+
+        <LinearLayout
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:text="Giao kiện hàng thành công"
+                android:textSize="16dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_marginTop="5dp"
+                android:text="Giao kiện hàng thành công"
+                android:textSize="14dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/gray99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_marginTop="5dp"
+                android:text="11/11/2022 111"
+                android:textColor="@color/gray99"
+                android:textSize="11dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:visibility="visible"
+        android:background="@color/gray_ground"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"/>
+</LinearLayout>

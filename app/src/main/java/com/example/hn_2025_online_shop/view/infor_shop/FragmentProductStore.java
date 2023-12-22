@@ -7,6 +7,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 
@@ -23,11 +25,14 @@ import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductStoreBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.ProductPaginationScrollListener;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.StoreUltil;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.my_store.FragmentCreateProductMyStore;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +49,10 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
     private FragmentProductStoreBinding binding;
     private List<Product> productList;
     ProductAdapter productAdapter;
-    ProgressLoadingDialog dialog;
+    private int currentPage = 1;
+    private boolean isLoading;
+    private boolean isLastPage;
+    private GridLayoutManager gridLayoutManager;
 
     public FragmentProductStore() {
     }
@@ -68,28 +76,65 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        dialog = new ProgressLoadingDialog(getContext());
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        binding.rcvProductStore.setLayoutManager(layoutManager);
+        initView();
+        initController();
+        setDataProductStore(currentPage);
+    }
+
+
+
+    private void initView() {
+        gridLayoutManager = new GridLayoutManager(getContext(), 2);
+        binding.rcvProductStore.setLayoutManager(gridLayoutManager);
         productList = new ArrayList<>();
         Log.d(TAG.toString, "onViewCreated: "+ StoreUltil.store.getId());
         productAdapter = new ProductAdapter(getActivity(), productList, this);
         binding.rcvProductStore.setAdapter(productAdapter);
-       setDataProductStore();
     }
 
-    public void setDataProductStore(){
-        dialog.show();
-        BaseApi.API.getDataProductStore(StoreUltil.store.getId()).enqueue(new Callback<ProductResponse>() {
+    private void initController() {
+        binding.rcvProductStore.addOnScrollListener(new ProductPaginationScrollListener(gridLayoutManager) {
+            @Override
+            public void loadMoreItems() {
+                isLoading = true;
+                currentPage++;
+                loadNextPage(currentPage);
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+        });
+    }
+
+    private void loadNextPage(int currentPage) {
+        setDataProductStore(currentPage);
+    }
+
+    public void setDataProductStore(int currentP){
+        binding.progressBar.setVisibility(View.VISIBLE);
+        BaseApi.API.getDataProductStore(StoreUltil.store.getId(), currentP, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
                 if(response.isSuccessful()){
                     ProductResponse response1 = response.body();
                     if (response1.getCode() == 200){
-                        productAdapter.setProductList(response1.getResult());
+                        List<Product> listProductReponse = response1.getResult();
+                        productList.addAll(listProductReponse);
+                        productAdapter.setProductList(productList);
                         binding.rcvProductStore.setAdapter(productAdapter);
-                        Log.d("cccc", "onResponse: " + response1.getResult());
-                        Toast.makeText(getContext(), response1.getMessage(), Toast.LENGTH_SHORT).show();
+                        isLoading = false;
+                        // Kiểm tra nếu hết dữ liệu mà nhỏ hơn 10 thì tức là hết trang
+                        // mỗi page có 10 data
+                        if (listProductReponse.size() < 10) {
+                            isLastPage = true;
+                        }
                     }
                 } else {
                     try {
@@ -104,13 +149,13 @@ public class FragmentProductStore extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(getContext(), "Không Call đươc API", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

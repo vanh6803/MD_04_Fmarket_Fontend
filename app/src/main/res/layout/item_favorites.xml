@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingVertical="5dp"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content"
+    android:background="#E6F9FB"
+    android:layout_marginVertical="4dp"
+    tools:ignore="MissingDefaultResource">
+    <ImageView
+        android:layout_gravity="center"
+        android:id="@+id/imgProduct"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        />
+   <LinearLayout
+       android:padding="10dp"
+       android:layout_gravity="center"
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+     <LinearLayout
+         android:orientation="horizontal"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content">
+         <TextView
+             android:layout_weight="1"
+             android:textStyle="bold"
+             android:layout_gravity="center"
+             android:gravity="center|start"
+             android:id="@+id/tvName"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Tên sản phẩm"
+             android:textColor="@color/black"
+             android:textSize="@dimen/font_size_text"
+             android:maxLines="2"
+             android:minLines="2"
+             android:ellipsize="end"
+             />
+         <ImageView
+             android:layout_gravity="center"
+             android:layout_width="20dp"
+             android:layout_height="20dp"
+             android:src="@drawable/baseline_favorite_24"
+             />
+
+     </LinearLayout>
+
+
+       <LinearLayout
+           android:orientation="horizontal"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content">
+
+           <TextView
+               android:layout_gravity="center"
+               android:gravity="center|start"
+               android:id="@+id/tvPrice"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/red"
+               android:text="200.000đ"
+               android:textStyle="bold"
+               android:layout_marginTop="5dp"
+               />
+           <TextView
+               android:id="@+id/txtSale"
+               android:layout_marginLeft="10dp"
+               android:layout_gravity="center"
+               android:gravity="center|start"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:textColor="@color/black"
+               android:text="200.000đ"
+               android:layout_marginTop="5dp"
+               />
+       </LinearLayout>
+
+       <TextView
+           android:layout_weight="1"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+       <LinearLayout
+           android:layout_gravity="center"
+           android:gravity="center|start"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="5dp"
+           >
+
+
+          <LinearLayout
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/font_size_text_mini"
+                  android:text="Đã bán: "
+                  android:layout_gravity="center"
+                  />
+              <TextView
+                  android:id="@+id/txtCount"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textSize="@dimen/font_size_text_mini"
+                  android:text="22"
+                  android:layout_gravity="center"
+                  />
+
+              <TextView
+                  android:layout_weight="1"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"/>
+              <ImageView
+                  android:layout_gravity="center"
+                  android:layout_width="20dp"
+                  android:layout_height="20dp"
+                  android:src="@drawable/baseline_add_shopping_cart_24"
+                  />
+          </LinearLayout>
+       </LinearLayout>
+
+   </LinearLayout>
+
+
+</LinearLayout>

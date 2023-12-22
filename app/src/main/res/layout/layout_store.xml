@@ -5,16 +5,18 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
+            android:alpha="0.8"
             android:id="@+id/bannerStore"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
             android:background="@drawable/anhvudep"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,133 +25,102 @@
 
         <ImageView
             android:id="@+id/back"
-            app:tint="@color/primary"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/custom_bg_shopping_cart_white"
             android:padding="5dp"
-            android:layout_marginTop="20dp"
             android:src="@drawable/backs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.041"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"
-            />
+            app:tint="@color/primary"
+            tools:ignore="MissingConstraints" />
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imgAvartar"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="0dp"
+            android:layout_height="90dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="96dp"
+            android:layout_marginEnd="211dp"
             android:scaleType="centerCrop"
-            app:layout_constraintTop_toBottomOf="@+id/bannerStore"
-            app:layout_constraintBottom_toBottomOf="@+id/bannerStore"
+            android:src="@drawable/test"
+            app:layout_constraintEnd_toStartOf="@+id/btnChat"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/test" />
-
+            app:layout_constraintTop_toTopOf="@+id/bannerStore" />
 
         <RelativeLayout
             android:id="@+id/linearLayout"
-            android:paddingHorizontal="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="7dp"
-            app:layout_constraintTop_toBottomOf="@+id/imgAvartar"
+            android:layout_marginBottom="134dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/lineassrLayout2"
+            app:layout_constraintStart_toStartOf="@+id/lineassrLayout2"
+            app:layout_constraintTop_toTopOf="parent"
             tools:ignore="MissingConstraints">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_gravity="center"
+                android:layout_marginLeft="200dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_marginLeft="20dp"
-                    android:id="@+id/tvNameStore"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="LAPTOP AZ"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/font_size_text_title_medium" />
-
-                <LinearLayout
-                    android:layout_width="200dp"
-                    android:layout_height="30dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    tools:ignore="MissingConstraints">
-
-                    <ImageView
-                        android:layout_marginLeft="20dp"
-                        android:layout_width="17dp"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/ngoisao" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="15dp"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
-                        android:text="4.7/5.0  |  38.5k Người theo dõi"
-                        android:textSize="12dp"
-                        />
-                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:orientation="vertical">
+                android:background="@drawable/custom_lnnn"
+                android:layout_marginLeft="70dp"
+                android:layout_width="250dp"
+                android:layout_height="40dp"
+                android:orientation="horizontal" >
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/timkiem2"/>
+                <EditText
+                    android:background="@color/transparent"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp"
+                    android:textColorHint="@color/gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Search in the shop"/>
 
-                <Button
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:textColor="@color/color_chudao"
-                    android:layout_marginBottom="6dp"
-                    android:background="@drawable/custom_btn_detail_prodcut"
-                    android:text="Theo dõi"
-                    android:textAlignment="center"
-                    android:textSize="10dp"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="329dp"
-                    tools:layout_editor_absoluteY="170dp" />
-
-                <Button
-                    android:textColor="@color/color_chudao"
-                    android:layout_width="80dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/custom_btn_detail_prodcut"
-                    android:text="Chat"
-                    android:textSize="10dp"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="329dp"
-                    tools:layout_editor_absoluteY="217dp" />
             </LinearLayout>
+            <ImageView
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="350dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/menudots"/>
         </RelativeLayout>
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:id="@+id/lineassrLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bannerStore"
             tools:ignore="MissingConstraints">
 
             <TextView
+                android:layout_marginLeft="12dp"
                 android:id="@+id/textshop"
                 android:layout_width="50dp"
                 android:layout_height="30dp"
-                android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:text="Shop"
                 android:textColor="@color/red"
@@ -170,10 +141,99 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/lineassrLayout2"
+            app:layout_constraintStart_toStartOf="@+id/lineassrLayout2"
             app:layout_constraintTop_toBottomOf="@+id/lineassrLayout2"
             tools:ignore="MissingConstraints" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout8"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="113dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/imgAvartar"
+            app:layout_constraintEnd_toStartOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:elevation="100dp"
+                android:id="@+id/tvNameStore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:text="LAPTOP AZ"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_text_title_medium"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+
+                android:orientation="horizontal"
+                tools:ignore="MissingConstraints">
+
+                <ImageView
+                    android:elevation="8dp"
+                    android:layout_width="17dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ngoisao" />
+
+                <TextView
+                    android:elevation="100dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:text="4.7 / 5.0 Followers"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:elevation="100dp"
+            android:textStyle="bold"
+            android:id="@+id/textView7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/custom_btn_chat"
+            android:gravity="center"
+            android:text="Theo dõi"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnChat"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout8"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout8" />
+
+        <TextView
+            android:elevation="100dp"
+            android:textStyle="bold"
+            android:layout_marginBottom="25dp"
+            android:id="@+id/btnChat"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="13dp"
+            android:background="@drawable/custom_btn_chat"
+            android:gravity="center"
+            android:text="Chat"
+            android:textColor="@color/white"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bannerStore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgAvartar"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout8" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">HN-2025-Online-shop</string>
+    <string name="channe">channe</string>
     <string name="parameter_text">%s</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="web_client_id">52248343175-t9jiacpb07fov31faob0en15k944300q.apps.googleusercontent.com</string>
+    <string name="android_client_id">52248343175-el4h3n5n8mc7nbl7oll24ngifvh9ka4a.apps.googleusercontent.com</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_logout">Đăng xuất khỏi tài khoản của bạn?</string>
+    <string name="title_logout">Bạn có muốn đăng xuất khỏi ứng dụng ?</string>
     <string name="navigation_open">navigation_open</string>
     <string name="navigation_close">navigation_close</string>
 </resources>

@@ -1,32 +1,42 @@
 package com.example.hn_2025_online_shop.adapter;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.databinding.LayoutIteamOptionProductBinding;
-import com.example.hn_2025_online_shop.databinding.LayoutItemProductBinding;
 import com.example.hn_2025_online_shop.model.OptionProduct;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
+import com.example.hn_2025_online_shop.ultil.OptionUtil;
 
 import java.util.List;
 
 public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionViewHolder>{
-    private Context context;
+    private final Context context;
     private List<OptionProduct> list;
+    private OptionUtil optionUtil;
     private ObjectUtil objectUtil;
 
 
-    public OptionAdapter(Context context, List<OptionProduct> list, ObjectUtil objectUtil) {
+    public OptionAdapter(Context context, List<OptionProduct> list) {
         this.context = context;
         this.list = list;
-        this.objectUtil = objectUtil;
     }
+
+    public void setOptionUtil(OptionUtil optionUtil) {
+        this.optionUtil = optionUtil;
+        notifyDataSetChanged();
+    }
+
+    public void setObjectUtil(ObjectUtil objectUtil) {
+        this.objectUtil = objectUtil;
+        notifyDataSetChanged();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     public void setDataListOptionProduct(List<OptionProduct> list){
         this.list=list;
         notifyDataSetChanged();
@@ -41,16 +51,32 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
 
     @Override
     public void onBindViewHolder(@NonNull OptionViewHolder holder, int position) {
-          OptionProduct optionProduct = list.get(position);
-          holder.binding.tvColorOption.setText(optionProduct.getNameColor());
-          Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
+        OptionProduct optionProduct = list.get(position);
+        holder.binding.tvColorOption.setText(optionProduct.getNameColor());
+//        holder.binding.tvHetHang1.setVisibility(View.GONE);
+//        holder.binding.tvHetHang2.setVisibility(View.GONE);
+        Glide.with(context).load(optionProduct.getImage()).into(holder.binding.imgIteamOption);
 
-          holder.itemView.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-                  objectUtil.onclickObject(optionProduct);
-              }
-          });
+        if(objectUtil != null) {
+            holder.binding.btnDelete.setVisibility(View.GONE);
+        }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(optionUtil != null) {
+                    optionUtil.onclickOption(optionProduct);
+                }
+
+                if(objectUtil != null) {
+                    objectUtil.onclickObject(optionProduct);
+                }
+            }
+        });
+
+        holder.binding.btnDelete.setOnClickListener(view -> {
+            optionUtil.deleteOption(optionProduct);
+        });
     }
 
     @Override
@@ -62,7 +88,7 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.OptionView
     }
 
     public  class OptionViewHolder extends RecyclerView.ViewHolder {
-        private LayoutIteamOptionProductBinding binding;
+        private final LayoutIteamOptionProductBinding binding;
         public OptionViewHolder(LayoutIteamOptionProductBinding binding) {
             super(binding.getRoot());
             this.binding = binding;

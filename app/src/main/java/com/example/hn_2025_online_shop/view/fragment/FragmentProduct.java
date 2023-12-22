@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,19 +21,21 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.hn_2025_online_shop.R;
 import com.example.hn_2025_online_shop.adapter.ProductAdapter;
-import com.example.hn_2025_online_shop.adapter.page_view.ViewPageHomeAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentProductBinding;
 import com.example.hn_2025_online_shop.model.Banner;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.response.BannerReponse;
 import com.example.hn_2025_online_shop.model.response.ProductResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
 import com.example.hn_2025_online_shop.view.cart_screen.CartActivity;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.chat_message.ChatActivity;
+import com.example.hn_2025_online_shop.view.find_product.FindProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,8 +52,6 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
 
     private List<Product> listProdcut;
     private ProductAdapter productAdapter;
-
-    private ProgressLoadingDialog dialog;
     private FragmentProductBinding binding;
     public static FragmentProduct newInstance() {
         FragmentProduct fragment = new FragmentProduct();
@@ -132,10 +134,46 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
                 getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
             }
         });
+
+        binding.imgChat.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            startActivity(intent);
+            getActivity().overridePendingTransition(R.anim.slidle_in_left, R.anim.slidle_out_left);
+        });
+
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length() > 0){
+                    productAdapter.filterItem(s.toString());
+
+                }else {
+                    productAdapter.filterItem(s.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+//        binding.find.addTextChangedListener(textWatcher);
+//        binding.recycleProduct.setAdapter(productAdapter);
+        binding.find.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindProduct.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initView() {
-        dialog = new ProgressLoadingDialog(getContext());
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
         binding.recycleProduct.setLayoutManager(layoutManager);
         listProdcut = new ArrayList<>();
@@ -145,23 +183,23 @@ public class FragmentProduct extends Fragment implements ObjectUtil {
     }
 
     public void callApiGetListAllProducts(){
-        dialog.show();
-        BaseApi.API.getListAllProduct().enqueue(new Callback<ProductResponse>() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        BaseApi.API.getListAllProduct(true, AccountUltil.TOKEN).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ProductResponse productResponse = response.body();
                     productAdapter.setProductList(productResponse.getResult());
                     binding.recycleProduct.setAdapter(productAdapter);
-                }else {
+                } else {
                     Toast.makeText(getActivity(), "call list all products err", Toast.LENGTH_SHORT).show();
                 }
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Call<ProductResponse> call, Throwable t) {
                 Toast.makeText(getActivity(), "Err", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

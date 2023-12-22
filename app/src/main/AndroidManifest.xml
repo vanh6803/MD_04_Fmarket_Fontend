@@ -4,10 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".ultil.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -19,6 +21,22 @@
         android:theme="@style/Theme.HN2025Onlineshop"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".view.product_screen.CommentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.fragment.ShowAllProductByCategoryActivity"
+            android:exported="false" />
+        <activity android:name=".view.my_store.UpdateProductActivity" />
+<!--        <activity-->
+<!--            android:name=".view.product_screen.fragment_comment.BottomSheetComment"-->
+<!--            android:exported="false" />-->
+        <activity
+            android:name=".view.chat_message.MessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.chat_message.ChatActivity"
+            android:exported="false" />
         <activity
             android:name=".view.buy_product.UpdateAddressActivity"
             android:exported="false" />
@@ -43,16 +61,13 @@
         <activity
             android:name=".view.profile_screen.ProfileUserScreen"
             android:exported="false" />
-
         <activity android:name=".view.voucher.VoucherScreen" />
-
         <activity android:name=".view.my_store.MyStoreScreen" />
-
-        <activity
-            android:name=".view.profile_screen.ChatScreen"
-            android:exported="false" />
         <activity
             android:name=".view.cart_screen.CartActivity"
+            android:exported="true" />
+        <activity
+            android:name=".view.find_product.FindProduct"
             android:exported="true" />
         <activity
             android:name=".view.home_screen.MainActivity"
@@ -76,16 +91,21 @@
             android:name=".view.login.ForgotPassWord"
             android:exported="true" />
         <activity
-            android:name=".view.profile_screen.history_buy_screen.product_screen.DetailProduct"
-            android:exported="true" />
+            android:name=".view.product_screen.DetailProduct"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".view.login.RegisterMemberSeller"
             android:exported="true" />
         <activity
-            android:name=".view.profile_screen.HistoryBuyScreen"
+            android:name=".view.profile_screen.OrderProductScreen"
             android:exported="true" />
+        <activity android:name=".view.my_store.FragmentCreateProductMyStore" />
         <activity
             android:name=".view.infor_shop.InforShop"
+            android:exported="true" />
+        <activity
+            android:name=".view.my_store.Bill.DetailBill"
             android:exported="true" />
         <activity
             android:name=".view.login.Splash"
@@ -95,7 +115,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

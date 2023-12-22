@@ -15,21 +15,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.adapter.ProductAdapter;
 import com.example.hn_2025_online_shop.adapter.ProductByCategoryAdapter;
 import com.example.hn_2025_online_shop.api.BaseApi;
 import com.example.hn_2025_online_shop.databinding.FragmentFragementPageSellingBinding;
 import com.example.hn_2025_online_shop.model.Product;
 import com.example.hn_2025_online_shop.model.ProductByCategory;
 import com.example.hn_2025_online_shop.model.response.ProductByCategoryReponse;
-import com.example.hn_2025_online_shop.model.response.ProductResponse;
-import com.example.hn_2025_online_shop.model.response.ServerResponse;
+import com.example.hn_2025_online_shop.ultil.AccountUltil;
 import com.example.hn_2025_online_shop.ultil.ObjectUtil;
 import com.example.hn_2025_online_shop.ultil.ProgressLoadingDialog;
 import com.example.hn_2025_online_shop.ultil.TAG;
-import com.example.hn_2025_online_shop.view.login.Register;
-import com.example.hn_2025_online_shop.view.login.VerifiPassWord;
-import com.example.hn_2025_online_shop.view.profile_screen.history_buy_screen.product_screen.DetailProduct;
+import com.example.hn_2025_online_shop.view.product_screen.DetailProduct;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +40,6 @@ import retrofit2.Response;
 
 public class FragementPageSelling extends Fragment implements ObjectUtil {
 
-    private ProgressLoadingDialog loadingDialog;
     private ProductByCategoryAdapter productAdapter;
     private List<ProductByCategory> productList;
     private FragmentFragementPageSellingBinding binding;
@@ -77,13 +72,13 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
         initView();
         initController();
         callApiProductByCategory();
+
     }
 
     private void initController() {
     }
 
     private void initView() {
-        loadingDialog = new ProgressLoadingDialog(getActivity());
         productList = new ArrayList<>();
         productAdapter = new ProductByCategoryAdapter(getActivity(), productList, this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
@@ -92,15 +87,20 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
     }
 
     private void callApiProductByCategory(){
-        loadingDialog.show();
-        BaseApi.API.getListProductByCategory().enqueue(new Callback<ProductByCategoryReponse>() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+        BaseApi.API.getListProductByCategory(AccountUltil.TOKEN).enqueue(new Callback<ProductByCategoryReponse>() {
             @Override
             public void onResponse(Call<ProductByCategoryReponse> call, Response<ProductByCategoryReponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                if (response.isSuccessful()) { // chỉ nhận đầu status 200
                     ProductByCategoryReponse reponse = response.body();
                     Log.d(TAG.toString, "onResponse-ListProductByCategory: " + reponse.toString());
-                    if(reponse.getCode() == 200) {
-                        productAdapter.setListProductType(reponse.getResult());
+                    if (reponse.getCode() == 200) {
+                        for (ProductByCategory productByCategory : reponse.getResult()) {
+                            if (productByCategory.getProduct().size() > 0) {
+                                productList.add(productByCategory);
+                            }
+                        }
+                        productAdapter.setListProductType(productList);
                     }
                 } else { // nhận các đầu status #200
                     try {
@@ -115,12 +115,12 @@ public class FragementPageSelling extends Fragment implements ObjectUtil {
                         throw new RuntimeException(e);
                     }
                 }
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ProductByCategoryReponse> call, Throwable t) {
-                loadingDialog.dismiss();
+                binding.progressBar.setVisibility(View.GONE);
             }
         });
     }

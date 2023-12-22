@@ -9,14 +9,13 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.hn_2025_online_shop.R;
-import com.example.hn_2025_online_shop.model.CartOfList;
+import com.example.hn_2025_online_shop.model.OptionAndQuantity;
 import com.example.hn_2025_online_shop.ultil.CartInterface;
 import com.example.hn_2025_online_shop.ultil.CartUtil;
 
@@ -26,16 +25,16 @@ import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     private Context context;
-    private List<CartOfList> listCart;
+    private List<OptionAndQuantity> listCart;
     private CartInterface cartInterface;
 
-    public CartAdapter(Context context, List<CartOfList> listCart, CartInterface cartInterface) {
+    public CartAdapter(Context context, List<OptionAndQuantity> listCart, CartInterface cartInterface) {
         this.context = context;
         this.listCart = listCart;
         this.cartInterface = cartInterface;
     }
 
-    public void setListCart(List<CartOfList> listCart) {
+    public void setListCart(List<OptionAndQuantity> listCart) {
         this.listCart = listCart;
         notifyDataSetChanged();
     }
@@ -49,11 +48,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        CartOfList cart = listCart.get(position);
+        OptionAndQuantity cart = listCart.get(position);
         if(cart == null) {
             return;
         }
-        holder.tvName.setText(cart.getOptionProduct().getProduct().getName());
+       holder.tvName.setText(cart.getOptionProduct().getProduct().getName());
         DecimalFormat df = new DecimalFormat("###,###,###");
         holder.tvPrice.setText(df.format(cart.getOptionProduct().getPrice()) + "đ");
         holder.tvQuantity.setText(cart.getQuantity() + "");
@@ -131,7 +130,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         notifyItemRemoved(index);
     }
 
-    public void undoItem(CartOfList cart, int index) {
+    public void undoItem(OptionAndQuantity cart, int index) {
         listCart.add(index, cart);
         notifyItemInserted(index);
     }
