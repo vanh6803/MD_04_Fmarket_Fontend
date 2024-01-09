@@ -2,13 +2,13 @@ package com.example.hn_2025_online_shop.view.product_screen;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -99,8 +100,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     private void getVoucher() {
         voucherList = new ArrayList<>();
-        for (int i = 1 ; i< 6; i++){
-            voucherList.add(new Voucher("Giảm"+ i +"% đối với đơn hàng trên 100k","Giảm"+i+"%", "1234", ""));
+        for (int i = 1; i < 6; i++) {
+            voucherList.add(new Voucher("Giảm" + i + "% đối với đơn hàng trên 100k", "Giảm" + i + "%", "1234", ""));
         }
         binding.count.setText(voucherList.size() + " mã giảm giá");
         productAdapter = new ProductAdapter(this, productList, this);
@@ -109,17 +110,17 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         binding.recyVoucher.setAdapter(voucherAdapter);
     }
 
-    public void callApiDetailProduct(){
+    public void callApiDetailProduct() {
         dialog.show();
         Intent intent = getIntent();
         String id_product = intent.getStringExtra("id_product");
         BaseApi.API.getDetailProduct(id_product).enqueue(new Callback<DetailProductResponse>() {
             @Override
             public void onResponse(@NonNull Call<DetailProductResponse> call, @NonNull Response<DetailProductResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     DetailProductResponse detailProductResponse = response.body();
                     assert detailProductResponse != null;
-                    if (detailProductResponse.getCode() == 200){
+                    if (detailProductResponse.getCode() == 200) {
                         productDetail = detailProductResponse.getResult();
                         Log.d("gggg", "onResponse: " + detailProductResponse.getResult());
                         setDataUi(detailProductResponse);
@@ -132,7 +133,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                         JSONObject errorJson = new JSONObject(errorBody);
                         String errorMessage = errorJson.getString("message");
                         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
@@ -140,6 +141,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 }
                 dialog.dismiss();
             }
+
             @Override
             public void onFailure(@NonNull Call<DetailProductResponse> call, @NonNull Throwable t) {
                 Toast.makeText(DetailProduct.this, "Error", Toast.LENGTH_SHORT).show();
@@ -152,52 +154,52 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     @SuppressLint({"SetTextI18n", "CheckResult"})
     private void setDataUi(DetailProductResponse detailProductResponse) {
 
-        if(detailProductResponse != null){
+        if (detailProductResponse != null) {
             List<SlideModel> listImg = new ArrayList<>();
-            for(int i = 0; i< detailProductResponse.getResult().getImage().size(); i++){
+            for (int i = 0; i < detailProductResponse.getResult().getImage().size(); i++) {
                 String linkImg = detailProductResponse.getResult().getImage().get(i);
                 listImg.add(new SlideModel(linkImg, ScaleTypes.FIT));
             }
             Log.d(TAG.toString, "setDataUi: " + detailProductResponse.getResult().getOption());
-            if(detailProductResponse.getResult().getOption().size() != 0){
+            if (detailProductResponse.getResult().getOption().size() != 0) {
                 DecimalFormat df = new DecimalFormat("###,###,###");
-                binding.tvPrice.setText(df.format(detailProductResponse.getResult().getOption().get(0).getPrice())+" đ");
-            }else{
+                binding.tvPrice.setText(df.format(detailProductResponse.getResult().getOption().get(0).getPrice()) + " đ");
+            } else {
                 binding.tvPrice.setText("Không có dữ liệu trả về");
                 Toast.makeText(this, detailProductResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
-            if(detailProductResponse.getResult().getImage().size() != 0){
+            if (detailProductResponse.getResult().getImage().size() != 0) {
                 binding.imgProduct.setImageList(listImg, ScaleTypes.FIT);
-            }else {
+            } else {
                 Glide.with(DetailProduct.this).load(R.drawable.error);
             }
 
-            if(detailProductResponse.getResult().getName().length() != 0){
+            if (detailProductResponse.getResult().getName().length() != 0) {
                 binding.tvName.setText(detailProductResponse.getResult().getName());
-            }else{
+            } else {
                 binding.tvName.setText("Không có dữ liệu trả về");
             }
 
             if (detailProductResponse.getResult().getStore_id().getName().length() != 0 || detailProductResponse.getResult().getStore_id().getName() != null) {
                 binding.tvShop.setText(detailProductResponse.getResult().getStore_id().getName());
-            }else{
+            } else {
                 binding.tvShop.setText("Không có dữ liệu trả về");
             }
 
-            if(detailProductResponse.getResult().getStore_id().getAddress().length() != 0){
+            if (detailProductResponse.getResult().getStore_id().getAddress().length() != 0) {
                 binding.diachiShop.setText(detailProductResponse.getResult().getStore_id().getAddress());
-            }else {
+            } else {
                 binding.diachiShop.setText("Không có dữ liệu trả về");
             }
 
-            if(detailProductResponse.getResult().getStore_id().getAvatar().length() != 0){
+            if (detailProductResponse.getResult().getStore_id().getAvatar().length() != 0) {
                 Glide.with(this)
                         .load(detailProductResponse.getResult().getStore_id().getAvatar())
                         .placeholder(R.drawable.loading)
                         .error(R.drawable.error)
                         .into(binding.imgShop);
-            }else {
+            } else {
                 Glide.with(this).load(R.drawable.error);
             }
 
@@ -206,7 +208,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             strDetailProduct += "...";
             binding.tvProductDetail.setText(strDetailProduct);
 
-        }else{
+        } else {
             Toast.makeText(this, "Không tìm thấy thông tin sản phẩm", Toast.LENGTH_SHORT).show();
         }
 
@@ -214,7 +216,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     }
 
     private void setDetailProduct() {
-        if(isShowDetail) {
+        if (isShowDetail) {
             strDetailProduct = "";
             strDetailProduct += productDetail.getDescription() + "\n";
             strDetailProduct += "...";
@@ -238,108 +240,108 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 //            strDetailProduct += "SpecialFeature: "+ productDetail.getSpecialFeature() + "\n" + "\n";
 //            strDetailProduct += "Manufacturer: "+productDetail.getManufacturer() + "\n" + "\n";
 //            strDetailProduct += "Other: "+productDetail.getOther() + "\n" + "\n";
-            if(productDetail.getDescription() != null){
+            if (productDetail.getDescription() != null) {
                 strDetailProduct += productDetail.getDescription() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getScreen() != null){
-                strDetailProduct += "Screen: "+productDetail.getScreen() + "\n" + "\n";
+            if (productDetail.getScreen() != null) {
+                strDetailProduct += "Screen: " + productDetail.getScreen() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
             }
-            if(productDetail.getCamera() != null){
+            if (productDetail.getCamera() != null) {
                 strDetailProduct += "Camera: " + productDetail.getCamera() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getChipset() != null){
+            if (productDetail.getChipset() != null) {
                 strDetailProduct += "Chipset: " + productDetail.getChipset() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
 
-            if(productDetail.getCpu() != null){
-                strDetailProduct += "Cpu: "+productDetail.getCpu() + "\n" + "\n";
+            if (productDetail.getCpu() != null) {
+                strDetailProduct += "Cpu: " + productDetail.getCpu() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getGpu() != null){
-                strDetailProduct += "Gpu: "+productDetail.getGpu() + "\n" + "\n";
+            if (productDetail.getGpu() != null) {
+                strDetailProduct += "Gpu: " + productDetail.getGpu() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getRam() != 0){
-                strDetailProduct += "Ram: "+productDetail.getRam() +"GB" + "\n" + "\n";
+            if (productDetail.getRam() != 0) {
+                strDetailProduct += "Ram: " + productDetail.getRam() + "GB" + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getRom() != 0){
-                strDetailProduct += "Rom: "+productDetail.getRom()+"GB" + "\n" + "\n";
+            if (productDetail.getRom() != 0) {
+                strDetailProduct += "Rom: " + productDetail.getRom() + "GB" + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getOperatingSystem() != null){
-                strDetailProduct += "OperatingSystem: "+productDetail.getOperatingSystem()+ "\n" + "\n";
+            if (productDetail.getOperatingSystem() != null) {
+                strDetailProduct += "OperatingSystem: " + productDetail.getOperatingSystem() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getBattery() != null){
+            if (productDetail.getBattery() != null) {
                 strDetailProduct += "Battery: " + productDetail.getBattery() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getWeight() != 0){
+            if (productDetail.getWeight() != 0) {
                 strDetailProduct += "Weight: " + productDetail.getWeight() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getConnection() != null){
-                strDetailProduct += "Connection: "+productDetail.getConnection() + "\n" + "\n";
+            if (productDetail.getConnection() != null) {
+                strDetailProduct += "Connection: " + productDetail.getConnection() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getSpecialFeature() != null){
-                strDetailProduct += "SpecialFeature: "+ productDetail.getSpecialFeature() + "\n" + "\n";
+            if (productDetail.getSpecialFeature() != null) {
+                strDetailProduct += "SpecialFeature: " + productDetail.getSpecialFeature() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getManufacturer() != null){
-                strDetailProduct += "Manufacturer: "+productDetail.getManufacturer() + "\n" + "\n";
+            if (productDetail.getManufacturer() != null) {
+                strDetailProduct += "Manufacturer: " + productDetail.getManufacturer() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
-            if(productDetail.getOther() != null){
-                strDetailProduct += "Other: "+productDetail.getOther() + "\n" + "\n";
+            if (productDetail.getOther() != null) {
+                strDetailProduct += "Other: " + productDetail.getOther() + "\n" + "\n";
                 isShowDetail = false;
-            }else {
+            } else {
                 strDetailProduct = "";
                 isShowDetail = true;
             }
@@ -350,24 +352,25 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     }
 
 
-    public void setDataSimilarProduct(){
+    public void setDataSimilarProduct() {
         dialog.show();
         Intent intent = getIntent();
         String id_product = intent.getStringExtra("id_product");
         BaseApi.API.getDataSimilarlProduct(id_product).enqueue(new Callback<ProductResponse>() {
             @Override
             public void onResponse(@NonNull Call<ProductResponse> call, @NonNull Response<ProductResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ProductResponse productResponse = response.body();
                     assert productResponse != null;
                     Log.d(TAG.toString, "onResponse-setDataSimilarProduct: " + productResponse.getResult().toString());
                     productAdapter.setProductList(productResponse.getResult());
                     binding.recyProductSimilar.setAdapter(productAdapter);
-                }else {
+                } else {
                     Toast.makeText(DetailProduct.this, "Get Data Product Similar Error", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }
+
             @Override
             public void onFailure(@NonNull Call<ProductResponse> call, @NonNull Throwable t) {
                 Toast.makeText(DetailProduct.this, "call api err", Toast.LENGTH_SHORT).show();
@@ -386,7 +389,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         binding.showshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(productDetail!= null) {
+                if (productDetail != null) {
                     String productId = productDetail.getId();
                     Store store = productDetail.getStore_id();
                     StoreUltil.store = productDetail.getStore_id();
@@ -444,14 +447,14 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    if(result.getResultCode() == RESULT_OK) {
+                    if (result.getResultCode() == RESULT_OK) {
                         Intent intent = result.getData();
                         assert intent != null;
                         int cartSize = intent.getIntExtra("data_cart_size", 0);
                         binding.tvQuantityCart.setText(cartSize + "");
+                    }
                 }
-            }
-    });
+            });
 
     private void initView() {
         dialog = new ProgressLoadingDialog(this);
@@ -463,7 +466,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     // --------------------------------- BottomSheetDialog --------------------------------------------
 
     private void showBottomSheetDialog(Boolean isCheck) {
-        if(productDetail == null) {
+        if (productDetail == null) {
             return;
         }
 
@@ -488,8 +491,8 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         bindingOption.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(optionProduct != null) {
-                    if(isCheck) {
+                if (optionProduct != null) {
+                    if (isCheck) {
                         // set dữ liệu vào CartUtil.listCartCheck  để có thể mua ngay
 //                        CartOfList cartOfList = new CartOfList();
 //                        cartOfList.setQuantity(quantityProduct);
@@ -500,7 +503,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 //                        totalPrice = quantityProduct * optionProduct.getPrice();
 
                         Intent intent = new Intent(DetailProduct.this, PayActivity.class);
-                        intent.putExtra("totalPrice" , totalPrice);
+                        intent.putExtra("totalPrice", totalPrice);
                         startActivity(intent);
                     } else {
                         urlCartAdd(bindingOption);
@@ -516,7 +519,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                if(quantityProduct < 20) {
+                if (quantityProduct < 20) {
                     quantityProduct += 1;
                     bindingOption.tvQuantity.setText(quantityProduct + "");
                 }
@@ -527,7 +530,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
             @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
-                if(quantityProduct > 1) {
+                if (quantityProduct > 1) {
                     quantityProduct -= 1;
                     bindingOption.tvQuantity.setText(quantityProduct + "");
                 }
@@ -544,11 +547,11 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
         BaseApi.API.createCartItem(token, optionId, quantityProduct).enqueue(new Callback<ServerResponse>() {
             @Override
             public void onResponse(@NonNull Call<ServerResponse> call, @NonNull Response<ServerResponse> response) {
-                if(response.isSuccessful()){ // chỉ nhận đầu status 200
+                if (response.isSuccessful()) { // chỉ nhận đầu status 200
                     ServerResponse serverResponse = response.body();
                     assert serverResponse != null;
                     Log.d(TAG.toString, "onResponse-cartAdd: " + serverResponse.toString());
-                    if(serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
+                    if (serverResponse.getCode() == 200 || serverResponse.getCode() == 201) {
                         Toast.makeText(DetailProduct.this, "Thêm sản phẩm vào giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
                         ApiUtil.setTitleQuantityCart(DetailProduct.this, binding.tvQuantityCart);
                     }
@@ -560,7 +563,7 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
                         String errorMessage = errorJson.getString("message");
                         Log.d(TAG.toString, "onResponse-cartAdd: " + errorMessage);
                         Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }catch (IOException e){
+                    } catch (IOException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
@@ -580,25 +583,25 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
 
     @SuppressLint("SetTextI18n")
     private void setDataBottomSheetDialog(Boolean isCheck, LayoutDialigOptionProductBinding bindingoption) {
-        if(isCheck) {
+        if (isCheck) {
             bindingoption.btnSave.setText("Mua ngay");
         } else {
             bindingoption.btnSave.setText("Thêm vào giỏ hàng");
         }
-        if(productDetail.getOption().size() != 0){
+        if (productDetail.getOption().size() != 0) {
             Glide.with(DetailProduct.this).load(productDetail.getOption().get(0).getImage()).into(bindingoption.imgProduct);
-        }else {
+        } else {
             Glide.with(DetailProduct.this).load(R.drawable.error).into(bindingoption.imgProduct);
         }
-        if(productDetail.getOption().size() != 0){
+        if (productDetail.getOption().size() != 0) {
             DecimalFormat df = new DecimalFormat("###,###,###");
             bindingoption.tvPrice.setText(df.format(productDetail.getOption().get(0).getPrice()) + " đ");
-        }else {
+        } else {
             bindingoption.tvPrice.setText("No data");
         }
-        if(productDetail.getOption().size() != 0){
+        if (productDetail.getOption().size() != 0) {
             bindingoption.tvWarehouseQuantity.setText("Kho: " + productDetail.getOption().get(0).getSoldQuantity());
-        }else {
+        } else {
             bindingoption.tvWarehouseQuantity.setText("No data");
         }
     }
@@ -607,14 +610,25 @@ public class DetailProduct extends AppCompatActivity implements ObjectUtil {
     @Override
     public void onclickObject(Object object) {
         // Do dùng trung 1 hàm lên phải kiểm tra xem giá trị trả về là của OptionProduct Hay Product
-        if(object instanceof OptionProduct) {
+        if (object instanceof OptionProduct) {
+            Log.d("OBjectDetail", "onclickObject: " + object.toString());
             optionProduct = (OptionProduct) object;
-            Glide.with(this)
-                    .load(optionProduct.getImage())
-                    .placeholder(R.drawable.loading)
-                    .error(R.drawable.error)
-                    .into(bindingOption.imgProduct);
-        } else if(object instanceof Product) {
+
+            if (optionProduct.getQuantity() > 0) {
+                optionProduct = (OptionProduct) object;
+                Glide.with(this)
+                        .load(optionProduct.getImage())
+                        .placeholder(R.drawable.loading)
+                        .error(R.drawable.error)
+                        .into(bindingOption.imgProduct);
+
+                bindingOption.tvWarehouseQuantity.setText("Kho: " + optionProduct.getQuantity());
+            } else {
+                bindingOption.tvWarehouseQuantity.setText("Kho: " + 0);
+                Toast.makeText(this, "Sản phẩm đã hết hàng", Toast.LENGTH_SHORT).show();
+            }
+
+        } else if (object instanceof Product) {
             Product product = (Product) object;
             String id = product.getId();
             Intent intent = new Intent(this, DetailProduct.class);
